@@ -1,4 +1,4 @@
-import "../common/styles/_reset.scss";
+import "../common/styles/_reset.css";
 
 import MainLayout from "src/layouts/MainLayout";
 
