@@ -1,9 +1,9 @@
-import arcLogo from "/public/arcLogo.png";
-import beOneStepAheadIcon from "/public/beOneStepAheadIcon.svg";
-import companyResearchIcon from "/public/companyResearchIcon.svg";
-import krooLogo from "/public/krooLogo.svg";
-import privateEquityIcon from "/public/privateEquityIcon.svg";
-import stratiphyLogo from "/public/stratiphyLogo.svg";
+import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg";
+import companyResearchIcon from "/public/icons/companyResearchIcon.svg";
+import privateEquityIcon from "/public/icons/privateEquityIcon.svg";
+import arcLogo from "/public/logos/arcLogo.png";
+import krooLogo from "/public/logos/krooLogo.svg";
+import stratiphyLogo from "/public/logos/stratiphyLogo.svg";
 
 export const benefitsFeatures = [
   {

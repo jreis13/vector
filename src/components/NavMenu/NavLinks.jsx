@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import Image from "next/image";
 import NavLink from "./NavLink";
-import loginIcon from "/public/loginicon.svg";
+import loginIcon from "/public/icons/loginicon.svg";
 
 const PATHS = [
   { name: "Companies", path: "/companies/" },

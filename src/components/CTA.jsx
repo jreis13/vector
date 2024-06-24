@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "./Button";
 
-import subscribe from "/public/subscribe.svg";
+import subscribe from "/public/icons/subscribe.svg";
 
 function CTA() {
   return (
