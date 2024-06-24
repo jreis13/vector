@@ -4,7 +4,9 @@ import {
   benefitsFeatures,
   offeringFeatures,
 } from "src/common/data/featureData";
+
 import Breadcrumb from "src/components/Breadcrumb";
+import CTA from "src/components/CTA";
 import CardList from "src/components/CardList";
 import Header from "src/components/Header";
 import MainHero from "src/components/MainHero";
@@ -38,6 +40,9 @@ function MainLayout() {
             features={analysisFeatures}
             imagesOnTop
           />
+        </div>
+        <div id="subscribe" className="py-16">
+          <CTA />
         </div>
       </div>
     </div>
