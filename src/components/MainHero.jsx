@@ -7,8 +7,7 @@ function MainHero({ children }) {
       <div className="absolute inset-0 w-full h-full z-[-1]">
         <Image
           src="/vector.png"
-          layout="fill"
-          // objectFit="cover"
+          fill
           objectPosition="center"
           alt="Background image"
         />
