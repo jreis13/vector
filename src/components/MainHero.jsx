@@ -1,20 +1,24 @@
 import Image from "next/image";
+import Button from "./Button";
 
 function MainHero({ children }) {
   return (
-    <div className="relative h-[790px] md:h-[816px] mb-[120px] overflow-hidden text-white flex justify-center">
+    <div className="main-hero relative overflow-hidden text-white flex justify-center items-center pt-24">
       <div className="absolute inset-0 w-full h-full z-[-1]">
         <Image
-          src="/heroimage.svg"
+          src="/vector.png"
           layout="fill"
-          //   width={500}
-          //   height={500}
-          objectFit="cover"
+          // objectFit="cover"
           objectPosition="center"
-          alt="Picture of the author"
+          alt="Background image"
         />
       </div>
-      <div className="relative z-10 text-center px-4 py-6">{children}</div>
+      <div className="relative z-10 text-center py-6">
+        {children}
+        <div className="my-6">
+          <Button href="mailto:contact@vector.com">Join Us</Button>
+        </div>
+      </div>
     </div>
   );
 }

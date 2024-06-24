@@ -26,7 +26,7 @@ function NavMenu() {
         <>
           <button
             type="button"
-            className="p-0 mb-2 bg-transparent border-0 text-current cursor-pointer text-2xl"
+            className="p-0 mb-2 bg-transparent border-0 cursor-pointer"
             onClick={() => setToggle(!toggle)}
           >
             {toggle ? <MenuClose /> : <MenuOpen />}

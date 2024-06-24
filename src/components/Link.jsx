@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 function Link({ blank, children, download, faded, internal, title, to }) {
   const className = classNames(
-    "cursor-pointer text-current no-underline transition-opacity duration-200",
+    "cursor-pointer no-underline transition-opacity duration-200",
     {
       "opacity-50 hover:opacity-100": faded,
       "hover:opacity-50": !faded,

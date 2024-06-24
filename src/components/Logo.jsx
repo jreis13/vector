@@ -18,9 +18,17 @@ function Logo() {
   return (
     <a
       href="/"
-      className="text-4xl leading-[44px] transition-opacity duration-200 hover:opacity-70 hover:text-orange-500"
+      className="text-4xl leading-[44px] transition-opacity duration-200 hover:opacity-70 hover:text-[#BB44F0]"
     >
-      {isDesktop ? <p>vector^</p> : <p>v/^</p>}
+      {isDesktop ? (
+        <p>
+          vector<span>^</span>
+        </p>
+      ) : (
+        <p>
+          v/<span>^</span>
+        </p>
+      )}
     </a>
   );
 }

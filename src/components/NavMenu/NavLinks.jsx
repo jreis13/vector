@@ -1,7 +1,7 @@
-import Button from "../Button";
-import NavLink from "./NavLink";
-
 import classNames from "classnames";
+import Image from "next/image";
+import NavLink from "./NavLink";
+import loginIcon from "/public/loginicon.svg";
 
 const PATHS = [
   { name: "Companies", path: "/companies/" },
@@ -9,6 +9,7 @@ const PATHS = [
   { name: "Platforms", path: "/platforms/" },
   { name: "Pricing", path: "/pricing/" },
   { name: "About", path: "/about/" },
+  { name: "Login", path: "/login/", type: "image" },
 ];
 
 function NavLinks({ isDesktop }) {
@@ -20,14 +21,22 @@ function NavLinks({ isDesktop }) {
           "flex-row items-center gap-7 h-8": isDesktop,
         })}
       >
-        {PATHS.map(({ name, path }) => (
+        {PATHS.map(({ name, path, type }) => (
           <li key={name}>
-            <NavLink to={path}>{name}</NavLink>
+            <NavLink to={path}>
+              {type === "image" ? (
+                <Image
+                  src={loginIcon}
+                  alt="Login Icon"
+                  width={24}
+                  height={24}
+                />
+              ) : (
+                name
+              )}
+            </NavLink>
           </li>
         ))}
-        <li>
-          <Button href="mailto:contact@vector.com">Login/Register</Button>
-        </li>
       </ul>
     </nav>
   );
