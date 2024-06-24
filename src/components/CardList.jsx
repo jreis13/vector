@@ -19,7 +19,7 @@ function CardList({ title, features, imagesOnTop = false }) {
                     <Image
                       src={feature.image}
                       alt={feature.name || feature.description}
-                      layout="fill"
+                      fill
                       objectFit="contain"
                     />
                   </div>
