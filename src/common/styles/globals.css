@@ -50,9 +50,9 @@ body {
   color: #fcfcfc;
 
   font-family: "Syne", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 28px;
 
   @media (min-width: 768px) {
     --page-wide-spacing: 0;
