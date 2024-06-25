@@ -28,51 +28,50 @@ export const benefitsFeatures = [
 
 export const offeringFeatures = [
   {
-    name: "Company Research",
+    name: "European Startups Research",
     description:
-      "Lorem ipsum dolor sit amet. Sit exercitationem pariatur et dolores perferendis eos unde tenetur non expedita obcaecati quo dolore..",
+      "Every week, be thrilled to receive in-depth company reports that offer unbiased insights into founders, investors, business models, and competitiveness, providing you with state-of-the-art information on startups.",
   },
   {
-    name: "Company Data",
+    name: "Startup Database ",
     description:
-      "Ut debitis blanditiis non tempore rerum ut explicabo dicta ut quisquam voluptas 33 optio alias ut obcaecati..",
+      "Access up-to-date private company data and analysis anytime on this platform, enabling you to make well-informed decisions. Compare data between competitors for valuable insights.",
   },
   {
     name: "Ecosystem Updates",
     description:
-      "Qui fugit velit et quos veritatis qui maiores quas vel volupta tes voluptatibus non expedita obcaecati quo dolore.",
+      "Stay ahead of the curve with a comprehensive and continuous updates on Europe's most relevant ecosystems. Gain valuable insights into macro trends and maintain a competitive edge by staying one step ahead of everybody else.",
   },
   {
     name: "Platform Comparison",
     description:
-      "Lorem ipsum dolor sit amet. Sit exercitationem pariatur et dolores perferendis eos unde tenetur non expedita obcaecati quo dolore.",
+      "Discover the perfect European equity crowdfunding platform tailored to your needs, from pricing to small print. Make an informed decision and choose the best fit for you.",
   },
   {
     name: "Weekly Newsletter",
     description:
-      "Ut debitis blanditiis non tempore rerum ut explicabo dicta ut quisquam voluptas 33 optio alias ut obcaecati..",
+      "Stay informed about the latest relevant news on the European startup scene by subscribing to our weekly newsletter.",
   },
   {
     name: "On-demand Research",
     description:
-      "Qui fugit velit et quos veritatis qui maiores quas vel volupta tes voluptatibus non expedita obcaecati quo dolore.",
+      "Ask us anything: can be a specific research on a company, ecosystem, trend, or any specific question. We will be there for you.",
   },
 ];
 
 export const analysisFeatures = [
   {
     description:
-      "Lorem ipsum dolor sit amet. Sit exercitationem pariatur et dolores perferendis eos unde tenetur non expedita obcaecati quo dolore",
+      "Digital bank specifically designed for young adults, with an impressive 145k customer base. Amidst global economic uncertainty, this innovative platform was set to raise £1 million in a fiercely competitive UK market.",
     image: krooLogo,
   },
   {
-    description:
-      "Ut debitis blanditiis non tempore rerum ut explicabo dicta ut quisquam voluptas 33 optio alias ut obcaecati.",
+    description: "Helicopter goes vroom.",
     image: arcLogo,
   },
   {
     description:
-      "Qui fugit velit et quos veritatis qui maiores quas vel voluptates voluptatibus.",
+      "Digital robot advisor was raising funds through its 3rd crowdfunding campaign, after secured £1 million consortium grant. This innovative platform is set to revolutionize AI investment solutions for its users.",
     image: stratiphyLogo,
   },
 ];
