@@ -44,16 +44,12 @@ function Breadcrumb({ sections }) {
   };
 
   return (
-    <nav className="fixed bottom-0 right-0 mx-6 mb-16 lg:mx-8 lg:mb-16 z-10 flex flex-col-reverse">
+    <nav className="fixed bottom-0 right-0 px-8 mb-16 lg:mb-16 z-10 flex flex-col-reverse">
       <ol className="list-none flex flex-col space-y-6">
         {sections.map((section) => (
           <li key={section.title} className="flex items-center">
             <button
-              className={`flex items-center space-x-1 ${
-                currentSection === section.id
-                  ? "text-indigo-600"
-                  : "text-gray-400"
-              }`}
+              className={"flex items-center space-x-1"}
               onClick={() => scrollToSection(section.id)}
             >
               <Image
@@ -61,9 +57,6 @@ function Breadcrumb({ sections }) {
                 alt={section.title}
                 width={24}
                 height={24}
-                className={`${
-                  currentSection === section.id ? "filter-blue" : ""
-                }`}
               />
             </button>
           </li>

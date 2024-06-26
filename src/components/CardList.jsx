@@ -2,13 +2,16 @@ import Image from "next/image";
 
 function CardList({ title, features, imagesOnTop = false }) {
   return (
-    <div id={title} className="flex flex-col items-center min-h-screen py-16">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center mb-8">
+    <div
+      id={title}
+      className="flex flex-col items-center min-h-screen py-16 px-16"
+    >
+      <div>
+        <div className="text-center mb-8">
           <h2>{title}</h2>
         </div>
         <div className="flex flex-grow items-center justify-center">
-          <div className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3 lg:gap-y-16">
             {features.map((feature) => (
               <div
                 key={feature.name || feature.description}

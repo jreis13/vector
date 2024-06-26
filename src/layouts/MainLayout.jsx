@@ -8,6 +8,7 @@ import {
 import Breadcrumb from "src/components/Breadcrumb";
 import CTA from "src/components/CTA";
 import CardList from "src/components/CardList";
+import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import MainHero from "src/components/MainHero";
 
@@ -16,7 +17,7 @@ function MainLayout() {
     <div className="flex flex-col items-center min-h-screen">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="w-full flex flex-col">
+      <div>
         <MainHero>
           <div className="flex flex-col gap-7">
             <h1>Build Your Success.</h1>
@@ -43,6 +44,9 @@ function MainLayout() {
         </div>
         <div id="subscribe" className="py-16">
           <CTA />
+        </div>
+        <div id="footer" className="pt-16">
+          <Footer />
         </div>
       </div>
     </div>
