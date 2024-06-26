@@ -44,7 +44,7 @@ function Breadcrumb({ sections }) {
   };
 
   return (
-    <nav className="fixed bottom-0 right-0 px-8 mb-16 lg:mb-16 z-10 flex flex-col-reverse">
+    <nav className="fixed bottom-0 right-0 px-6 mb-16 lg:mb-16 z-10 flex flex-col-reverse">
       <ol className="list-none flex flex-col space-y-6">
         {sections.map((section) => (
           <li key={section.title} className="flex items-center">
