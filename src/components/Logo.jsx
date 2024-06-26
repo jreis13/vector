@@ -22,7 +22,7 @@ function Logo() {
     >
       {isDesktop ? (
         <p>
-          vector<span>^</span>
+          vector<span className="caret">^</span>
         </p>
       ) : (
         <p>

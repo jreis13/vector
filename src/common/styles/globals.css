@@ -13,8 +13,11 @@
   height: calc(100vh - var(--header-height));
 }
 
-span {
+.caret {
   font-family: "Poppins", sans-serif;
+}
+
+span {
 }
 
 h1 {
