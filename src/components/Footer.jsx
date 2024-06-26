@@ -12,7 +12,7 @@ function Footer() {
             Unlock equity crowdfunding analysis and real private equity data
             delivered directly to your inbox.
           </p>
-          <span className="text-sm">
+          <span>
             © 2024 <a href="#">Vector</a>. All Rights Reserved.
           </span>
         </div>

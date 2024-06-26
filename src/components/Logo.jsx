@@ -18,7 +18,7 @@ function Logo() {
   return (
     <a
       href="/"
-      className="text-4xl leading-[44px] transition-opacity duration-200 hover:opacity-70 hover:text-[#BB44F0]"
+      className="text-4xl leading-[42px] font-semibold transition-opacity duration-200 hover:opacity-70 hover:text-[#BB44F0]"
     >
       {isDesktop ? (
         <p>
@@ -26,7 +26,7 @@ function Logo() {
         </p>
       ) : (
         <p>
-          v/<span>^</span>
+          v/<span className="caret">^</span>
         </p>
       )}
     </a>

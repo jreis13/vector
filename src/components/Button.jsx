@@ -16,7 +16,7 @@ function Button({ onClick, href, children }) {
   return (
     <a
       href={href}
-      className="inline-flex justify-center w-full max-w-xs py-4 border border-current rounded-full text-current cursor-pointer uppercase transition-colors duration-200 hover:font-medium hover:bg-[#BB44F0]"
+      className="inline-flex justify-center w-full max-w-xs py-4 border border-current rounded-full cursor-pointer uppercase transition-colors duration-200 hover:font-medium hover:bg-[#BB44F0]"
     >
       <p>{children}</p>
     </a>

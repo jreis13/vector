@@ -27,12 +27,8 @@ function CardList({ title, features, imagesOnTop = false }) {
                     />
                   </div>
                 )}
-                {feature.name && (
-                  <h3 className="py-4 text-xl leading-7">{feature.name}</h3>
-                )}
-                <div className="py-2 text-lg leading-7">
-                  {feature.description}
-                </div>
+                {feature.name && <h3 className="py-4">{feature.name}</h3>}
+                <p className="py-2">{feature.description}</p>
                 <div className="flex-grow" />
                 {!imagesOnTop && feature.image && (
                   <div className="mt-8 h-80 w-80">
