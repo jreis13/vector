@@ -7,9 +7,9 @@ function MainHero({ children }) {
       <div className="absolute inset-0 w-full h-full z-[-1]">
         <Image
           src="/vector.png"
-          fill
-          objectPosition="center"
           alt="Background image"
+          fill
+          style={{ objectPosition: "center" }}
         />
       </div>
       <div className="relative z-10 text-center py-6">

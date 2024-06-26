@@ -15,12 +15,12 @@ function CardList({ title, features, imagesOnTop = false }) {
                 className="flex flex-col h-full text-center items-center"
               >
                 {imagesOnTop && feature.image && (
-                  <div className="h-80 w-80 relative  overflow-hidden">
+                  <div className="h-80 w-80 relative overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.name || feature.description}
                       fill
-                      objectFit="contain"
+                      style={{ objectFit: "contain" }}
                     />
                   </div>
                 )}
