@@ -1,11 +1,13 @@
+import Logo from "./Logo";
+
 function Footer() {
   return (
     <footer className="py-4 px-16 md:py-8 lg:py-16 bg-[#34333d]">
       <div className="flex justify-between items-center">
         <div className="text-left">
-          <a href="#" className="flex text-2xl font-semibold">
-            Vector
-          </a>
+          <div className="flex">
+            <Logo />
+          </div>
           <p className="my-6">
             Unlock equity crowdfunding analysis and real private equity data
             delivered directly to your inbox.
