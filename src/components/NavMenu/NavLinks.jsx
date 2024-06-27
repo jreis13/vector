@@ -1,7 +1,6 @@
 import classNames from "classnames";
-import Image from "next/image";
+import Login from "./Login";
 import NavLink from "./NavLink";
-import loginIcon from "/public/icons/login.svg";
 
 const PATHS = [
   { name: "Companies", path: "/companies/" },
@@ -16,25 +15,18 @@ function NavLinks({ isDesktop }) {
   return (
     <nav>
       <ul
-        className={classNames("flex list-none text-right", {
+        className={classNames("flex list-none", {
+          "text-right": !isDesktop,
           "flex-col gap-2": !isDesktop,
           "flex-row items-center gap-7 h-8": isDesktop,
         })}
       >
         {PATHS.map(({ name, path, type }) => (
-          <li key={name} className="hover:[#BB44F0]">
-            <NavLink to={path}>
-              {type === "image" ? (
-                <Image
-                  src={loginIcon}
-                  alt="Login Icon"
-                  width={24}
-                  height={24}
-                />
-              ) : (
-                name
-              )}
-            </NavLink>
+          <li
+            key={name}
+            className={classNames("icon", { "ml-auto": !isDesktop })}
+          >
+            {type === "image" ? <Login /> : <NavLink to={path}>{name}</NavLink>}
           </li>
         ))}
       </ul>
