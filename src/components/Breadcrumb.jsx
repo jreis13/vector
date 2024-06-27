@@ -20,6 +20,7 @@ function Breadcrumb({ sections }) {
 
     handleResize();
     window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -69,9 +70,14 @@ function Breadcrumb({ sections }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 flex flex-col items-center z-20">
       <nav
-        className={`w-full flex justify-center transition-transform duration-300 transform ${
+        className={`w-full flex justify-center transition-all duration-300 transform ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
+        style={{
+          zIndex: 10,
+          marginBottom: isVisible ? "" : "-10rem",
+          marginTop: isVisible ? "-10rem" : "",
+        }}
       >
         <ol className="list-none flex flex-row justify-center px-8 space-x-8 bg-[#34333d] p-4 rounded-full mb-6">
           {sections.map((section) => (
@@ -91,29 +97,35 @@ function Breadcrumb({ sections }) {
           ))}
         </ol>
       </nav>
-      <button
-        onClick={toggleVisibility}
-        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 bg-[#34333d] rounded-full mb-2"
+
+      <div
+        className="fixed bottom-6 z-30 w-12 h-12 flex items-center justify-center bg-[#34333d] rounded-full mb-2"
+        style={{ left: "50%", transform: "translateX(-50%)" }}
       >
-        <Image
-          src={arrowDown}
-          alt="Hide Breadcrumb"
-          width={24}
-          height={24}
-          className={`absolute transition-opacity duration-300 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <Image
-          src={arrowUp}
-          alt="Show Breadcrumb"
-          width={24}
-          height={24}
-          className={`absolute transition-opacity duration-300 ${
-            isVisible ? "opacity-0" : "opacity-100"
-          }`}
-        />
-      </button>
+        <button
+          onClick={toggleVisibility}
+          className="relative w-full h-full flex items-center justify-center"
+        >
+          <Image
+            src={arrowDown}
+            alt="Hide Breadcrumb"
+            width={24}
+            height={24}
+            className={`absolute transition-opacity duration-300 ${
+              isVisible ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <Image
+            src={arrowUp}
+            alt="Show Breadcrumb"
+            width={24}
+            height={24}
+            className={`absolute transition-opacity duration-300 ${
+              isVisible ? "opacity-0" : "opacity-100"
+            }`}
+          />
+        </button>
+      </div>
     </div>
   );
 }
