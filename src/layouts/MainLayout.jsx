@@ -29,23 +29,23 @@ function MainLayout() {
             </h3>
           </div>
         </MainHero>
-        <div id="benefits" className="py-16">
+        <div id="benefits" className="py-12">
           <CardList title="Benefits" features={benefitsFeatures} />
         </div>
-        <div id="offering" className="py-16">
+        <div id="offering" className="py-12">
           <CardList title="Our Offering" features={offeringFeatures} />
         </div>
-        <div id="analysis" className="py-16">
+        <div id="analysis" className="py-12">
           <CardList
             title="Our Analysis"
             features={analysisFeatures}
             imagesOnTop
           />
         </div>
-        <div id="subscribe" className="py-16">
+        <div id="subscribe" className="py-12">
           <CTA />
         </div>
-        <div id="footer" className="pt-16">
+        <div id="footer" className="pt-12">
           <Footer />
         </div>
       </div>

@@ -5,12 +5,12 @@ import subscribe from "/public/icons/subscribe.svg";
 
 function CTA() {
   return (
-    <div className="flex items-center min-h-screen overflow-hidden px-16">
+    <div className="flex items-center min-h-screen overflow-hidden px-6 lg:px-16">
       <div className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2">
         <div className="lg:pt-4 flex flex-col gap-6">
           <div className="flex flex-col gap-y-6">
             <h2>Join Us</h2>
-            <p className="leading-10">
+            <p>
               Join our community of savvy investors and unlock the potential of
               crowdfunding! <br /> Equip yourself with the tools and insights to
               make informed investment decisions. <br />

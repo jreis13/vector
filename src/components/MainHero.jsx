@@ -3,7 +3,7 @@ import Button from "./Button";
 
 function MainHero({ children }) {
   return (
-    <div className="main-hero relative overflow-hidden flex justify-center items-center pt-24">
+    <div className="main-hero relative overflow-hidden flex flex-col justify-center items-center px-6 lg:pt-24">
       <div className="absolute inset-0 w-full h-full z-[-1]">
         <Image
           src="/mainHero.svg"
@@ -12,7 +12,7 @@ function MainHero({ children }) {
           style={{ objectPosition: "center" }}
         />
       </div>
-      <div className="relative z-10 text-center py-6">
+      <div className="relative z-10 text-center">
         <div
           style={{
             textShadow:
