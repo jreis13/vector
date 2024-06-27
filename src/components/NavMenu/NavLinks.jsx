@@ -22,7 +22,7 @@ function NavLinks({ isDesktop }) {
         })}
       >
         {PATHS.map(({ name, path, type }) => (
-          <li key={name}>
+          <li key={name} className="hover:[#BB44F0]">
             <NavLink to={path}>
               {type === "image" ? (
                 <Image
