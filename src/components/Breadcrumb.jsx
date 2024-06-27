@@ -7,7 +7,24 @@ import arrowUp from "/public/icons/arrowUp.svg";
 
 function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsVisible(false); // Hide on desktop
+      } else {
+        setIsVisible(true); // Show on mobile
+      }
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize); // Update on resize
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,7 +94,7 @@ function Breadcrumb({ sections }) {
       </nav>
       <button
         onClick={toggleVisibility}
-        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 bg-[#34333d] rounded-full mb-2"
+        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300"
       >
         <Image
           src={arrowDown}
