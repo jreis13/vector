@@ -5,7 +5,7 @@ import subscribe from "/public/icons/subscribe.svg";
 
 function CTA() {
   return (
-    <div className="flex items-center min-h-screen overflow-hidden px-6 lg:px-16">
+    <div className="flex flex-col justify-center items-center min-h-screen py-8 lg:py-16 px-6 lg:px-16">
       <div className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2">
         <div className="lg:pt-4 flex flex-col gap-6">
           <div className="flex flex-col gap-y-6">

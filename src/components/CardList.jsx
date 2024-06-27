@@ -4,7 +4,7 @@ function CardList({ title, features, imagesOnTop = false }) {
   return (
     <div
       id={title}
-      className="flex flex-col items-center min-h-screen py-8 lg:py-16 px-6 lg:px-16"
+      className="flex flex-col justify-center items-center min-h-screen py-8 lg:py-16 px-6 lg:px-16"
     >
       <div>
         <div className="text-center mb-8">
