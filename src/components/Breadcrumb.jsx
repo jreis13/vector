@@ -12,15 +12,14 @@ function Breadcrumb({ sections }) {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setIsVisible(false); // Hide on desktop
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // Show on mobile
+        setIsVisible(true);
       }
     };
 
-    handleResize(); // Set initial state
-    window.addEventListener("resize", handleResize); // Update on resize
-
+    handleResize();
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -94,7 +93,7 @@ function Breadcrumb({ sections }) {
       </nav>
       <button
         onClick={toggleVisibility}
-        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 bg-[#34333d] rounded-full mb-6"
+        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 bg-[#34333d] rounded-full mb-2"
       >
         <Image
           src={arrowDown}
