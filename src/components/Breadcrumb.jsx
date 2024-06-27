@@ -7,7 +7,7 @@ import arrowUp from "/public/icons/arrowUp.svg";
 
 function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("");
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
