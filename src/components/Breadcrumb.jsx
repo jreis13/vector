@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+
 import { useEffect, useState } from "react";
+
 import arrowDown from "/public/icons/arrowDown.svg";
 import arrowUp from "/public/icons/arrowUp.svg";
 
