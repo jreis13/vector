@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import MenuClose from "./MenuClose";
-import MenuOpen from "./MenuOpen";
-import NavLinks from "./NavLinks";
+import MenuClose from "./MenuClose"
+import MenuOpen from "./MenuOpen"
+import NavLinks from "./NavLinks"
 
 function NavMenu() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [toggle, setToggle] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false)
+  const [toggle, setToggle] = useState(false)
 
   const updateMedia = () => {
-    setIsDesktop(window.innerWidth >= 1024);
-  };
+    setIsDesktop(window.innerWidth >= 1024)
+  }
 
   useEffect(() => {
-    updateMedia();
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  }, []);
+    updateMedia()
+    window.addEventListener("resize", updateMedia)
+    return () => window.removeEventListener("resize", updateMedia)
+  }, [])
 
   return (
     <div className="flex flex-col items-end">
@@ -26,7 +26,7 @@ function NavMenu() {
         <>
           <button
             type="button"
-            className="py-0 mb-2 bg-transparent border-0 cursor-pointer"
+            className="mb-2 cursor-pointer border-0 bg-transparent py-0"
             onClick={() => setToggle(!toggle)}
           >
             {toggle ? <MenuClose /> : <MenuOpen />}
@@ -36,7 +36,7 @@ function NavMenu() {
       )}
       {isDesktop && <NavLinks isDesktop />}
     </div>
-  );
+  )
 }
 
-export default NavMenu;
+export default NavMenu

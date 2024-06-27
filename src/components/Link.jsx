@@ -1,7 +1,7 @@
 function Link({ blank, children, to }) {
   if (blank) {
-    attrs.target = "_blank";
-    attrs.rel = "noopener noreferrer";
+    attrs.target = "_blank"
+    attrs.rel = "noopener noreferrer"
   }
 
   return (
@@ -10,7 +10,7 @@ function Link({ blank, children, to }) {
         {children}
       </a>
     </p>
-  );
+  )
 }
 
-export default Link;
+export default Link

@@ -1,24 +1,24 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
 function Logo() {
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false)
 
   const updateMedia = () => {
-    setIsDesktop(window.innerWidth >= 1024);
-  };
+    setIsDesktop(window.innerWidth >= 1024)
+  }
 
   useEffect(() => {
-    updateMedia();
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  }, []);
+    updateMedia()
+    window.addEventListener("resize", updateMedia)
+    return () => window.removeEventListener("resize", updateMedia)
+  }, [])
 
   return (
     <a
       href="/"
-      className="text-4xl leading-[42px] font-semibold transition-opacity duration-200 hover:opacity-70 hover:text-[#BB44F0]"
+      className="text-4xl font-semibold leading-[42px] transition-opacity duration-200 hover:text-[#BB44F0] hover:opacity-70"
     >
       {isDesktop ? (
         <p>
@@ -30,7 +30,7 @@ function Logo() {
         </p>
       )}
     </a>
-  );
+  )
 }
 
-export default Logo;
+export default Logo

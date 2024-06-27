@@ -1,9 +1,9 @@
-import Logo from "./Logo";
+import Logo from "./Logo"
 
 function Footer() {
   return (
-    <footer className="py-4 px-16 md:py-8 lg:py-16 bg-[#34333d]">
-      <div className="flex justify-between items-center">
+    <footer className="bg-[#34333d] px-16 py-4 md:py-8 lg:py-16">
+      <div className="flex items-center justify-between">
         <div className="text-left">
           <div className="flex">
             <Logo />
@@ -16,7 +16,7 @@ function Footer() {
             © 2024 <a href="#">Vector</a>. All Rights Reserved.
           </span>
         </div>
-        <ul className="flex flex-col justify-end items-end">
+        <ul className="flex flex-col items-end justify-end">
           <li>
             <a href="#" className="mb-2 md:mb-4">
               Companies
@@ -45,7 +45,7 @@ function Footer() {
         </ul>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

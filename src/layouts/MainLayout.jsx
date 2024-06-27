@@ -1,20 +1,20 @@
-import { breadcrumbSections } from "src/common/data/breadcrumbData";
+import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
   analysisFeatures,
   benefitsFeatures,
   offeringFeatures,
-} from "src/common/data/featureData";
+} from "src/common/data/featureData"
 
-import Breadcrumb from "src/components/Breadcrumb";
-import CTA from "src/components/CTA";
-import CardList from "src/components/CardList";
-import Footer from "src/components/Footer";
-import Header from "src/components/Header";
-import MainHero from "src/components/MainHero";
+import Breadcrumb from "src/components/Breadcrumb"
+import CTA from "src/components/CTA"
+import CardList from "src/components/CardList"
+import Footer from "src/components/Footer"
+import Header from "src/components/Header"
+import MainHero from "src/components/MainHero"
 
 function MainLayout() {
   return (
-    <div className="flex flex-col items-center min-h-screen">
+    <div className="flex min-h-screen flex-col items-center">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
       <div>
@@ -50,7 +50,7 @@ function MainLayout() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainLayout;
+export default MainLayout

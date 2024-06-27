@@ -1,9 +1,9 @@
-import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg";
-import companyResearchIcon from "/public/icons/companyResearchIcon.svg";
-import privateEquityIcon from "/public/icons/privateEquityIcon.svg";
-import arcLogo from "/public/logos/arcLogo.png";
-import krooLogo from "/public/logos/krooLogo.svg";
-import stratiphyLogo from "/public/logos/stratiphyLogo.svg";
+import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
+import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
+import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
+import arcLogo from "/public/logos/arcLogo.png"
+import krooLogo from "/public/logos/krooLogo.svg"
+import stratiphyLogo from "/public/logos/stratiphyLogo.svg"
 
 export const benefitsFeatures = [
   {
@@ -24,7 +24,7 @@ export const benefitsFeatures = [
       "Keep up to date with news of equity crowdfunding rounds and trends in the various prominent industries.",
     image: beOneStepAheadIcon,
   },
-];
+]
 
 export const offeringFeatures = [
   {
@@ -57,7 +57,7 @@ export const offeringFeatures = [
     description:
       "Ask us anything: can be a specific research on a company, ecosystem, trend, or any specific question. We will be there for you.",
   },
-];
+]
 
 export const analysisFeatures = [
   {
@@ -74,4 +74,4 @@ export const analysisFeatures = [
       "Digital robot advisor was raising funds through its 3rd crowdfunding campaign, after secured £1 million consortium grant. This innovative platform is set to revolutionize AI investment solutions for its users.",
     image: stratiphyLogo,
   },
-];
+]

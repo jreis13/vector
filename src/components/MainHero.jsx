@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image from "next/image"
 
-import Button from "./Button";
+import Button from "./Button"
 
 function MainHero({ children }) {
   return (
-    <div className="main-hero relative overflow-hidden flex flex-col justify-center items-center px-6 lg:pt-24">
-      <div className="absolute inset-0 w-full h-full z-[-1]">
+    <div className="main-hero relative flex flex-col items-center justify-center overflow-hidden px-6 lg:pt-24">
+      <div className="absolute inset-0 z-[-1] h-full w-full">
         <Image
           src="/mainHero.svg"
           alt="Background image"
@@ -27,7 +27,7 @@ function MainHero({ children }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainHero;
+export default MainHero

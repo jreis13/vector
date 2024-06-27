@@ -1,7 +1,7 @@
-import classNames from "classnames";
+import classNames from "classnames"
 
-import Login from "./Login";
-import NavLink from "./NavLink";
+import Login from "./Login"
+import NavLink from "./NavLink"
 
 const PATHS = [
   { name: "Companies", path: "/companies/" },
@@ -10,7 +10,7 @@ const PATHS = [
   { name: "Pricing", path: "/pricing/" },
   { name: "About", path: "/about/" },
   { name: "Login", path: "/login/", type: "image" },
-];
+]
 
 function NavLinks({ isDesktop }) {
   return (
@@ -19,7 +19,7 @@ function NavLinks({ isDesktop }) {
         className={classNames("flex list-none", {
           "text-right": !isDesktop,
           "flex-col gap-2": !isDesktop,
-          "flex-row items-center gap-7 h-8": isDesktop,
+          "h-8 flex-row items-center gap-7": isDesktop,
         })}
       >
         {PATHS.map(({ name, path, type }) => (
@@ -32,7 +32,7 @@ function NavLinks({ isDesktop }) {
         ))}
       </ul>
     </nav>
-  );
+  )
 }
 
-export default NavLinks;
+export default NavLinks

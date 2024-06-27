@@ -20,7 +20,7 @@ function MenuClose() {
         fill="currentColor"
       />
     </svg>
-  );
+  )
 }
 
-export default MenuClose;
+export default MenuClose

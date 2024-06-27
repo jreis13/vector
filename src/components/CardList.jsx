@@ -1,13 +1,13 @@
-import Image from "next/image";
+import Image from "next/image"
 
 function CardList({ title, features, imagesOnTop = false }) {
   return (
     <div
       id={title}
-      className="flex flex-col justify-center items-center min-h-screen py-8 lg:py-16 px-6 lg:px-16"
+      className="flex min-h-screen flex-col items-center justify-center px-6 py-8 lg:px-16 lg:py-16"
     >
       <div>
-        <div className="text-center mb-8">
+        <div className="mb-8 text-center">
           <h2>{title}</h2>
         </div>
         <div className="flex flex-grow items-center justify-center">
@@ -15,10 +15,10 @@ function CardList({ title, features, imagesOnTop = false }) {
             {features.map((feature) => (
               <div
                 key={feature.name || feature.description}
-                className="flex flex-col h-full text-center items-center"
+                className="flex h-full flex-col items-center text-center"
               >
                 {imagesOnTop && feature.image && (
-                  <div className="h-80 w-80 relative overflow-hidden">
+                  <div className="relative h-80 w-80 overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.name || feature.description}
@@ -46,7 +46,7 @@ function CardList({ title, features, imagesOnTop = false }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CardList;
+export default CardList

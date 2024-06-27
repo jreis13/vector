@@ -10,7 +10,7 @@ function MenuOpen() {
       <rect y="7" width="24" height="3" fill="currentColor" />
       <rect y="14" width="17" height="3" fill="currentColor" />
     </svg>
-  );
+  )
 }
 
-export default MenuOpen;
+export default MenuOpen
