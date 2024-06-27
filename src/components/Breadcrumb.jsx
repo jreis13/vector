@@ -94,7 +94,7 @@ function Breadcrumb({ sections }) {
       </nav>
       <button
         onClick={toggleVisibility}
-        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300"
+        className="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 bg-[#34333d] rounded-full mb-6"
       >
         <Image
           src={arrowDown}
