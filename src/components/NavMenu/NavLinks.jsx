@@ -1,18 +1,7 @@
 import classNames from "classnames"
+import Link from "../Link"
 
-import Login from "./Login"
-import NavLink from "./NavLink"
-
-const PATHS = [
-  { name: "Companies", path: "/companies/" },
-  { name: "Ecosystem", path: "/ecosystem/" },
-  { name: "Platforms", path: "/platforms/" },
-  { name: "Pricing", path: "/pricing/" },
-  { name: "About", path: "/about/" },
-  { name: "Login", path: "/login/", type: "image" },
-]
-
-function NavLinks({ isDesktop }) {
+function NavLinks({ paths, isDesktop }) {
   return (
     <nav>
       <ul
@@ -22,12 +11,13 @@ function NavLinks({ isDesktop }) {
           "h-8 flex-row items-center gap-7": isDesktop,
         })}
       >
-        {PATHS.map(({ name, path, type }) => (
-          <li
-            key={name}
-            className={classNames("icon", { "ml-auto": !isDesktop })}
-          >
-            {type === "image" ? <Login /> : <NavLink to={path}>{name}</NavLink>}
+        {paths.map(({ name, path, type, imageComponent: ImageComponent }) => (
+          <li key={name} className={"link cursor-pointer"}>
+            {type === "image" ? (
+              <ImageComponent />
+            ) : (
+              <Link to={path}>{name}</Link>
+            )}
           </li>
         ))}
       </ul>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 
+import PATHS from "src/common/data/navigationData"
 import MenuClose from "./MenuClose"
 import MenuOpen from "./MenuOpen"
 import NavLinks from "./NavLinks"
@@ -31,10 +32,10 @@ function NavMenu() {
           >
             {toggle ? <MenuClose /> : <MenuOpen />}
           </button>
-          {toggle && <NavLinks />}
+          {toggle && <NavLinks paths={PATHS} />}
         </>
       )}
-      {isDesktop && <NavLinks isDesktop />}
+      {isDesktop && <NavLinks paths={PATHS} isDesktop />}
     </div>
   )
 }

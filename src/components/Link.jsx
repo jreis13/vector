@@ -6,7 +6,7 @@ function Link({ blank, children, to }) {
   }
 
   return (
-    <a href={to} className="cursor-pointer no-underline" {...attrs}>
+    <a href={to} className="link cursor-pointer no-underline" {...attrs}>
       {children}
     </a>
   )

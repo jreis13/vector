@@ -48,9 +48,9 @@ body {
   line-height: 28px;
 }
 
-.icon {
-  cursor: pointer;
+.link {
   :hover {
-    stroke: #bb44f0;
+    cursor: pointer;
+    color: #bb44f0;
   }
 }
