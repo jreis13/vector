@@ -43,7 +43,7 @@ function CompanyCard({ company }) {
       </div>
       <div className="mt-4 flex flex-col justify-end">
         <div className="mb-4">
-          {company.stats.map((stat, index) => (
+          {company.mainStats.map((stat, index) => (
             <div key={index} className="flex justify-between py-1">
               <span>{stat.label}:</span>
               <span>{stat.value}</span>
