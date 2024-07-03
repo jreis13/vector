@@ -1,0 +1,21 @@
+import CompanyDetails from "src/components/CompanyDetails"
+import Footer from "src/components/Footer"
+import Header from "src/components/Header"
+
+function CompanyLayout({ company }) {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <div>
+        <div id="Companies" className="py-12">
+          <CompanyDetails company={company} />
+        </div>
+        <div id="footer" className="pt-12">
+          <Footer />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CompanyLayout
