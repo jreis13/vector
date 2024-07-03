@@ -21,7 +21,7 @@ function CompanyCard({ company }) {
 
   return (
     <div
-      className="mb-6 flex h-full cursor-pointer flex-col justify-between rounded-lg border p-4 transition-shadow duration-200 hover:shadow-lg"
+      className="mb-6 flex h-full cursor-pointer flex-col justify-between rounded-lg border p-4 transition-all duration-300 hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
       onClick={handleCardClick}
     >
       <div>
@@ -38,9 +38,7 @@ function CompanyCard({ company }) {
           </div>
         </div>
         <div className="mb-4">
-          <p className="text-gray-600">
-            {truncateText(company.summary, descriptionLimit)}
-          </p>
+          <p>{truncateText(company.summary, descriptionLimit)}</p>
         </div>
       </div>
       <div className="mt-4 flex flex-col justify-end">

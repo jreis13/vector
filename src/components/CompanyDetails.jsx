@@ -2,6 +2,8 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import Button from "./Button"
+import arrowBack from "/public/icons/arrowBack.svg"
 
 function truncateText(text, wordLimit) {
   const words = text.split(" ")
@@ -49,16 +51,19 @@ function CompanyDetails({ company }) {
             </div>
           ))}
         </div>
-        <div className="text-lg font-bold">
-          Vector Score: {company.vectorScore}
+        <div className="flex flex-col items-center font-bold">
+          <div>
+            v/<span className="caret">^</span> Score
+          </div>
+          <div className="my-2 flex h-16 w-16 items-center justify-center rounded-full border bg-[#BB44F0] px-4 py-4">
+            {company.vectorScore}
+          </div>
         </div>
-        <div>
-          <button
-            className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-            onClick={handleBackClick}
-          >
-            Back to Companies
-          </button>
+        <div className="my-4 flex max-w-fit">
+          <Button onClick={handleBackClick}>
+            {" "}
+            <Image src={arrowBack} alt="Back" width={24} height={24} />
+          </Button>
         </div>
       </div>
     </div>
