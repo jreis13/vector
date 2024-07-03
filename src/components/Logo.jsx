@@ -18,7 +18,7 @@ function Logo() {
   return (
     <a
       href="/"
-      className="text-4xl font-semibold leading-[42px] transition-opacity duration-200 hover:text-[#BB44F0] hover:opacity-70"
+      className="text-4xl font-semibold leading-[42px] transition-opacity duration-300 hover:text-[#BB44F0] hover:opacity-70"
     >
       {isDesktop ? (
         <p>

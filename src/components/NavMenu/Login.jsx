@@ -5,7 +5,7 @@ function Login() {
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke="white"
+      stroke="#e8e8e8"
       class="size-6"
     >
       <path
