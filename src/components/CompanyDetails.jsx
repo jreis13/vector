@@ -5,14 +5,6 @@ import { useRouter } from "next/navigation"
 import Button from "./Button"
 import arrowBack from "/public/icons/arrowBack.svg"
 
-function truncateText(text, wordLimit) {
-  const words = text.split(" ")
-  if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(" ") + "..."
-  }
-  return text
-}
-
 function CompanyDetails({ company }) {
   const router = useRouter()
 
@@ -23,8 +15,6 @@ function CompanyDetails({ company }) {
       </div>
     )
   }
-
-  const descriptionLimit = 20
 
   const handleBackClick = () => {
     router.push("/companies")
@@ -41,15 +31,24 @@ function CompanyDetails({ company }) {
             height={96}
           />
         </div>
-        <p className="pb-8">
-          {truncateText(company.summary, descriptionLimit)}
-        </p>
+        <p className="pb-8">{company.summary}</p>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.stats.map((stat, index) => (
+          {company.mainStats.map((stat, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{stat.label}:</span> {stat.value}
             </div>
           ))}
+          {company.stats.map(
+            (stat, index) =>
+              !company.mainStats.some(
+                (mainStat) => mainStat.label === stat.label
+              ) && (
+                <div key={index} className="rounded-lg border p-4">
+                  <span className="font-semibold">{stat.label}:</span>{" "}
+                  {stat.value}
+                </div>
+              )
+          )}
         </div>
         <div className="flex flex-col items-center font-bold">
           <div>
@@ -59,9 +58,8 @@ function CompanyDetails({ company }) {
             {company.vectorScore}
           </div>
         </div>
-        <div className="my-4 flex max-w-fit">
+        <div className="mx-auto my-4 flex max-w-fit lg:mx-0">
           <Button onClick={handleBackClick}>
-            {" "}
             <Image src={arrowBack} alt="Back" width={24} height={24} />
           </Button>
         </div>
