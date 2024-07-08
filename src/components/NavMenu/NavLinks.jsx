@@ -7,7 +7,7 @@ function NavLinks({ paths, isDesktop }) {
       <ul
         className={classNames("flex list-none", {
           "text-right": !isDesktop,
-          "flex-col gap-2": !isDesktop,
+          "flex-col gap-3": !isDesktop,
           "h-8 flex-row items-center gap-7": isDesktop,
         })}
       >

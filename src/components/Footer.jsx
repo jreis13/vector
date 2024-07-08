@@ -1,4 +1,5 @@
-import PATHS from "src/common/data/socialsData"
+import navigationPATHS from "src/common/data/navigationData"
+import socialPATHS from "src/common/data/socialsData"
 
 import Link from "./Link"
 import Logo from "./Logo"
@@ -26,36 +27,10 @@ function Footer() {
             © 2024 <a href="#">Vector</a>. All Rights Reserved.
           </span>
         </div>
-        <ul className="flex flex-col items-end justify-end gap-4">
-          <li>
-            <a href="#" className="mb-2 md:mb-4">
-              Companies
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mb-2 md:mb-4">
-              Ecosystem
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mb-2 md:mb-4">
-              Platforms
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mb-2 md:mb-4">
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a href="#" className="mb-2 md:mb-4">
-              About
-            </a>
-          </li>
-        </ul>
+        <NavLinks isDesktop={false} paths={navigationPATHS} />
       </div>
       <div className="my-6">
-        <NavLinks isDesktop={true} paths={PATHS} />
+        <NavLinks isDesktop={true} paths={socialPATHS} />
       </div>
       <div className="mt-6">
         <Link to={"mailto:contact@vector.com"}>
