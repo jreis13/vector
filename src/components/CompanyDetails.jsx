@@ -42,7 +42,7 @@ function CompanyDetails({ company }) {
         </div>
         <h2 className="pb-4 text-lg font-bold">Founding Team</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.foundingTeam.map((member, index) => (
+          {company.foundingTeam?.map((member, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{member.label}:</span>
               {member.value}
@@ -52,7 +52,7 @@ function CompanyDetails({ company }) {
 
         <h2 className="pb-4 text-lg font-bold">Investors</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.investors.map((investor, index) => (
+          {company.investors?.map((investor, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{investor.label}:</span>
               {investor.value}
@@ -62,7 +62,7 @@ function CompanyDetails({ company }) {
 
         <h2 className="pb-4 text-lg font-bold">Market Size</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.marketSize.map((market, index) => (
+          {company.marketSize?.map((market, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{market.label}:</span>
               {market.value}
@@ -72,7 +72,7 @@ function CompanyDetails({ company }) {
 
         <h2 className="pb-4 text-lg font-bold">Customers</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.customers.map((customer, index) => (
+          {company.customers?.map((customer, index) => (
             <div key={index} className="rounded-lg border p-4">
               {customer}
             </div>
@@ -80,11 +80,11 @@ function CompanyDetails({ company }) {
         </div>
 
         <h2 className="pb-4 text-lg font-bold">Value Proposition</h2>
-        <p className="pb-8">{company.valueProposition}</p>
+        <p className="pb-8">{company.valueProposition || ""}</p>
 
         <h2 className="pb-4 text-lg font-bold">Revenue Streams</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.revenueStreams.map((stream, index) => (
+          {company.revenueStreams?.map((stream, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{stream.label}:</span>
               {stream.value}
@@ -95,26 +95,26 @@ function CompanyDetails({ company }) {
         <h2 className="pb-4 text-lg font-bold">Cost Structure</h2>
         <h3 className="pb-2 font-semibold">Fixed Costs</h3>
         <ul className="list-disc pb-4 pl-8">
-          {company.costStructure.fixed.map((cost, index) => (
+          {company.costStructure?.fixed.map((cost, index) => (
             <li key={index}>{cost}</li>
           ))}
         </ul>
         <h3 className="pb-2 font-semibold">Variable Costs</h3>
         <ul className="list-disc pb-4 pl-8">
-          {company.costStructure.variable.map((cost, index) => (
+          {company.costStructure?.variable.map((cost, index) => (
             <li key={index}>{cost}</li>
           ))}
         </ul>
         <h3 className="pb-2 font-semibold">Scalability</h3>
         <ul className="list-disc pb-4 pl-8">
-          {company.costStructure.scalability.map((scale, index) => (
+          {company.costStructure?.scalability.map((scale, index) => (
             <li key={index}>{scale}</li>
           ))}
         </ul>
 
         <h2 className="pb-4 text-lg font-bold">Customer Growth</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.customerGrowth.map((growth, index) => (
+          {company.customerGrowth?.map((growth, index) => (
             <div key={index} className="rounded-lg border p-4">
               {growth}
             </div>
@@ -123,7 +123,7 @@ function CompanyDetails({ company }) {
 
         <h2 className="pb-4 text-lg font-bold">Patents</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.patents.map((patent, index) => (
+          {company.patents?.map((patent, index) => (
             <div key={index} className="rounded-lg border p-4">
               {patent}
             </div>
@@ -132,7 +132,7 @@ function CompanyDetails({ company }) {
 
         <h2 className="pb-4 text-lg font-bold">Financials</h2>
         <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-          {company.financials.map((financial, index) => (
+          {company.financials?.map((financial, index) => (
             <div key={index} className="rounded-lg border p-4">
               <span className="font-semibold">{financial.label}:</span>
               {financial.value}
@@ -165,7 +165,7 @@ function CompanyDetails({ company }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {company.products.map((product, index) => (
+            {company.products?.map((product, index) => (
               <tr key={index}>
                 <td
                   className={`whitespace-nowrap px-6 py-4 ${index % 2 === 0 ? "" : "bg-gray-100 text-[#403f4c]"}`}
@@ -230,7 +230,7 @@ function CompanyDetails({ company }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {company.keyCompetitors.map((competitor, index) => (
+            {company.keyCompetitors?.map((competitor, index) => (
               <tr key={index}>
                 <td
                   className={`whitespace-nowrap px-6 py-4 ${index % 2 === 0 ? "" : "bg-gray-100 text-[#403f4c]"}`}
@@ -278,7 +278,7 @@ function CompanyDetails({ company }) {
         <table className="min-w-full divide-y divide-gray-200 border">
           <thead>
             <tr>
-              {company.comparison.map((competitor, index) => (
+              {company.comparison?.map((competitor, index) => (
                 <th
                   key={index}
                   colSpan={competitor.aircrafts.length}
@@ -289,7 +289,7 @@ function CompanyDetails({ company }) {
               ))}
             </tr>
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <th
                     key={idx}
@@ -303,7 +303,7 @@ function CompanyDetails({ company }) {
           </thead>
           <tbody className="divide-y divide-gray-200">
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <td
                     key={idx}
@@ -315,7 +315,7 @@ function CompanyDetails({ company }) {
               )}
             </tr>
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <td
                     key={idx}
@@ -327,7 +327,7 @@ function CompanyDetails({ company }) {
               )}
             </tr>
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <td
                     key={idx}
@@ -339,7 +339,7 @@ function CompanyDetails({ company }) {
               )}
             </tr>
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <td
                     key={idx}
@@ -351,7 +351,7 @@ function CompanyDetails({ company }) {
               )}
             </tr>
             <tr>
-              {company.comparison.map((competitor, index) =>
+              {company.comparison?.map((competitor, index) =>
                 competitor.aircrafts.map((aircraft, idx) => (
                   <td
                     key={idx}

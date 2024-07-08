@@ -15,6 +15,9 @@ export const companiesData = [
       { label: "Funding Stage", value: "Seed" },
     ],
     stats: [
+      { label: "Industry", value: "Investments" },
+      { label: "Funding Amount", value: "£802k" },
+      { label: "Funding Stage", value: "Seed" },
       { label: "Last Valuation", value: "£3,000,000" },
       { label: "HQ", value: "London, UK" },
       { label: "Employees", value: "30" },
@@ -29,6 +32,11 @@ export const companiesData = [
     name: "Arc",
     summary:
       "ARC Aerosystems is a pioneering technology firm dedicated to advancing a portfolio of civil aircraft, both conventional and hybrid-electric, specializing in vertical take-off and landing (VTOL) capabilities. The company’s mission is to foster the growth of sustainable civil air transport technology that serves the benefit of humanity and the environment. ARC Aerosystems is leading the way in the development of hybrid-electric VTOL aircraft set to revolutionize urban air mobility and regional air transport, emphasizing efficiency, reliability, and environmental sustainability.",
+    mainStats: [
+      { label: "Industry", value: "Aerospace, Aviation" },
+      { label: "Funding Amount", value: "$83.000.000" },
+      { label: "Funding Stage", value: "Early-stage (Series A)" },
+    ],
     stats: [
       { label: "Industry", value: "Aerospace, Aviation" },
       { label: "Funding Amount", value: "$83.000.000" },
@@ -330,6 +338,9 @@ export const companiesData = [
       { label: "Funding Stage", value: "Seed" },
     ],
     stats: [
+      { label: "Industry", value: "Investments" },
+      { label: "Funding Amount", value: "£821k" },
+      { label: "Funding Stage", value: "Seed" },
       { label: "Last Valuation", value: "£3,000,000" },
       { label: "HQ", value: "London, UK" },
       { label: "Employees", value: "30" },
