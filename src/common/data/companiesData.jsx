@@ -238,7 +238,8 @@ export const companiesData = [
     comparison: [
       {
         name: "ARC Aerosystems",
-        aircrafts: [
+
+        products: [
           {
             name: "Pegasus",
             function: "Airtaxi",
@@ -267,7 +268,8 @@ export const companiesData = [
       },
       {
         name: "Vertical",
-        aircrafts: [
+
+        products: [
           {
             name: "VX4",
             function: "Airtaxi",
@@ -280,7 +282,8 @@ export const companiesData = [
       },
       {
         name: "Volocopter",
-        aircrafts: [
+
+        products: [
           {
             name: "Volocity",
             function: "Airtaxi",
@@ -301,7 +304,8 @@ export const companiesData = [
       },
       {
         name: "Lilium",
-        aircrafts: [
+
+        products: [
           {
             name: "Lilium",
             function: "Airtaxi",
