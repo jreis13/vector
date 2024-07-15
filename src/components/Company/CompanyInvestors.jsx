@@ -29,7 +29,7 @@ function CompanyInvestors({ investors }) {
             </div>
             <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-75 text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
               <Link blank to={investor.website}>
-                <FontAwesomeIcon icon={faExternalLinkAlt} size="2x" />
+                <FontAwesomeIcon icon={faExternalLinkAlt} />
               </Link>
             </div>
           </div>
