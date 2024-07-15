@@ -124,10 +124,14 @@ function ProductComparisonChart({ comparison }) {
         },
       },
     },
+    maintainAspectRatio: false,
   }
 
   return (
-    <div className="product-comparison-scatter-chart">
+    <div
+      className="product-comparison-scatter-chart"
+      style={{ height: "100%" }}
+    >
       <Scatter data={generateChartData()} options={chartOptions} />
     </div>
   )

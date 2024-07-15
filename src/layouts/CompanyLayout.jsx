@@ -1,4 +1,4 @@
-import CompanyDetails from "src/components/CompanyDetails"
+import CompanyDetails from "src/components/Company/CompanyDetails"
 import Footer from "src/components/Footer"
 import Header from "src/components/Header"
 
