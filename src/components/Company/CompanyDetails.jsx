@@ -46,7 +46,7 @@ function CompanyDetails({ company }) {
         </div>
         <p className="pb-8">{company.summary}</p>
 
-        <CompanyStats stats={company.stats} />
+        {company.stats && <CompanyStats stats={company.stats} />}
 
         {company.foundingTeam && (
           <CompanyFoundingTeam foundingTeam={company.foundingTeam} />
@@ -56,11 +56,19 @@ function CompanyDetails({ company }) {
           <CompanyInvestors investors={company.investors} />
         )}
 
-        <CompanyCustomers customers={company.customers} />
+        {company.customers && (
+          <CompanyCustomers customers={company.customers} />
+        )}
 
-        <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
+        {company.customerGrowth && (
+          <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
+        )}
 
-        <CompanyValueProposition valueProposition={company.valueProposition} />
+        {company.valueProposition && (
+          <CompanyValueProposition
+            valueProposition={company.valueProposition}
+          />
+        )}
 
         {company.revenueStreams && (
           <CompanyRevenueStreams revenueStreams={company.revenueStreams} />
@@ -70,9 +78,11 @@ function CompanyDetails({ company }) {
           <CompanyCostStructure costStructure={company.costStructure} />
         )}
 
-        <CompanyMarketSize marketSize={company.marketSize} />
+        {company.marketSize && (
+          <CompanyMarketSize marketSize={company.marketSize} />
+        )}
 
-        <CompanyPatents patents={company.patents} />
+        {company.patents && <CompanyPatents patents={company.patents} />}
 
         {company.financials && (
           <CompanyFinancials financials={company.financials} />
