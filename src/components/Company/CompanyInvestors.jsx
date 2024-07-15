@@ -25,7 +25,7 @@ function CompanyInvestors({ investors }) {
             </div>
             <div className="text-center">
               <span className="font-semibold">{investor.label}</span>
-              <p className="mt-2 text-sm">{investor.value}</p>
+              <p className="mt-2">{investor.value}</p>
             </div>
             <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-75 text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
               <Link blank to={investor.website}>
