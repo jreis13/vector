@@ -6,7 +6,7 @@ import Link from "../Link"
 
 function CompanyFoundingTeam({ foundingTeam }) {
   return (
-    <div className="flex flex-col py-8 lg:py-16">
+    <div className="flex min-h-screen flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">Founding Team</h2>
       <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2 lg:grid-cols-3">
         {foundingTeam.map((member, index) => (
