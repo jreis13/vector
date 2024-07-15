@@ -53,28 +53,29 @@ export const companiesData = [
     foundingTeam: [
       {
         label: "Dr. Seyed Mohseni",
-        value:
-          "Dr. Seyed Mohseni is the CEO and co-founder of ARC Aerosystems. He has extensive experience in the aerospace sector, particularly in the development of VTOL aircraft. Under his leadership, the company has made significant strides in pioneering sustainable air transport technologies. Dr. Mohseni's innovative approach and strategic vision have been pivotal in advancing the company's projects, including the development of hybrid-electric and fully electric aircraft. His expertise in integrating new technologies into practical aviation solutions has positioned ARC Aerosystems as a leader in the emerging eVTOL market.",
+        value: "CEO & CO-Founder",
+        linkedin: "https://www.linkedin.com/in/seyed-mohseni-92953a4a/",
       },
       {
         label: "John Wighton",
-        value:
-          "John Wighton, the Head of Design Organization at ARC Aerosystems, brings a wealth of experience in structural optimization and certification of airborne platforms. He has a background in engineering and has held major positions in CAA, DOA and EASA organizations. John's career began with an engineering apprenticeship at BAe Hatfield and has included entrepreneurial ventures, such as a joint venture with GE Plastics. His expertise in lightweight design and innovative solutions is crucial to ARC's development of advanced VTOL aircraft.",
+        value: "Head of Design Organization",
+        linkedin: "https://www.linkedin.com/in/johnwighton/",
       },
       {
         label: "Prof. Iain Gray",
-        value:
-          "Professor Iain Gray serves as the Chief Strategy Advisor at ARC Aerosystems. With nearly 30 years in the aerospace manufacturing and engineering sector, he has a distinguished career, including leading Airbus in the UK. Prof. Gray also spearheaded the UK Government's innovation agenda as Chief Executive of the Technology Strategy Board, managing a significant budget and engaging with thousands of businesses. His leadership and strategic insights are invaluable to ARC's mission of revolutionizing civil air transport.",
+        value: "Chief Strategy Advisor",
+        linkedin: "https://www.linkedin.com/in/iain-gray-120aa88/",
       },
       {
         label: "Mohammad Reza Marghoubkar",
-        value:
-          "Mohammad Reza Marghoubkar is the Chief Operating Officer at ARC Aerosystems. He is a multi-skilled specialist in business operations and growth within technology and research sectors. With an MSc in Mechanical Engineering, Mohammad Reza has experience across diverse fields including R&D, aerospace, biotechnology, and automotive. His international experience in regions such as South America, the Middle East, and Europe has equipped him with a broad perspective and deep understanding of global markets, enhancing ARC's operational capabilities.",
+        value: "Chief Operating Officer",
+        linkedin:
+          "https://www.linkedin.com/in/mohammad-reza-marghoubkar-aab433155/",
       },
       {
         label: "Norman Wijker",
-        value:
-          "Norman Wijker, the Chief Designer at ARC Aerosystems, has a rich background in aerospace vehicle design. A graduate of Cranfield University's renowned Aerospace Vehicle Design course, he has worked in various roles including software coding for tilt-rotor performance and all-round design and manufacturing. Since joining ARC (formerly SAMAD) in 2018, Norman has led the designs for significant projects such as the e-Starling and Q-Starling. His innovative design skills are instrumental in creating advanced VTOL aircraft that meet the highest standards of performance and efficiency.",
+        value: "Chief Designer",
+        linkedin: "https://www.linkedin.com/in/norman-wijker-8958b712/",
       },
     ],
     investors: [
