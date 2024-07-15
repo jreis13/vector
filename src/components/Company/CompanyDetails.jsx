@@ -44,9 +44,18 @@ function CompanyDetails({ company }) {
             height={96}
           />
         </div>
-        <p className="pb-8">{company.summary}</p>
 
-        {company.stats && <CompanyStats stats={company.stats} />}
+        <div className="min-h-screen">
+          <div className="pb-8 leading-8">
+            {company.summary.split(".").map((sentence, index) => (
+              <p className="mb-4" key={index}>
+                {sentence.trim()}.
+              </p>
+            ))}
+          </div>
+
+          {company.stats && <CompanyStats stats={company.stats} />}
+        </div>
 
         {company.foundingTeam && (
           <CompanyFoundingTeam foundingTeam={company.foundingTeam} />
@@ -56,13 +65,15 @@ function CompanyDetails({ company }) {
           <CompanyInvestors investors={company.investors} />
         )}
 
-        {company.customers && (
-          <CompanyCustomers customers={company.customers} />
-        )}
+        <div className="min-h-screen">
+          {company.customers && (
+            <CompanyCustomers customers={company.customers} />
+          )}
 
-        {company.customerGrowth && (
-          <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
-        )}
+          {company.customerGrowth && (
+            <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
+          )}
+        </div>
 
         {company.valueProposition && (
           <CompanyValueProposition
