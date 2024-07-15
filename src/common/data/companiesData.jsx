@@ -82,27 +82,37 @@ export const companiesData = [
       {
         label: "Innovate UK",
         value:
-          "As part of their Future Flight Challenge program, Innovate UK has provided significant grants to support ARC Aerosystems. The exact amount is not publicly disclosed, but Innovate UK is known for substantial investments in innovative technologies.",
+          "Supports ARC Aerosystems through the Future Flight Challenge program, providing substantial grants for innovative technologies.",
+        logo: "/logos/innovate-uk.svg",
+        website: "https://www.ukri.org/councils/innovate-uk/",
       },
       {
         label: "British Business Bank",
         value:
-          "This government-owned business development bank has also supported ARC Aerosystems with financial backing. Specific figures are not disclosed, but their investment has been part of the over £10 million total funding secured by ARC.",
+          "Government-owned bank backing ARC Aerosystems with funding, part of their £10 million total funding secured.",
+        logo: "/logos/british-business-bank.svg",
+        website: "https://www.british-business-bank.co.uk/",
       },
       {
         label: "Turquoise International",
         value:
-          "This venture capital firm has provided funding to ARC Aerosystems, contributing to their development of sustainable aviation technologies. The exact amount is not specified.",
+          "Venture capital firm funding ARC Aerosystems, contributing to sustainable aviation technologies.",
+        logo: "/logos/turquoise.jpg",
+        website: "https://turquoise.eu/",
       },
       {
         label: "EIT KIC Urban Mobility",
         value:
-          "As an accelerator and incubator, EIT KIC Urban Mobility has supported ARC Aerosystems, helping to drive their urban mobility projects forward",
+          "Accelerator and incubator supporting ARC Aerosystems in driving urban mobility projects.",
+        logo: "/logos/urban-mobility.svg",
+        website: "https://www.eiturbanmobility.eu/",
       },
       {
         label: "Life Shield",
         value:
-          "A Saudi-backed start-up, Life Shield has pledged support for ARC Aerosystems' new aircraft projects. This partnership aligns with Saudi Arabia’s Vision 2030 goals and emphasizes significant backing, although the precise financial details are not disclosed",
+          "Saudi-backed start-up partnering with ARC Aerosystems for new aircraft projects, aligning with Vision 2030 goals.",
+        logo: "/logos/life-shield.webp",
+        website: "https://lifeshield.com.sa/",
       },
     ],
     marketSize: [
