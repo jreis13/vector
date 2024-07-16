@@ -49,7 +49,7 @@ function CompanyDetails({ company }) {
           <div className="pb-8 leading-8">
             {company.summary.split(".").map((sentence, index) => (
               <p className="mb-4" key={index}>
-                {sentence.trim()}.
+                {sentence.trim()}
               </p>
             ))}
           </div>
