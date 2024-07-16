@@ -2,11 +2,11 @@ function CompanyPatents({ patents }) {
   return (
     <>
       <h2 className="pb-4 text-lg font-bold">Patents</h2>
-      <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
-        {patents.map((patent, index) => (
-          <div key={index} className="rounded-lg border p-4">
-            {patent}
-          </div>
+      <div className="pb-8">
+        {patents.map((growth, index) => (
+          <ul key={index} className="list-disc pl-4">
+            <li>{growth}</li>
+          </ul>
         ))}
       </div>
     </>
