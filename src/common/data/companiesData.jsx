@@ -116,18 +116,25 @@ export const companiesData = [
       },
     ],
     marketSize: [
-      { label: "TAM (Globally)", value: "$3.60 Billion in 2024" },
+      {
+        label: "TAM (Globally)",
+        value: "$3.60 Billion in 2024",
+        icon: "faGlobe",
+      },
       {
         label: "TAM (Europe)",
         value: "€1.26 Billion in 2024 / €6.8 Billion by 2030",
+        icon: "faEuroSign",
       },
       {
         label: "Projected Growth",
         value: "$21.13 Billion by 2030",
+        icon: "faChartLine",
       },
       {
         label: "Averaged CAGR (2024-2030)",
         value: "24.23%",
+        icon: "faPercentage",
       },
     ],
     customers: [
@@ -190,11 +197,19 @@ export const companiesData = [
       "Yes. However, its unclear how many patents the company actually has registered.",
     ],
     financials: [
-      { label: "Fixed Assets", value: "£10,541,154" },
-      { label: "Current Assets", value: "£865,899" },
-      { label: "Total Assets less current liabilities", value: "£7,963,170" },
-      { label: "Net Assets", value: "£1,406,660" },
-      { label: "Estimated Monthly Burn Rate", value: "£345,776" },
+      { label: "Fixed Assets", value: "£10,541,154", icon: "faBuilding" },
+      { label: "Current Assets", value: "£865,899", icon: "faPiggyBank" },
+      {
+        label: "Total Assets",
+        value: "£7,963,170",
+        icon: "faBalanceScale",
+      },
+      { label: "Net Assets", value: "£1,406,660", icon: "faHandHoldingUsd" },
+      {
+        label: "Estimated Monthly Burn Rate",
+        value: "£345,776",
+        icon: "faFire",
+      },
     ],
     products: [
       {
