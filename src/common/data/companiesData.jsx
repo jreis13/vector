@@ -31,7 +31,7 @@ export const companiesData = [
     logo: arcLogo,
     name: "Arc",
     summary:
-      "ARC Aerosystems is a pioneering technology firm dedicated to advancing a portfolio of civil aircraft, both conventional and hybrid-electric, specializing in vertical take-off and landing (VTOL) capabilities. The company’s mission is to foster the growth of sustainable civil air transport technology that serves the benefit of humanity and the environment. ARC Aerosystems is leading the way in the development of hybrid-electric VTOL aircraft set to revolutionize urban air mobility and regional air transport, emphasizing efficiency, reliability, and environmental sustainability",
+      "ARC Aerosystems is a pioneering technology firm dedicated to advancing a portfolio of civil aircraft, both conventional and hybrid-electric, specializing in vertical take-off and landing (VTOL) capabilities. The company’s mission is to foster the growth of sustainable civil air transport technology that serves the benefit of humanity and the environment. ARC Aerosystems is leading the way in the development of hybrid-electric VTOL aircraft set to revolutionize urban air mobility and regional air transport, emphasizing efficiency, reliability, and environmental sustainability.",
     mainStats: [
       { label: "Industry", value: "Aerospace, Aviation" },
       { label: "Funding Amount", value: "$83.000.000" },
@@ -131,35 +131,43 @@ export const companiesData = [
       },
     ],
     customers: [
-      "Aerial Service Operators",
-      "Logistics",
-      "First Responders (Medical, Law Enforcement)",
-      "Surveillance Providers",
-      "Shuttle/Air Taxi Services",
+      { type: "Aerial Service Operators", icon: "faPlane" },
+      { type: "Logistics", icon: "faTruck" },
+      { type: "First Responders (Medical, Law Enforcement)", icon: "faMedkit" },
+      { type: "Surveillance Providers", icon: "faBinoculars" },
+      { type: "Shuttle/Air Taxi Services", icon: "faTaxi" },
     ],
     valueProposition:
-      "ARC Aerosystems leverages innovative technology by developing VTOL and hybrid-electric aircraft that can operate from helipads or rural locations without traditional runways, enhancing accessibility and flexibility.  Their advanced designs, exemplified by the Pegasus, Linx P9, and C150 aircraft, feature cutting-edge aerodynamics and propulsion systems, offering greater reliability, efficiency, and lower emissions compared to traditional aircraft. This positions ARC Aerosystems as a leader in practical and advanced air mobility solutions.  The company’s commitment to sustainability is evident through the reduced environmental impact of their hybrid-electric systems, which significantly lower carbon emissions and fuel consumption, and their efficient resource utilization aims to reduce maintenance costs and improve operational efficiency.   Additionally, ARC Aerosystems offers cost-effective solutions with lower operational costs than traditional helicopters and planes and caters to a wide range of applications, including passenger transport, cargo delivery, and medical supply transport, enhancing their value proposition by addressing multiple market needs with efficient and reliable solutions​",
+      "ARC Aerosystems leverages innovative technology by developing VTOL and hybrid-electric aircraft that can operate from helipads or rural locations without traditional runways, enhancing accessibility and flexibility.  Their advanced designs, exemplified by the Pegasus, Linx P9, and C150 aircraft, feature cutting-edge aerodynamics and propulsion systems, offering greater reliability, efficiency, and lower emissions compared to traditional aircraft. This positions ARC Aerosystems as a leader in practical and advanced air mobility solutions.  The company’s commitment to sustainability is evident through the reduced environmental impact of their hybrid-electric systems, which significantly lower carbon emissions and fuel consumption, and their efficient resource utilization aims to reduce maintenance costs and improve operational efficiency.   Additionally, ARC Aerosystems offers cost-effective solutions with lower operational costs than traditional helicopters and planes and caters to a wide range of applications, including passenger transport, cargo delivery, and medical supply transport, enhancing their value proposition by addressing multiple market needs with efficient and reliable solutions.​",
     revenueStreams: [
-      { label: "Aircraft Sales", value: "Sale of the aircraft to companies" },
+      {
+        label: "Aircraft Sales",
+        value: "Sale of the aircraft to companies",
+        icon: "faPlane",
+      },
       {
         label: "Leasing",
         value:
           "Unclear of the type of leasings the companies indulges in (Wet-leasings or Dry-leasings)",
+        icon: "faExchangeAlt",
       },
       {
         label: "Service Contracts",
         value:
           "The company can collect revenues from maintenance and support of the aircraft",
+        icon: "faTools",
       },
       {
         label: "Technology Licensing and Partnerships",
         value:
           "The company can earn revenue from IP licensing or via strategic partnerships with other players in the aviation industry.",
+        icon: "faHandshake",
       },
       {
         label: "Training and Advisory Services",
         value:
           "From a broader viewpoint, the company can create a revenue stream from its pilot/maintenance training programs and generic advisory.",
+        icon: "faChalkboardTeacher",
       },
     ],
     costStructure: {
