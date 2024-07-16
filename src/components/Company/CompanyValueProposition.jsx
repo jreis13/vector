@@ -8,7 +8,7 @@ function CompanyValueProposition({ valueProposition }) {
           .filter((sentence) => sentence.trim() !== "")
           .map((sentence, index) => (
             <p key={index} className="mb-4">
-              {sentence.trim()}.
+              {sentence.trim()}
             </p>
           ))}
       </div>
