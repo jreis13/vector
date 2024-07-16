@@ -1,6 +1,9 @@
 import arcLogo from "/public/logos/arcLogo.png"
 import krooLogo from "/public/logos/krooLogo.svg"
+import liliumLogo from "/public/logos/liliumLogo.svg"
 import stratiphyLogo from "/public/logos/stratiphyLogo.svg"
+import verticalLogo from "/public/logos/verticalLogo.svg"
+import volocopterLogo from "/public/logos/volocopterLogo.svg"
 
 export const companiesData = [
   {
@@ -249,6 +252,7 @@ export const companiesData = [
         website: "https://vertical-aerospace.com/",
         funding: "$350.000.000",
         products: 1,
+        logo: verticalLogo,
       },
       {
         name: "Volocopter",
@@ -258,6 +262,7 @@ export const companiesData = [
         website: "https://www.volocopter.com/en",
         funding: "$550.000.000",
         products: 3,
+        logo: volocopterLogo,
       },
       {
         name: "Lilium",
@@ -267,6 +272,7 @@ export const companiesData = [
         website: "https://lilium.com/",
         funding: "$800.000.000 (IPO)",
         products: 1,
+        logo: liliumLogo,
       },
     ],
     comparison: [
