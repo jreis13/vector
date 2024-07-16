@@ -89,11 +89,13 @@ function CompanyDetails({ company }) {
           <CompanyCostStructure costStructure={company.costStructure} />
         )}
 
-        {company.marketSize && (
-          <CompanyMarketSize marketSize={company.marketSize} />
-        )}
+        <div className="min-h-screen">
+          {company.marketSize && (
+            <CompanyMarketSize marketSize={company.marketSize} />
+          )}
 
-        {company.patents && <CompanyPatents patents={company.patents} />}
+          {company.patents && <CompanyPatents patents={company.patents} />}
+        </div>
 
         {company.financials && (
           <CompanyFinancials financials={company.financials} />
