@@ -21,10 +21,6 @@ export default function CompanyPage({ params }) {
           setCompany(foundCompany)
           setLoading(false)
         })
-        .catch((error) => {
-          console.error("Error fetching company data:", error)
-          setLoading(false)
-        })
     }
   }, [companyName])
 

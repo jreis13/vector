@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import CompanyCard from "./CompanyCard"
 
@@ -9,12 +7,7 @@ function Companies() {
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
       .then((response) => response.json())
-      .then((data) => {
-        setCompanies(data)
-      })
-      .catch((error) => {
-        console.error("Error fetching companies data:", error)
-      })
+      .then((data) => setCompanies(data))
   }, [])
 
   return (
