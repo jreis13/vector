@@ -2,7 +2,9 @@
   "name": "vector-backend",
   "version": "1.0.0",
   "scripts": {
-    "start": "next start -p $PORT"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "PORT=${PORT:-3001} next start"
   },
   "dependencies": {
     "aws-sdk": "^2.1659.0",
