@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "logo": "arcLogo",
+    "name": "Arc",
+    "summary": "ARC Aerosystems is a pioneering technology firm...",
+    "mainStats": [
+      { "label": "Industry", "value": "Aerospace Aviation" },
+      { "label": "Funding Amount", "value": "$83,000,000" },
+      { "label": "Funding Stage", "value": "Early-stage (Series A)" }
+    ],
+    "vectorScore": 8
+  },
+  {
+    "id": 2,
+    "logo": "krooLogo",
+    "name": "Kroo",
+    "summary": "Digital bank specifically designed for young adults, with an impressive 145k customer base. Amidst global economic uncertainty, this innovative platform was set to raise £1 million in a fiercely competitive UK market.",
+    "mainStats": [
+      { "label": "Industry", "value": "Investments" },
+      { "label": "Funding Amount", "value": "£802k" },
+      { "label": "Funding Stage", "value": "Seed" }
+    ],
+    "vectorScore": 8
+  }
+]

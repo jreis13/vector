@@ -11,14 +11,25 @@ export default function CompanyPage({ params }) {
   useEffect(() => {
     if (companyName) {
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
         .then((data) => {
+          console.log("Fetched Data:", data) // Add this line to log fetched data
           const foundCompany = data.find(
             (company) =>
               company.name.replace(/\s+/g, "").toLowerCase() ===
               companyName.toLowerCase()
           )
+          console.log("Found Company:", foundCompany) // Add this line to log found company
           setCompany(foundCompany)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error) // Add this line to log any errors
           setLoading(false)
         })
     }

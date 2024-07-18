@@ -38,24 +38,16 @@ function CompanyDetails({ company }) {
       <div>
         <div className="pb-8">
           <Image
-            src={company.logo}
+            src={`/path/to/logos/${company.logo}.svg`}
             alt={`${company.name} logo`}
             width={96}
             height={96}
           />
         </div>
 
-        <div className="min-h-screen">
-          <div className="pb-8 leading-8">
-            {company.summary.split(".").map((sentence, index) => (
-              <p className="mb-4" key={index}>
-                {sentence.trim()}
-              </p>
-            ))}
-          </div>
+        <p className="pb-8">{company.summary}</p>
 
-          {company.stats && <CompanyStats stats={company.stats} />}
-        </div>
+        {company.mainStats && <CompanyStats stats={company.mainStats} />}
 
         {company.foundingTeam && (
           <CompanyFoundingTeam foundingTeam={company.foundingTeam} />
@@ -65,15 +57,13 @@ function CompanyDetails({ company }) {
           <CompanyInvestors investors={company.investors} />
         )}
 
-        <div className="min-h-screen">
-          {company.customers && (
-            <CompanyCustomers customers={company.customers} />
-          )}
+        {company.customers && (
+          <CompanyCustomers customers={company.customers} />
+        )}
 
-          {company.customerGrowth && (
-            <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
-          )}
-        </div>
+        {company.customerGrowth && (
+          <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
+        )}
 
         {company.valueProposition && (
           <CompanyValueProposition
@@ -89,13 +79,11 @@ function CompanyDetails({ company }) {
           <CompanyCostStructure costStructure={company.costStructure} />
         )}
 
-        <div className="min-h-screen">
-          {company.marketSize && (
-            <CompanyMarketSize marketSize={company.marketSize} />
-          )}
+        {company.marketSize && (
+          <CompanyMarketSize marketSize={company.marketSize} />
+        )}
 
-          {company.patents && <CompanyPatents patents={company.patents} />}
-        </div>
+        {company.patents && <CompanyPatents patents={company.patents} />}
 
         {company.financials && (
           <CompanyFinancials financials={company.financials} />

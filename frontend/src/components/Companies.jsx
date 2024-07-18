@@ -1,16 +1,34 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import useCompanyData from "src/hooks/useCompanyData"
 import CompanyCard from "./CompanyCard"
 
-function Companies() {
-  const [companies, setCompanies] = useState([])
+export default function CompaniesPage() {
+  const { companies, loading, error } = useCompanyData()
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
-      .then((response) => response.json())
-      .then((data) => setCompanies(data))
-  }, [])
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-red-500">Error: {error}</p>
+      </div>
+    )
+  }
+
+  if (!companies || companies.length === 0) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p>No companies found</p>
+      </div>
+    )
+  }
 
   return (
     <div
@@ -30,5 +48,3 @@ function Companies() {
     </div>
   )
 }
-
-export default Companies
