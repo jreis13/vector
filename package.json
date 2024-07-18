@@ -1,0 +1,13 @@
+{
+  "name": "vector",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace frontend && npm run build --workspace backend",
+    "dev": "npm run dev --workspace frontend",
+    "start": "npm run start --workspace frontend"
+  }
+}
