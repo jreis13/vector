@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { companiesData } from "src/common/data/companiesData"
 import CompanyLayout from "src/layouts/CompanyLayout"
 
 export default function CompanyPage({ params }) {
@@ -11,13 +10,21 @@ export default function CompanyPage({ params }) {
 
   useEffect(() => {
     if (companyName) {
-      const foundCompany = companiesData.find(
-        (company) =>
-          company.name.replace(/\s+/g, "").toLowerCase() ===
-          companyName.toLowerCase()
-      )
-      setCompany(foundCompany)
-      setLoading(false)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
+        .then((response) => response.json())
+        .then((data) => {
+          const foundCompany = data.find(
+            (company) =>
+              company.name.replace(/\s+/g, "").toLowerCase() ===
+              companyName.toLowerCase()
+          )
+          setCompany(foundCompany)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error)
+          setLoading(false)
+        })
     }
   }, [companyName])
 

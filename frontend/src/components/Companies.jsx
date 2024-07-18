@@ -1,8 +1,22 @@
-import { companiesData } from "src/common/data/companiesData"
+"use client"
 
+import { useEffect, useState } from "react"
 import CompanyCard from "./CompanyCard"
 
 function Companies() {
+  const [companies, setCompanies] = useState([])
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/companies`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCompanies(data)
+      })
+      .catch((error) => {
+        console.error("Error fetching companies data:", error)
+      })
+  }, [])
+
   return (
     <div
       id="Companies"
@@ -13,7 +27,7 @@ function Companies() {
           <h2 className="text-3xl font-bold">Companies</h2>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {companiesData.map((company) => (
+          {companies.map((company) => (
             <CompanyCard key={company.id} company={company} />
           ))}
         </div>
