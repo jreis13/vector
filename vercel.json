@@ -15,12 +15,5 @@
       "src": "/companies/([^/]+)",
       "dest": "/companies/[companyName]/page"
     }
-  ],
-  "env": {
-    "AWS_ACCESS_KEY_ID": "@aws-access-key-id",
-    "AWS_SECRET_ACCESS_KEY": "@aws-secret-access-key",
-    "AWS_REGION": "@aws-region",
-    "S3_BUCKET_NAME": "@s3-bucket-name",
-    "S3_KEY": "@s3-key"
-  }
+  ]
 }
