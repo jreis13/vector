@@ -26,7 +26,7 @@ export default function CompanyPage({ params }) {
   if (!company) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Company not found</p>
+        <p>Company not found...</p>
       </div>
     )
   }
