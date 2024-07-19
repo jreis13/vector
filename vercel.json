@@ -2,15 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "next.config.js",
       "use": "@vercel/next"
     }
   ],
+  "routes": [
+    {
+      "src": "/api/companies/(.*)",
+      "dest": "/api/companies/$1"
+    },
+    {
+      "src": "/companies/([^/]+)",
+      "dest": "/companies/[companyName]/page"
+    }
+  ],
   "env": {
-    "AWS_ACCESS_KEY_ID": "@aws_access_key_id",
-    "AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key",
-    "AWS_REGION": "@aws_region",
-    "S3_BUCKET_NAME": "@s3_bucket_name",
-    "S3_KEY": "@s3_key"
+    "AWS_ACCESS_KEY_ID": "@aws-access-key-id",
+    "AWS_SECRET_ACCESS_KEY": "@aws-secret-access-key",
+    "AWS_REGION": "@aws-region",
+    "S3_BUCKET_NAME": "@s3-bucket-name",
+    "S3_KEY": "@s3-key"
   }
 }
