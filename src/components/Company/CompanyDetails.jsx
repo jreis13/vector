@@ -1,21 +1,15 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Button from "../Button"
-import CompanyCostStructure from "./CompanyCostStructure"
-import CompanyCustomerGrowth from "./CompanyCustomerGrowth"
-import CompanyCustomers from "./CompanyCustomers"
-import CompanyFinancials from "./CompanyFinancials"
-import CompanyFoundingTeam from "./CompanyFoundingTeam"
-import CompanyInvestors from "./CompanyInvestors"
+import CompanyCardsClickable from "./CompanyCardsClickable"
+import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
 import CompanyKeyCompetitors from "./CompanyKeyCompetitors"
-import CompanyMarketSize from "./CompanyMarketSize"
-import CompanyPatents from "./CompanyPatents"
 import CompanyProductComparison from "./CompanyProductComparison"
 import CompanyProducts from "./CompanyProducts"
-import CompanyRevenueStreams from "./CompanyRevenueStreams"
 import CompanyScore from "./CompanyScore"
 import CompanyStats from "./CompanyStats"
-import CompanyValueProposition from "./CompanyValueProposition"
+import CompanyTable from "./CompanyTable"
+import CompanyText from "./CompanyText"
 import arrowBack from "/public/icons/arrowBack.svg"
 
 function CompanyDetails({ company }) {
@@ -47,52 +41,87 @@ function CompanyDetails({ company }) {
 
         <p className="pb-8">{company.summary}</p>
 
-        {company.mainStats && <CompanyStats stats={company.mainStats} />}
+        {company.stats && <CompanyStats stats={company.stats.data} />}
 
         {company.foundingTeam && (
-          <CompanyFoundingTeam foundingTeam={company.foundingTeam} />
+          <CompanyCardsClickable
+            title={company.foundingTeam.title}
+            data={company.foundingTeam.data}
+          />
         )}
 
         {company.investors && (
-          <CompanyInvestors investors={company.investors} />
+          <CompanyCardsClickable
+            title={company.investors.title}
+            data={company.investors.data}
+          />
         )}
 
         {company.customers && (
-          <CompanyCustomers customers={company.customers} />
+          <CompanyCardsNonClickable
+            title={company.customers.title}
+            data={company.customers.data}
+          />
         )}
 
         {company.customerGrowth && (
-          <CompanyCustomerGrowth customerGrowth={company.customerGrowth} />
+          <CompanyText
+            title={company.customerGrowth.title}
+            data={company.customerGrowth.data}
+          />
         )}
 
         {company.valueProposition && (
-          <CompanyValueProposition
-            valueProposition={company.valueProposition}
+          <CompanyText
+            title={company.valueProposition.title}
+            data={company.valueProposition.data}
           />
         )}
 
         {company.revenueStreams && (
-          <CompanyRevenueStreams revenueStreams={company.revenueStreams} />
+          <CompanyCardsNonClickable
+            title={company.revenueStreams.title}
+            data={company.revenueStreams.data}
+          />
         )}
 
         {company.costStructure && (
-          <CompanyCostStructure costStructure={company.costStructure} />
+          <CompanyTable
+            title="Cost Structure"
+            columns={["Fixed Costs", "Variable Costs"]}
+            rows={[
+              company.costStructure.data.fixed || [],
+              company.costStructure.data.variable || [],
+            ]}
+            scalability={company.costStructure.data.scalability}
+          />
         )}
 
         {company.marketSize && (
-          <CompanyMarketSize marketSize={company.marketSize} />
+          <CompanyCardsNonClickable
+            title={company.marketSize.title}
+            data={company.marketSize.data}
+          />
         )}
 
-        {company.patents && <CompanyPatents patents={company.patents} />}
+        {company.patents && (
+          <CompanyText
+            title={company.patents.title}
+            data={company.patents.data}
+          />
+        )}
 
         {company.financials && (
-          <CompanyFinancials financials={company.financials} />
+          <CompanyCardsNonClickable
+            title={company.financials.title}
+            data={company.financials.data}
+          />
         )}
 
         {company.products && <CompanyProducts products={company.products} />}
 
         {company.keyCompetitors && (
-          <CompanyKeyCompetitors keyCompetitors={company.keyCompetitors} />
+          <CompanyKeyCompetitors keyCompetitors={company.keyCompetitors.data} />
         )}
 
         {company.comparison && (

@@ -22,39 +22,80 @@ ChartJS.register(
 )
 
 function ProductComparisonChart({ comparison }) {
-  const [maxSpeed, setMaxSpeed] = useState(0)
-  const [maxRange, setMaxRange] = useState(0)
+  const [maxX, setMaxX] = useState(0)
+  const [maxY, setMaxY] = useState(0)
+  const [xAttribute, setXAttribute] = useState("")
+  const [yAttribute, setYAttribute] = useState("")
+  const [numericAttributes, setNumericAttributes] = useState([])
+  const [units, setUnits] = useState({})
 
   useEffect(() => {
-    let maxSpeedValue = 0
-    let maxRangeValue = 0
+    const allAttributes = comparison.flatMap((competitor) =>
+      competitor.products.flatMap((product) =>
+        Object.keys(product).filter((key) => !isNaN(parseFloat(product[key])))
+      )
+    )
+    const uniqueAttributes = [...new Set(allAttributes)]
+    setNumericAttributes(uniqueAttributes)
 
-    comparison.forEach((competitor) => {
-      competitor.products.forEach((product) => {
-        const speedValue = parseFloat(product.speed)
-        const rangeValue = parseFloat(product.range)
-
-        if (!isNaN(speedValue) && speedValue > maxSpeedValue) {
-          maxSpeedValue = speedValue
-        }
-
-        if (!isNaN(rangeValue) && rangeValue > maxRangeValue) {
-          maxRangeValue = rangeValue
-        }
-      })
-    })
-
-    setMaxSpeed(Math.ceil(maxSpeedValue / 100) * 100 + 50)
-    setMaxRange(Math.ceil(maxRangeValue / 100) * 100 + 200)
+    if (uniqueAttributes.length >= 2) {
+      setXAttribute(uniqueAttributes[0])
+      setYAttribute(uniqueAttributes[1])
+    }
   }, [comparison])
+
+  useEffect(() => {
+    if (xAttribute && yAttribute) {
+      let maxXValue = 0
+      let maxYValue = 0
+
+      comparison.forEach((competitor) => {
+        competitor.products.forEach((product) => {
+          const xValue = parseFloat(product[xAttribute])
+          const yValue = parseFloat(product[yAttribute])
+
+          if (!isNaN(xValue) && xValue > maxXValue) {
+            maxXValue = xValue
+          }
+
+          if (!isNaN(yValue) && yValue > maxYValue) {
+            maxYValue = yValue
+          }
+        })
+      })
+
+      setMaxX(Math.ceil(maxXValue / 100) * 100 + 50)
+      setMaxY(Math.ceil(maxYValue / 100) * 100 + 50)
+    }
+  }, [comparison, xAttribute, yAttribute])
+
+  useEffect(() => {
+    const extractUnits = (attribute) => {
+      const sampleProduct = comparison
+        .flatMap((competitor) => competitor.products)
+        .find((product) => product[attribute] != null)
+      if (!sampleProduct) return ""
+
+      const value = sampleProduct[attribute]
+      const unitMatch = value.match(/[^\d\s]+$/)
+      return unitMatch ? unitMatch[0] : ""
+    }
+
+    const attributeUnits = {
+      [xAttribute]: extractUnits(xAttribute),
+      [yAttribute]: extractUnits(yAttribute),
+    }
+
+    setUnits(attributeUnits)
+  }, [xAttribute, yAttribute, comparison])
 
   const colors = ["#BB44F0", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
 
   const generateChartData = () => {
     const datasets = comparison.map((competitor, index) => {
       const data = competitor.products.map((product) => ({
-        x: parseFloat(product.speed),
-        y: parseFloat(product.range),
+        x: parseFloat(product[xAttribute]),
+        y: parseFloat(product[yAttribute]),
         label: product.name,
       }))
 
@@ -74,43 +115,10 @@ function ProductComparisonChart({ comparison }) {
     }
   }
 
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+
   const chartOptions = {
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        min: 0,
-        max: maxSpeed,
-        grid: {
-          display: true,
-          drawBorder: true,
-        },
-        title: {
-          display: true,
-          text: "Speed (KM/h)",
-          font: {
-            size: 14,
-          },
-        },
-      },
-      y: {
-        type: "linear",
-        position: "left",
-        min: 0,
-        max: maxRange,
-        grid: {
-          display: true,
-          drawBorder: true,
-        },
-        title: {
-          display: true,
-          text: "Range (KM)",
-          font: {
-            size: 14,
-          },
-        },
-      },
-    },
+    responsive: true,
     plugins: {
       tooltip: {
         callbacks: {
@@ -123,6 +131,28 @@ function ProductComparisonChart({ comparison }) {
           },
         },
       },
+      legend: {
+        display: true,
+        position: "top",
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: `${capitalize(xAttribute)} (${units[xAttribute] || ""})`,
+        },
+        min: 0,
+        max: maxX,
+      },
+      y: {
+        title: {
+          display: true,
+          text: `${capitalize(yAttribute)} (${units[yAttribute] || ""})`,
+        },
+        min: 0,
+        max: maxY,
+      },
     },
     maintainAspectRatio: false,
   }
@@ -130,9 +160,18 @@ function ProductComparisonChart({ comparison }) {
   return (
     <div
       className="product-comparison-scatter-chart"
-      style={{ height: "100%" }}
+      style={{
+        height: "100%",
+        position: "relative",
+        display: "flex",
+        flexDirection: "row",
+      }}
     >
-      <Scatter data={generateChartData()} options={chartOptions} />
+      <div style={{ position: "relative", flex: 1 }}>
+        {xAttribute && yAttribute && (
+          <Scatter data={generateChartData()} options={chartOptions} />
+        )}
+      </div>
     </div>
   )
 }
