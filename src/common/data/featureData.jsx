@@ -1,9 +1,7 @@
 import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
 import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
 import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
-import arcLogo from "/public/logos/arcLogo.png"
-import krooLogo from "/public/logos/krooLogo.svg"
-import stratiphyLogo from "/public/logos/stratiphyLogo.svg"
+import logo from "/public/vercel.svg"
 
 export const benefitsFeatures = [
   {
@@ -63,15 +61,15 @@ export const analysisFeatures = [
   {
     description:
       "Digital bank specifically designed for young adults, with an impressive 145k customer base. Amidst global economic uncertainty, this innovative platform was set to raise £1 million in a fiercely competitive UK market.",
-    image: krooLogo,
+    image: logo,
   },
   {
     description: "Helicopter goes vroom.",
-    image: arcLogo,
+    image: logo,
   },
   {
     description:
       "Digital robot advisor was raising funds through its 3rd crowdfunding campaign, after secured £1 million consortium grant. This innovative platform is set to revolutionize AI investment solutions for its users.",
-    image: stratiphyLogo,
+    image: logo,
   },
 ]

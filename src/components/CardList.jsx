@@ -12,7 +12,7 @@ function CardList({ title, features, imagesOnTop = false }) {
         </div>
         <div className="flex flex-grow items-center justify-center">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3 lg:gap-y-16">
-            {features.map((feature) => (
+            {features?.map((feature) => (
               <div
                 key={feature.name || feature.description}
                 className="flex h-full flex-col items-center text-center"
