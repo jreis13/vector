@@ -32,7 +32,7 @@ function CompanyDetails({ company }) {
       <div>
         <div className="pb-8">
           <Image
-            src={`/path/to/logos/${company.logo}.svg`}
+            src={company.logo}
             alt={`${company.name} logo`}
             width={96}
             height={96}
