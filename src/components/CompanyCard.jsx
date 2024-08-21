@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 function truncateText(text, wordLimit) {
@@ -27,13 +28,13 @@ function CompanyCard({ company }) {
     >
       <div>
         <div className="mb-4 flex items-center">
-          {/* <Image
+          <Image
             src={company.logo}
             alt={`${company.name} logo`}
             width={48}
             height={48}
             className="mr-4"
-          /> */}
+          />
           <div>
             <h3 className="text-xl font-bold">{company.name}</h3>
           </div>
