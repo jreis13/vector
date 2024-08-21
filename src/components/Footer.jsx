@@ -1,4 +1,3 @@
-import navigationPATHS from "src/common/data/navigationData"
 import socialPATHS from "src/common/data/socialsData"
 
 import Link from "./Link"
@@ -8,7 +7,7 @@ import Email from "./icons/Email"
 
 function Footer() {
   return (
-    <footer className="bg-[#34333d] px-16 py-4 md:py-8 lg:py-16">
+    <footer className="bg-[#34333d] px-16 py-4 md:py-8">
       <div className="flex items-end justify-between">
         <div>
           <div className="flex">
@@ -27,7 +26,6 @@ function Footer() {
             © 2024 <a href="#">Vector</a>. All Rights Reserved.
           </span>
         </div>
-        <NavLinks isDesktop={false} paths={navigationPATHS} />
       </div>
       <div className="my-6">
         <NavLinks isDesktop={true} paths={socialPATHS} />
