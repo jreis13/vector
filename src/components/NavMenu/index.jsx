@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useUser } from "@auth0/nextjs-auth0/client"
 
 import PATHS from "src/common/data/navigationData"
 import MenuClose from "./MenuClose"
@@ -8,6 +9,7 @@ import MenuOpen from "./MenuOpen"
 import NavLinks from "./NavLinks"
 
 function NavMenu() {
+  const { user } = useUser()
   const [isDesktop, setIsDesktop] = useState(false)
   const [toggle, setToggle] = useState(false)
 
@@ -21,6 +23,17 @@ function NavMenu() {
     return () => window.removeEventListener("resize", updateMedia)
   }, [])
 
+  // Filter paths based on authentication status
+  const authPaths = user
+    ? [
+        ...PATHS.filter((path) => path.name !== "Login"), // Show all paths except "Login"
+        { name: "Logout", path: "/api/auth/logout" }
+      ]
+    : [
+        ...PATHS.filter((path) => path.name !== "Login" && path.name !== "Companies"), // Hide "Companies" when logged out
+        { name: "Login", path: "/api/auth/login" }
+      ]
+
   return (
     <div className="flex flex-col items-end">
       {!isDesktop && (
@@ -32,10 +45,10 @@ function NavMenu() {
           >
             {toggle ? <MenuClose /> : <MenuOpen />}
           </button>
-          {toggle && <NavLinks paths={PATHS} />}
+          {toggle && <NavLinks paths={authPaths} />}
         </>
       )}
-      {isDesktop && <NavLinks paths={PATHS} isDesktop />}
+      {isDesktop && <NavLinks paths={authPaths} isDesktop />}
     </div>
   )
 }

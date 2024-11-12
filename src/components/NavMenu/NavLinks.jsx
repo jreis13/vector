@@ -12,11 +12,13 @@ function NavLinks({ paths, isDesktop }) {
         })}
       >
         {paths.map(({ name, path, type, imageComponent: ImageComponent }) => (
-          <li key={name} className={"link cursor-pointer"}>
+          <li key={name} className="link cursor-pointer">
             {type === "image" ? (
               <ImageComponent />
             ) : (
-              <Link to={path}>{name}</Link>
+              <Link to={path}>
+                <span className="nav-link">{name}</span>
+              </Link>
             )}
           </li>
         ))}
