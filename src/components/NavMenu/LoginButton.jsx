@@ -5,7 +5,7 @@ function LoginButton() {
     <Link href="/api/auth/login">
       <button>Log In</button>
     </Link>
-  );
+  )
 }
 
 export default LoginButton

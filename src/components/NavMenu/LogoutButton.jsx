@@ -5,7 +5,7 @@ function LogoutButton() {
     <Link href="/api/auth/logout">
       <button>Log Out</button>
     </Link>
-  );
+  )
 }
 
 export default LogoutButton

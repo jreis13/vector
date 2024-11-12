@@ -27,11 +27,13 @@ function NavMenu() {
   const authPaths = user
     ? [
         ...PATHS.filter((path) => path.name !== "Login"), // Show all paths except "Login"
-        { name: "Logout", path: "/api/auth/logout" }
+        { name: "Logout", path: "/api/auth/logout" },
       ]
     : [
-        ...PATHS.filter((path) => path.name !== "Login" && path.name !== "Companies"), // Hide "Companies" when logged out
-        { name: "Login", path: "/api/auth/login" }
+        ...PATHS.filter(
+          (path) => path.name !== "Login" && path.name !== "Companies"
+        ), // Hide "Companies" when logged out
+        { name: "Login", path: "/api/auth/login" },
       ]
 
   return (
