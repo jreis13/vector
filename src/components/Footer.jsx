@@ -1,9 +1,7 @@
 import socialPATHS from "src/common/data/socialsData"
 
-import Link from "./Link"
 import Logo from "./Logo"
 import NavLinks from "./NavMenu/NavLinks"
-import Email from "./icons/Email"
 
 function Footer() {
   return (
