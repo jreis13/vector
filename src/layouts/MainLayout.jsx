@@ -1,6 +1,6 @@
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
-  analysisFeatures,
+  customersFeatures,
   benefitsFeatures,
   offeringFeatures,
 } from "src/common/data/featureData"
@@ -20,12 +20,10 @@ function MainLayout() {
       <div>
         <MainHero>
           <div className="flex flex-col gap-7">
-            <h1>Build Your Success.</h1>
+            <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
             <h3>
-              Unlock equity crowdfunding analysis and real private equity data
-              delivered directly to your inbox. <br /> Vector provides all the
-              information you need to invest confidently. <br />
-              Success is not luck; it’s built.
+              Join us in our mission to track Europe’s emerging business
+              ecosystems and get ahead of the game with our reporting.
             </h3>
           </div>
         </MainHero>
@@ -33,13 +31,12 @@ function MainLayout() {
           <CardList title="Benefits" features={benefitsFeatures} />
         </div>
         <div id="offering" className="py-12">
-          <CardList title="Our Offering" features={offeringFeatures} />
+          <CardList title="What do we do?" features={offeringFeatures} />
         </div>
-        <div id="analysis" className="py-12">
+        <div id="customers" className="py-12">
           <CardList
-            title="Our Analysis"
-            features={analysisFeatures}
-            imagesOnTop
+            title="Who are our products for?"
+            features={customersFeatures}
           />
         </div>
         <div id="subscribe" className="py-12">
