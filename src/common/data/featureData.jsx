@@ -1,77 +1,57 @@
 import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
 import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
 import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
-import arcLogo from "/public/logos/arcLogo.png"
-import krooLogo from "/public/logos/krooLogo.svg"
-import stratiphyLogo from "/public/logos/stratiphyLogo.svg"
 
 export const benefitsFeatures = [
   {
     name: "Company Research Analysis",
     description:
-      "Get weekly in-depth analysis on companies launching their equity crowdfunding campaigns.",
+      "A new way to digest reports, with interactive and customizable capabilities.",
     image: companyResearchIcon,
   },
   {
     name: "Private Equity Data",
     description:
-      "Get permanent exclusive access to our database of private companies.",
+      "Unprecedented coverage of key news and events occurring in the selected industry.",
     image: privateEquityIcon,
   },
   {
     name: "Be One Step Ahead",
     description:
-      "Keep up to date with news of equity crowdfunding rounds and trends in the various prominent industries.",
+      "Frequent industry follow-ups, covering all the latest growth tendencies.",
     image: beOneStepAheadIcon,
   },
 ]
 
 export const offeringFeatures = [
   {
-    name: "European Startups Research",
     description:
-      "Every week, be thrilled to receive in-depth company reports that offer unbiased insights into founders, investors, business models, and competitiveness, providing you with state-of-the-art information on startups.",
+      "We are committed to supporting Europe’s disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
   },
   {
-    name: "Startup Database ",
     description:
-      "Access up-to-date private company data and analysis anytime on this platform, enabling you to make well-informed decisions. Compare data between competitors for valuable insights.",
+      "We focus on collecting all publicly available information on these ecosystems and analysing it to determine their strengths and weaknesses, and what action should relevant stakeholders take in order to maximize success.",
   },
   {
-    name: "Ecosystem Updates",
     description:
-      "Stay ahead of the curve with a comprehensive and continuous updates on Europe's most relevant ecosystems. Gain valuable insights into macro trends and maintain a competitive edge by staying one step ahead of everybody else.",
-  },
-  {
-    name: "Platform Comparison",
-    description:
-      "Discover the perfect European equity crowdfunding platform tailored to your needs, from pricing to small print. Make an informed decision and choose the best fit for you.",
-  },
-  {
-    name: "Weekly Newsletter",
-    description:
-      "Stay informed about the latest relevant news on the European startup scene by subscribing to our weekly newsletter.",
-  },
-  {
-    name: "On-demand Research",
-    description:
-      "Ask us anything: can be a specific research on a company, ecosystem, trend, or any specific question. We will be there for you.",
+      "We want to make the information easily digestible for all interested stakeholders and focus on visual mapping rather than traditional long text to reach a larger audience and to ensure that all stakeholders understand their role clearly.",
   },
 ]
 
-export const analysisFeatures = [
+export const customersFeatures = [
   {
+    name: "Innovation Enthusiasts",
     description:
-      "Digital bank specifically designed for young adults, with an impressive 145k customer base. Amidst global economic uncertainty, this innovative platform was set to raise £1 million in a fiercely competitive UK market.",
-    image: krooLogo,
+      "Whatever your role in society, if you are excited about what’s coming next, and want to be part of it, you will surely enjoy our products.",
   },
   {
-    description: "Helicopter goes vroom.",
-    image: arcLogo,
+    name: "Start-ups and Scale-ups",
+    description:
+      " All companies that are creating something in Europe and often feel unheard and disregarded, we want to ensure that your concerns are heard and that they reach the right stakeholders.",
   },
   {
+    name: "Organizations and government officials",
     description:
-      "Digital robot advisor was raising funds through its 3rd crowdfunding campaign, after secured £1 million consortium grant. This innovative platform is set to revolutionize AI investment solutions for its users.",
-    image: stratiphyLogo,
+      "For anyone in the realm of politics, all of these new disruptions can be overwhelming and difficult to fully grasp. We are here to offer you fresh perspectives and to provide you with insights capable of assisting your decision-making process.",
   },
 ]
