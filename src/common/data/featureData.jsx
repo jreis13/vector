@@ -55,3 +55,10 @@ export const customersFeatures = [
       "For anyone in the realm of politics, all of these new disruptions can be overwhelming and difficult to fully grasp. We are here to offer you fresh perspectives and to provide you with insights capable of assisting your decision-making process.",
   },
 ]
+
+export const goalsFeatures = [
+  {
+    description:
+      "As we grow and scale, we want to ensure that all the voices are heard and are aiming to become a research reference, aiming to build a better and more resilient Europe.",
+  },
+]

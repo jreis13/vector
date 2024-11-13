@@ -3,6 +3,7 @@ import {
   customersFeatures,
   benefitsFeatures,
   offeringFeatures,
+  goalsFeatures,
 } from "src/common/data/featureData"
 
 import Breadcrumb from "src/components/Breadcrumb"
@@ -14,12 +15,12 @@ import MainHero from "src/components/MainHero"
 
 function MainLayout() {
   return (
-    <div className="flex min-h-screen flex-col items-center">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div>
+      <div className="flex flex-grow flex-col">
         <MainHero>
-          <div className="flex flex-col gap-7">
+          <div className="flex flex-col">
             <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
             <h3>
               Join us in our mission to track Europe’s emerging business
@@ -27,25 +28,28 @@ function MainLayout() {
             </h3>
           </div>
         </MainHero>
-        <div id="benefits" className="py-12">
-          <CardList title="Benefits" features={benefitsFeatures} />
+        <div className="pt-8">
+          <div id="benefits" className="py-8">
+            <CardList title="Benefits" features={benefitsFeatures} />
+          </div>
+          <div id="offering" className="py-8">
+            <CardList title="What do we do?" features={offeringFeatures} />
+          </div>
+          <div id="customers" className="py-8">
+            <CardList
+              title="Who are our products for?"
+              features={customersFeatures}
+            />
+          </div>
+          <div id="goals" className="py-8">
+            <CardList title="What are aiming for?" features={goalsFeatures} />
+          </div>
         </div>
-        <div id="offering" className="py-12">
-          <CardList title="What do we do?" features={offeringFeatures} />
-        </div>
-        <div id="customers" className="py-12">
-          <CardList
-            title="Who are our products for?"
-            features={customersFeatures}
-          />
-        </div>
-        <div id="subscribe" className="py-12">
+        <div id="subscribe" className="py-8">
           <CTA />
         </div>
-        <div id="footer" className="pt-12">
-          <Footer />
-        </div>
       </div>
+      <Footer />
     </div>
   )
 }
