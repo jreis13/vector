@@ -12,10 +12,8 @@ function CTA() {
           <div className="flex flex-col gap-y-6">
             <h2>Join Us</h2>
             <p>
-              Join our community of savvy investors and unlock the potential of
-              crowdfunding! <br /> Equip yourself with the tools and insights to
-              make informed investment decisions. <br />
-              Subscribe now and stay ahead of the game.
+              Join us on this journey into the future and help us shape a
+              stronger Europe!
             </p>
           </div>
           <Button href="mailto:contact@vector.com">Subscribe</Button>
