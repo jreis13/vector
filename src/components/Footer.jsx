@@ -10,30 +10,18 @@ function Footer() {
     <footer className="bg-[#34333d] px-16 py-4 md:py-8">
       <div className="flex items-end justify-between">
         <div>
-          <div className="flex">
-            <Logo />
+          <div className="flex flex-col gap-2">
+            <div className="flex">
+              <Logo />
+            </div>
+            <span>
+              © 2024 <a href="#">Vector</a>. All Rights Reserved.
+            </span>
           </div>
-          <p className="my-6">
-            Unlock equity crowdfunding analysis and real private equity data
-            delivered directly to your inbox.
-          </p>
-          <div className="my-6">
-            <a href="/privacy">Privacy Policy</a>
-            <span className="px-2">|</span>
-            <a href="/terms">Terms of Service</a>
-          </div>
-          <span>
-            © 2024 <a href="#">Vector</a>. All Rights Reserved.
-          </span>
         </div>
       </div>
-      <div className="my-6">
+      <div className="my-2">
         <NavLinks isDesktop={true} paths={socialPATHS} />
-      </div>
-      <div className="mt-6">
-        <Link to={"mailto:contact@vector.com"}>
-          <Email />
-        </Link>
       </div>
     </footer>
   )
