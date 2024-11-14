@@ -23,16 +23,15 @@ function NavMenu() {
     return () => window.removeEventListener("resize", updateMedia)
   }, [])
 
-  // Filter paths based on authentication status
   const authPaths = user
     ? [
-        ...PATHS.filter((path) => path.name !== "Login"), // Show all paths except "Login"
+        ...PATHS.filter((path) => path.name !== "Login"),
         { name: "Logout", path: "/api/auth/logout" },
       ]
     : [
         ...PATHS.filter(
           (path) => path.name !== "Login" && path.name !== "Companies"
-        ), // Hide "Companies" when logged out
+        ),
         { name: "Login", path: "/api/auth/login" },
       ]
 
