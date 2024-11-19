@@ -1,7 +1,14 @@
+"use client"
+
 import classNames from "classnames"
 import Link from "../Link"
+import { usePathname } from "next/navigation"
 
 function NavLinks({ paths, isDesktop }) {
+  const pathname = usePathname()
+
+  const normalizedPathname = pathname?.replace(/\/$/, "").toLowerCase()
+
   return (
     <nav>
       <ul
@@ -11,17 +18,24 @@ function NavLinks({ paths, isDesktop }) {
           "h-8 flex-row items-center gap-7": isDesktop,
         })}
       >
-        {paths.map(({ name, path, type, imageComponent: ImageComponent }) => (
-          <li key={name} className="link cursor-pointer">
-            {type === "image" ? (
-              <ImageComponent />
-            ) : (
-              <Link to={path}>
-                <span className="nav-link">{name}</span>
-              </Link>
-            )}
-          </li>
-        ))}
+        {paths
+          .filter(({ path }) => {
+            const normalizedPath = path.replace(/\/$/, "").toLowerCase()
+            return normalizedPath !== normalizedPathname
+          })
+          .map(({ name, path, type, icon }) => (
+            <li key={name} className="link cursor-pointer">
+              {type === "image" && icon ? (
+                <a href={path} target="_blank" rel="noopener noreferrer">
+                  {icon}
+                </a>
+              ) : (
+                <Link to={path}>
+                  <span className="nav-link">{name}</span>
+                </Link>
+              )}
+            </li>
+          ))}
       </ul>
     </nav>
   )
