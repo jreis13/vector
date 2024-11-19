@@ -9,31 +9,31 @@ export const PATHS = [
     name: "X",
     path: "https://www.twitter.com",
     type: "image",
-    imageComponent: X,
+    icon: <X />,
   },
   {
     name: "Linkedin",
     path: "https://www.linkedin.com",
     type: "image",
-    imageComponent: Linkedin,
+    icon: <Linkedin />,
   },
   {
     name: "Instagram",
     path: "https://www.instagram.com",
     type: "image",
-    imageComponent: Instagram,
+    icon: <Instagram />,
   },
   {
     name: "Tiktok",
     path: "https://www.tiktok.com",
     type: "image",
-    imageComponent: Tiktok,
+    icon: <Tiktok />,
   },
   {
     name: "Discord",
     path: "https://www.discord.com",
     type: "image",
-    imageComponent: Discord,
+    icon: <Discord />,
   },
 ]
 
