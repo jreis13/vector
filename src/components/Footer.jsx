@@ -1,25 +1,23 @@
 import socialPATHS from "src/common/data/socialsData"
-
 import Logo from "./Logo"
 import NavLinks from "./NavMenu/NavLinks"
 
 function Footer() {
   return (
-    <footer className="bg-[#34333d] px-16 py-4 md:py-8">
-      <div className="flex items-end justify-between">
-        <div>
-          <div className="flex flex-col gap-2">
-            <div className="flex">
-              <Logo />
-            </div>
-            <span>
-              © 2024 <a href="#">Vector</a>. All Rights Reserved.
-            </span>
+    <footer className="bg-[#34333d] px-16 py-4 md:py-6">
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center gap-2 md:flex-row">
+          <div className="flex">
+            <Logo />
           </div>
+          <span className="text-white md:ml-4">
+            © 2024 <a href="#">Vector</a>. All Rights Reserved.
+          </span>
         </div>
-      </div>
-      <div className="my-2">
-        <NavLinks isDesktop={true} paths={socialPATHS} />
+
+        <div>
+          <NavLinks isDesktop={true} paths={socialPATHS} />
+        </div>
       </div>
     </footer>
   )
