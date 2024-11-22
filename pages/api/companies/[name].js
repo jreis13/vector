@@ -23,7 +23,7 @@ const s3 = new AWS.S3({
 })
 
 const BUCKET_NAME = process.env.S3_BUCKET_NAME
-const KEY = process.env.S3_KEY
+const COMPANIES_KEY = process.env.S3_COMPANIES_KEY
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, corsMiddleware)
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     try {
       const params = {
         Bucket: BUCKET_NAME,
-        Key: KEY,
+        Key: COMPANIES_KEY,
       }
 
       const data = await s3.getObject(params).promise()
