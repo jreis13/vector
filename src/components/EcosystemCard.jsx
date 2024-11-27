@@ -32,15 +32,6 @@ function EcosystemCard({ ecosystem }) {
     >
       <div>
         <div className="mb-4 flex items-center">
-          {ecosystem.logo && (
-            <Image
-              src={ecosystem.logo}
-              alt={`${ecosystem.name} logo`}
-              width={48}
-              height={48}
-              className="mr-4"
-            />
-          )}
           <div>
             <h3 className="text-xl font-bold">{ecosystem.name}</h3>
           </div>

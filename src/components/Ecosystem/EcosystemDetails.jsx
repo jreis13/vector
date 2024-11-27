@@ -21,17 +21,6 @@ function EcosystemDetails({ ecosystem }) {
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
-        <div className="pb-8">
-          {ecosystem.logo && (
-            <Image
-              src={ecosystem.logo}
-              alt={`${ecosystem.name} logo`}
-              width={96}
-              height={96}
-            />
-          )}
-        </div>
-
         <p className="pb-8">{ecosystem.summary}</p>
 
         {ecosystem.keyStats && (
