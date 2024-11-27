@@ -57,12 +57,12 @@ function CompanyDetails({ company }) {
           />
         )}
 
-        {company.customers && (
+        {/* {company.customers && (
           <CompanyCardsNonClickable
             title={company.customers.title}
             data={company.customers.data}
           />
-        )}
+        )} */}
 
         {company.customerGrowth && (
           <CompanyText
@@ -71,21 +71,21 @@ function CompanyDetails({ company }) {
           />
         )}
 
-        {company.valueProposition && (
+        {/* {company.valueProposition && (
           <CompanyText
             title={company.valueProposition.title}
             data={company.valueProposition.data}
           />
-        )}
+        )} */}
 
-        {company.revenueStreams && (
+        {/* {company.revenueStreams && (
           <CompanyCardsNonClickable
             title={company.revenueStreams.title}
             data={company.revenueStreams.data}
           />
-        )}
+        )} */}
 
-        {company.costStructure && (
+        {/* {company.costStructure && (
           <CompanyTable
             title="Cost Structure"
             columns={["Fixed Costs", "Variable Costs"]}
@@ -95,14 +95,14 @@ function CompanyDetails({ company }) {
             ]}
             scalability={company.costStructure.data.scalability}
           />
-        )}
+        )} */}
 
-        {company.marketSize && (
+        {/* {company.marketSize && (
           <CompanyCardsNonClickable
             title={company.marketSize.title}
             data={company.marketSize.data}
           />
-        )}
+        )} */}
 
         {company.patents && (
           <CompanyText
@@ -118,11 +118,11 @@ function CompanyDetails({ company }) {
           />
         )}
 
-        {company.products && <CompanyProducts products={company.products} />}
+        {/* {company.products && <CompanyProducts products={company.products} />} */}
 
-        {company.keyCompetitors && (
+        {/* {company.keyCompetitors && (
           <CompanyKeyCompetitors keyCompetitors={company.keyCompetitors.data} />
-        )}
+        )} */}
 
         {company.comparison && (
           <CompanyProductComparison comparison={company.comparison} />
