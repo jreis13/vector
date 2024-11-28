@@ -1,0 +1,201 @@
+// hooks/useD3Graph.js
+import { useEffect } from "react"
+import * as d3 from "d3"
+import GraphGradients from "../components/GraphGradients"
+
+export const useD3Graph = (svgRef, ecosystem) => {
+  useEffect(() => {
+    if (!ecosystem || !svgRef.current) return
+
+    const width = 800
+    const height = 600
+
+    const svg = d3.select(svgRef.current)
+    svg.selectAll("*").remove()
+
+    GraphGradients({ svg })
+
+    const svgGroup = svg.append("g")
+
+    const zoom = d3
+      .zoom()
+      .scaleExtent([0.5, 5])
+      .filter((event) => !event.ctrlKey && event.type !== "wheel")
+      .on("zoom", (event) => {
+        svgGroup.attr("transform", event.transform)
+      })
+
+    svg
+      .attr("width", "100%")
+      .attr("height", height)
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .call(zoom)
+      .on("dblclick.zoom", null)
+      .on("mousedown.zoom", null)
+      .on("touchstart.zoom", null)
+      .on("click", () => {
+        svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity)
+      })
+
+    const networkData = transformNetworkData(ecosystem)
+
+    const simulation = d3
+      .forceSimulation(networkData.nodes)
+      .force(
+        "link",
+        d3
+          .forceLink(networkData.links)
+          .id((d) => d.id)
+          .distance(150)
+      )
+      .force("charge", d3.forceManyBody().strength(-200))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .on("tick", ticked)
+
+    const link = svgGroup
+      .append("g")
+      .attr("class", "links")
+      .selectAll("line")
+      .data(networkData.links)
+      .enter()
+      .append("line")
+      .attr("stroke-width", 2)
+      .attr("stroke", "#999")
+
+    const nodeGroup = svgGroup
+      .append("g")
+      .attr("class", "nodes")
+      .selectAll("g")
+      .data(networkData.nodes)
+      .enter()
+      .append("g")
+      .call(
+        d3
+          .drag()
+          .on("start", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0.3).restart()
+            if (!d.fixed) {
+              d.fx = d.x
+              d.fy = d.y
+            }
+          })
+          .on("drag", (event, d) => {
+            if (!d.fixed) {
+              d.fx = Math.max(d.radius, Math.min(width - d.radius, event.x))
+              d.fy = Math.max(d.radius, Math.min(height - d.radius, event.y))
+            }
+          })
+          .on("end", (event, d) => {
+            if (!event.active) simulation.alphaTarget(0)
+            if (!d.fixed) {
+              d.fx = null
+              d.fy = null
+            }
+          })
+      )
+      .on("click", (event, d) => {
+        event.stopPropagation()
+        const scale = 2
+        const x = width / 2 - d.x * scale
+        const y = height / 2 - d.y * scale
+
+        svg
+          .transition()
+          .duration(750)
+          .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
+      })
+
+    nodeGroup.each(function (d) {
+      const textNode = d3
+        .select(this)
+        .append("text")
+        .attr("text-anchor", "middle")
+        .text(d.id)
+        .attr("font-size", 12)
+        .attr("pointer-events", "none")
+        .style("user-select", "none")
+        .style("fill", "white")
+        .attr("dy", "0.35em")
+
+      const textWidth = textNode.node().getBBox().width
+      d.radius = Math.max(20, textWidth / 2 + 10)
+    })
+
+    nodeGroup
+      .append("circle")
+      .attr("r", (d) => d.radius)
+      .attr("fill", (d) => {
+        switch (d.group) {
+          case 1:
+            return "url(#gradientLevel0)"
+          case 2:
+            return "url(#gradientLevel1)"
+          case 3:
+            return "url(#gradientLevel2)"
+          case 4:
+            return "url(#gradientLevel3)"
+          default:
+            return "url(#gradientLevel4)"
+        }
+      })
+
+    nodeGroup.each(function () {
+      const textElement = d3.select(this).select("text")
+      d3.select(this).append(() => textElement.node())
+    })
+
+    function ticked() {
+      networkData.nodes.forEach((d) => {
+        const radius = d.radius || 12
+        d.x = Math.max(radius, Math.min(width - radius, d.x))
+        d.y = Math.max(radius, Math.min(height - radius, d.y))
+      })
+
+      link
+        .attr("x1", (d) => d.source.x)
+        .attr("y1", (d) => d.source.y)
+        .attr("x2", (d) => d.target.x)
+        .attr("y2", (d) => d.target.y)
+
+      nodeGroup.attr("transform", (d) => `translate(${d.x},${d.y})`)
+    }
+  }, [ecosystem])
+}
+
+export const transformNetworkData = (ecosystem) => {
+  if (!ecosystem || typeof ecosystem !== "object") {
+    console.error("Invalid ecosystem data provided.")
+    return { nodes: [], links: [] }
+  }
+
+  const nodes = [{ id: ecosystem.name, group: 1, fixed: true }]
+  const links = []
+
+  const addCategoryNodesAndLinks = (categoryName, category, group) => {
+    if (!category || !category.data) return
+
+    nodes.push({ id: categoryName, group: 2 })
+    links.push({ source: ecosystem.name, target: categoryName })
+
+    if (Array.isArray(category.data)) {
+      category.data.forEach((item, index) => {
+        const itemId = `${categoryName}-${index}`
+        nodes.push({ id: itemId, group: 3 })
+        links.push({ source: categoryName, target: itemId })
+      })
+    } else if (typeof category.data === "string") {
+      const textId = `${categoryName}-text`
+      nodes.push({ id: textId, group: 3 })
+      links.push({ source: categoryName, target: textId })
+    }
+  }
+
+  addCategoryNodesAndLinks("Applications", ecosystem.applications, 3)
+  addCategoryNodesAndLinks("Innovations", ecosystem.innovations, 3)
+  addCategoryNodesAndLinks("Challenges", ecosystem.challenges, 3)
+  addCategoryNodesAndLinks("Insights", ecosystem.insights, 3)
+  addCategoryNodesAndLinks("Key Players", ecosystem.keyPlayers, 3)
+
+  return { nodes, links }
+}
