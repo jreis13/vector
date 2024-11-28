@@ -11,66 +11,9 @@ const EcosystemDetails = ({ ecosystem }) => {
   const router = useRouter()
   const svgRef = useRef()
 
-  if (!ecosystem) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-      </div>
-    )
-  }
-
-  const transformNetworkData = (ecosystem) => {
-    if (!ecosystem || typeof ecosystem !== "object") {
-      console.error("Invalid ecosystem data provided.")
-      return { nodes: [], links: [] }
-    }
-
-    const nodes = [{ id: ecosystem.name, group: 1, fixed: true }]
-    const links = []
-
-    const addCategoryNodesAndLinks = (categoryName, category, group) => {
-      if (!category || !category.data) return
-
-      nodes.push({ id: categoryName, group })
-      links.push({ source: ecosystem.name, target: categoryName })
-
-      if (Array.isArray(category.data)) {
-        category.data.forEach((item, index) => {
-          const itemId = `${categoryName}-${index}`
-          nodes.push({ id: itemId, group: group + 1 })
-          links.push({ source: categoryName, target: itemId })
-        })
-      } else if (typeof category.data === "string") {
-        const textId = `${categoryName}-text`
-        nodes.push({ id: textId, group: group + 1 })
-        links.push({ source: categoryName, target: textId })
-      }
-    }
-
-    if (Array.isArray(ecosystem.mainStats)) {
-      const mainStatsCategoryId = "Main Stats"
-      nodes.push({ id: mainStatsCategoryId, group: 2 })
-      links.push({ source: ecosystem.name, target: mainStatsCategoryId })
-
-      ecosystem.mainStats.forEach((stat, index) => {
-        const statId = `${mainStatsCategoryId}-${index}`
-        nodes.push({ id: statId, group: 3 })
-        links.push({ source: mainStatsCategoryId, target: statId })
-      })
-    }
-
-    addCategoryNodesAndLinks("Applications", ecosystem.applications, 3)
-    addCategoryNodesAndLinks("Innovations", ecosystem.innovations, 3)
-    addCategoryNodesAndLinks("Challenges", ecosystem.challenges, 3)
-    addCategoryNodesAndLinks("Insights", ecosystem.insights, 3)
-    addCategoryNodesAndLinks("Key Players", ecosystem.keyPlayers, 3)
-
-    return { nodes, links }
-  }
-
-  const networkData = transformNetworkData(ecosystem)
-
   useEffect(() => {
+    if (!ecosystem) return
+
     const width = 800
     const height = 600
 
@@ -79,6 +22,7 @@ const EcosystemDetails = ({ ecosystem }) => {
 
     const svgGroup = svg.append("g")
 
+    // Set up zoom behavior (only scale, no translation by dragging background)
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 5])
@@ -92,12 +36,14 @@ const EcosystemDetails = ({ ecosystem }) => {
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .call(zoom)
-      .on("dblclick.zoom", null)
-      .on("mousedown.zoom", null)
-      .on("touchstart.zoom", null)
+      .on("dblclick.zoom", null) // Disable double-click to prevent zoom reset
+      .on("mousedown.zoom", null) // Disable dragging on the SVG background
+      .on("touchstart.zoom", null) // Disable touch dragging on the SVG background
       .on("click", () => {
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity)
-      })
+      }) // Reset zoom on background click
+
+    const networkData = transformNetworkData(ecosystem)
 
     const simulation = d3
       .forceSimulation(networkData.nodes)
@@ -154,9 +100,10 @@ const EcosystemDetails = ({ ecosystem }) => {
           })
       )
       .on("click", (event, d) => {
-        event.stopPropagation()
+        event.stopPropagation() // Prevent the click from propagating to the SVG background
 
-        const scale = 2
+        // Zoom in on the clicked node
+        const scale = 2 // Adjust scale as needed
         const x = width / 2 - d.x * scale
         const y = height / 2 - d.y * scale
 
@@ -195,6 +142,7 @@ const EcosystemDetails = ({ ecosystem }) => {
     })
 
     function ticked() {
+      // Constrain all nodes to remain within the SVG bounds
       networkData.nodes.forEach((d) => {
         const radius = d.radius || 12
         d.x = Math.max(radius, Math.min(width - radius, d.x))
@@ -209,7 +157,56 @@ const EcosystemDetails = ({ ecosystem }) => {
 
       nodeGroup.attr("transform", (d) => `translate(${d.x},${d.y})`)
     }
-  }, [networkData])
+  }, [ecosystem])
+
+  const transformNetworkData = (ecosystem) => {
+    if (!ecosystem || typeof ecosystem !== "object") {
+      console.error("Invalid ecosystem data provided.")
+      return { nodes: [], links: [] }
+    }
+
+    const nodes = [{ id: ecosystem.name, group: 1, fixed: true }]
+    const links = []
+
+    const addCategoryNodesAndLinks = (categoryName, category, group) => {
+      if (!category || !category.data) return
+
+      nodes.push({ id: categoryName, group })
+      links.push({ source: ecosystem.name, target: categoryName })
+
+      if (Array.isArray(category.data)) {
+        category.data.forEach((item, index) => {
+          const itemId = `${categoryName}-${index}`
+          nodes.push({ id: itemId, group: group + 1 })
+          links.push({ source: categoryName, target: itemId })
+        })
+      } else if (typeof category.data === "string") {
+        const textId = `${categoryName}-text`
+        nodes.push({ id: textId, group: group + 1 })
+        links.push({ source: categoryName, target: textId })
+      }
+    }
+
+    if (Array.isArray(ecosystem.mainStats)) {
+      const mainStatsCategoryId = "Main Stats"
+      nodes.push({ id: mainStatsCategoryId, group: 2 })
+      links.push({ source: ecosystem.name, target: mainStatsCategoryId })
+
+      ecosystem.mainStats.forEach((stat, index) => {
+        const statId = `${mainStatsCategoryId}-${index}`
+        nodes.push({ id: statId, group: 3 })
+        links.push({ source: mainStatsCategoryId, target: statId })
+      })
+    }
+
+    addCategoryNodesAndLinks("Applications", ecosystem.applications, 3)
+    addCategoryNodesAndLinks("Innovations", ecosystem.innovations, 3)
+    addCategoryNodesAndLinks("Challenges", ecosystem.challenges, 3)
+    addCategoryNodesAndLinks("Insights", ecosystem.insights, 3)
+    addCategoryNodesAndLinks("Key Players", ecosystem.keyPlayers, 3)
+
+    return { nodes, links }
+  }
 
   const handleBackClick = () => {
     router.push("/ecosystems")
