@@ -1,33 +1,48 @@
 "use client"
 
-import React from "react"
-import { useRouter } from "next/navigation"
-import Image from "next/image"
-import Button from "../Button"
-import arrowBack from "/public/icons/arrowBack.svg"
-import NodeGraph from "../NodeGraph"
+import React, { useState } from "react"
+import EcosystemTabs from "./EcosystemTabs"
+import NodeGraph from "src/components/NodeGraph"
 
-const EcosystemDetails = ({ ecosystem }) => {
-  const router = useRouter()
+function EcosystemDetails({ ecosystem }) {
+  const [currentTab, setCurrentTab] = useState("overview")
 
-  const handleBackClick = () => {
-    router.push("/ecosystems")
-  }
+  const sections = [
+    { title: "Overview", id: "overview" },
+    { title: "Companies", id: "companies" },
+    { title: "Country Profiles", id: "countryProfiles" },
+    { title: "Active Investors", id: "activeInvestors" },
+    { title: "Product Comparison", id: "productComparison" },
+    { title: "Policy Making Tips", id: "policyMakingTips" },
+    { title: "News", id: "news" },
+    { title: "Routes", id: "routes" },
+  ]
 
   return (
-    <div
-      className="flex min-h-screen flex-col items-center justify-center px-6 py-8 lg:px-16 lg:py-16"
-      style={{ userSelect: "none" }}
-    >
-      <h1 className="mb-8 text-center text-4xl font-bold">{ecosystem.name}</h1>
-      <p className="mb-8 text-center">{ecosystem.summary}</p>
-      <div className="mb-8 flex w-full justify-center">
-        <NodeGraph ecosystem={ecosystem} />
-      </div>
-      <div className="flex justify-center">
-        <Button onClick={handleBackClick}>
-          <Image src={arrowBack} alt="Back" width={24} height={24} />
-        </Button>
+    <div>
+      <EcosystemTabs
+        sections={sections}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+      />
+
+      <div className="mt-4 p-8">
+        {currentTab === "overview" && <NodeGraph ecosystem={ecosystem} />}
+        {currentTab === "companies" && <div>Companies Content Goes Here</div>}
+        {currentTab === "countryProfiles" && (
+          <div>Country Profiles Content Goes Here</div>
+        )}
+        {currentTab === "activeInvestors" && (
+          <div>Active Investors Content Goes Here</div>
+        )}
+        {currentTab === "productComparison" && (
+          <div>Product Comparison Content Goes Here</div>
+        )}
+        {currentTab === "policyMakingTips" && (
+          <div>Policy Making Tips Content Goes Here</div>
+        )}
+        {currentTab === "news" && <div>News Content Goes Here</div>}
+        {currentTab === "routes" && <div>Routes Content Goes Here</div>}
       </div>
     </div>
   )
