@@ -26,6 +26,10 @@ const EcosystemDetails = ({ ecosystem }) => {
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 5])
+      .filter((event) => {
+        // Disable zoom on scroll wheel event, allow other zoom triggers like dragging and clicking
+        return !event.ctrlKey && event.type !== "wheel"
+      })
       .on("zoom", (event) => {
         svgGroup.attr("transform", event.transform)
       })
