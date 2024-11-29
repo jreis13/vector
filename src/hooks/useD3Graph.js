@@ -1,4 +1,3 @@
-// hooks/useD3Graph.js
 import { useEffect } from "react"
 import * as d3 from "d3"
 import GraphGradients from "../components/GraphGradients"
@@ -7,7 +6,7 @@ export const useD3Graph = (svgRef, ecosystem) => {
   useEffect(() => {
     if (!ecosystem || !svgRef.current) return
 
-    const width = 800
+    const width = 1200
     const height = 600
 
     const svg = d3.select(svgRef.current)
@@ -17,11 +16,14 @@ export const useD3Graph = (svgRef, ecosystem) => {
 
     const svgGroup = svg.append("g")
 
+    let currentScale = 1
+
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 5])
       .filter((event) => !event.ctrlKey && event.type !== "wheel")
       .on("zoom", (event) => {
+        currentScale = event.transform.k
         svgGroup.attr("transform", event.transform)
       })
 
@@ -48,10 +50,23 @@ export const useD3Graph = (svgRef, ecosystem) => {
           .forceLink(networkData.links)
           .id((d) => d.id)
           .distance(150)
+          .strength(0.7)
       )
-      .force("charge", d3.forceManyBody().strength(-200))
+      .force("charge", d3.forceManyBody().strength(-500))
       .force("center", d3.forceCenter(width / 2, height / 2))
+      .force(
+        "collision",
+        d3.forceCollide().radius((d) => d.radius + 25)
+      )
+      .force("x", d3.forceX(width / 2).strength(0.1))
+      .force("y", d3.forceY(height / 2).strength(0.1))
       .on("tick", ticked)
+
+    const rootNode = networkData.nodes.find((node) => node.group === 1)
+    if (rootNode) {
+      rootNode.fx = width / 2
+      rootNode.fy = height / 2
+    }
 
     const link = svgGroup
       .append("g")
@@ -75,20 +90,20 @@ export const useD3Graph = (svgRef, ecosystem) => {
           .drag()
           .on("start", (event, d) => {
             if (!event.active) simulation.alphaTarget(0.3).restart()
-            if (!d.fixed) {
+            if (d.group !== 1) {
               d.fx = d.x
               d.fy = d.y
             }
           })
           .on("drag", (event, d) => {
-            if (!d.fixed) {
+            if (d.group !== 1) {
               d.fx = Math.max(d.radius, Math.min(width - d.radius, event.x))
               d.fy = Math.max(d.radius, Math.min(height - d.radius, event.y))
             }
           })
           .on("end", (event, d) => {
             if (!event.active) simulation.alphaTarget(0)
-            if (!d.fixed) {
+            if (d.group !== 1) {
               d.fx = null
               d.fy = null
             }
@@ -96,7 +111,8 @@ export const useD3Graph = (svgRef, ecosystem) => {
       )
       .on("click", (event, d) => {
         event.stopPropagation()
-        const scale = 2
+
+        const scale = 3
         const x = width / 2 - d.x * scale
         const y = height / 2 - d.y * scale
 
@@ -105,22 +121,6 @@ export const useD3Graph = (svgRef, ecosystem) => {
           .duration(750)
           .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
       })
-
-    nodeGroup.each(function (d) {
-      const textNode = d3
-        .select(this)
-        .append("text")
-        .attr("text-anchor", "middle")
-        .text(d.id)
-        .attr("font-size", 12)
-        .attr("pointer-events", "none")
-        .style("user-select", "none")
-        .style("fill", "white")
-        .attr("dy", "0.35em")
-
-      const textWidth = textNode.node().getBBox().width
-      d.radius = Math.max(20, textWidth / 2 + 10)
-    })
 
     nodeGroup
       .append("circle")
@@ -140,10 +140,73 @@ export const useD3Graph = (svgRef, ecosystem) => {
         }
       })
 
-    nodeGroup.each(function () {
-      const textElement = d3.select(this).select("text")
-      d3.select(this).append(() => textElement.node())
-    })
+    nodeGroup
+      .append("text")
+      .attr("text-anchor", "middle")
+      .each(function (d) {
+        adjustTextSizeAndWrap(d3.select(this), d.radius)
+      })
+      .attr("pointer-events", "none")
+      .style("user-select", "none")
+      .style("fill", "white")
+
+    function adjustTextSizeAndWrap(textNode, radius) {
+      const text = textNode.datum().title || textNode.datum().name
+      const words = text.split(" ")
+      textNode.text(null)
+
+      let lineHeight = 1
+      let maxFontSize = radius / 4
+
+      let line = []
+      let lineNumber = 0
+      let tspan = textNode
+        .append("tspan")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("font-size", `${maxFontSize}px`)
+
+      let tspans = []
+
+      words.forEach((word) => {
+        line.push(word)
+        tspan.text(line.join(" "))
+        if (tspan.node().getComputedTextLength() > radius * 1.8) {
+          line.pop()
+          tspan.text(line.join(" "))
+          line = [word]
+          lineNumber += 1
+          tspan = textNode
+            .append("tspan")
+            .attr("x", 0)
+            .attr("dy", `${lineHeight}em`)
+            .attr("font-size", `${maxFontSize}px`)
+            .text(word)
+          tspans.push(tspan)
+        }
+      })
+
+      if (line.length > 0) {
+        tspans.push(tspan)
+      }
+
+      const totalTextHeight = (tspans.length - 1) * lineHeight * maxFontSize
+      const offsetY = -(totalTextHeight / 2) - maxFontSize / 2
+
+      textNode.selectAll("tspan").attr("dy", (d, i) => {
+        if (i === 0) {
+          return `${offsetY / maxFontSize}em`
+        } else {
+          return `${lineHeight}em`
+        }
+      })
+
+      if (textNode.node().getBBox().height > radius * 1.8) {
+        maxFontSize =
+          (maxFontSize * (radius * 1.8)) / textNode.node().getBBox().height
+        textNode.selectAll("tspan").attr("font-size", `${maxFontSize}px`)
+      }
+    }
 
     function ticked() {
       networkData.nodes.forEach((d) => {
@@ -169,33 +232,47 @@ export const transformNetworkData = (ecosystem) => {
     return { nodes: [], links: [] }
   }
 
-  const nodes = [{ id: ecosystem.name, group: 1, fixed: true }]
+  const nodes = [
+    {
+      id: ecosystem.name,
+      group: 1,
+      fixed: true,
+      title: ecosystem.name,
+      radius: 70,
+    },
+  ]
   const links = []
 
-  const addCategoryNodesAndLinks = (categoryName, category, group) => {
-    if (!category || !category.data) return
+  const addNodesAndLinks = (parentId, data, groupLevel) => {
+    if (!data) return
 
-    nodes.push({ id: categoryName, group: 2 })
-    links.push({ source: ecosystem.name, target: categoryName })
+    if (Array.isArray(data)) {
+      data.forEach((item) => {
+        const nodeId = item.name || item.title
+        if (!nodeId) return
 
-    if (Array.isArray(category.data)) {
-      category.data.forEach((item, index) => {
-        const itemId = `${categoryName}-${index}`
-        nodes.push({ id: itemId, group: 3 })
-        links.push({ source: categoryName, target: itemId })
+        const existingNode = nodes.find((node) => node.id === nodeId)
+        if (!existingNode) {
+          nodes.push({
+            id: nodeId,
+            group: groupLevel,
+            title: item.title || item.name,
+            radius: Math.max(20, 40 - groupLevel * 5),
+          })
+        }
+
+        links.push({ source: parentId, target: nodeId })
+
+        if (item.subnodes && Array.isArray(item.subnodes)) {
+          addNodesAndLinks(nodeId, item.subnodes, groupLevel + 1)
+        }
       })
-    } else if (typeof category.data === "string") {
-      const textId = `${categoryName}-text`
-      nodes.push({ id: textId, group: 3 })
-      links.push({ source: categoryName, target: textId })
     }
   }
 
-  addCategoryNodesAndLinks("Applications", ecosystem.applications, 3)
-  addCategoryNodesAndLinks("Innovations", ecosystem.innovations, 3)
-  addCategoryNodesAndLinks("Challenges", ecosystem.challenges, 3)
-  addCategoryNodesAndLinks("Insights", ecosystem.insights, 3)
-  addCategoryNodesAndLinks("Key Players", ecosystem.keyPlayers, 3)
+  if (Array.isArray(ecosystem.nodes)) {
+    addNodesAndLinks(ecosystem.name, ecosystem.nodes, 2)
+  }
 
   return { nodes, links }
 }
