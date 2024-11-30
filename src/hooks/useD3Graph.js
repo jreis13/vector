@@ -21,7 +21,7 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
     const zoom = d3
       .zoom()
       .scaleExtent([0.5, 10])
-      .filter(() => false) // Disable scroll zoom
+      .filter(() => false)
       .on("zoom", (event) => {
         currentScale = event.transform.k
         svgGroup.attr("transform", event.transform)
@@ -38,8 +38,9 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
       .on("touchstart.zoom", null)
       .on("click", () => {
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity)
+        resetNodeText()
         svgGroup.selectAll(".zoom-plus").style("visibility", "hidden")
-        svgGroup.selectAll(".node-data").remove() // Remove any node details
+        svgGroup.selectAll(".zoom-minus").style("visibility", "hidden") // Hide "-" signs
         currentScale = 1
       })
 
@@ -108,7 +109,6 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
           })
       )
 
-    // First click: zoom into node
     nodeGroup.on("click", (event, d) => {
       event.stopPropagation()
 
@@ -150,70 +150,121 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
         }
       })
 
-    nodeGroup
+    const nodeText = nodeGroup
       .append("text")
       .attr("text-anchor", "middle")
-      .each(function (d) {
-        adjustTextSizeAndWrap(d3.select(this), d.radius)
-      })
       .attr("pointer-events", "none")
       .style("user-select", "none")
       .style("fill", "white")
+      .each(function (d) {
+        adjustTextSizeAndWrap(d3.select(this), d.radius, d.name)
+      })
 
-    // Add "+" sign
     nodeGroup
       .append("text")
       .attr("class", "zoom-plus")
       .attr("text-anchor", "middle")
-      .attr("y", (d) => d.radius + 10)
-      .text((d) => (d.data || d.title ? "+" : ""))
+      .text((d) => (d.data ? "+" : ""))
       .style("fill", "white")
       .style("cursor", "pointer")
       .style("visibility", "hidden")
+      .attr("y", (d) => d.radius - 5)
       .on("click", (event, d) => {
         event.stopPropagation()
 
         const scale = 10
-        const x = width / 2 - d.x * scale
-        const y = height / 2 - d.y * scale
+        const centerX = width / 2
+        const centerY = height / 2
+        const translateX = centerX - d.x * scale
+        const translateY = centerY - d.y * scale
 
         svg
           .transition()
           .duration(750)
-          .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
+          .call(
+            zoom.transform,
+            d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+          )
 
-        // Show node data inside the zoomed-in node
-        svgGroup.selectAll(".node-data").remove() // Clear previous data text
+        d.fx = d.x
+        d.fy = d.y
 
-        svgGroup
-          .append("text")
-          .attr("class", "node-data")
-          .attr("x", width / 2)
-          .attr("y", height / 2 - 20)
-          .attr("text-anchor", "middle")
-          .style("fill", "white")
-          .style("font-size", "20px")
-          .style("font-weight", "bold")
-          .text(d.title || "")
+        nodeText.each(function (node) {
+          if (node.id === d.id) {
+            adjustTextSizeAndWrap(
+              d3.select(this),
+              d.radius,
+              `${d.data || ""}`,
+              true
+            )
+          }
+        })
 
-        svgGroup
-          .append("text")
-          .attr("class", "node-data")
-          .attr("x", width / 2)
-          .attr("y", height / 2 + 20)
-          .attr("text-anchor", "middle")
-          .style("fill", "white")
-          .style("font-size", "14px")
-          .text(d.data || "")
+        d3.select(event.currentTarget).style("visibility", "hidden")
+
+        d3.select(event.currentTarget.parentNode)
+          .select(".zoom-minus")
+          .style("visibility", "visible")
       })
 
-    function adjustTextSizeAndWrap(textNode, radius) {
-      const text = textNode.datum().name
+    nodeGroup
+      .append("text")
+      .attr("class", "zoom-minus")
+      .attr("text-anchor", "middle")
+      .text("-")
+      .style("fill", "white")
+      .style("cursor", "pointer")
+      .style("visibility", "hidden")
+      .attr("y", (d) => d.radius - 5)
+      .on("click", (event, d) => {
+        event.stopPropagation()
+
+        const scale = 3
+        const translateX = width / 2 - d.x * scale
+        const translateY = height / 2 - d.y * scale
+
+        svg
+          .transition()
+          .duration(750)
+          .call(
+            zoom.transform,
+            d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+          )
+
+        d.fx = null
+        d.fy = null
+
+        nodeText.each(function (node) {
+          if (node.id === d.id) {
+            adjustTextSizeAndWrap(d3.select(this), d.radius, d.name, false)
+          }
+        })
+
+        d3.select(event.currentTarget).style("visibility", "hidden")
+
+        d3.select(event.currentTarget.parentNode)
+          .select(".zoom-plus")
+          .style("visibility", "visible")
+      })
+
+    function resetNodeText() {
+      nodeText.each(function (d) {
+        adjustTextSizeAndWrap(d3.select(this), d.radius, d.name)
+      })
+    }
+
+    function adjustTextSizeAndWrap(
+      textNode,
+      radius,
+      text,
+      isSecondZoom = false
+    ) {
       const words = text.split(" ")
       textNode.text(null)
 
-      let lineHeight = 1
-      let maxFontSize = radius / 4
+      let maxFontSize = isSecondZoom ? radius / 8 : radius / 4
+      const lineHeight = 1.1
+      const maxWidth = radius * 1.8
 
       let line = []
       let lineNumber = 0
@@ -226,7 +277,7 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
       words.forEach((word) => {
         line.push(word)
         tspan.text(line.join(" "))
-        if (tspan.node().getComputedTextLength() > radius * 1.8) {
+        if (tspan.node().getComputedTextLength() > maxWidth) {
           line.pop()
           tspan.text(line.join(" "))
           line = [word]
@@ -241,13 +292,22 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
       })
 
       const totalTextHeight = (lineNumber + 1) * lineHeight * maxFontSize
-      const offsetY = -(totalTextHeight / 2) - maxFontSize / 2
+      const offsetY = -(totalTextHeight / 2)
 
       textNode
         .selectAll("tspan")
         .attr("dy", (d, i) =>
-          i === 0 ? offsetY / maxFontSize + "em" : lineHeight + "em"
+          i === 0 ? `${offsetY / maxFontSize}em` : `${lineHeight}em`
         )
+
+      if (isSecondZoom) {
+        let textBox = textNode.node().getBBox()
+        while (textBox.height > radius * 1.6 || textBox.width > maxWidth) {
+          maxFontSize *= 0.9
+          textNode.selectAll("tspan").attr("font-size", `${maxFontSize}px`)
+          textBox = textNode.node().getBBox()
+        }
+      }
     }
 
     function ticked() {
@@ -301,7 +361,7 @@ export const transformNetworkData = (ecosystem) => {
             name: item.name,
             radius: Math.max(20, 40 - groupLevel * 5),
             data: item.data || null,
-            title: item.title || null,
+            title: item.title || "",
           })
         }
 
