@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import EcosystemTabs from "./EcosystemTabs"
 import NodeGraph from "src/components/NodeGraph"
+import CompaniesPage from "../Companies"
 
 function EcosystemDetails({ ecosystem }) {
   const [currentTab, setCurrentTab] = useState("overview")
@@ -28,7 +29,7 @@ function EcosystemDetails({ ecosystem }) {
 
       <div className="mt-4 p-8">
         {currentTab === "overview" && <NodeGraph ecosystem={ecosystem} />}
-        {currentTab === "companies" && <div>Companies Content Goes Here</div>}
+        {currentTab === "companies" && <CompaniesPage />}
         {currentTab === "countryProfiles" && (
           <div>Country Profiles Content Goes Here</div>
         )}
