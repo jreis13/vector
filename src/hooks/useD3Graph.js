@@ -40,7 +40,7 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity)
         resetNodeText()
         svgGroup.selectAll(".zoom-plus").style("visibility", "hidden")
-        svgGroup.selectAll(".zoom-minus").style("visibility", "hidden") // Hide "-" signs
+        svgGroup.selectAll(".zoom-minus").style("visibility", "hidden")
         currentScale = 1
       })
 
@@ -129,6 +129,15 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
           .style("visibility", "visible")
       }
 
+      nodeText.each(function (node) {
+        if (node.id !== d.id) {
+          adjustTextSizeAndWrap(d3.select(this), node.radius, node.name, false)
+          d3.select(this.parentNode)
+            .select(".zoom-minus")
+            .style("visibility", "hidden")
+        }
+      })
+
       currentScale = scale
     })
 
@@ -190,6 +199,23 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
         d.fy = d.y
 
         nodeText.each(function (node) {
+          if (node.id !== d.id) {
+            adjustTextSizeAndWrap(
+              d3.select(this),
+              node.radius,
+              node.name,
+              false
+            )
+            d3.select(this.parentNode)
+              .select(".zoom-plus")
+              .style("visibility", "hidden")
+            d3.select(this.parentNode)
+              .select(".zoom-minus")
+              .style("visibility", "hidden")
+          }
+        })
+
+        nodeText.each(function (node) {
           if (node.id === d.id) {
             adjustTextSizeAndWrap(
               d3.select(this),
@@ -231,20 +257,15 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
             d3.zoomIdentity.translate(translateX, translateY).scale(scale)
           )
 
-        d.fx = null
-        d.fy = null
-
         nodeText.each(function (node) {
-          if (node.id === d.id) {
-            adjustTextSizeAndWrap(d3.select(this), d.radius, d.name, false)
-          }
+          adjustTextSizeAndWrap(d3.select(this), node.radius, node.name, false)
+          d3.select(this.parentNode)
+            .select(".zoom-plus")
+            .style("visibility", "hidden")
+          d3.select(this.parentNode)
+            .select(".zoom-minus")
+            .style("visibility", "hidden")
         })
-
-        d3.select(event.currentTarget).style("visibility", "hidden")
-
-        d3.select(event.currentTarget.parentNode)
-          .select(".zoom-plus")
-          .style("visibility", "visible")
       })
 
     function resetNodeText() {
@@ -330,7 +351,6 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
 
 export const transformNetworkData = (ecosystem) => {
   if (!ecosystem || typeof ecosystem !== "object") {
-    console.error("Invalid ecosystem data provided.")
     return { nodes: [], links: [] }
   }
 
