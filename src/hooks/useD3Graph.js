@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import * as d3 from "d3"
 import GraphGradients from "../components/GraphGradients"
 
-export const useD3Graph = (svgRef, ecosystem) => {
+export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
   useEffect(() => {
     if (!ecosystem || !svgRef.current) return
 
@@ -20,8 +20,8 @@ export const useD3Graph = (svgRef, ecosystem) => {
 
     const zoom = d3
       .zoom()
-      .scaleExtent([0.5, 5])
-      .filter((event) => !event.ctrlKey && event.type !== "wheel")
+      .scaleExtent([0.5, 10])
+      .filter(() => false) // Disable scroll zoom
       .on("zoom", (event) => {
         currentScale = event.transform.k
         svgGroup.attr("transform", event.transform)
@@ -38,6 +38,9 @@ export const useD3Graph = (svgRef, ecosystem) => {
       .on("touchstart.zoom", null)
       .on("click", () => {
         svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity)
+        svgGroup.selectAll(".zoom-plus").style("visibility", "hidden")
+        svgGroup.selectAll(".node-data").remove() // Remove any node details
+        currentScale = 1
       })
 
     const networkData = transformNetworkData(ecosystem)
@@ -91,37 +94,43 @@ export const useD3Graph = (svgRef, ecosystem) => {
           .drag()
           .on("start", (event, d) => {
             if (!event.active) simulation.alphaTarget(0.3).restart()
-            if (d.group !== 1) {
-              d.fx = d.x
-              d.fy = d.y
-            }
+            d.fx = d.x
+            d.fy = d.y
           })
           .on("drag", (event, d) => {
-            if (d.group !== 1) {
-              d.fx = Math.max(d.radius, Math.min(width - d.radius, event.x))
-              d.fy = Math.max(d.radius, Math.min(height - d.radius, event.y))
-            }
+            d.fx = Math.max(d.radius, Math.min(width - d.radius, event.x))
+            d.fy = Math.max(d.radius, Math.min(height - d.radius, event.y))
           })
           .on("end", (event, d) => {
             if (!event.active) simulation.alphaTarget(0)
-            if (d.group !== 1) {
-              d.fx = null
-              d.fy = null
-            }
+            d.fx = null
+            d.fy = null
           })
       )
-      .on("click", (event, d) => {
-        event.stopPropagation()
 
-        const scale = 3
-        const x = width / 2 - d.x * scale
-        const y = height / 2 - d.y * scale
+    // First click: zoom into node
+    nodeGroup.on("click", (event, d) => {
+      event.stopPropagation()
 
-        svg
-          .transition()
-          .duration(750)
-          .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
-      })
+      const scale = 3
+      const x = width / 2 - d.x * scale
+      const y = height / 2 - d.y * scale
+
+      svg
+        .transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
+
+      svgGroup.selectAll(".zoom-plus").style("visibility", "hidden")
+
+      if (d.data || d.title) {
+        d3.select(event.currentTarget)
+          .select(".zoom-plus")
+          .style("visibility", "visible")
+      }
+
+      currentScale = scale
+    })
 
     nodeGroup
       .append("circle")
@@ -151,6 +160,53 @@ export const useD3Graph = (svgRef, ecosystem) => {
       .style("user-select", "none")
       .style("fill", "white")
 
+    // Add "+" sign
+    nodeGroup
+      .append("text")
+      .attr("class", "zoom-plus")
+      .attr("text-anchor", "middle")
+      .attr("y", (d) => d.radius + 10)
+      .text((d) => (d.data || d.title ? "+" : ""))
+      .style("fill", "white")
+      .style("cursor", "pointer")
+      .style("visibility", "hidden")
+      .on("click", (event, d) => {
+        event.stopPropagation()
+
+        const scale = 10
+        const x = width / 2 - d.x * scale
+        const y = height / 2 - d.y * scale
+
+        svg
+          .transition()
+          .duration(750)
+          .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale))
+
+        // Show node data inside the zoomed-in node
+        svgGroup.selectAll(".node-data").remove() // Clear previous data text
+
+        svgGroup
+          .append("text")
+          .attr("class", "node-data")
+          .attr("x", width / 2)
+          .attr("y", height / 2 - 20)
+          .attr("text-anchor", "middle")
+          .style("fill", "white")
+          .style("font-size", "20px")
+          .style("font-weight", "bold")
+          .text(d.title || "")
+
+        svgGroup
+          .append("text")
+          .attr("class", "node-data")
+          .attr("x", width / 2)
+          .attr("y", height / 2 + 20)
+          .attr("text-anchor", "middle")
+          .style("fill", "white")
+          .style("font-size", "14px")
+          .text(d.data || "")
+      })
+
     function adjustTextSizeAndWrap(textNode, radius) {
       const text = textNode.datum().name
       const words = text.split(" ")
@@ -167,8 +223,6 @@ export const useD3Graph = (svgRef, ecosystem) => {
         .attr("y", 0)
         .attr("font-size", `${maxFontSize}px`)
 
-      let tspans = []
-
       words.forEach((word) => {
         line.push(word)
         tspan.text(line.join(" "))
@@ -183,30 +237,17 @@ export const useD3Graph = (svgRef, ecosystem) => {
             .attr("dy", `${lineHeight}em`)
             .attr("font-size", `${maxFontSize}px`)
             .text(word)
-          tspans.push(tspan)
         }
       })
 
-      if (line.length > 0) {
-        tspans.push(tspan)
-      }
-
-      const totalTextHeight = (tspans.length - 1) * lineHeight * maxFontSize
+      const totalTextHeight = (lineNumber + 1) * lineHeight * maxFontSize
       const offsetY = -(totalTextHeight / 2) - maxFontSize / 2
 
-      textNode.selectAll("tspan").attr("dy", (d, i) => {
-        if (i === 0) {
-          return `${offsetY / maxFontSize}em`
-        } else {
-          return `${lineHeight}em`
-        }
-      })
-
-      if (textNode.node().getBBox().height > radius * 1.8) {
-        maxFontSize =
-          (maxFontSize * (radius * 1.8)) / textNode.node().getBBox().height
-        textNode.selectAll("tspan").attr("font-size", `${maxFontSize}px`)
-      }
+      textNode
+        .selectAll("tspan")
+        .attr("dy", (d, i) =>
+          i === 0 ? offsetY / maxFontSize + "em" : lineHeight + "em"
+        )
     }
 
     function ticked() {
@@ -224,7 +265,7 @@ export const useD3Graph = (svgRef, ecosystem) => {
 
       nodeGroup.attr("transform", (d) => `translate(${d.x},${d.y})`)
     }
-  }, [ecosystem])
+  }, [ecosystem, csvData])
 }
 
 export const transformNetworkData = (ecosystem) => {
@@ -259,6 +300,8 @@ export const transformNetworkData = (ecosystem) => {
             group: groupLevel,
             name: item.name,
             radius: Math.max(20, 40 - groupLevel * 5),
+            data: item.data || null,
+            title: item.title || null,
           })
         }
 
