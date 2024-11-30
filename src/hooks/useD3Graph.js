@@ -85,6 +85,7 @@ export const useD3Graph = (svgRef, ecosystem) => {
       .data(networkData.nodes)
       .enter()
       .append("g")
+      .style("cursor", "pointer")
       .call(
         d3
           .drag()
@@ -151,7 +152,7 @@ export const useD3Graph = (svgRef, ecosystem) => {
       .style("fill", "white")
 
     function adjustTextSizeAndWrap(textNode, radius) {
-      const text = textNode.datum().title || textNode.datum().name
+      const text = textNode.datum().name
       const words = text.split(" ")
       textNode.text(null)
 
@@ -237,7 +238,7 @@ export const transformNetworkData = (ecosystem) => {
       id: ecosystem.name,
       group: 1,
       fixed: true,
-      title: ecosystem.name,
+      name: ecosystem.name,
       radius: 70,
     },
   ]
@@ -248,7 +249,7 @@ export const transformNetworkData = (ecosystem) => {
 
     if (Array.isArray(data)) {
       data.forEach((item) => {
-        const nodeId = item.name || item.title
+        const nodeId = item.name
         if (!nodeId) return
 
         const existingNode = nodes.find((node) => node.id === nodeId)
@@ -256,7 +257,7 @@ export const transformNetworkData = (ecosystem) => {
           nodes.push({
             id: nodeId,
             group: groupLevel,
-            title: item.title || item.name,
+            name: item.name,
             radius: Math.max(20, 40 - groupLevel * 5),
           })
         }
