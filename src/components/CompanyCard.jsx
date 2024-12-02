@@ -18,7 +18,8 @@ function CompanyCard({ company }) {
   const descriptionLimit = 20
 
   const handleCardClick = () => {
-    router.push(`/companies/${company.name.replace(/\s+/g, "").toLowerCase()}`)
+    const url = `/companies/${company.name.replace(/\s+/g, "").toLowerCase()}`
+    window.open(url, "_blank")
   }
 
   return (
