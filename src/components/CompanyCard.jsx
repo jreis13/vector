@@ -19,7 +19,7 @@ function CompanyCard({ company }) {
 
   const handleCardClick = () => {
     const url = `/companies/${company.name.replace(/\s+/g, "").toLowerCase()}`
-    window.open(url, "_blank")
+    router.push(url)
   }
 
   return (

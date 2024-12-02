@@ -23,36 +23,44 @@ const s3 = new AWS.S3({
 })
 
 const BUCKET_NAME = process.env.S3_BUCKET_NAME
-const COMPANIES_KEY = process.env.S3_COMPANIES_KEY
+const ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
 
 export default async function handler(req, res) {
   await runMiddleware(req, res, corsMiddleware)
 
-  if (req.method === "GET") {
-    try {
-      const params = {
-        Bucket: BUCKET_NAME,
-        Key: COMPANIES_KEY,
-      }
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Method Not Allowed" })
+  }
 
-      const data = await s3.getObject(params).promise()
-      const companies = JSON.parse(data.Body.toString("utf-8"))
-      const companyName = decodeURIComponent(req.query.name)
-
-      const company = companies.find(
-        (c) => c.name.toLowerCase() === companyName.toLowerCase()
-      )
-
-      if (!company) {
-        return res.status(404).json({ error: "Company not found" })
-      }
-
-      res.status(200).json(company)
-    } catch (error) {
-      console.error("Error fetching or parsing data from S3:", error)
-      res.status(500).json({ error: "Failed to fetch or parse data from S3" })
+  try {
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: ECOSYSTEMS_KEY,
     }
-  } else {
-    res.status(405).json({ error: "Method Not Allowed" })
+
+    const data = await s3.getObject(params).promise()
+    const ecosystems = JSON.parse(data.Body.toString("utf-8"))
+
+    const { name } = req.query
+    if (!name) {
+      return res.status(400).json({ error: "Company name is required" })
+    }
+
+    let company = null
+    ecosystems.some((ecosystem) => {
+      company = ecosystem.companies.find(
+        (c) => c.name.toLowerCase() === decodeURIComponent(name).toLowerCase()
+      )
+      return company !== undefined
+    })
+
+    if (!company) {
+      return res.status(404).json({ error: "Company not found" })
+    }
+
+    return res.status(200).json(company)
+  } catch (error) {
+    console.error("Error fetching company data:", error.message)
+    return res.status(500).json({ error: "Failed to fetch company data" })
   }
 }
