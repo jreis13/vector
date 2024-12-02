@@ -13,12 +13,16 @@ function truncateText(text, wordLimit) {
   return text
 }
 
-function CompanyCard({ company }) {
+function CompanyCard({ company, ecosystemName }) {
   const router = useRouter()
   const descriptionLimit = 20
 
+  const normalizeName = (name) => name.replace(/\s+/g, "").toLowerCase()
+
   const handleCardClick = () => {
-    const url = `/companies/${company.name.replace(/\s+/g, "").toLowerCase()}`
+    const normalizedEcosystemName = normalizeName(ecosystemName)
+    const normalizedCompanyName = normalizeName(company.name)
+    const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
     router.push(url)
   }
 

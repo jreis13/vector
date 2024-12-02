@@ -2,7 +2,7 @@
 
 import CompanyCard from "./CompanyCard"
 
-export default function CompaniesPage({ companies }) {
+export default function CompaniesPage({ companies, ecosystemName }) {
   if (!companies || companies.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -19,7 +19,11 @@ export default function CompaniesPage({ companies }) {
       <div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {companies.map((company) => (
-            <CompanyCard key={company.id} company={company} />
+            <CompanyCard
+              key={company.id}
+              company={company}
+              ecosystemName={ecosystemName}
+            />
           ))}
         </div>
       </div>

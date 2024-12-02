@@ -45,26 +45,38 @@ export default async function handler(req, res) {
     const data = await s3.getObject(params).promise()
     const ecosystems = JSON.parse(data.Body.toString("utf-8"))
 
-    const { name } = req.query
-    if (name) {
-      const ecosystemName = normalizeName(decodeURIComponent(name))
-      const ecosystem = ecosystems.find(
-        (e) => normalizeName(e.name) === ecosystemName
-      )
+    const { ecosystemName, companyName } = req.query
 
-      if (!ecosystem) {
-        console.log("Ecosystem not found for:", ecosystemName)
-        return res.status(404).json({ error: "Ecosystem not found" })
-      }
-
-      return res.status(200).json(ecosystem)
+    if (!ecosystemName || !companyName) {
+      return res
+        .status(400)
+        .json({ error: "Ecosystem name and company name are required" })
     }
 
-    return res.status(200).json(ecosystems)
+    const normalizedEcosystemName = normalizeName(
+      decodeURIComponent(ecosystemName)
+    )
+    const normalizedCompanyName = normalizeName(decodeURIComponent(companyName))
+
+    const ecosystem = ecosystems.find(
+      (e) => normalizeName(e.name) === normalizedEcosystemName
+    )
+
+    if (!ecosystem) {
+      return res.status(404).json({ error: "Ecosystem not found" })
+    }
+
+    const company = ecosystem.companies.find(
+      (c) => normalizeName(c.name) === normalizedCompanyName
+    )
+
+    if (!company) {
+      return res.status(404).json({ error: "Company not found" })
+    }
+
+    return res.status(200).json(company)
   } catch (error) {
-    console.error("Error fetching or parsing data from S3:", error)
-    return res
-      .status(500)
-      .json({ error: "Failed to fetch or parse data from S3" })
+    console.error("Error fetching company data:", error.message)
+    return res.status(500).json({ error: "Failed to fetch company data" })
   }
 }

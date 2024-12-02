@@ -30,7 +30,10 @@ function EcosystemDetails({ ecosystem }) {
       <div className="mt-4 p-8">
         {currentTab === "overview" && <NodeGraph ecosystem={ecosystem} />}
         {currentTab === "companies" && (
-          <CompaniesPage companies={ecosystem.companies} />
+          <CompaniesPage
+            companies={ecosystem.companies}
+            ecosystemName={ecosystem.name}
+          />
         )}
         {currentTab === "countryProfiles" && (
           <div>Country Profiles Content Goes Here</div>

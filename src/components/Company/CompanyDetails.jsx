@@ -9,7 +9,7 @@ import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
 import arrowBack from "/public/icons/arrowBack.svg"
 
-function CompanyDetails({ company }) {
+function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
 
   if (router.isFallback || !company) {
@@ -21,7 +21,8 @@ function CompanyDetails({ company }) {
   }
 
   const handleBackClick = () => {
-    router.push("/companies")
+    const normalizedEcosystemName = encodeURIComponent(ecosystemName)
+    router.push(`/ecosystems/${normalizedEcosystemName}`)
   }
 
   return (
@@ -54,52 +55,12 @@ function CompanyDetails({ company }) {
           />
         )}
 
-        {/* {company.customers && (
-          <CompanyCardsNonClickable
-            title={company.customers.title}
-            data={company.customers.data}
-          />
-        )} */}
-
         {company.customerGrowth && (
           <CompanyText
             title={company.customerGrowth.title}
             data={company.customerGrowth.data}
           />
         )}
-
-        {/* {company.valueProposition && (
-          <CompanyText
-            title={company.valueProposition.title}
-            data={company.valueProposition.data}
-          />
-        )} */}
-
-        {/* {company.revenueStreams && (
-          <CompanyCardsNonClickable
-            title={company.revenueStreams.title}
-            data={company.revenueStreams.data}
-          />
-        )} */}
-
-        {/* {company.costStructure && (
-          <CompanyTable
-            title="Cost Structure"
-            columns={["Fixed Costs", "Variable Costs"]}
-            rows={[
-              company.costStructure.data.fixed || [],
-              company.costStructure.data.variable || [],
-            ]}
-            scalability={company.costStructure.data.scalability}
-          />
-        )} */}
-
-        {/* {company.marketSize && (
-          <CompanyCardsNonClickable
-            title={company.marketSize.title}
-            data={company.marketSize.data}
-          />
-        )} */}
 
         {company.patents && (
           <CompanyText
@@ -114,12 +75,6 @@ function CompanyDetails({ company }) {
             data={company.financials.data}
           />
         )}
-
-        {/* {company.products && <CompanyProducts products={company.products} />} */}
-
-        {/* {company.keyCompetitors && (
-          <CompanyKeyCompetitors keyCompetitors={company.keyCompetitors.data} />
-        )} */}
 
         {company.comparison && (
           <CompanyProductComparison comparison={company.comparison} />

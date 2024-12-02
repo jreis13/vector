@@ -25,6 +25,10 @@ const s3 = new AWS.S3({
 const BUCKET_NAME = process.env.S3_BUCKET_NAME
 const ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
 
+function normalizeName(name) {
+  return name.replace(/\s+/g, "").toLowerCase()
+}
+
 export default async function handler(req, res) {
   await runMiddleware(req, res, corsMiddleware)
 
@@ -41,26 +45,29 @@ export default async function handler(req, res) {
     const data = await s3.getObject(params).promise()
     const ecosystems = JSON.parse(data.Body.toString("utf-8"))
 
-    const { name } = req.query
-    if (!name) {
-      return res.status(400).json({ error: "Company name is required" })
-    }
+    const { ecosystemName } = req.query
 
-    let company = null
-    ecosystems.some((ecosystem) => {
-      company = ecosystem.companies.find(
-        (c) => c.name.toLowerCase() === decodeURIComponent(name).toLowerCase()
+    if (ecosystemName) {
+      const normalizedEcosystemName = normalizeName(
+        decodeURIComponent(ecosystemName)
       )
-      return company !== undefined
-    })
+      const ecosystem = ecosystems.find(
+        (e) => normalizeName(e.name) === normalizedEcosystemName
+      )
 
-    if (!company) {
-      return res.status(404).json({ error: "Company not found" })
+      if (!ecosystem) {
+        console.log("Ecosystem not found for:", normalizedEcosystemName)
+        return res.status(404).json({ error: "Ecosystem not found" })
+      }
+
+      return res.status(200).json(ecosystem)
     }
 
-    return res.status(200).json(company)
+    return res.status(200).json(ecosystems)
   } catch (error) {
-    console.error("Error fetching company data:", error.message)
-    return res.status(500).json({ error: "Failed to fetch company data" })
+    console.error("Error fetching or parsing data from S3:", error)
+    return res
+      .status(500)
+      .json({ error: "Failed to fetch or parse data from S3" })
   }
 }
