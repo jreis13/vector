@@ -82,11 +82,11 @@ function CompanyDetails({ company, ecosystemName }) {
 
         <CompanyScore vectorScore={company.vectorScore} />
 
-        <div className="mx-auto my-4 flex max-w-fit lg:mx-0">
+        {/* <div className="mx-auto my-4 flex max-w-fit lg:mx-0">
           <Button onClick={handleBackClick}>
             <Image src={arrowBack} alt="Back" width={24} height={24} />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   )
