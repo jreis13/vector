@@ -1,27 +1,8 @@
 "use client"
 
-import useCompanyData from "src/hooks/useCompanyData"
 import CompanyCard from "./CompanyCard"
 
-export default function CompaniesPage() {
-  const { companies, loading, error } = useCompanyData()
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-red-500">Error: {error}</p>
-      </div>
-    )
-  }
-
+export default function CompaniesPage({ companies }) {
   if (!companies || companies.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center">
