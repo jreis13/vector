@@ -23,7 +23,7 @@ function CompanyCard({ company, ecosystemName }) {
     const normalizedEcosystemName = normalizeName(ecosystemName)
     const normalizedCompanyName = normalizeName(company.name)
     const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
-    router.push(url)
+    window.open(url, "_blank")
   }
 
   return (
