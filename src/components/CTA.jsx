@@ -11,12 +11,8 @@ function CTA() {
         <div className="flex flex-col gap-6 lg:pt-4">
           <div className="flex flex-col gap-y-6">
             <h2>Join Us</h2>
-            <p>
-              Join us on this journey into the future and help us shape a
-              stronger Europe!
-            </p>
           </div>
-          <Button href="mailto:contact@vector.com">Subscribe</Button>
+          <Button href="mailto:support@exponentialvector.eu">Subscribe</Button>
         </div>
         <Image
           src={subscribe}
