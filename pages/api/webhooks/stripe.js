@@ -14,9 +14,11 @@ export default async function handler(req, res) {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
 
   let event
+
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret)
   } catch (err) {
+    console.error("Webhook signature verification failed:", err.message)
     res.status(400).send(`Webhook Error: ${err.message}`)
     return
   }
@@ -28,6 +30,7 @@ export default async function handler(req, res) {
     try {
       await createAuth0User(email)
     } catch (err) {
+      console.error("Error creating Auth0 user:", err.message)
       res.status(500).send(`Auth0 Error: ${err.message}`)
       return
     }
