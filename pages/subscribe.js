@@ -4,6 +4,10 @@ export default function SubscribePage() {
   const router = useRouter()
   const { email } = router.query
 
+  if (!email) {
+    return <p>Error: Email is missing in the URL.</p>
+  }
+
   const handleSubscribe = async () => {
     const response = await fetch("/api/checkout", {
       method: "POST",
