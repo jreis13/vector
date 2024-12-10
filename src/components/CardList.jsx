@@ -4,7 +4,7 @@ function CardList({ title, features, imagesOnTop = false }) {
   const getGridCols = () => {
     const count = features?.length || 0
     if (count === 1) return "grid-cols-1"
-    if (count === 2) return "grid-cols-2"
+    if (count === 2 || count === 4) return "grid-cols-2"
     return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
   }
 

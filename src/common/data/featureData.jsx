@@ -2,23 +2,29 @@ import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
 import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
 import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
 
+export const questionFeatures = [
+  {
+    name: "Are you tired of text-intensive insights?",
+  },
+  {
+    name: "Are you tired of recycled gibberish?",
+  },
+  {
+    name: "Do you think quality research should be accessible and customizable to your needs?",
+  },
+]
+
 export const benefitsFeatures = [
   {
-    name: "Company Research Analysis",
-    description:
-      "A new way to digest reports, with interactive and customizable capabilities.",
+    name: "A new way to digest reports, with interactive and customizable capabilities.",
     image: companyResearchIcon,
   },
   {
-    name: "Private Equity Data",
-    description:
-      "Unprecedented coverage of key news and events occurring in the selected industry.",
+    name: "A constantly updated platform enabling you to stay updated about disruptive tech ecosystems.",
     image: privateEquityIcon,
   },
   {
-    name: "Be One Step Ahead",
-    description:
-      "Frequent industry follow-ups, covering all the latest growth tendencies.",
+    name: "Frequent industry follow-ups, covering all the latest growth trends.",
     image: beOneStepAheadIcon,
   },
 ]
@@ -26,11 +32,11 @@ export const benefitsFeatures = [
 export const offeringFeatures = [
   {
     description:
-      "We are committed to supporting Europe’s disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
+      "We are committed to tailoring research to support Europe’s disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
   },
   {
     description:
-      "We focus on collecting all publicly available information on these ecosystems and analysing it to determine their strengths and weaknesses, and what action should relevant stakeholders take in order to maximize success.",
+      "We focus on collecting publicly available information on these ecosystems and analyzing it to determine their strengths and weaknesses, and what action should relevant stakeholders take to maximize success.",
   },
   {
     description:
@@ -42,23 +48,28 @@ export const customersFeatures = [
   {
     name: "Innovation Enthusiasts",
     description:
-      "Whatever your role in society, if you are excited about what’s coming next, and want to be part of it, you will surely enjoy our products.",
+      "Whatever your role in society, if you are excited about what’s coming next, and want to be part of it, you will surely enjoy our research.",
   },
   {
-    name: "Start-ups and Scale-ups",
+    name: "Start-ups, Scaleups, and Enterprises",
     description:
-      " All companies that are creating something in Europe and often feel unheard and disregarded, we want to ensure that your concerns are heard and that they reach the right stakeholders.",
+      "Our products provide a great way for you to scout for competition and to complement your understanding of market dynamics.",
   },
   {
-    name: "Organizations and government officials",
+    name: "Organizations and Government Officials",
     description:
-      "For anyone in the realm of politics, all of these new disruptions can be overwhelming and difficult to fully grasp. We are here to offer you fresh perspectives and to provide you with insights capable of assisting your decision-making process.",
+      "All these new disruptions can be overwhelming and difficult to fully grasp. We are here to offer you fresh perspectives and to provide you with insights capable of assisting your decision-making process.",
+  },
+  {
+    name: "Investors",
+    description:
+      "Investors looking to quickly understand market dynamics and the relevance of every stakeholder. Since time is of the essence, we focus more on comprehensive visuals rather than lengthy text.",
   },
 ]
 
 export const goalsFeatures = [
   {
     description:
-      "As we grow and scale, we want to ensure that all the voices are heard and are aiming to become a research reference, aiming to build a better and more resilient Europe.",
+      "As we grow and scale, we want to expand coverage over all disruptive business ecosystems and ensure that we can provide a platform capable of generating relevant insights and actions for our users. Your feedback is critical for our growth and we hope that you will help us shape our product to fulfill your needs.",
   },
 ]

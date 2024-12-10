@@ -1,5 +1,6 @@
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
+  questionFeatures,
   customersFeatures,
   benefitsFeatures,
   offeringFeatures,
@@ -22,6 +23,10 @@ function MainLayout() {
         <MainHero>
           <div className="flex flex-col">
             <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
+            <div id="benefits" className="py-4">
+              <CardList features={questionFeatures} />
+            </div>
+            <h2>Same here,</h2>
             <h3>
               Join us in our mission to track Europe’s emerging business
               ecosystems and get ahead of the game with our reporting.
