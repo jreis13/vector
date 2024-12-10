@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import SubscribeButton from "../components/SubscribeButton"
+import SubscribeButton from "../src/components/SubscribeButton"
 
 export default function SubscribePage() {
   const router = useRouter()
