@@ -30,18 +30,32 @@ export default async function handler(req, res) {
     const session = event.data.object
     const email = session.customer_email
 
+    console.log(`Processing Stripe webhook for email: ${email}`)
+
     try {
       const userId = await getAuth0UserIdByEmail(email)
-      await updateUserMetadata(userId, { subscribed: true })
+      console.log(`Fetched user ID from Auth0: ${userId}`)
+
+      const updateResponse = await updateUserMetadata(userId, {
+        subscribed: true,
+      })
       console.log(
-        `Successfully updated subscription status for user: ${userId}`
+        `User metadata updated successfully for ${userId}:`,
+        updateResponse
       )
+
+      res.status(200).json({ received: true })
     } catch (err) {
       console.error("Error updating user metadata:", err.message)
-      res.status(500).send(`Auth0 Error: ${err.message}`)
+
+      res.status(500).send({
+        error: "Auth0 Error",
+        message: err.response?.data || err.message,
+      })
       return
     }
+  } else {
+    console.log(`Unhandled event type: ${event.type}`)
+    res.status(400).json({ error: `Unhandled event type: ${event.type}` })
   }
-
-  res.status(200).json({ received: true })
 }
