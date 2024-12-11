@@ -25,16 +25,72 @@ export default async function handler(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     )
+    console.log("Webhook verified:", event)
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
 
-  // Process the event
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
-    console.log("Session completed:", session)
+    console.log("Checkout session completed:", session)
+
+    try {
+      const userId = await getAuth0UserIdByEmail(session.customer_email)
+      await updateUserMetadata(userId, { subscribed: true })
+      console.log("User metadata updated successfully for:", userId)
+    } catch (error) {
+      console.error("Error updating Auth0 metadata:", error.message)
+      return res.status(500).send("Failed to update user metadata.")
+    }
   }
 
   res.status(200).json({ received: true })
+}
+
+async function getAuth0UserIdByEmail(email) {
+  const token = await getManagementToken()
+
+  const response = await fetch(
+    `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users-by-email?email=${email}`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  )
+
+  const users = await response.json()
+  if (users.length === 0) {
+    throw new Error(`No user found for email: ${email}`)
+  }
+
+  return users[0].user_id
+}
+
+async function updateUserMetadata(userId, metadata) {
+  const token = await getManagementToken()
+
+  await fetch(`${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ app_metadata: metadata }),
+  })
+}
+
+async function getManagementToken() {
+  const response = await fetch(`${process.env.AUTH0_DOMAIN}/oauth/token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      client_id: process.env.M2M_CLIENT_ID,
+      client_secret: process.env.M2M_CLIENT_SECRET,
+      audience: process.env.AUTH0_MANAGEMENT_API_AUDIENCE,
+      grant_type: "client_credentials",
+    }),
+  })
+
+  const data = await response.json()
+  return data.access_token
 }
