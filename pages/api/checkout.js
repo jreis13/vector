@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         customer_email: email,
         line_items: [
           {
-            price: "price_1QUdMuH8mb7EVuIwQypS43pM",
+            price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
             quantity: 1,
           },
         ],
