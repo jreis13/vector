@@ -25,7 +25,6 @@ export default async function handler(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     )
-    console.log("Webhook verified:", event)
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
@@ -33,7 +32,6 @@ export default async function handler(req, res) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
-    console.log("Checkout session completed:", session)
 
     try {
       const userId = await getAuth0UserIdByEmail(session.customer_email)
