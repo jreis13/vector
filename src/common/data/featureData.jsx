@@ -1,16 +1,24 @@
 import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
 import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
 import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
+import textIcon from "/public/icons/textIcon.svg"
+import trashIcon from "/public/icons/trashIcon.svg"
+import customizeIcon from "/public/icons/customizeIcon.svg"
+import goalsIcon from "/public/icons/goalsIcon.svg"
+import offeringIcon from "/public/icons/workIcon.svg"
 
 export const questionFeatures = [
   {
     name: "Are you tired of text-intensive insights?",
+    image: textIcon,
   },
   {
     name: "Are you tired of recycled gibberish?",
+    image: trashIcon,
   },
   {
     name: "Do you think quality research should be accessible and customizable to your needs?",
+    image: customizeIcon,
   },
 ]
 
@@ -42,6 +50,9 @@ export const offeringFeatures = [
     description:
       "We want to make the information easily digestible for all interested stakeholders and focus on visual mapping rather than traditional long text to reach a larger audience and to ensure that all stakeholders understand their role clearly.",
   },
+  {
+    sectionImage: offeringIcon,
+  },
 ]
 
 export const customersFeatures = [
@@ -71,5 +82,8 @@ export const goalsFeatures = [
   {
     description:
       "As we grow and scale, we want to expand coverage over all disruptive business ecosystems and ensure that we can provide a platform capable of generating relevant insights and actions for our users. Your feedback is critical for our growth and we hope that you will help us shape our product to fulfill your needs.",
+  },
+  {
+    sectionImage: goalsIcon,
   },
 ]

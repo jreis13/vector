@@ -21,24 +21,36 @@ function MainLayout() {
       <Breadcrumb sections={breadcrumbSections} />
       <div className="flex flex-grow flex-col">
         <MainHero>
-          <div className="flex flex-col">
+          <div className="flex flex-col px-6 lg:px-16">
             <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
-            <div id="benefits" className="py-4">
-              <CardList features={questionFeatures} />
-            </div>
+          </div>
+        </MainHero>
+        <div className="flex flex-col items-center py-8 lg:px-16">
+          <div id="benefits" className="py-4">
+            <CardList features={questionFeatures} />
+          </div>
+          <div className="flex w-full flex-col items-center px-6 py-8 text-center lg:px-16 lg:py-12">
             <h2>Same here,</h2>
             <h3>
               Join us in our mission to track Europe’s emerging business
               ecosystems and get ahead of the game with our reporting.
             </h3>
           </div>
-        </MainHero>
+        </div>
+
         <div className="pt-8">
           <div id="benefits" className="py-8">
             <CardList title="Benefits" features={benefitsFeatures} />
           </div>
           <div id="offering" className="py-8">
-            <CardList title="What do we do?" features={offeringFeatures} />
+            <CardList
+              title="What do we do?"
+              features={offeringFeatures.filter((f) => !f.sectionImage)}
+              sectionImage={
+                offeringFeatures.find((f) => f.sectionImage)?.sectionImage
+              }
+              imageOnRight
+            />
           </div>
           <div id="customers" className="py-8">
             <CardList
@@ -47,7 +59,13 @@ function MainLayout() {
             />
           </div>
           <div id="goals" className="py-8">
-            <CardList title="What are aiming for?" features={goalsFeatures} />
+            <CardList
+              title="What are we aiming for?"
+              features={goalsFeatures.filter((f) => !f.sectionImage)}
+              sectionImage={
+                goalsFeatures.find((f) => f.sectionImage)?.sectionImage
+              }
+            />
           </div>
         </div>
         <div id="subscribe" className="py-8">

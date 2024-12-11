@@ -7,7 +7,7 @@ import X from "src/components/icons/X"
 export const PATHS = [
   {
     name: "X",
-    path: "https://www.twitter.com",
+    path: "https://x.com/exp_vector",
     type: "image",
     icon: <X />,
   },
@@ -16,24 +16,6 @@ export const PATHS = [
     path: "https://www.linkedin.com",
     type: "image",
     icon: <Linkedin />,
-  },
-  {
-    name: "Instagram",
-    path: "https://www.instagram.com",
-    type: "image",
-    icon: <Instagram />,
-  },
-  {
-    name: "Tiktok",
-    path: "https://www.tiktok.com",
-    type: "image",
-    icon: <Tiktok />,
-  },
-  {
-    name: "Discord",
-    path: "https://www.discord.com",
-    type: "image",
-    icon: <Discord />,
   },
 ]
 

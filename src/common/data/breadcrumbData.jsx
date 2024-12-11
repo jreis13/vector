@@ -1,4 +1,3 @@
-import AnalysisIcon from "/public/icons/analysis.svg"
 import BenefitsIcon from "/public/icons/benefits.svg"
 import HomeIcon from "/public/icons/home.svg"
 import OfferingIcon from "/public/icons/offering.svg"

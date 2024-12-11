@@ -24,6 +24,27 @@ h1 {
   line-height: 76px;
 }
 
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+    line-height: 46px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
 h2 {
   font-family: "Syne", sans-serif;
   font-size: 36px;
