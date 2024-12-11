@@ -1,5 +1,8 @@
 import Stripe from "stripe"
-import { updateUserMetadata } from "../../../lib/auth0Api"
+import {
+  updateUserMetadata,
+  getAuth0UserIdByEmail,
+} from "../../../lib/auth0Api"
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
@@ -28,12 +31,8 @@ export default async function handler(req, res) {
     const email = session.customer_email
 
     try {
-      // Fetch user ID by email (you may need to query Auth0)
       const userId = await getAuth0UserIdByEmail(email)
-
-      // Update user metadata in Auth0
       await updateUserMetadata(userId, { subscribed: true })
-
       console.log(
         `Successfully updated subscription status for user: ${userId}`
       )
