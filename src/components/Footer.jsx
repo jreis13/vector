@@ -11,7 +11,8 @@ function Footer() {
             <Logo />
           </div>
           <span className="text-white md:ml-4">
-            © 2024 <a href="#">Vector</a>. All Rights Reserved.
+            © 2024 <a href="#">Exponential Vector S.R.O</a>. All Rights
+            Reserved.
           </span>
         </div>
 

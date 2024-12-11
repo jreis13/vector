@@ -9,9 +9,13 @@ function SectionWithImage({
   return (
     <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
       {title && (
-        <h2 className="mb-8 text-center text-2xl lg:text-3xl xl:text-4xl">
-          {title}
-        </h2>
+        <div className="mb-8 flex items-center justify-center">
+          <span className="caret font-bold text-[#7032ff]">^</span>
+          <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl">
+            {title}
+          </h2>
+          <span className="mt-4 font-bold text-[#7032ff]">v</span>
+        </div>
       )}
       <div
         className={`flex w-full flex-col items-center justify-between gap-y-8 lg:flex-row lg:gap-x-8 ${
@@ -25,15 +29,11 @@ function SectionWithImage({
             layout="responsive"
             width={400}
             height={400}
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: "cover" }}
           />
         </div>
 
-        <div
-          className={`flex flex-col justify-center ${
-            features.length > 1 ? "max-w-[600px]" : "max-w-[800px]"
-          } text-center text-lg lg:text-left lg:text-xl xl:text-2xl`}
-        >
+        <div className="flex flex-col justify-center text-lg lg:text-left lg:text-xl xl:text-2xl">
           {features.map((feature, index) => (
             <div key={index} className="mb-6">
               {feature.name && (

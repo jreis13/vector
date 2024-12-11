@@ -17,6 +17,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+.caret-down {
+  margin-top: 15px;
+}
+
 h1 {
   font-family: "Syne", sans-serif;
   font-size: 64px;
@@ -70,8 +74,13 @@ body {
 }
 
 .link {
-  :hover {
-    cursor: pointer;
-    color: #bb44f0;
-  }
+  transition:
+    color 0.3s,
+    opacity 0.3s;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #7032ff;
+  opacity: 0.7;
 }

@@ -10,7 +10,11 @@ function FeatureGrid({ title, features, imageOnLeft }) {
 
   return (
     <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
-      {title && <h2 className="mb-8 text-center">{title}</h2>}
+      <div className="flex">
+        <span className="caret font-bold text-[#7032ff]">^</span>
+        {title && <h2 className="mb-8 text-center">{title}</h2>}
+        <span className="mt-4 font-bold text-[#7032ff]">v</span>
+      </div>
       <div
         className={`grid ${getGridCols()} w-full gap-x-8 gap-y-10 lg:gap-y-16`}
       >

@@ -10,7 +10,10 @@ function CTA() {
       <div className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2">
         <div className="flex flex-col gap-6 lg:pt-4">
           <div className="flex flex-col gap-y-6">
-            <h2>Join Us</h2>
+            <h2>
+              Consider supporting us and be part of this new era of research and
+              insights{" "}
+            </h2>
           </div>
           <Button href="/api/auth/login">Join Us</Button>
         </div>

@@ -15,7 +15,7 @@ function PublicEcosystemCard({ ecosystem }) {
   }
 
   return (
-    <div className="duration- duration:300 mb-6 flex h-full flex-col justify-between rounded-lg border p-4 transition-all hover:scale-105 hover:shadow-lg">
+    <div className="mb-6 flex h-full flex-col justify-between rounded-lg border p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg">
       <div>
         <h3 className="text-xl font-bold">{ecosystem.name}</h3>
         <p>{ecosystem.summary}</p>
@@ -28,7 +28,7 @@ function PublicEcosystemCard({ ecosystem }) {
           Purchase PDF
         </button>
         <button
-          className="flex-grow rounded-lg bg-[#BB44F0] px-4 py-2 font-bold shadow-sm"
+          className="flex-grow rounded-lg bg-[#7032ff] px-4 py-2 font-bold shadow-sm"
           onClick={handleSubscribe}
         >
           Subscribe

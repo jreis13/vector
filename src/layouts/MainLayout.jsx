@@ -20,9 +20,9 @@ function splitDescription(feature) {
     description: feature.description
       ? feature.description.split(".").map((sentence, index) =>
           sentence.trim() ? (
-            <p key={index} className="mb-2">
+            <span key={index} className="mb-2 block">
               {sentence.trim() + "."}
-            </p>
+            </span>
           ) : null
         )
       : feature.description,
@@ -46,10 +46,10 @@ function MainLayout() {
           </div>
           <div className="flex w-full flex-col items-center px-6 py-8 text-center lg:px-16 lg:py-12">
             <h2>Same here,</h2>
-            <h3>
+            <h2>
               Join us in our mission to track Europe’s emerging business
               ecosystems and get ahead of the game with our reporting.
-            </h3>
+            </h2>
           </div>
         </div>
 

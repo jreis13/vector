@@ -1,4 +1,6 @@
 "use client"
+import Image from "next/image"
+import expvectorIcon from "public/expvector.png"
 
 import { useEffect, useState } from "react"
 
@@ -18,16 +20,25 @@ function Logo() {
   return (
     <a
       href="/"
-      className="text-4xl font-semibold leading-[42px] transition-opacity duration-300 hover:text-[#BB44F0] hover:opacity-70"
+      className="transition-text-opacity text-4xl font-semibold leading-[42px] duration-300 hover:text-[#7032ff] hover:text-opacity-70"
     >
       {isDesktop ? (
-        <p>
-          vector<span className="caret">^</span>
-        </p>
+        <div className="flex">
+          <Image
+            alt="Exponential Vector Logo"
+            src={expvectorIcon}
+            width={80}
+            height={80}
+          />
+          <p>exponentialvector</p>
+        </div>
       ) : (
-        <p>
-          v/<span className="caret">^</span>
-        </p>
+        <Image
+          alt="Exponential Vector Logo"
+          src={expvectorIcon}
+          width={80}
+          height={80}
+        />
       )}
     </a>
   )
