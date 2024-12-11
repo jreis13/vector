@@ -1,7 +1,7 @@
 import Stripe from "stripe"
-import { createAuth0User } from "../../../lib/auth0Api"
+import { updateUserMetadata } from "../../../lib/auth0Api"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
 export const config = {
   api: {
@@ -28,9 +28,17 @@ export default async function handler(req, res) {
     const email = session.customer_email
 
     try {
-      await createAuth0User(email)
+      // Fetch user ID by email (you may need to query Auth0)
+      const userId = await getAuth0UserIdByEmail(email)
+
+      // Update user metadata in Auth0
+      await updateUserMetadata(userId, { subscribed: true })
+
+      console.log(
+        `Successfully updated subscription status for user: ${userId}`
+      )
     } catch (err) {
-      console.error("Error creating Auth0 user:", err.message)
+      console.error("Error updating user metadata:", err.message)
       res.status(500).send(`Auth0 Error: ${err.message}`)
       return
     }
