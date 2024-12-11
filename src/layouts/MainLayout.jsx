@@ -14,6 +14,21 @@ import Footer from "src/components/Footer"
 import Header from "src/components/Header"
 import MainHero from "src/components/MainHero"
 
+function splitDescription(feature) {
+  return {
+    ...feature,
+    description: feature.description
+      ? feature.description.split(".").map((sentence, index) =>
+          sentence.trim() ? (
+            <p key={index} className="mb-2">
+              {sentence.trim() + "."}
+            </p>
+          ) : null
+        )
+      : feature.description,
+  }
+}
+
 function MainLayout() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -27,7 +42,7 @@ function MainLayout() {
         </MainHero>
         <div className="flex flex-col items-center py-8 lg:px-16">
           <div id="benefits" className="py-4">
-            <CardList features={questionFeatures} />
+            <CardList features={questionFeatures.map(splitDescription)} />
           </div>
           <div className="flex w-full flex-col items-center px-6 py-8 text-center lg:px-16 lg:py-12">
             <h2>Same here,</h2>
@@ -40,12 +55,17 @@ function MainLayout() {
 
         <div className="pt-8">
           <div id="benefits" className="py-8">
-            <CardList title="Benefits" features={benefitsFeatures} />
+            <CardList
+              title="Benefits"
+              features={benefitsFeatures.map(splitDescription)}
+            />
           </div>
           <div id="offering" className="py-8">
             <CardList
               title="What do we do?"
-              features={offeringFeatures.filter((f) => !f.sectionImage)}
+              features={offeringFeatures
+                .filter((f) => !f.sectionImage)
+                .map(splitDescription)}
               sectionImage={
                 offeringFeatures.find((f) => f.sectionImage)?.sectionImage
               }
@@ -55,13 +75,15 @@ function MainLayout() {
           <div id="customers" className="py-8">
             <CardList
               title="Who are our products for?"
-              features={customersFeatures}
+              features={customersFeatures.map(splitDescription)}
             />
           </div>
           <div id="goals" className="py-8">
             <CardList
               title="What are we aiming for?"
-              features={goalsFeatures.filter((f) => !f.sectionImage)}
+              features={goalsFeatures
+                .filter((f) => !f.sectionImage)
+                .map(splitDescription)}
               sectionImage={
                 goalsFeatures.find((f) => f.sectionImage)?.sectionImage
               }
