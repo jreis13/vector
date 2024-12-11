@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Vector",
+  title: "Exponential Vector",
   description:
     "Unlock equity crowdfunding analysis and real private equity data delivered directly to your inbox.",
 }
