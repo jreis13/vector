@@ -12,7 +12,7 @@ function CTA() {
           <div className="flex flex-col gap-y-6">
             <h2>Join Us</h2>
           </div>
-          <Button href="mailto:support@exponentialvector.eu">Join Us</Button>
+          <Button href="/api/auth/login">Join Us</Button>
         </div>
         <Image
           src={subscribe}

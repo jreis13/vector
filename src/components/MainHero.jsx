@@ -23,7 +23,7 @@ function MainHero({ children }) {
           {children}
         </div>
         <div className="my-6">
-          <Button href="mailto:contact@vector.com">Join Us</Button>
+          <Button href="/api/auth/login">Join Us</Button>
         </div>
       </div>
     </div>
