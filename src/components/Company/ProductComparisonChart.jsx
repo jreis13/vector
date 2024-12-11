@@ -89,7 +89,7 @@ function ProductComparisonChart({ comparison }) {
     setUnits(attributeUnits)
   }, [xAttribute, yAttribute, comparison])
 
-  const colors = ["#BB44F0", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
+  const colors = ["#7032ff", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
 
   const generateChartData = () => {
     const datasets = comparison.map((competitor, index) => {

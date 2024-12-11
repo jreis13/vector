@@ -12,7 +12,7 @@ import { Bar } from "react-chartjs-2"
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 function ProductChart({ products }) {
-  const colors = ["#BB44F0", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
+  const colors = ["#7032ff", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
 
   const getRandomColor = () => {
     const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`

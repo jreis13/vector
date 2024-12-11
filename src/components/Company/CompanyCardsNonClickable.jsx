@@ -75,7 +75,7 @@ function CompanyCardsNonClickable({ title, data }) {
               {item.icon && (
                 <FontAwesomeIcon
                   icon={iconMapping[item.icon]}
-                  className="text-4xl text-[#BB44F0]"
+                  className="text-4xl text-[#7032ff]"
                 />
               )}
               {item.logo && (
