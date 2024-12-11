@@ -14,7 +14,7 @@ function SectionWithImage({
           <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl">
             {title}
           </h2>
-          <span className="mt-4 font-bold text-[#7032ff]">v</span>
+          <span className="mt-4 text-[24px] font-bold text-[#7032ff]">v</span>
         </div>
       )}
       <div

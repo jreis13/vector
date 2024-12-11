@@ -11,6 +11,7 @@ function CTA() {
         <div className="flex flex-col gap-6 lg:pt-4">
           <div className="flex flex-col gap-y-6">
             <h2>
+              <span className="caret font-bold text-[#7032ff]">^</span>
               Consider supporting us and be part of this new era of research and
               insights{" "}
             </h2>
