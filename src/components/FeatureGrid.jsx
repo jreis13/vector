@@ -48,7 +48,9 @@ function FeatureGrid({
           {features.map((feature, index) => (
             <div key={index} className="p-4">
               <div className="flex flex-col items-center text-center">
-                {feature.name && <h3 className="py-4">{feature.name}</h3>}
+                {feature.name && (
+                  <h3 className="py-4 font-bold">{feature.name}</h3>
+                )}
                 {feature.description && (
                   <p className="py-2">{feature.description}</p>
                 )}
