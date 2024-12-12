@@ -1,9 +1,9 @@
-import BenefitsIcon from "/public/icons/benefits.svg"
-import HomeIcon from "/public/icons/home.svg"
-import OfferingIcon from "/public/icons/offering.svg"
+import BenefitsIcon from "/public/icons/benefitsIcon.svg"
+import HomeIcon from "/public/icons/homeIcon.svg"
+import OfferingIcon from "/public/icons/offeringIcon.svg"
 import SubscribeIcon from "/public/icons/subscribeIcon.svg"
-import ProductIcon from "/public/icons/product.svg"
-import GoalIcon from "/public/icons/goal.svg"
+import ProductIcon from "/public/icons/productIcon.svg"
+import GoalIcon from "/public/icons/goalIcon.svg"
 
 export const breadcrumbSections = [
   { title: "Home", icon: HomeIcon, id: "" },

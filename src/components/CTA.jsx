@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import Button from "./Button"
 
-import subscribe from "/public/icons/subscribe.svg"
+import mailIcon from "/public/icons/mailIcon.svg"
 
 function CTA() {
   return (
@@ -19,7 +19,7 @@ function CTA() {
           <Button href="/api/auth/login">Join Us</Button>
         </div>
         <Image
-          src={subscribe}
+          src={mailIcon}
           alt="Subscribe"
           className="w-full md:-ml-4 lg:-ml-0"
         />

@@ -1,6 +1,6 @@
-import beOneStepAheadIcon from "/public/icons/beOneStepAheadIcon.svg"
-import companyResearchIcon from "/public/icons/companyResearchIcon.svg"
-import privateEquityIcon from "/public/icons/privateEquityIcon.svg"
+import growthChartIcon from "/public/icons/growthChartIcon.svg"
+import customizeChartIcon from "/public/icons/customizeChartIcon.svg"
+import updatedPlatformIcon from "/public/icons/updatedPlatformIcon.svg"
 import textIcon from "/public/icons/textIcon.svg"
 import trashIcon from "/public/icons/trashIcon.svg"
 import customizeIcon from "/public/icons/customizeIcon.svg"
@@ -25,15 +25,15 @@ export const questionFeatures = [
 export const benefitsFeatures = [
   {
     name: "A new way to digest reports, with interactive and customizable capabilities.",
-    image: companyResearchIcon,
+    image: customizeChartIcon,
   },
   {
     name: "A constantly updated platform enabling you to stay updated about disruptive tech ecosystems.",
-    image: privateEquityIcon,
+    image: updatedPlatformIcon,
   },
   {
     name: "Frequent industry follow-ups, covering all the latest growth trends.",
-    image: beOneStepAheadIcon,
+    image: growthChartIcon,
   },
 ]
 

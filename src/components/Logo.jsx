@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import expvectorIcon from "public/expvector.png"
+import expVectorLogo from "public/expVectorLogo.png"
 
 import { useEffect, useState } from "react"
 
@@ -27,7 +27,7 @@ function Logo() {
         <div className="flex">
           <Image
             alt="Exponential Vector Logo"
-            src={expvectorIcon}
+            src={expVectorLogo}
             width={80}
             height={80}
           />
@@ -36,7 +36,7 @@ function Logo() {
       ) : (
         <Image
           alt="Exponential Vector Logo"
-          src={expvectorIcon}
+          src={expVectorLogo}
           width={80}
           height={80}
         />

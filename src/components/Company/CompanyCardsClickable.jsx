@@ -2,7 +2,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
-import placeholder from "public/icons/avatar.svg"
+import placeholder from "public/icons/avatarIcon.svg"
 import Link from "../Link"
 
 function CompanyCardsClickable({ title, data }) {
