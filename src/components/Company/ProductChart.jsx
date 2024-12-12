@@ -19,7 +19,7 @@ function ProductChart({ products }) {
     return randomColor.length === 7 ? randomColor : getRandomColor()
   }
 
-  const labels = products.map((product) => product.name)
+  const labels = products && products.map((product) => product.name)
 
   const parseValue = (value) => {
     if (typeof value === "string") {
@@ -34,10 +34,12 @@ function ProductChart({ products }) {
   )
 
   const datasets = numericAttributes.map((attr, index) => {
-    const data = products.map((product) => ({
-      numeric: parseValue(product[attr]),
-      original: product[attr],
-    }))
+    const data =
+      products &&
+      products.map((product) => ({
+        numeric: parseValue(product[attr]),
+        original: product[attr],
+      }))
 
     const color = index < colors.length ? colors[index] : getRandomColor()
     const backgroundColor = color.replace("0.2", "0.2")
@@ -45,11 +47,11 @@ function ProductChart({ products }) {
 
     return {
       label: attr.charAt(0).toUpperCase() + attr.slice(1),
-      data: data.map((d) => d.numeric),
+      data: data && data.map((d) => d.numeric),
       backgroundColor: color + "33",
       borderColor: color,
       borderWidth: 1,
-      originalData: data.map((d) => d.original),
+      originalData: data && data.map((d) => d.original),
     }
   })
 

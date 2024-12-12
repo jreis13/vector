@@ -18,13 +18,14 @@ export default function CompaniesPage({ companies, ecosystemName }) {
     >
       <div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {companies.map((company) => (
-            <CompanyCard
-              key={company.id}
-              company={company}
-              ecosystemName={ecosystemName}
-            />
-          ))}
+          {companies &&
+            companies.map((company) => (
+              <CompanyCard
+                key={company.id}
+                company={company}
+                ecosystemName={ecosystemName}
+              />
+            ))}
         </div>
       </div>
     </div>

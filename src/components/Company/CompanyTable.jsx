@@ -9,23 +9,25 @@ function CompanyTable({ title, columns = [], rows = [], scalability }) {
         <table className="w-full">
           <thead>
             <tr>
-              {columns.map((col, index) => (
-                <th key={index} className="px-4 py-2 text-center">
-                  {col}
-                </th>
-              ))}
+              {columns &&
+                columns.map((col, index) => (
+                  <th key={index} className="px-4 py-2 text-center">
+                    {col}
+                  </th>
+                ))}
             </tr>
           </thead>
           <tbody>
             {[...Array(maxRows)].map((_, rowIndex) => (
               <tr key={rowIndex}>
-                {columns.map((_, colIndex) => (
-                  <td key={colIndex} className="px-4 py-2 text-center">
-                    {rows[colIndex] && rows[colIndex][rowIndex]
-                      ? rows[colIndex][rowIndex]
-                      : ""}
-                  </td>
-                ))}
+                {columns &&
+                  columns.map((_, colIndex) => (
+                    <td key={colIndex} className="px-4 py-2 text-center">
+                      {rows[colIndex] && rows[colIndex][rowIndex]
+                        ? rows[colIndex][rowIndex]
+                        : ""}
+                    </td>
+                  ))}
               </tr>
             ))}
             {scalability && scalability.length > 0 && (

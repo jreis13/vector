@@ -68,13 +68,14 @@ export default function EcosystemsPage() {
           <h2 className="text-3xl font-bold">Ecosystems</h2>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {data.map((ecosystem) =>
-            user ? (
-              <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-            ) : (
-              <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-            )
-          )}
+          {data &&
+            data.map((ecosystem) =>
+              user ? (
+                <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+              ) : (
+                <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+              )
+            )}
         </div>
       </div>
     </div>

@@ -82,21 +82,22 @@ function Breadcrumb({ sections }) {
         }}
       >
         <ol className="mb-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-8">
-          {sections.map((section) => (
-            <li key={section.title} className="flex items-center">
-              <button
-                className={"flex items-center space-x-1"}
-                onClick={() => scrollToSection(section.id)}
-              >
-                <Image
-                  src={section.icon}
-                  alt={section.title}
-                  width={24}
-                  height={24}
-                />
-              </button>
-            </li>
-          ))}
+          {sections &&
+            sections.map((section) => (
+              <li key={section.title} className="flex items-center">
+                <button
+                  className={"flex items-center space-x-1"}
+                  onClick={() => scrollToSection(section.id)}
+                >
+                  <Image
+                    src={section.icon}
+                    alt={section.title}
+                    width={24}
+                    height={24}
+                  />
+                </button>
+              </li>
+            ))}
         </ol>
       </nav>
 

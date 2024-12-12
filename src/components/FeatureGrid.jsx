@@ -45,30 +45,31 @@ function FeatureGrid({
           </>
         )}
         <div className={`grid ${getGridCols()} gap-4`}>
-          {features.map((feature, index) => (
-            <div key={index} className="p-4">
-              <div className="flex flex-col items-center text-center">
-                {feature.name && (
-                  <h3 className="py-4 font-bold">{feature.name}</h3>
-                )}
-                {feature.description && (
-                  <p className="py-2">{feature.description}</p>
+          {features &&
+            features.map((feature, index) => (
+              <div key={index} className="p-4">
+                <div className="flex flex-col items-center text-center">
+                  {feature.name && (
+                    <h3 className="py-4 font-bold">{feature.name}</h3>
+                  )}
+                  {feature.description && (
+                    <p className="py-2">{feature.description}</p>
+                  )}
+                </div>
+                {feature.image && (
+                  <div className="flex items-center justify-center">
+                    <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-80 lg:w-80">
+                      <Image
+                        src={feature.image}
+                        alt={feature.name || feature.description}
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    </div>
+                  </div>
                 )}
               </div>
-              {feature.image && (
-                <div className="flex items-center justify-center">
-                  <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-80 lg:w-80">
-                    <Image
-                      src={feature.image}
-                      alt={feature.name || feature.description}
-                      layout="fill"
-                      objectFit="contain"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>

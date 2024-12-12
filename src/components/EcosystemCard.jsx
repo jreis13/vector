@@ -43,12 +43,13 @@ function EcosystemCard({ ecosystem }) {
       <div className="mt-4 flex flex-col justify-end">
         {ecosystem.mainStats && (
           <div className="mb-4">
-            {ecosystem.mainStats.map((stat, index) => (
-              <div key={index} className="flex justify-between py-1">
-                <span>{stat.label}:</span>
-                <span>{stat.value}</span>
-              </div>
-            ))}
+            {ecosystem.mainStats &&
+              ecosystem.mainStats.map((stat, index) => (
+                <div key={index} className="flex justify-between py-1">
+                  <span>{stat.label}:</span>
+                  <span>{stat.value}</span>
+                </div>
+              ))}
           </div>
         )}
         <div className="text-center">

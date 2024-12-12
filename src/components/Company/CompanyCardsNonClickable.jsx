@@ -66,33 +66,34 @@ function CompanyCardsNonClickable({ title, data }) {
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">{title}</h2>
       <div className={`grid grid-cols-1 gap-4 pb-8 md:grid-cols-2`}>
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="group relative flex flex-col items-center p-4"
-          >
-            <div className="mb-4 flex h-24 w-24 items-center justify-center">
-              {item.icon && (
-                <FontAwesomeIcon
-                  icon={iconMapping[item.icon]}
-                  className="text-4xl text-[#7032ff]"
-                />
-              )}
-              {item.logo && (
-                <Image
-                  src={`/path/to/logos/${item.logo}.svg`}
-                  alt={`${item.name} logo`}
-                  height={24}
-                  width={24}
-                />
-              )}
+        {data &&
+          data.map((item, index) => (
+            <div
+              key={index}
+              className="group relative flex flex-col items-center p-4"
+            >
+              <div className="mb-4 flex h-24 w-24 items-center justify-center">
+                {item.icon && (
+                  <FontAwesomeIcon
+                    icon={iconMapping[item.icon]}
+                    className="text-4xl text-[#7032ff]"
+                  />
+                )}
+                {item.logo && (
+                  <Image
+                    src={`/path/to/logos/${item.logo}.svg`}
+                    alt={`${item.name} logo`}
+                    height={24}
+                    width={24}
+                  />
+                )}
+              </div>
+              <div className="text-center">
+                <h3 className="font-semibold">{item.name || item.label}</h3>
+                {renderItemContent(item)}
+              </div>
             </div>
-            <div className="text-center">
-              <h3 className="font-semibold">{item.name || item.label}</h3>
-              {renderItemContent(item)}
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   )

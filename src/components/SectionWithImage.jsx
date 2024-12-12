@@ -34,18 +34,19 @@ function SectionWithImage({
         </div>
 
         <div className="flex flex-col justify-center text-lg lg:text-left lg:text-xl xl:text-2xl">
-          {features.map((feature, index) => (
-            <div key={index} className="mb-6">
-              {feature.name && (
-                <h3 className="py-4 text-xl lg:text-2xl xl:text-3xl">
-                  {feature.name}
-                </h3>
-              )}
-              {feature.description && (
-                <p className="py-2">{feature.description}</p>
-              )}
-            </div>
-          ))}
+          {features &&
+            features.map((feature, index) => (
+              <div key={index} className="mb-6">
+                {feature.name && (
+                  <h3 className="py-4 text-xl lg:text-2xl xl:text-3xl">
+                    {feature.name}
+                  </h3>
+                )}
+                {feature.description && (
+                  <p className="py-2">{feature.description}</p>
+                )}
+              </div>
+            ))}
         </div>
       </div>
     </div>

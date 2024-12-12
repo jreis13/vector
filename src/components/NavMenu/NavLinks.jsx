@@ -18,24 +18,25 @@ function NavLinks({ paths, isDesktop }) {
           "h-8 flex-row items-center gap-7": isDesktop,
         })}
       >
-        {paths
-          .filter(({ path }) => {
-            const normalizedPath = path.replace(/\/$/, "").toLowerCase()
-            return normalizedPath !== normalizedPathname
-          })
-          .map(({ name, path, type, icon }) => (
-            <li key={name} className="link cursor-pointer">
-              {type === "image" && icon ? (
-                <a href={path} target="_blank" rel="noopener noreferrer">
-                  {icon}
-                </a>
-              ) : (
-                <Link to={path}>
-                  <span className="nav-link">{name}</span>
-                </Link>
-              )}
-            </li>
-          ))}
+        {paths &&
+          paths
+            .filter(({ path }) => {
+              const normalizedPath = path.replace(/\/$/, "").toLowerCase()
+              return normalizedPath !== normalizedPathname
+            })
+            .map(({ name, path, type, icon }) => (
+              <li key={name} className="link cursor-pointer">
+                {type === "image" && icon ? (
+                  <a href={path} target="_blank" rel="noopener noreferrer">
+                    {icon}
+                  </a>
+                ) : (
+                  <Link to={path}>
+                    <span className="nav-link">{name}</span>
+                  </Link>
+                )}
+              </li>
+            ))}
       </ul>
     </nav>
   )

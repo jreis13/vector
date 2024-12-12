@@ -92,23 +92,27 @@ function ProductComparisonChart({ comparison }) {
   const colors = ["#7032ff", "#FF5733", "#33FF57", "#3357FF", "#F0BB44"]
 
   const generateChartData = () => {
-    const datasets = comparison.map((competitor, index) => {
-      const data = competitor.products.map((product) => ({
-        x: parseFloat(product[xAttribute]),
-        y: parseFloat(product[yAttribute]),
-        label: product.name,
-      }))
+    const datasets =
+      comparison &&
+      comparison.map((competitor, index) => {
+        const data =
+          competitor.products &&
+          competitor.products.map((product) => ({
+            x: parseFloat(product[xAttribute]),
+            y: parseFloat(product[yAttribute]),
+            label: product.name,
+          }))
 
-      return {
-        label: competitor.name,
-        data,
-        backgroundColor: colors[index % colors.length],
-        borderColor: "transparent",
-        borderWidth: 1,
-        pointRadius: 8,
-        pointHoverRadius: 10,
-      }
-    })
+        return {
+          label: competitor.name,
+          data,
+          backgroundColor: colors[index % colors.length],
+          borderColor: "transparent",
+          borderWidth: 1,
+          pointRadius: 8,
+          pointHoverRadius: 10,
+        }
+      })
 
     return {
       datasets,

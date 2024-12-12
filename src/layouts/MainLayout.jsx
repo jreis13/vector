@@ -63,9 +63,12 @@ function MainLayout() {
           <div id="offering" className="py-8">
             <CardList
               title="What do we do?"
-              features={offeringFeatures
-                .filter((f) => !f.sectionImage)
-                .map(splitDescription)}
+              features={
+                offeringFeatures &&
+                offeringFeatures
+                  .filter((f) => !f.sectionImage)
+                  .map(splitDescription)
+              }
               sectionImage={
                 offeringFeatures.find((f) => f.sectionImage)?.sectionImage
               }
@@ -75,16 +78,21 @@ function MainLayout() {
           <div id="customers" className="py-8">
             <CardList
               title="Who are our products for?"
-              features={customersFeatures.map(splitDescription)}
+              features={
+                customersFeatures && customersFeatures.map(splitDescription)
+              }
               isCustomersGrid={true}
             />
           </div>
           <div id="goals" className="py-8">
             <CardList
               title="What are we aiming for?"
-              features={goalsFeatures
-                .filter((f) => !f.sectionImage)
-                .map(splitDescription)}
+              features={
+                goalsFeatures &&
+                goalsFeatures
+                  .filter((f) => !f.sectionImage)
+                  .map(splitDescription)
+              }
               sectionImage={
                 goalsFeatures.find((f) => f.sectionImage)?.sectionImage
               }
