@@ -76,6 +76,7 @@ function MainLayout() {
             <CardList
               title="Who are our products for?"
               features={customersFeatures.map(splitDescription)}
+              isCustomersGrid={true}
             />
           </div>
           <div id="goals" className="py-8">

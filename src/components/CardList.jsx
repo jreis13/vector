@@ -7,6 +7,7 @@ function CardList({
   sectionImage,
   imageOnLeft,
   imageOnRight,
+  isCustomersGrid = false,
 }) {
   if (sectionImage) {
     return (
@@ -19,7 +20,12 @@ function CardList({
     )
   }
   return (
-    <FeatureGrid title={title} features={features} imageOnLeft={imageOnLeft} />
+    <FeatureGrid
+      title={title}
+      features={features}
+      imageOnLeft={imageOnLeft}
+      isCustomersGrid={isCustomersGrid}
+    />
   )
 }
 
