@@ -1,8 +1,8 @@
 "use client"
 
 import socialPATHS from "src/common/data/socialsData"
-import Logo from "./Logo"
-import NavLinks from "./NavMenu/NavLinks"
+import Logo from "../Logo"
+import NavLinks from "../NavMenu/NavLinks"
 
 function Footer() {
   return (

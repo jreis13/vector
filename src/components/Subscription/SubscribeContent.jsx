@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
 
-import Button from "./Button"
+import Button from "../Button"
 
 export default function SubscribeContent() {
   const [email, setEmail] = useState("")

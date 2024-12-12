@@ -10,8 +10,8 @@ import {
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
-import Footer from "src/components/Footer"
-import Header from "src/components/Header"
+import Footer from "src/components/Structure/Footer"
+import Header from "src/components/Structure/Header"
 import MainHero from "src/components/MainHero"
 
 function splitDescription(feature) {

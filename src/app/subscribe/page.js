@@ -1,7 +1,7 @@
 import "../../common/styles/_reset.css"
 
 import SubscriptionLayout from "src/layouts/SubscriptionLayout"
-import SubscribeContent from "src/components/SubscribeContent"
+import SubscribeContent from "src/components/Subscription/SubscribeContent"
 
 export default function SubscribePage() {
   return (
