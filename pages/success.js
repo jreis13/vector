@@ -1,25 +1,9 @@
-"use client"
-
-import { useRouter } from "next/router"
-import { useUser } from "@auth0/nextjs-auth0/client"
-
+import { withPageAuthRequired } from "@auth0/nextjs-auth0"
 import Button from "src/components/Button"
 import Header from "src/components/Header"
 import Footer from "src/components/Footer"
 
 export default function SuccessPage() {
-  const router = useRouter()
-  const { user, isLoading } = useUser()
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (!user) {
-    router.push("/api/auth/login")
-    return null
-  }
-
   const handleRedirect = () => {
     router.push("/api/auth/login")
   }
@@ -40,3 +24,5 @@ export default function SuccessPage() {
     </div>
   )
 }
+
+export const getServerSideProps = withPageAuthRequired()
