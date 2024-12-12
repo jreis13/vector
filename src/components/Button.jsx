@@ -1,3 +1,5 @@
+"use client"
+
 function Button({ onClick, href, children }) {
   if (onClick) {
     return (
