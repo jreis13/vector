@@ -1,12 +1,12 @@
 import "../../common/styles/_reset.css"
 
-import GenericLayout from "src/layouts/GenericLayout"
+import SubscriptionLayout from "src/layouts/SubscriptionLayout"
 import SubscribeContent from "src/components/SubscribeContent"
 
 export default function SubscribePage() {
   return (
-    <GenericLayout>
+    <SubscriptionLayout>
       <SubscribeContent />
-    </GenericLayout>
+    </SubscriptionLayout>
   )
 }

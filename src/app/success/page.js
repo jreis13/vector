@@ -1,12 +1,12 @@
 import "../../common/styles/_reset.css"
 
-import GenericLayout from "src/layouts/GenericLayout"
+import SubscriptionLayout from "src/layouts/SubscriptionLayout"
 import SuccessContent from "src/components/SuccessContent"
 
 export default function SuccessPage() {
   return (
-    <GenericLayout>
+    <SubscriptionLayout>
       <SuccessContent />
-    </GenericLayout>
+    </SubscriptionLayout>
   )
 }
