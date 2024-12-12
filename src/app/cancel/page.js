@@ -1,11 +1,12 @@
+import "../../common/styles/_reset.css"
+
+import SubscriptionLayout from "src/layouts/SubscriptionLayout"
+import CancelContent from "src/components/CancelContent"
+
 export default function CancelPage() {
   return (
-    <div>
-      <h1>Subscription Canceled</h1>
-      <p>
-        It looks like you canceled your subscription. If this was a mistake, you
-        can try again.
-      </p>
-    </div>
+    <SubscriptionLayout>
+      <CancelContent />
+    </SubscriptionLayout>
   )
 }
