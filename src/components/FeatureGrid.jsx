@@ -54,13 +54,15 @@ function FeatureGrid({
                 )}
               </div>
               {feature.image && (
-                <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-64 lg:w-64">
-                  <Image
-                    src={feature.image}
-                    alt={feature.name || feature.description}
-                    layout="fill"
-                    objectFit="cover"
-                  />
+                <div className="flex items-center justify-center">
+                  <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-80 lg:w-80">
+                    <Image
+                      src={feature.image}
+                      alt={feature.name || feature.description}
+                      layout="fill"
+                      objectFit="contain"
+                    />
+                  </div>
                 </div>
               )}
             </div>
