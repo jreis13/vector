@@ -1,6 +1,6 @@
-"use client"
-
-import { useEffect, useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
+import Button from "./Button"
 
 export default function SubscribeContent() {
   const [email, setEmail] = useState("")
@@ -28,21 +28,12 @@ export default function SubscribeContent() {
   return (
     <div className="py-16 text-center">
       <h1 className="text-2xl font-bold">Subscribe to Exponential Vector</h1>
-      <p className="mt-4 text-lg text-gray-600">
+      <p className="mt-4 text-lg">
         Complete your subscription to access the platform.
       </p>
-      <input
-        className="mx-auto mt-6 block w-full max-w-md rounded border px-4 py-2"
-        type="email"
-        value={email}
-        readOnly
-      />
-      <button
-        className="mt-4 rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-500"
-        onClick={handleSubscribe}
-      >
-        Subscribe Now
-      </button>
+      <Button onClick={handleSubscribe}>
+        Subscribe with <FontAwesomeIcon icon={faCcStripe} />
+      </Button>
     </div>
   )
 }
