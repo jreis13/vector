@@ -1,4 +1,4 @@
-import "../common/styles/globals.css"
+import "../../common/styles/globals.css"
 import { UserProvider } from "@auth0/nextjs-auth0/client"
 
 export const metadata = {
