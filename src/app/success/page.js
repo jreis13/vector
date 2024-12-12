@@ -1,7 +1,7 @@
 import "../../common/styles/_reset.css"
 
 import SubscriptionLayout from "src/layouts/SubscriptionLayout"
-import SuccessContent from "src/components/SuccessContent"
+import SuccessContent from "src/components/Subscription/SuccessContent"
 
 export default function SuccessPage() {
   return (
