@@ -4,8 +4,9 @@ import Image from "next/image"
 
 import { useEffect, useState } from "react"
 
-import arrowDown from "/public/icons/arrowDown.svg"
-import arrowUp from "/public/icons/arrowUp.svg"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 
 function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")
@@ -109,23 +110,21 @@ function Breadcrumb({ sections }) {
           onClick={toggleVisibility}
           className="relative flex h-full w-full items-center justify-center"
         >
-          <Image
-            src={arrowDown}
-            alt="Hide Breadcrumb"
-            width={24}
-            height={24}
+          <FontAwesomeIcon
+            icon={faArrowDown}
+            size="lg"
             className={`absolute transition-opacity duration-300 ${
               isVisible ? "opacity-100" : "opacity-0"
             }`}
+            title="Hide Breadcrumb"
           />
-          <Image
-            src={arrowUp}
-            alt="Show Breadcrumb"
-            width={24}
-            height={24}
+          <FontAwesomeIcon
+            icon={faArrowUp}
+            size="lg"
             className={`absolute transition-opacity duration-300 ${
               isVisible ? "opacity-0" : "opacity-100"
             }`}
+            title="Show Breadcrumb"
           />
         </button>
       </div>

@@ -1,13 +1,10 @@
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import Button from "../Button"
 import CompanyCardsClickable from "./CompanyCardsClickable"
 import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
 import CompanyProductComparison from "./CompanyProductComparison"
-import CompanyScore from "./CompanyScore"
 import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
-import arrowBack from "/public/icons/arrowBack.svg"
 
 function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
@@ -79,14 +76,6 @@ function CompanyDetails({ company, ecosystemName }) {
         {company.comparison && (
           <CompanyProductComparison comparison={company.comparison} />
         )}
-
-        <CompanyScore vectorScore={company.vectorScore} />
-
-        {/* <div className="mx-auto my-4 flex max-w-fit lg:mx-0">
-          <Button onClick={handleBackClick}>
-            <Image src={arrowBack} alt="Back" width={24} height={24} />
-          </Button>
-        </div> */}
       </div>
     </div>
   )
