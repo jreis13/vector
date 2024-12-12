@@ -31,14 +31,18 @@ export default function SubscribeContent() {
   }
 
   return (
-    <div className="py-16 text-center">
-      <h1 className="text-2xl font-bold">Subscribe to Exponential Vector</h1>
-      <p className="mt-4 text-lg">
-        Complete your subscription to access the platform.
-      </p>
-      <Button onClick={handleSubscribe}>
-        Subscribe with <FontAwesomeIcon icon={faCcStripe} />
-      </Button>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">Subscribe to Exponential Vector</h1>
+        <p className="mt-4 text-lg">
+          Complete your subscription to access the platform.
+        </p>
+        <div className="mt-8">
+          <Button onClick={handleSubscribe}>
+            Subscribe with <FontAwesomeIcon icon={faCcStripe} />
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
