@@ -58,11 +58,6 @@ function CompanyCard({ company, ecosystemName }) {
               </div>
             ))}
         </div>
-        <div className="text-center">
-          <span className="text-lg font-bold">
-            v/<span className="caret">^</span> Score: {company.vectorScore}
-          </span>
-        </div>
       </div>
     </div>
   )
