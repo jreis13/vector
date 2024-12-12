@@ -1,10 +1,16 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 export default function SubscribePage() {
   const router = useRouter()
-  const { email } = router.query
+  const [email, setEmail] = useState("")
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search)
+    setEmail(query.get("email") || "")
+  }, [])
 
   if (!email) {
     return <p>Error: Email is missing in the URL.</p>
