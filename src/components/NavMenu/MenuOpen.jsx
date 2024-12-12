@@ -1,3 +1,5 @@
+"use client"
+
 function MenuOpen() {
   return (
     <svg

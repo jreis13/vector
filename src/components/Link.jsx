@@ -1,3 +1,5 @@
+"use client"
+
 function Link({ blank, children, to }) {
   const attrs = {}
   if (blank) {
