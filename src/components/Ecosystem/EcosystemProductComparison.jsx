@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
 import EcosystemProductTable from "./EcosystemProductTable"
 import EcosystemProductChart from "./EcosystemProductChart"
+import Dropdown from "../Dropdown"
 
 export default function EcosystemProductComparison({ companies }) {
   const [xAttribute, setXAttribute] = useState("")
   const [yAttribute, setYAttribute] = useState("")
-  const [numericAttributes, setNumericAttributes] = useState([])
 
   const groupedProducts =
     companies
@@ -39,19 +39,16 @@ export default function EcosystemProductComparison({ companies }) {
       .every((value) => !isNaN(value))
 
   const attributesArray = Array.from(allAttributes)
-  const filteredNumericAttributes = attributesArray.filter(isNumericAttribute)
+  const numericAttributes = attributesArray.filter(isNumericAttribute)
 
   useEffect(() => {
-    setNumericAttributes(filteredNumericAttributes)
-
-    if (filteredNumericAttributes.length > 0) {
-      setXAttribute((prev) => prev || filteredNumericAttributes[0])
-      setYAttribute(
-        (prev) =>
-          prev || filteredNumericAttributes[1] || filteredNumericAttributes[0]
-      )
+    if (!xAttribute && numericAttributes.length > 0) {
+      setXAttribute(numericAttributes[0])
     }
-  }, [filteredNumericAttributes])
+    if (!yAttribute && numericAttributes.length > 1) {
+      setYAttribute(numericAttributes[1] || numericAttributes[0])
+    }
+  }, [numericAttributes, xAttribute, yAttribute])
 
   const labels = groupedProducts.flatMap((group) =>
     group.products.map((product) => `${group.companyName} - ${product.name}`)
@@ -88,31 +85,19 @@ export default function EcosystemProductComparison({ companies }) {
       </div>
       <div className="mb-8 flex flex-col items-center gap-8 lg:flex-row lg:items-start">
         <div>
-          <select
-            className="w-full rounded-lg border border-gray-700 bg-[#34333d] px-4 py-2 text-[#e8e8e8] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={xAttribute}
-            onChange={(e) => setXAttribute(e.target.value)}
-          >
-            {numericAttributes.map((attr) => (
-              <option key={attr} value={attr}>
-                {attr}
-              </option>
-            ))}
-          </select>
+          <Dropdown
+            attributes={numericAttributes}
+            selectedValue={xAttribute}
+            onChange={setXAttribute}
+          />
         </div>
 
         <div>
-          <select
-            className="w-full rounded-lg border border-gray-700 bg-[#34333d] px-4 py-2 text-[#e8e8e8] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={yAttribute}
-            onChange={(e) => setYAttribute(e.target.value)}
-          >
-            {numericAttributes.map((attr) => (
-              <option key={attr} value={attr}>
-                {attr}
-              </option>
-            ))}
-          </select>
+          <Dropdown
+            attributes={numericAttributes}
+            selectedValue={yAttribute}
+            onChange={setYAttribute}
+          />
         </div>
       </div>
 

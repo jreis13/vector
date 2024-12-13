@@ -6,9 +6,9 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
       <thead>
         <tr>
           <th className="border border-gray-300 px-4 py-2">Company</th>
-          {attributes.map((attr, index) => (
+          {attributes.map((attr) => (
             <th
-              key={index}
+              key={attr}
               className="border border-gray-300 px-4 py-2 capitalize"
             >
               {attr}
@@ -18,9 +18,9 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
       </thead>
       <tbody>
         {groupedProducts.map((group) => (
-          <>
+          <React.Fragment key={group.companyName}>
             {group.products.map((product, productIndex) => (
-              <tr key={productIndex}>
+              <tr key={`${group.companyName}-${product.name || productIndex}`}>
                 {productIndex === 0 && (
                   <td
                     className="border border-gray-300 px-4 py-2 text-center font-bold"
@@ -29,9 +29,9 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                     {group.companyName}
                   </td>
                 )}
-                {attributes.map((attr, attrIndex) => (
+                {attributes.map((attr) => (
                   <td
-                    key={attrIndex}
+                    key={`${product.name || productIndex}-${attr}`}
                     className="border border-gray-300 px-4 py-2"
                   >
                     {product[attr] || "N/A"}
@@ -39,7 +39,7 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                 ))}
               </tr>
             ))}
-          </>
+          </React.Fragment>
         ))}
       </tbody>
     </table>
