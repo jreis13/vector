@@ -82,10 +82,12 @@ export default function EcosystemProductChart({
   }
 
   const calculatePadding = (data) => {
-    const min = Math.min(...data)
-    const max = Math.max(...data)
+    const validData = data.filter((value) => !isNaN(value) && value >= 0) // Only consider non-negative values
+    if (validData.length === 0) return { min: 0, max: 1 } // Default range for empty data
+    const min = Math.min(...validData)
+    const max = Math.max(...validData)
     const range = max - min
-    return { min: min - range * 0.1, max: max + range * 0.1 }
+    return { min: Math.max(0, min - range * 0.1), max: max + range * 0.1 } // Enforce min >= 0
   }
 
   const xPadding = calculatePadding(xData)
