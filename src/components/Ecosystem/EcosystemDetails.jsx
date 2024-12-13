@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import EcosystemTabs from "./EcosystemTabs"
 import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
+import EcosystemProductComparison from "./EcosystemProductComparison"
 
 function EcosystemDetails({ ecosystem }) {
   const [currentTab, setCurrentTab] = useState("overview")
@@ -15,8 +16,6 @@ function EcosystemDetails({ ecosystem }) {
     { title: "Active Investors", id: "activeInvestors" },
     { title: "Product Comparison", id: "productComparison" },
     { title: "Policy Making Tips", id: "policyMakingTips" },
-    { title: "News", id: "news" },
-    { title: "Routes", id: "routes" },
   ]
 
   return (
@@ -42,13 +41,11 @@ function EcosystemDetails({ ecosystem }) {
           <div>Active Investors Content Goes Here</div>
         )}
         {currentTab === "productComparison" && (
-          <div>Product Comparison Content Goes Here</div>
+          <EcosystemProductComparison companies={ecosystem.companies} />
         )}
         {currentTab === "policyMakingTips" && (
           <div>Policy Making Tips Content Goes Here</div>
         )}
-        {currentTab === "news" && <div>News Content Goes Here</div>}
-        {currentTab === "routes" && <div>Routes Content Goes Here</div>}
       </div>
     </div>
   )

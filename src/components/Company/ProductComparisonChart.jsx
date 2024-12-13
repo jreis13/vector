@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react"
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -8,7 +9,6 @@ import {
   Title,
   Tooltip,
 } from "chart.js"
-import { useEffect, useState } from "react"
 import { Scatter } from "react-chartjs-2"
 
 ChartJS.register(
@@ -162,16 +162,48 @@ function ProductComparisonChart({ comparison }) {
   }
 
   return (
-    <div
-      className="product-comparison-scatter-chart"
-      style={{
-        height: "100%",
-        position: "relative",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
-      <div style={{ position: "relative", flex: 1 }}>
+    <div>
+      <div className="mb-4 flex justify-between">
+        <div>
+          <label htmlFor="x-attribute" className="mr-2">
+            X-Axis:
+          </label>
+          <select
+            id="x-attribute"
+            value={xAttribute}
+            onChange={(e) => setXAttribute(e.target.value)}
+          >
+            {numericAttributes.map((attr, index) => (
+              <option key={index} value={attr}>
+                {capitalize(attr)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="y-attribute" className="mr-2">
+            Y-Axis:
+          </label>
+          <select
+            id="y-attribute"
+            value={yAttribute}
+            onChange={(e) => setYAttribute(e.target.value)}
+          >
+            {numericAttributes.map((attr, index) => (
+              <option key={index} value={attr}>
+                {capitalize(attr)}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div
+        className="product-comparison-scatter-chart"
+        style={{
+          height: "500px",
+          position: "relative",
+        }}
+      >
         {xAttribute && yAttribute && (
           <Scatter data={generateChartData()} options={chartOptions} />
         )}
