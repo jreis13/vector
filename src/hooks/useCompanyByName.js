@@ -14,8 +14,6 @@ const useCompanyByName = (ecosystemName, companyName) => {
         return
       }
 
-      console.log("Fetching company details:", { ecosystemName, companyName })
-
       setLoading(true)
       setError(null)
 

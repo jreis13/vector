@@ -34,14 +34,12 @@ export default function EcosystemPage({ params }) {
 
   useEffect(() => {
     async function fetchEcosystem() {
-      console.log("Fetching ecosystem for name:", ecosystemName)
       try {
         const response = await fetch(`/api/ecosystems/${ecosystemName}`)
         if (!response.ok) {
           throw new Error("Failed to fetch ecosystem data")
         }
         const data = await response.json()
-        console.log("Fetched ecosystem data:", data)
         setEcosystem(data)
       } catch (err) {
         console.error("Error fetching ecosystem:", err.message)

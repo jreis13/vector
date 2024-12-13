@@ -36,7 +36,6 @@ export default async function handler(req, res) {
     try {
       const userId = await getAuth0UserIdByEmail(session.customer_email)
       await updateUserMetadata(userId, { subscribed: true })
-      console.log("User metadata updated successfully for:", userId)
     } catch (error) {
       console.error("Error updating Auth0 metadata:", error.message)
       return res.status(500).send("Failed to update user metadata.")
