@@ -22,7 +22,7 @@ function PublicEcosystemCard({ ecosystem }) {
       </div>
       <div className="mt-4 flex gap-4">
         <button
-          className="rounded-lg bg-blue-500 px-4 py-2 font-bold text-white shadow-md"
+          className="rounded-lg bg-blue-500 px-4 py-2 font-bold text-[#e8e8e8] shadow-md"
           onClick={handlePurchasePDF}
         >
           Purchase PDF

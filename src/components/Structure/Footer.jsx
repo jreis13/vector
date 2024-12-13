@@ -12,7 +12,7 @@ function Footer() {
           <div className="flex">
             <Logo />
           </div>
-          <span className="text-white md:ml-4">
+          <span className="text-[#e8e8e8] md:ml-4">
             © 2024 <a href="#">Exponential Vector S.R.O</a>. All Rights
             Reserved.
           </span>
