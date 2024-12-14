@@ -4,6 +4,8 @@
   text-rendering: optimizeLegibility;
 
   backface-visibility: hidden;
+
+  caret-color: transparent;
 }
 
 *,
