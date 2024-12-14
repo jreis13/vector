@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { categoriesFilters } from "src/common/data/categoriesData"
 import EcosystemCard from "./EcosystemCard"
+import Filter from "./Filter"
 import PublicEcosystemCard from "./PublicEcosystemCard"
 
 export default function EcosystemsPage() {
@@ -9,6 +11,8 @@ export default function EcosystemsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState([])
 
   useEffect(() => {
     async function fetchUser() {
@@ -31,6 +35,7 @@ export default function EcosystemsPage() {
         }
         const ecosystemsData = await response.json()
         setData(ecosystemsData)
+        setFilteredData(ecosystemsData)
       } catch (err) {
         setError(err.message)
       } finally {
@@ -41,6 +46,29 @@ export default function EcosystemsPage() {
     fetchUser()
     fetchEcosystems()
   }, [])
+
+  useEffect(() => {
+    if (selectedCategories.length > 0) {
+      const filtered = data.filter(
+        (ecosystem) =>
+          ecosystem.categories &&
+          ecosystem.categories.some((category) =>
+            selectedCategories.includes(category.name.toLowerCase())
+          )
+      )
+      setFilteredData(filtered)
+    } else {
+      setFilteredData(data)
+    }
+  }, [selectedCategories, data])
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategories((prevSelected) =>
+      prevSelected.includes(category)
+        ? prevSelected.filter((cat) => cat !== category)
+        : [...prevSelected, category]
+    )
+  }
 
   if (loading) {
     return (
@@ -64,18 +92,24 @@ export default function EcosystemsPage() {
       className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16"
     >
       <div>
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold">Ecosystems</h2>
+        <div className="flex justify-between">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold">Ecosystems</h2>
+          </div>
+          <Filter
+            categories={categoriesFilters}
+            selectedCategories={selectedCategories}
+            onChange={handleCategoryChange}
+          />
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {data &&
-            data.map((ecosystem) =>
-              user ? (
-                <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-              ) : (
-                <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-              )
-            )}
+          {filteredData.map((ecosystem) =>
+            user ? (
+              <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+            ) : (
+              <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+            )
+          )}
         </div>
       </div>
     </div>
