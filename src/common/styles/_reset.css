@@ -6,6 +6,9 @@
   backface-visibility: hidden;
 
   caret-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 *,
