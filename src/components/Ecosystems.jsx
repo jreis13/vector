@@ -1,8 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import EcosystemCard from "./EcosystemCard"
 import PublicEcosystemCard from "./PublicEcosystemCard"
-import { useState, useEffect } from "react"
 
 export default function EcosystemsPage() {
   const [user, setUser] = useState(null)

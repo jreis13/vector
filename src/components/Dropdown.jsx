@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Dropdown({ attributes, selectedValue, onChange }) {
   const [isOpen, setIsOpen] = useState(false)

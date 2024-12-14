@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import EcosystemLayout from "src/layouts/EcosystemLayout"
 
 export default function EcosystemPage({ params }) {

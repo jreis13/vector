@@ -1,7 +1,5 @@
 "use client"
 
-import React from "react"
-
 const EcosystemTabs = ({ sections, currentTab, setCurrentTab }) => {
   return (
     <div className="mb-4 mt-8 flex items-center justify-center">

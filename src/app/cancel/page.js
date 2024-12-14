@@ -1,7 +1,7 @@
 import "../../common/styles/_reset.css"
 
-import SubscriptionLayout from "src/layouts/SubscriptionLayout"
 import CancelContent from "src/components/Subscription/CancelContent"
+import SubscriptionLayout from "src/layouts/SubscriptionLayout"
 
 export default function CancelPage() {
   return (

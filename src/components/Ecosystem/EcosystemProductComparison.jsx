@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
-import EcosystemProductTable from "./EcosystemProductTable"
-import EcosystemProductChart from "./EcosystemProductChart"
+import { useEffect, useState } from "react"
 import Dropdown from "../Dropdown"
+import EcosystemProductChart from "./EcosystemProductChart"
+import EcosystemProductTable from "./EcosystemProductTable"
 
 export default function EcosystemProductComparison({ companies }) {
   const [xAttribute, setXAttribute] = useState("")

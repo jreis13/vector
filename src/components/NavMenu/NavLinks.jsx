@@ -1,8 +1,8 @@
 "use client"
 
 import classNames from "classnames"
-import Link from "../Link"
 import { usePathname } from "next/navigation"
+import Link from "../Link"
 
 function NavLinks({ paths, isDesktop }) {
   const pathname = usePathname()

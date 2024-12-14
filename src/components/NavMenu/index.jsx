@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { useUser } from "@auth0/nextjs-auth0/client"
+import { useEffect, useState } from "react"
 
 import PATHS from "src/common/data/navigationData"
 import MenuClose from "./MenuClose"

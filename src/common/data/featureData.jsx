@@ -1,10 +1,10 @@
-import growthChartIcon from "/public/icons/growthChartIcon.svg"
 import customizeChartIcon from "/public/icons/customizeChartIcon.svg"
-import updatedPlatformIcon from "/public/icons/updatedPlatformIcon.svg"
-import textIcon from "/public/icons/textIcon.svg"
-import trashIcon from "/public/icons/trashIcon.svg"
 import customizeIcon from "/public/icons/customizeIcon.svg"
 import goalsIcon from "/public/icons/goalsIcon.svg"
+import growthChartIcon from "/public/icons/growthChartIcon.svg"
+import textIcon from "/public/icons/textIcon.svg"
+import trashIcon from "/public/icons/trashIcon.svg"
+import updatedPlatformIcon from "/public/icons/updatedPlatformIcon.svg"
 import offeringIcon from "/public/icons/workIcon.svg"
 
 export const questionFeatures = [

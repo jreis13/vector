@@ -4,9 +4,8 @@ import Image from "next/image"
 
 import { useEffect, useState } from "react"
 
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons"
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 
 function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")

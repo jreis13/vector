@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react"
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -9,6 +8,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js"
+import { useEffect, useState } from "react"
 import { Scatter } from "react-chartjs-2"
 
 ChartJS.register(

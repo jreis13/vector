@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState } from "react"
-import EcosystemTabs from "./EcosystemTabs"
+import { useState } from "react"
 import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
 import EcosystemProductComparison from "./EcosystemProductComparison"
+import EcosystemTabs from "./EcosystemTabs"
 
 function EcosystemDetails({ ecosystem }) {
   const [currentTab, setCurrentTab] = useState("overview")

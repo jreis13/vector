@@ -1,5 +1,5 @@
-import SectionWithImage from "./SectionWithImage"
 import FeatureGrid from "./FeatureGrid"
+import SectionWithImage from "./SectionWithImage"
 
 function CardList({
   title,

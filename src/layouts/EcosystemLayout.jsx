@@ -1,10 +1,8 @@
 "use client"
 
-import React from "react"
-
+import EcosystemDetails from "src/components/Ecosystem/EcosystemDetails"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
-import EcosystemDetails from "src/components/Ecosystem/EcosystemDetails"
 
 function EcosystemLayout({ ecosystem }) {
   return (
