@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { categoriesFilters } from "src/common/data/categoriesData"
 import EcosystemCard from "./EcosystemCard"
 import Filter from "./Filter"
+import Overlay from "./Overlay"
 import PublicEcosystemCard from "./PublicEcosystemCard"
 
 export default function EcosystemsPage() {
@@ -13,6 +14,7 @@ export default function EcosystemsPage() {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
+  const [showOverlay, setShowOverlay] = useState(true)
 
   useEffect(() => {
     async function fetchUser() {
@@ -91,27 +93,35 @@ export default function EcosystemsPage() {
       id="Ecosystems"
       className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16"
     >
-      <div>
-        <div className="flex justify-between">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold">Ecosystems</h2>
+      {showOverlay && <Overlay onDismiss={() => setShowOverlay(false)} />}
+      {!showOverlay && (
+        <>
+          <div>
+            <div className="flex justify-between">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold">Ecosystems</h2>
+              </div>
+              <Filter
+                categories={categoriesFilters}
+                selectedCategories={selectedCategories}
+                onChange={handleCategoryChange}
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredData.map((ecosystem) =>
+                user ? (
+                  <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+                ) : (
+                  <PublicEcosystemCard
+                    key={ecosystem.id}
+                    ecosystem={ecosystem}
+                  />
+                )
+              )}
+            </div>
           </div>
-          <Filter
-            categories={categoriesFilters}
-            selectedCategories={selectedCategories}
-            onChange={handleCategoryChange}
-          />
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredData.map((ecosystem) =>
-            user ? (
-              <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-            ) : (
-              <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-            )
-          )}
-        </div>
-      </div>
+        </>
+      )}
     </div>
   )
 }
