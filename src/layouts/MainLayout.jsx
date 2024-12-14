@@ -1,18 +1,18 @@
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
-  questionFeatures,
-  customersFeatures,
   benefitsFeatures,
-  offeringFeatures,
+  customersFeatures,
   goalsFeatures,
+  offeringFeatures,
+  questionFeatures,
 } from "src/common/data/featureData"
 
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
+import MainHero from "src/components/MainHero"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
-import MainHero from "src/components/MainHero"
 
 function splitDescription(feature) {
   return {
@@ -41,10 +41,10 @@ function MainLayout() {
           </div>
         </MainHero>
         <div className="flex flex-col items-center py-8 lg:px-16">
-          <div id="benefits" className="py-4">
+          <div id="questions" className="py-4">
             <CardList features={questionFeatures.map(splitDescription)} />
           </div>
-          <div className="flex w-full flex-col items-center px-6 py-8 text-center lg:px-16 lg:py-12">
+          <div className="flex w-full flex-col items-center px-6 text-center lg:px-16">
             <h2>Same here,</h2>
             <h2>
               Join us in our mission to track Europe’s emerging business
