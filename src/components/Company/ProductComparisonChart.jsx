@@ -77,7 +77,9 @@ function ProductComparisonChart({ comparison }) {
       if (!sampleProduct) return ""
 
       const value = sampleProduct[attribute]
-      const unitMatch = value.match(/[^\d\s]+$/)
+      const valueAsString =
+        typeof value === "string" ? value : value?.toString() || ""
+      const unitMatch = valueAsString.match(/[^\d\s]+$/)
       return unitMatch ? unitMatch[0] : ""
     }
 
