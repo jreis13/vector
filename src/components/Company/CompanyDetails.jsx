@@ -2,7 +2,6 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import CompanyCardsClickable from "./CompanyCardsClickable"
 import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
-import CompanyProductComparison from "./CompanyProductComparison"
 import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
 
@@ -71,10 +70,6 @@ function CompanyDetails({ company, ecosystemName }) {
             title={company.financials.title}
             data={company.financials.data}
           />
-        )}
-
-        {company.comparison && (
-          <CompanyProductComparison comparison={company.comparison} />
         )}
       </div>
     </div>
