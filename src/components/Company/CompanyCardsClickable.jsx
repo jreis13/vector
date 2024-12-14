@@ -34,6 +34,7 @@ function CompanyCardsClickable({ title, data }) {
                 <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-75 text-[#e8e8e8] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
                   <Link blank to={item.link}>
                     <FontAwesomeIcon
+                      aria-hidden="true"
                       icon={
                         title === "Founding Team"
                           ? faLinkedin

@@ -75,6 +75,7 @@ function CompanyCardsNonClickable({ title, data }) {
               <div className="mb-4 flex h-24 w-24 items-center justify-center">
                 {item.icon && (
                   <FontAwesomeIcon
+                    aria-hidden="true"
                     icon={iconMapping[item.icon]}
                     className="text-4xl text-[#7032ff]"
                   />

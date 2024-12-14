@@ -39,7 +39,8 @@ export default function SubscribeContent() {
         </p>
         <div className="mt-6">
           <Button onClick={handleSubscribe}>
-            Subscribe with <FontAwesomeIcon icon={faCcStripe} />
+            Subscribe with{" "}
+            <FontAwesomeIcon aria-hidden="true" icon={faCcStripe} />
           </Button>
         </div>
       </div>
