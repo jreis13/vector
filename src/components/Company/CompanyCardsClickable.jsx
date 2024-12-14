@@ -22,11 +22,7 @@ function CompanyCardsClickable({ title, data }) {
                   alt={`${item.name} photo`}
                   width={100}
                   height={100}
-                  className={
-                    title === "Founding Team"
-                      ? "rounded-full"
-                      : "object-contain"
-                  }
+                  className={title === "Founding Team" ? "" : "object-contain"}
                 />
               </div>
               <div className="text-center">
