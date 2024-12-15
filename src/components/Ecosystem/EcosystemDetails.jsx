@@ -7,7 +7,7 @@ import EcosystemMap from "./EcosystemMap"
 import EcosystemProductComparison from "./EcosystemProductComparison"
 import EcosystemTabs from "./EcosystemTabs"
 
-function EcosystemDetails({ ecosystem }) {
+export default function EcosystemDetails({ ecosystem }) {
   const [currentTab, setCurrentTab] = useState("overview")
 
   const sections = [
@@ -51,5 +51,3 @@ function EcosystemDetails({ ecosystem }) {
     </div>
   )
 }
-
-export default EcosystemDetails

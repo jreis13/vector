@@ -5,7 +5,7 @@ import Image from "next/image"
 import placeholder from "public/icons/avatarIcon.svg"
 import Link from "../Link"
 
-function CompanyCardsClickable({ title, data }) {
+export default function CompanyCardsClickable({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">{title}</h2>
@@ -51,5 +51,3 @@ function CompanyCardsClickable({ title, data }) {
     </div>
   )
 }
-
-export default CompanyCardsClickable

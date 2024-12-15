@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-function CompetitorCard({ competitor }) {
+export default function CompetitorCard({ competitor }) {
   return (
     <div className="group relative flex flex-col items-center p-4">
       <div className="relative mb-4 h-24 w-24">
@@ -34,5 +34,3 @@ function CompetitorCard({ competitor }) {
     </div>
   )
 }
-
-export default CompetitorCard

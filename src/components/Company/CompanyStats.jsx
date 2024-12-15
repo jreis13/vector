@@ -1,4 +1,4 @@
-function CompanyStats({ stats }) {
+export default function CompanyStats({ stats }) {
   return (
     <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
       {stats &&
@@ -10,5 +10,3 @@ function CompanyStats({ stats }) {
     </div>
   )
 }
-
-export default CompanyStats

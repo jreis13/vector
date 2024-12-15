@@ -1,4 +1,4 @@
-function CompanyText({ title, data }) {
+export default function CompanyText({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">{title}</h2>
@@ -16,5 +16,3 @@ function CompanyText({ title, data }) {
     </div>
   )
 }
-
-export default CompanyText

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 
-function EcosystemCard({ ecosystem }) {
+export default function EcosystemCard({ ecosystem }) {
   const router = useRouter()
 
   const handleCardClick = () => {
@@ -48,5 +48,3 @@ function EcosystemCard({ ecosystem }) {
     </div>
   )
 }
-
-export default EcosystemCard

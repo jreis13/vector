@@ -8,7 +8,7 @@ import MenuClose from "./MenuClose"
 import MenuOpen from "./MenuOpen"
 import NavLinks from "./NavLinks"
 
-function NavMenu() {
+export default function NavMenu() {
   const { user } = useUser()
   const [isDesktop, setIsDesktop] = useState(false)
   const [toggle, setToggle] = useState(false)
@@ -53,5 +53,3 @@ function NavMenu() {
     </div>
   )
 }
-
-export default NavMenu

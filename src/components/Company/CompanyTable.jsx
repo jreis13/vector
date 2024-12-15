@@ -1,4 +1,9 @@
-function CompanyTable({ title, columns = [], rows = [], scalability }) {
+export default function CompanyTable({
+  title,
+  columns = [],
+  rows = [],
+  scalability,
+}) {
   const numColumns = columns.length
   const maxRows = Math.max(...rows.map((row) => row.length), 0)
 
@@ -50,5 +55,3 @@ function CompanyTable({ title, columns = [], rows = [], scalability }) {
     </div>
   )
 }
-
-export default CompanyTable

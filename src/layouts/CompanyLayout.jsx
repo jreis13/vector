@@ -2,7 +2,7 @@ import CompanyDetails from "src/components/Company/CompanyDetails"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
-function CompanyLayout({ company, ecosystemName }) {
+export default function CompanyLayout({ company, ecosystemName }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -17,5 +17,3 @@ function CompanyLayout({ company, ecosystemName }) {
     </div>
   )
 }
-
-export default CompanyLayout

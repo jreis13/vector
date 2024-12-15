@@ -2,7 +2,7 @@ import Companies from "src/components/Companies"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
-function CompaniesLayout() {
+export default function CompaniesLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -17,5 +17,3 @@ function CompaniesLayout() {
     </div>
   )
 }
-
-export default CompaniesLayout

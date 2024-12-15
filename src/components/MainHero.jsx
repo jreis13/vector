@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import Button from "./Button"
 
-function MainHero({ children }) {
+export default function MainHero({ children }) {
   return (
     <div className="main-hero relative flex flex-col items-center justify-center overflow-hidden px-6 lg:pt-24">
       <div className="absolute inset-0 z-[-1] h-full w-full">
@@ -29,5 +29,3 @@ function MainHero({ children }) {
     </div>
   )
 }
-
-export default MainHero

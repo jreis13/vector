@@ -34,7 +34,7 @@ function splitDescription(feature) {
   }
 }
 
-function MainLayout() {
+export default function MainLayout() {
   const [showDisclaimer, setShowDisclaimer] = useState(true)
 
   return (
@@ -117,5 +117,3 @@ function MainLayout() {
     </div>
   )
 }
-
-export default MainLayout

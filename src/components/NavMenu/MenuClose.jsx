@@ -1,6 +1,6 @@
 "use client"
 
-function MenuClose() {
+export default function MenuClose() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,5 +24,3 @@ function MenuClose() {
     </svg>
   )
 }
-
-export default MenuClose

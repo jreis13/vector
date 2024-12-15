@@ -13,7 +13,7 @@ function truncateText(text, wordLimit) {
   return text
 }
 
-function CompanyCard({ company, ecosystemName }) {
+export default function CompanyCard({ company, ecosystemName }) {
   const router = useRouter()
   const descriptionLimit = 20
 
@@ -62,5 +62,3 @@ function CompanyCard({ company, ecosystemName }) {
     </div>
   )
 }
-
-export default CompanyCard

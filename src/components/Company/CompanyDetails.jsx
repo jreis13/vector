@@ -5,7 +5,7 @@ import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
 import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
 
-function CompanyDetails({ company, ecosystemName }) {
+export default function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
 
   if (router.isFallback || !company) {
@@ -75,5 +75,3 @@ function CompanyDetails({ company, ecosystemName }) {
     </div>
   )
 }
-
-export default CompanyDetails

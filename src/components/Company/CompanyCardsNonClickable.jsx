@@ -48,7 +48,7 @@ const iconMapping = {
   faMoneyCheckAlt,
 }
 
-function CompanyCardsNonClickable({ title, data }) {
+export default function CompanyCardsNonClickable({ title, data }) {
   const renderItemContent = (item) => {
     return Object.entries(item)
       .filter(
@@ -99,5 +99,3 @@ function CompanyCardsNonClickable({ title, data }) {
     </div>
   )
 }
-
-export default CompanyCardsNonClickable

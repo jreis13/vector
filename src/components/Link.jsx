@@ -1,6 +1,6 @@
 "use client"
 
-function Link({ blank, children, to }) {
+export default function Link({ blank, children, to }) {
   const attrs = {}
   if (blank) {
     attrs.target = "_blank"
@@ -13,5 +13,3 @@ function Link({ blank, children, to }) {
     </a>
   )
 }
-
-export default Link

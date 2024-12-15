@@ -1,6 +1,6 @@
 "use client"
 
-function Button({ onClick, href, children }) {
+export default function Button({ onClick, href, children }) {
   if (onClick) {
     return (
       <button
@@ -24,5 +24,3 @@ function Button({ onClick, href, children }) {
     </a>
   )
 }
-
-export default Button

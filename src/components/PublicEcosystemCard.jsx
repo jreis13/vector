@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 
-function PublicEcosystemCard({ ecosystem }) {
+export default function PublicEcosystemCard({ ecosystem }) {
   const router = useRouter()
 
   const handlePurchasePDF = () => {
@@ -47,5 +47,3 @@ function PublicEcosystemCard({ ecosystem }) {
     </div>
   )
 }
-
-export default PublicEcosystemCard

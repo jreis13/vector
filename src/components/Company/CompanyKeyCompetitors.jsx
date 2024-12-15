@@ -1,6 +1,6 @@
 import CompetitorCard from "./CompetitorCard"
 
-function CompanyKeyCompetitors({ keyCompetitors }) {
+export default function CompanyKeyCompetitors({ keyCompetitors }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">Key Competitors</h2>
@@ -13,5 +13,3 @@ function CompanyKeyCompetitors({ keyCompetitors }) {
     </div>
   )
 }
-
-export default CompanyKeyCompetitors

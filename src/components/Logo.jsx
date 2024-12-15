@@ -5,7 +5,7 @@ import expVectorLogo from "public/expVectorLogo.png"
 
 import { useEffect, useState } from "react"
 
-function Logo() {
+export default function Logo() {
   const [isDesktop, setIsDesktop] = useState(false)
 
   const updateMedia = () => {
@@ -44,5 +44,3 @@ function Logo() {
     </a>
   )
 }
-
-export default Logo

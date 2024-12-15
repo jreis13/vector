@@ -1,7 +1,7 @@
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
-function SubscriptionLayout({ children }) {
+export default function SubscriptionLayout({ children }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -14,5 +14,3 @@ function SubscriptionLayout({ children }) {
     </div>
   )
 }
-
-export default SubscriptionLayout

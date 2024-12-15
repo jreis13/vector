@@ -1,4 +1,4 @@
-function X() {
+export default function X() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,5 +16,3 @@ function X() {
     </svg>
   )
 }
-
-export default X

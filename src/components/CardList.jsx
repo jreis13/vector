@@ -1,7 +1,7 @@
 import FeatureGrid from "./FeatureGrid"
 import SectionWithImage from "./SectionWithImage"
 
-function CardList({
+export default function CardList({
   title,
   features,
   sectionImage,
@@ -28,5 +28,3 @@ function CardList({
     />
   )
 }
-
-export default CardList

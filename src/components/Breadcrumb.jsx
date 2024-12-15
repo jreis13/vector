@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import arrowDown from "/public/icons/arrowDownIcon.svg"
 import arrowUp from "/public/icons/arrowUpIcon.svg"
 
-function Breadcrumb({ sections }) {
+export default function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")
   const [isVisible, setIsVisible] = useState(true)
 
@@ -118,5 +118,3 @@ function Breadcrumb({ sections }) {
     </div>
   )
 }
-
-export default Breadcrumb

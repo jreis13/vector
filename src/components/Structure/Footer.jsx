@@ -4,7 +4,7 @@ import socialPATHS from "src/common/data/socialsData"
 import Logo from "../Logo"
 import NavLinks from "../NavMenu/NavLinks"
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="bg-[#34333d] px-16 py-4 md:py-6">
       <div className="flex items-center justify-between">
@@ -25,5 +25,3 @@ function Footer() {
     </footer>
   )
 }
-
-export default Footer

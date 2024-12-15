@@ -4,7 +4,7 @@ import EcosystemDetails from "src/components/Ecosystem/EcosystemDetails"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
-function EcosystemLayout({ ecosystem }) {
+export default function EcosystemLayout({ ecosystem }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -21,5 +21,3 @@ function EcosystemLayout({ ecosystem }) {
     </div>
   )
 }
-
-export default EcosystemLayout

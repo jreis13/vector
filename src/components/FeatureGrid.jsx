@@ -1,7 +1,7 @@
 import Image from "next/image"
 import expVectorAvatar from "public/expVectorAvatar.png"
 
-function FeatureGrid({
+export default function FeatureGrid({
   title,
   features,
   imageOnLeft,
@@ -75,5 +75,3 @@ function FeatureGrid({
     </div>
   )
 }
-
-export default FeatureGrid

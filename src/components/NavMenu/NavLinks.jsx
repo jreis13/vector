@@ -4,7 +4,7 @@ import classNames from "classnames"
 import { usePathname } from "next/navigation"
 import Link from "../Link"
 
-function NavLinks({ paths, isDesktop }) {
+export default function NavLinks({ paths, isDesktop }) {
   const pathname = usePathname()
 
   const normalizedPathname = pathname?.replace(/\/$/, "").toLowerCase()
@@ -41,5 +41,3 @@ function NavLinks({ paths, isDesktop }) {
     </nav>
   )
 }
-
-export default NavLinks

@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-function SectionWithImage({
+export default function SectionWithImage({
   title,
   sectionImage,
   features,
@@ -52,5 +52,3 @@ function SectionWithImage({
     </div>
   )
 }
-
-export default SectionWithImage
