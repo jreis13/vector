@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { categoriesFilters } from "src/common/data/categoriesData"
 import EcosystemCard from "./EcosystemCard"
-import Filter from "./Filter"
 import Overlay from "./Overlay"
 import PublicEcosystemCard from "./PublicEcosystemCard"
 
@@ -101,11 +99,11 @@ export default function EcosystemsPage() {
               <div className="mb-8">
                 <h2 className="text-3xl font-bold">Ecosystems</h2>
               </div>
-              <Filter
+              {/* <Filter
                 categories={categoriesFilters}
                 selectedCategories={selectedCategories}
                 onChange={handleCategoryChange}
-              />
+              /> */}
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredData.map((ecosystem) =>

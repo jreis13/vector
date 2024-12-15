@@ -2,21 +2,8 @@
 
 import { useRouter } from "next/navigation"
 
-function truncateText(text, wordLimit) {
-  if (!text || typeof text !== "string") {
-    return ""
-  }
-
-  const words = text.split(" ")
-  if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(" ") + "..."
-  }
-  return text
-}
-
 function EcosystemCard({ ecosystem }) {
   const router = useRouter()
-  const descriptionLimit = 20
 
   const handleCardClick = () => {
     router.push(
@@ -26,29 +13,35 @@ function EcosystemCard({ ecosystem }) {
 
   return (
     <div
-      className="mb-6 flex h-full cursor-pointer flex-col justify-between rounded-lg border p-4 transition-all duration-300 hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
+      className="mb-6 flex flex-col cursor-pointer rounded-lg border overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:w-[600px] lg:h-auto"
       onClick={handleCardClick}
     >
-      <div>
-        <div className="mb-4 flex items-center">
-          <div>
-            <h3 className="text-xl font-bold">{ecosystem.name}</h3>
-          </div>
-        </div>
+      <div
+        className="h-[250px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${ecosystem.logo})`,
+        }}
+      ></div>
+      <div className="bg-[#e8e8e8] px-10 py-6 flex flex-col justify-between flex-grow">
         <div className="mb-4">
-          <p>{truncateText(ecosystem.summary, descriptionLimit)}</p>
+          <h3 className="text-2xl text-[#403f4c] font-bold mb-2">
+            {ecosystem.name}
+          </h3>
+          <p className="text-gray-700">{ecosystem.summary}</p>
         </div>
-      </div>
-      <div className="mt-4 flex flex-col justify-end">
         {ecosystem.mainStats && (
-          <div className="mb-4">
-            {ecosystem.mainStats &&
-              ecosystem.mainStats.map((stat, index) => (
-                <div key={index} className="flex justify-between py-1">
-                  <span>{stat.label}:</span>
-                  <span>{stat.value}</span>
-                </div>
-              ))}
+          <div className="text-gray-900">
+            {ecosystem.mainStats.map((stat, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 gap-x-4 py-1 items-center"
+              >
+                <span className="text-gray-600">{stat.label}:</span>
+                <span className="font-semibold text-gray-800 text-right">
+                  {stat.value}
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </div>
