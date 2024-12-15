@@ -3,6 +3,7 @@
 import { useState } from "react"
 import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
+import EcosystemMap from "./EcosystemMap"
 import EcosystemProductComparison from "./EcosystemProductComparison"
 import EcosystemTabs from "./EcosystemTabs"
 
@@ -35,7 +36,7 @@ function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "countryProfiles" && (
-          <div>Country Profiles Content Goes Here</div>
+          <EcosystemMap companies={ecosystem.companies} />
         )}
         {currentTab === "activeInvestors" && (
           <div>Active Investors Content Goes Here</div>
