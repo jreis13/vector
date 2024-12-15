@@ -15,24 +15,34 @@ function PublicEcosystemCard({ ecosystem }) {
   }
 
   return (
-    <div className="mb-6 flex h-full flex-col justify-between rounded-lg border p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-      <div>
-        <h3 className="text-xl font-bold">{ecosystem.name}</h3>
-        <p>{ecosystem.summary}</p>
-      </div>
-      <div className="mt-4 flex gap-4">
-        <button
-          className="rounded-lg bg-blue-500 px-4 py-2 font-bold text-[#e8e8e8] shadow-md"
-          onClick={handlePurchasePDF}
-        >
-          Purchase PDF
-        </button>
-        <button
-          className="flex-grow rounded-lg bg-[#7032ff] px-4 py-2 font-bold shadow-sm"
-          onClick={handleSubscribe}
-        >
-          Subscribe
-        </button>
+    <div className="mb-6 flex flex-col cursor-pointer rounded-lg border overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:w-[600px] lg:h-auto">
+      <div
+        className="h-[250px] bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${ecosystem.logo})`,
+        }}
+      ></div>
+      <div className="bg-[#e8e8e8] px-10 py-6 flex flex-col justify-between flex-grow">
+        <div className="mb-4">
+          <h3 className="text-2xl text-[#403f4c] font-bold mb-2">
+            {ecosystem.name}
+          </h3>
+          <p className="text-gray-700">{ecosystem.summary}</p>
+        </div>
+        <div className="flex gap-4">
+          <button
+            className="rounded-lg bg-blue-500 px-4 py-2 font-bold text-white shadow-md"
+            onClick={handlePurchasePDF}
+          >
+            Purchase PDF
+          </button>
+          <button
+            className="flex-grow rounded-lg bg-[#7032ff] px-4 py-2 font-bold text-white shadow-sm"
+            onClick={handleSubscribe}
+          >
+            Subscribe
+          </button>
+        </div>
       </div>
     </div>
   )
