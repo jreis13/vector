@@ -1,3 +1,7 @@
+"use client"
+
+import { useState } from "react"
+
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
   benefitsFeatures,
@@ -10,6 +14,7 @@ import {
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
+import Disclaimer from "src/components/Disclaimer"
 import MainHero from "src/components/MainHero"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
@@ -30,10 +35,15 @@ function splitDescription(feature) {
 }
 
 function MainLayout() {
+  const [showDisclaimer, setShowDisclaimer] = useState(true)
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
+      {showDisclaimer && (
+        <Disclaimer onDismiss={() => setShowDisclaimer(false)} />
+      )}
       <div className="flex flex-grow flex-col">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
