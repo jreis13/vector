@@ -13,23 +13,33 @@ function truncateText(text, wordLimit) {
   return text
 }
 
-export default function CompanyCard({ company, ecosystemName }) {
+export default function CompanyCard({
+  company,
+  ecosystemName,
+  isClickable = true,
+}) {
   const router = useRouter()
   const descriptionLimit = 20
 
   const normalizeName = (name) => name.replace(/\s+/g, "").toLowerCase()
 
   const handleCardClick = () => {
-    const normalizedEcosystemName = normalizeName(ecosystemName)
-    const normalizedCompanyName = normalizeName(company.name)
-    const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
-    window.open(url, "_blank")
+    if (isClickable) {
+      const normalizedEcosystemName = normalizeName(ecosystemName)
+      const normalizedCompanyName = normalizeName(company.name)
+      const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
+      window.open(url, "_blank")
+    }
   }
 
   return (
     <div
-      className="mb-6 flex h-full cursor-pointer flex-col justify-between rounded-lg border p-4 transition-all duration-300 hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
-      onClick={handleCardClick}
+      className={`mb-6 flex h-full flex-col justify-between rounded-lg border p-4 transition-all duration-300 ${
+        isClickable
+          ? "cursor-pointer hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
+          : ""
+      }`}
+      onClick={isClickable ? handleCardClick : undefined}
     >
       <div>
         <div className="mb-4 flex items-center">
