@@ -36,8 +36,8 @@ export default function CompanyCard({ company, ecosystemName }) {
           <Image
             src={company.logo}
             alt={`${company.name} logo`}
-            width={48}
-            height={48}
+            width={64}
+            height={64}
             className="mr-4"
           />
           <div>
@@ -54,7 +54,7 @@ export default function CompanyCard({ company, ecosystemName }) {
             company.mainStats.map((stat, index) => (
               <div key={index} className="flex justify-between py-1">
                 <span>{stat.label}:</span>
-                <span>{stat.value}</span>
+                <span className="text-right">{stat.value}</span>
               </div>
             ))}
         </div>
