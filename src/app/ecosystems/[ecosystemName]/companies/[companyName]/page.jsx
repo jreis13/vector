@@ -2,6 +2,7 @@
 
 import useCompanyByName from "src/hooks/useCompanyByName"
 import CompanyLayout from "src/layouts/CompanyLayout"
+import "../../../../../common/styles/_reset.css"
 
 export default function CompanyPage({ params }) {
   const { ecosystemName, companyName } = params
