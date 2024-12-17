@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import closeIcon from "public/icons/closeIcon.svg"
+import closeIconDark from "public/icons/closeIconDark.svg"
 import europeGeoUrl from "public/maps/europe.json"
 import { useEffect, useState } from "react"
 import Modal from "react-modal"
@@ -75,7 +75,7 @@ export default function EcosystemCountryProfiles({ companies }) {
                         outline: "none",
                       },
                       hover: {
-                        fill: countryHasCompanies ? "#7032ff" : "#D6D6DA",
+                        fill: countryHasCompanies ? "#330066" : "#D6D6DA",
                         stroke: "#e8e8e8",
                         outline: "none",
                       },
@@ -98,8 +98,8 @@ export default function EcosystemCountryProfiles({ companies }) {
         onRequestClose={closeModal}
         contentLabel="Country Details"
         shouldFocusAfterRender={false}
-        className="bg-white text-[#403f4c] p-8 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto overflow-y-auto relative"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+        className="bg-[#e8e8e8] text-[#403f4c] p-8 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto overflow-y-auto relative"
+        overlayClassName="fixed inset-0 bg-[#403f4c] bg-opacity-50 flex items-center justify-center"
       >
         {selectedCountry && (
           <div className="relative w-full h-full">
@@ -109,32 +109,32 @@ export default function EcosystemCountryProfiles({ companies }) {
               aria-label="Close Modal"
             >
               <Image
-                src={closeIcon}
+                src={closeIconDark}
                 alt="Close"
                 layout="responsive"
-                className="cursor-pointer"
+                className="cursor-pointer stroke-[#403f4c]"
               />
             </button>
             <div className="p-4">
-              <h2 className="text-3xl font-bold mb-6 text-center">
-                {selectedCountry}
-              </h2>
+              <h2 className="text-3xl font-bold mb-6">{selectedCountry}</h2>
               {countryCompanies.length > 0 ? (
-                <div>
+                <div className="flex flex-col gap-6">
                   {countryCompanies.map((company) => (
-                    <div key={company.id} className="mb-6 flex items-center">
+                    <div key={company.id} className="flex items-start gap-4">
                       <Image
                         src={company.logo}
                         alt={`${company.name} logo`}
                         height={64}
                         width={64}
-                        className="mr-6"
+                        className="shrink-0"
                       />
                       <div>
-                        <div className="text-xl font-semibold">
-                          {company.name}
+                        <div className="flex items-center">
+                          <h3 className="text-xl font-semibold">
+                            {company.name}
+                          </h3>
                         </div>
-                        <p className="text-gray-600">{company.summary}</p>
+                        <p className="text-gray-600 mt-1">{company.summary}</p>
                       </div>
                     </div>
                   ))}
