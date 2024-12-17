@@ -37,9 +37,7 @@ export default function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "countryProfiles" && (
-          <div className="flex gap-8 py-8">
-            <EcosystemCountryProfiles companies={ecosystem.companies} />
-          </div>
+          <EcosystemCountryProfiles companies={ecosystem.companies} />
         )}
         {currentTab === "activeInvestors" && (
           <EcosystemActiveInvestors companies={ecosystem.companies} />

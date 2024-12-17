@@ -1,111 +1,154 @@
 "use client"
 
 import Image from "next/image"
-
-import arrowEndDown from "public/icons/arrowEndDown.svg"
-import arrowEndUp from "public/icons/arrowEndUp.svg"
-import europeIcon from "public/icons/europeIcon.svg"
-
-import { useState } from "react"
+import closeIcon from "public/icons/closeIcon.svg"
+import europeGeoUrl from "public/maps/europe.json"
+import { useEffect, useState } from "react"
+import Modal from "react-modal"
+import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 
 export default function EcosystemCountryProfiles({ companies }) {
-  const [expandedCountries, setExpandedCountries] = useState({})
+  const [selectedCountry, setSelectedCountry] = useState(null)
+  const [countryCompanies, setCountryCompanies] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const toggleCountry = (country) => {
-    setExpandedCountries((prev) => ({
-      ...prev,
-      [country]: !prev[country],
-    }))
+  useEffect(() => {
+    const appRoot = document.getElementById("__next")
+    if (appRoot) {
+      Modal.setAppElement("#__next")
+    }
+  }, [])
+
+  const groupedCompaniesByCountry = companies.reduce((acc, company) => {
+    const country = company.country.toLowerCase().trim()
+    if (!acc[country]) {
+      acc[country] = []
+    }
+    acc[country].push(company)
+    return acc
+  }, {})
+
+  const openModal = (country) => {
+    const normalizedCountry = country.toLowerCase().trim()
+    if (groupedCompaniesByCountry[normalizedCountry]) {
+      setCountryCompanies(groupedCompaniesByCountry[normalizedCountry])
+      setSelectedCountry(country)
+      setIsModalOpen(true)
+    }
   }
 
-  const countryImages = {}
+  const closeModal = () => {
+    setSelectedCountry(null)
+    setCountryCompanies([])
+    setIsModalOpen(false)
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }
 
-  companies.forEach((company) => {
-    const { country, countryImage } = company
-    if (country && countryImage) {
-      if (!countryImages[country]) {
-        countryImages[country] = countryImage
-      }
-    }
-  })
-
-  const groupedCompaniesByCountry = Object.entries(
-    companies.reduce((acc, company) => {
-      const { country } = company
-      if (country === "Japan" || country === "China") return acc
-      if (!acc[country]) {
-        acc[country] = []
-      }
-      acc[country].push(company)
-      return acc
-    }, {})
-  ).sort((a, b) => b[1].length - a[1].length)
+  const hasCompanies = (countryName) => {
+    return groupedCompaniesByCountry[countryName.toLowerCase().trim()]
+  }
 
   return (
-    <div>
-      <div className="flex items-center mb-8 gap-4">
-        <h1 className="text-4xl font-bold">Europe</h1>
-        <Image
-          src={europeIcon}
-          alt="Europe map"
-          width={60}
-          height={60}
-          className="mr-4"
-        />
-      </div>
-      {groupedCompaniesByCountry.map(([country, countryCompanies]) => (
-        <div key={country} className="mb-8">
-          <div
-            className="flex items-center justify-between cursor-pointer mb-4 gap-4 p-4 border rounded-lg hover:shadow-md transition-all duration-300"
-            onClick={() => toggleCountry(country)}
-          >
-            <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-bold">{country}</h2>
-              {countryImages[country] && (
-                <Image
-                  src={countryImages[country]}
-                  alt={`${country} map`}
-                  width={60}
-                  height={60}
-                  className="rounded-md"
-                />
-              )}
-            </div>
-            <Image
-              src={expandedCountries[country] ? arrowEndUp : arrowEndDown}
-              alt="Toggle Arrow"
-              width={20}
-              height={20}
-              className="transition-transform duration-300"
-            />
-          </div>
+    <div className="flex min-h-screen">
+      <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
+        <ComposableMap
+          projection="geoAzimuthalEqualArea"
+          projectionConfig={{ rotate: [-10, -52, 0], scale: 800 }}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <Geographies geography={europeGeoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => {
+                const country = geo.properties.name
+                const countryHasCompanies = hasCompanies(country)
 
-          <div
-            className={`overflow-hidden transition-all duration-300 ${
-              expandedCountries[country] ? "max-h-screen" : "max-h-0"
-            }`}
-          >
-            <div className="space-y-6 px-4">
-              {countryCompanies.map((company) => (
-                <div key={company.id} className="flex items-start space-x-4">
-                  <Image
-                    src={company.logo}
-                    alt={`${company.name} logo`}
-                    width={60}
-                    height={60}
-                    className="rounded-md object-cover"
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    onClick={() => countryHasCompanies && openModal(country)}
+                    className="cursor-pointer"
+                    style={{
+                      default: {
+                        fill: countryHasCompanies ? "#7032ff" : "#D6D6DA",
+                        stroke: "#e8e8e8",
+                        outline: "none",
+                      },
+                      hover: {
+                        fill: countryHasCompanies ? "#7032ff" : "#D6D6DA",
+                        stroke: "#e8e8e8",
+                        outline: "none",
+                      },
+                      pressed: {
+                        fill: countryHasCompanies ? "#7032ff" : "#D6D6DA",
+                        stroke: "#e8e8e8",
+                        outline: "none",
+                      },
+                    }}
                   />
-                  <div>
-                    <div className="text-lg font-semibold">{company.name}</div>
-                    <p className="text-gray-300 text-sm mt-1">
-                      {company.summary}
-                    </p>
-                  </div>
+                )
+              })
+            }
+          </Geographies>
+        </ComposableMap>
+      </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Country Details"
+        shouldFocusAfterRender={false}
+        className="bg-white text-[#403f4c] p-8 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto overflow-y-auto relative"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      >
+        {selectedCountry && (
+          <div className="relative w-full h-full">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 w-8 h-8"
+              aria-label="Close Modal"
+            >
+              <Image
+                src={closeIcon}
+                alt="Close"
+                layout="responsive"
+                className="cursor-pointer"
+              />
+            </button>
+            <div className="p-4">
+              <h2 className="text-3xl font-bold mb-6 text-center">
+                {selectedCountry}
+              </h2>
+              {countryCompanies.length > 0 ? (
+                <div>
+                  {countryCompanies.map((company) => (
+                    <div key={company.id} className="mb-6 flex items-center">
+                      <Image
+                        src={company.logo}
+                        alt={`${company.name} logo`}
+                        height={64}
+                        width={64}
+                        className="mr-6"
+                      />
+                      <div>
+                        <div className="text-xl font-semibold">
+                          {company.name}
+                        </div>
+                        <p className="text-gray-600">{company.summary}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              <div className="mt-8">
-                <h3 className="text-xl font-bold mb-2">Final Considerations</h3>
-                <p className="text-gray-300 text-sm">
+              ) : (
+                <p className="text-center text-gray-500">
+                  No companies available for this country.
+                </p>
+              )}
+              <div className="mt-10">
+                <h3 className="text-2xl font-bold mb-4">
+                  Final Considerations
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
                   This country has shown significant innovation and development
                   in its aerospace ecosystem, highlighting key companies and
                   opportunities for sustainable growth and advancements in
@@ -114,8 +157,8 @@ export default function EcosystemCountryProfiles({ companies }) {
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        )}
+      </Modal>
     </div>
   )
 }
