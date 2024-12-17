@@ -67,7 +67,9 @@ export default function EcosystemCountryProfiles({ companies }) {
                     key={geo.rsmKey}
                     geography={geo}
                     onClick={() => countryHasCompanies && openModal(country)}
-                    className="cursor-pointer"
+                    className={
+                      countryHasCompanies ? "cursor-pointer" : "cursor-default"
+                    }
                     style={{
                       default: {
                         fill: countryHasCompanies ? "#7032ff" : "#D6D6DA",
