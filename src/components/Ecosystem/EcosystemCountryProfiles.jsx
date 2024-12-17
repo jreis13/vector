@@ -42,7 +42,7 @@ export default function EcosystemCountryProfiles({ companies }) {
   ).sort((a, b) => b[1].length - a[1].length)
 
   return (
-    <div className="px-6 py-8 lg:px-16 lg:py-16">
+    <div>
       <div className="flex items-center mb-8 gap-4">
         <h1 className="text-4xl font-bold">Europe</h1>
         <Image

@@ -5,7 +5,6 @@ import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCountryProfiles from "./EcosystemCountryProfiles"
-import EcosystemMap from "./EcosystemMap"
 import EcosystemProductComparison from "./EcosystemProductComparison"
 import EcosystemTabs from "./EcosystemTabs"
 
@@ -38,9 +37,8 @@ export default function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "countryProfiles" && (
-          <div className="flex flex-col gap-8">
+          <div className="flex gap-8 py-8">
             <EcosystemCountryProfiles companies={ecosystem.companies} />
-            <EcosystemMap companies={ecosystem.companies} />
           </div>
         )}
         {currentTab === "activeInvestors" && (
