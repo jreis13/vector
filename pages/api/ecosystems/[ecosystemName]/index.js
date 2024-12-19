@@ -26,7 +26,7 @@ const BUCKET_NAME = process.env.S3_BUCKET_NAME
 const ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
 
 function normalizeName(name) {
-  return name.replace(/\s+/g, "").toLowerCase()
+  return name.replace(/\s+/g, "").toLowerCase();
 }
 
 export default async function handler(req, res) {

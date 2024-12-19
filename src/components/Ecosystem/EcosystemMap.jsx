@@ -92,7 +92,7 @@ export default function EcosystemMap({ companies }) {
   }
 
   return (
-    <MapContainer center={[20, 0]} zoom={2}>
+    (<MapContainer center={[20, 0]} zoom={2}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -103,7 +103,7 @@ export default function EcosystemMap({ companies }) {
         const [latitude, longitude] = coordinates
 
         return (
-          <Marker
+          (<Marker
             position={[latitude, longitude]}
             key={company.id}
             icon={createCustomIcon()}
@@ -116,15 +116,18 @@ export default function EcosystemMap({ companies }) {
                     alt={name}
                     width={50}
                     height={50}
-                    style={{ objectFit: "contain" }}
-                  />
+                    style={{
+                      objectFit: "contain",
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                 )}
                 <h4>{name}</h4>
               </div>
             </Popup>
-          </Marker>
-        )
+          </Marker>)
+        );
       })}
-    </MapContainer>
-  )
+    </MapContainer>)
+  );
 }

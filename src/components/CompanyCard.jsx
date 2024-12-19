@@ -33,7 +33,7 @@ export default function CompanyCard({
   }
 
   return (
-    <div
+    (<div
       className={`mb-6 flex h-full flex-col justify-between rounded-lg border p-4 transition-all duration-300 ${
         isClickable
           ? "cursor-pointer hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
@@ -49,7 +49,10 @@ export default function CompanyCard({
             width={64}
             height={64}
             className="mr-4"
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
           <div>
             <h3 className="text-xl font-bold">{company.name}</h3>
           </div>
@@ -69,6 +72,6 @@ export default function CompanyCard({
             ))}
         </div>
       </div>
-    </div>
-  )
+    </div>)
+  );
 }

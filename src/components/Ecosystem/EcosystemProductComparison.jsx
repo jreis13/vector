@@ -28,7 +28,7 @@ export default function EcosystemProductComparison({ companies }) {
         group.products.map((product) => {
           const value = product[attribute]
           if (typeof value === "string") {
-            return parseFloat(value.replace(/[^0-9.]/g, ""))
+            return parseFloat(value.replace(/[^0-9.]/g, ""));
           } else if (typeof value === "number") {
             return value
           } else {
@@ -59,7 +59,7 @@ export default function EcosystemProductComparison({ companies }) {
       group.products.map((product) => {
         const value = product[attribute]
         if (typeof value === "string") {
-          return parseFloat(value.replace(/[^0-9.]/g, ""))
+          return parseFloat(value.replace(/[^0-9.]/g, ""));
         } else if (typeof value === "number") {
           return value
         } else {

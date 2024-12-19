@@ -7,7 +7,7 @@ export default function SectionWithImage({
   imageOnRight = false,
 }) {
   return (
-    <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
+    (<div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>
@@ -26,11 +26,14 @@ export default function SectionWithImage({
           <Image
             src={sectionImage}
             alt={`${title} section image`}
-            layout="responsive"
             width={400}
             height={400}
-            style={{ objectFit: "cover" }}
-          />
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "auto"
+            }} />
         </div>
 
         <div className="flex flex-col justify-center text-lg lg:text-left lg:text-xl xl:text-2xl">
@@ -49,6 +52,6 @@ export default function SectionWithImage({
             ))}
         </div>
       </div>
-    </div>
-  )
+    </div>)
+  );
 }

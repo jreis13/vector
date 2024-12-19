@@ -10,7 +10,7 @@ export default function NavLinks({ paths, isDesktop }) {
   const normalizedPathname = pathname?.replace(/\/$/, "").toLowerCase()
 
   return (
-    <nav>
+    (<nav>
       <ul
         className={classNames("flex list-none", {
           "text-right": !isDesktop,
@@ -38,6 +38,6 @@ export default function NavLinks({ paths, isDesktop }) {
               </li>
             ))}
       </ul>
-    </nav>
-  )
+    </nav>)
+  );
 }

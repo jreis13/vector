@@ -22,7 +22,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
+    (<div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
         <div className="pb-8">
           <Image
@@ -30,7 +30,10 @@ export default function CompanyDetails({ company, ecosystemName }) {
             alt={`${company.name} logo`}
             width={96}
             height={96}
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </div>
 
         <p className="pb-8">{company.summary}</p>
@@ -72,6 +75,6 @@ export default function CompanyDetails({ company, ecosystemName }) {
           />
         )}
       </div>
-    </div>
-  )
+    </div>)
+  );
 }

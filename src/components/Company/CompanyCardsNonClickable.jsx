@@ -63,7 +63,7 @@ export default function CompanyCardsNonClickable({ title, data }) {
   }
 
   return (
-    <div className="flex flex-col py-8 lg:py-16">
+    (<div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">{title}</h2>
       <div className={`grid grid-cols-1 gap-4 pb-8 md:grid-cols-2`}>
         {data &&
@@ -86,7 +86,10 @@ export default function CompanyCardsNonClickable({ title, data }) {
                     alt={`${item.name} logo`}
                     height={24}
                     width={24}
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                 )}
               </div>
               <div className="text-center">
@@ -96,6 +99,6 @@ export default function CompanyCardsNonClickable({ title, data }) {
             </div>
           ))}
       </div>
-    </div>
-  )
+    </div>)
+  );
 }

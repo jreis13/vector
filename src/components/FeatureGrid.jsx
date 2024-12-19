@@ -16,7 +16,7 @@ export default function FeatureGrid({
   }
 
   return (
-    <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
+    (<div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>
@@ -38,8 +38,11 @@ export default function FeatureGrid({
                 <Image
                   src={expVectorAvatar}
                   alt="Exponential Vector Logo"
-                  objectFit="contain"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain"
+                  }} />
               </div>
             </div>
           </>
@@ -62,9 +65,11 @@ export default function FeatureGrid({
                       <Image
                         src={feature.image}
                         alt={feature.name || feature.description}
-                        layout="fill"
-                        objectFit="contain"
-                      />
+                        fill
+                        sizes="100vw"
+                        style={{
+                          objectFit: "contain"
+                        }} />
                     </div>
                   </div>
                 )}
@@ -72,6 +77,6 @@ export default function FeatureGrid({
             ))}
         </div>
       </div>
-    </div>
-  )
+    </div>)
+  );
 }

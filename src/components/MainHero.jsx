@@ -10,7 +10,10 @@ export default function MainHero({ children }) {
           src="/mainHero.svg"
           alt="Background image"
           fill
-          style={{ objectPosition: "center" }}
+          style={{
+            objectPosition: "center",
+            maxWidth: "100%",
+          }}
         />
       </div>
       <div className="relative z-10 text-center">
