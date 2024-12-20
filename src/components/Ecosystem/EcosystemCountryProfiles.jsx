@@ -49,7 +49,7 @@ export default function EcosystemCountryProfiles({ companies }) {
   }
 
   return (
-    (<div className="flex min-h-screen">
+    <div className="flex min-h-screen">
       <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
         <ComposableMap
           projection="geoAzimuthalEqualArea"
@@ -116,8 +116,9 @@ export default function EcosystemCountryProfiles({ companies }) {
                 sizes="100vw"
                 style={{
                   width: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </button>
             <div className="p-4">
               <h2 className="text-3xl font-bold mb-6">{selectedCountry}</h2>
@@ -133,8 +134,9 @@ export default function EcosystemCountryProfiles({ companies }) {
                         className="shrink-0"
                         style={{
                           maxWidth: "100%",
-                          height: "auto"
-                        }} />
+                          height: "auto",
+                        }}
+                      />
                       <div>
                         <div className="flex items-center">
                           <h3 className="text-xl font-semibold">
@@ -166,6 +168,6 @@ export default function EcosystemCountryProfiles({ companies }) {
           </div>
         )}
       </Modal>
-    </div>)
-  );
+    </div>
+  )
 }

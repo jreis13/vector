@@ -5,6 +5,7 @@ import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCountryProfiles from "./EcosystemCountryProfiles"
+import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemProductComparison from "./EcosystemProductComparison"
 import EcosystemTabs from "./EcosystemTabs"
 
@@ -17,7 +18,7 @@ export default function EcosystemDetails({ ecosystem }) {
     { title: "Country Profiles", id: "countryProfiles" },
     { title: "Active Investors", id: "activeInvestors" },
     { title: "Product Comparison", id: "productComparison" },
-    { title: "Policy Making Tips", id: "policyMakingTips" },
+    { title: "Infrastructure", id: "infrastructure" },
   ]
 
   return (
@@ -45,8 +46,8 @@ export default function EcosystemDetails({ ecosystem }) {
         {currentTab === "productComparison" && (
           <EcosystemProductComparison companies={ecosystem.companies} />
         )}
-        {currentTab === "policyMakingTips" && (
-          <div>Policy Making Tips Content Goes Here</div>
+        {currentTab === "infrastructure" && (
+          <EcosystemInfrastructure ecosystem={ecosystem} />
         )}
       </div>
     </div>
