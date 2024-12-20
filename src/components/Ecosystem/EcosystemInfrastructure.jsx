@@ -52,14 +52,14 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
       )
       setSelectedCountry(name)
       setCountryVertiports(vertiportsInCountry)
-      smoothZoom(targetCenter, 4) // Smooth zoom into the country
+      smoothZoom(targetCenter, 4)
     }
   }
 
   const resetZoom = () => {
     setSelectedCountry(null)
     setCountryVertiports([])
-    smoothZoom([10, 50], 1) // Smooth zoom to default
+    smoothZoom([10, 50], 1)
   }
 
   const calculateCenter = (coordinatesList) => {
@@ -79,8 +79,8 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
     if (transitioning) return
     setTransitioning(true)
 
-    const duration = 500 // Total duration in milliseconds
-    const steps = 20 // Number of steps for the transition
+    const duration = 500
+    const steps = 20
     const interval = duration / steps
 
     const [currentLng, currentLat] = zoomConfig.center
