@@ -7,9 +7,13 @@ import { useEffect, useState } from "react"
 import Modal from "react-modal"
 import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 
-export default function EcosystemCountryProfiles({ companies }) {
+export default function EcosystemCountryProfiles({
+  companies,
+  countryReports,
+}) {
   const [selectedCountry, setSelectedCountry] = useState(null)
-  const [countryCompanies, setCountryCompanies] = useState([])
+  const [countryPages, setCountryPages] = useState([])
+  const [currentPageIndex, setCurrentPageIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export default function EcosystemCountryProfiles({ companies }) {
     }
   }, [])
 
-  const groupedCompaniesByCountry = companies.reduce((acc, company) => {
+  const groupedCompaniesByCountry = (companies || []).reduce((acc, company) => {
     const country = company.country.toLowerCase().trim()
     if (!acc[country]) {
       acc[country] = []
@@ -28,24 +32,133 @@ export default function EcosystemCountryProfiles({ companies }) {
     return acc
   }, {})
 
+  const getCountryReports = (country) => {
+    const normalizedCountry = country.toLowerCase().trim()
+    return countryReports?.[normalizedCountry] || []
+  }
+
   const openModal = (country) => {
     const normalizedCountry = country.toLowerCase().trim()
-    if (groupedCompaniesByCountry[normalizedCountry]) {
-      setCountryCompanies(groupedCompaniesByCountry[normalizedCountry])
-      setSelectedCountry(country)
-      setIsModalOpen(true)
-    }
+    const reports = getCountryReports(normalizedCountry)
+    const companies = groupedCompaniesByCountry[normalizedCountry] || []
+
+    setCountryPages([
+      { type: "companies", data: companies },
+      ...reports.map((report) => ({ type: "report", data: report })),
+    ])
+    setSelectedCountry(country)
+    setCurrentPageIndex(0)
+    setIsModalOpen(true)
   }
 
   const closeModal = () => {
     setSelectedCountry(null)
-    setCountryCompanies([])
+    setCountryPages([])
+    setCurrentPageIndex(0)
     setIsModalOpen(false)
-    window.scrollTo({ top: 0, behavior: "instant" })
   }
 
-  const hasCompanies = (countryName) => {
-    return groupedCompaniesByCountry[countryName.toLowerCase().trim()]
+  const handleNextPage = () => {
+    if (currentPageIndex < countryPages.length - 1) {
+      setCurrentPageIndex((prev) => prev + 1)
+    }
+  }
+
+  const handlePrevPage = () => {
+    if (currentPageIndex > 0) {
+      setCurrentPageIndex((prev) => prev - 1)
+    }
+  }
+
+  const renderContent = (data) => {
+    if (typeof data === "string") {
+      return <span>{data}</span>
+    }
+    if (Array.isArray(data)) {
+      return (
+        <ul className="ml-4 list-disc">
+          {data.map((item, idx) => (
+            <li key={idx}>
+              {typeof item === "string" ? item : renderContent(item)}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    if (typeof data === "object" && data !== null) {
+      if (data.type === "graph" && data.content) {
+        return (
+          <div className="graph-container" key={data.content}>
+            <div dangerouslySetInnerHTML={{ __html: data.content }} />
+          </div>
+        )
+      }
+      return (
+        <div className="ml-4">
+          {Object.entries(data).map(([key, value]) => {
+            if (key === "subtitle") {
+              return (
+                <h4 key={key} className="font-semibold mt-2">
+                  {value}
+                </h4>
+              )
+            }
+            if (key === "description") {
+              return <p key={key}>{value}</p>
+            }
+            if (key === "details") {
+              return renderContent(value)
+            }
+            if (key === "type" || key === "content") {
+              return null // Skip rendering "type" and "content"
+            }
+            return (
+              <div key={key} className="mt-2">
+                <strong>{key}:</strong> {renderContent(value)}
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
+    return null
+  }
+
+  const renderPageContent = (page) => {
+    if (page.type === "companies") {
+      return (
+        <div>
+          <div className="flex flex-col gap-6">
+            {page.data.map((company) => (
+              <div key={company.id} className="flex items-start gap-4">
+                <Image
+                  src={company.logo}
+                  alt={`${company.name} logo`}
+                  height={64}
+                  width={64}
+                  className="shrink-0"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">{company.name}</h3>
+                  <p className="text-gray-600 mt-1">{company.summary}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    } else if (page.type === "report") {
+      return (
+        <div>
+          <h3 className="text-2xl font-bold">{page.data.title}</h3>
+          {renderContent(page.data.details)}
+        </div>
+      )
+    }
   }
 
   return (
@@ -60,7 +173,8 @@ export default function EcosystemCountryProfiles({ companies }) {
             {({ geographies }) =>
               geographies.map((geo) => {
                 const country = geo.properties.name
-                const countryHasCompanies = hasCompanies(country)
+                const countryHasCompanies =
+                  groupedCompaniesByCountry[country.toLowerCase()]
 
                 return (
                   <Geography
@@ -98,7 +212,6 @@ export default function EcosystemCountryProfiles({ companies }) {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Country Details"
-        shouldFocusAfterRender={false}
         className="bg-[#e8e8e8] text-[#403f4c] p-8 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto overflow-y-auto relative"
         overlayClassName="fixed inset-0 bg-[#403f4c] bg-opacity-50 flex items-center justify-center"
       >
@@ -122,47 +235,22 @@ export default function EcosystemCountryProfiles({ companies }) {
             </button>
             <div className="p-4">
               <h2 className="text-3xl font-bold mb-6">{selectedCountry}</h2>
-              {countryCompanies.length > 0 ? (
-                <div className="flex flex-col gap-6">
-                  {countryCompanies.map((company) => (
-                    <div key={company.id} className="flex items-start gap-4">
-                      <Image
-                        src={company.logo}
-                        alt={`${company.name} logo`}
-                        height={64}
-                        width={64}
-                        className="shrink-0"
-                        style={{
-                          maxWidth: "100%",
-                          height: "auto",
-                        }}
-                      />
-                      <div>
-                        <div className="flex items-center">
-                          <h3 className="text-xl font-semibold">
-                            {company.name}
-                          </h3>
-                        </div>
-                        <p className="text-gray-600 mt-1">{company.summary}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-gray-500">
-                  No companies available for this country.
-                </p>
-              )}
-              <div className="mt-10">
-                <h3 className="text-2xl font-bold mb-4">
-                  Final Considerations
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
-                  This country has shown significant innovation and development
-                  in its aerospace ecosystem, highlighting key companies and
-                  opportunities for sustainable growth and advancements in
-                  technology.
-                </p>
+              {renderPageContent(countryPages[currentPageIndex])}
+              <div className="mt-10 flex justify-between">
+                <button
+                  disabled={currentPageIndex === 0}
+                  onClick={handlePrevPage}
+                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <button
+                  disabled={currentPageIndex >= countryPages.length - 1}
+                  onClick={handleNextPage}
+                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>

@@ -38,7 +38,10 @@ export default function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "countryProfiles" && (
-          <EcosystemCountryProfiles companies={ecosystem.companies} />
+          <EcosystemCountryProfiles
+            companies={ecosystem?.companies || []}
+            countryReports={ecosystem?.countryReports || {}}
+          />
         )}
         {currentTab === "activeInvestors" && (
           <EcosystemActiveInvestors companies={ecosystem.companies} />
