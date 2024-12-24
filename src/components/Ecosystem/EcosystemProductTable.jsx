@@ -18,21 +18,24 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
       <table className="w-full table-auto border-collapse border border-gray-200">
         <thead>
           <tr>
-            <th className="border border-gray-300 px-4 py-2">Company</th>
-            {attributes.map((attr) => (
-              <th
-                key={attr}
-                className="border border-gray-300 px-4 py-2 capitalize"
-              >
-                {attr}
-              </th>
-            ))}
+            <th className="border border-gray-300 px-4 py-2 min-w-[150px]">
+              Company
+            </th>
+            {attributes
+              .filter((attr) => attr !== "description")
+              .map((attr) => (
+                <th
+                  key={attr}
+                  className="border border-gray-300 px-4 py-2 capitalize min-w-[150px]"
+                >
+                  {attr}
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
           {groupedProducts.map((group) => (
             <React.Fragment key={group.companyName}>
-              {/* Company Row */}
               {visibleCompanies.includes(group.companyName) ? (
                 group.products.map((product, productIndex) => (
                   <tr
@@ -40,7 +43,7 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                   >
                     {productIndex === 0 && (
                       <td
-                        className="border border-gray-300 px-4 py-2 text-center font-bold"
+                        className="border border-gray-300 px-4 py-2 text-center font-bold min-w-[150px]"
                         rowSpan={group.products.length}
                       >
                         <div className="flex items-center justify-center">
@@ -56,20 +59,22 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                         </div>
                       </td>
                     )}
-                    {attributes.map((attr) => (
-                      <td
-                        key={`${product.name || productIndex}-${attr}`}
-                        className="border border-gray-300 px-4 py-2"
-                      >
-                        {product[attr] || "N/A"}
-                      </td>
-                    ))}
+                    {attributes
+                      .filter((attr) => attr !== "description")
+                      .map((attr) => (
+                        <td
+                          key={`${product.name || productIndex}-${attr}`}
+                          className="border border-gray-300 px-4 py-2 min-w-[150px]"
+                        >
+                          {product[attr] || "N/A"}
+                        </td>
+                      ))}
                   </tr>
                 ))
               ) : (
                 <tr>
                   <td
-                    className="border border-gray-300 px-4 py-2 text-center font-bold"
+                    className="border border-gray-300 px-4 py-2 text-center font-bold min-w-[150px]"
                     rowSpan={1}
                   >
                     <div className="flex items-center justify-between">
@@ -85,7 +90,9 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                     </div>
                   </td>
                   <td
-                    colSpan={attributes.length}
+                    colSpan={
+                      attributes.filter((attr) => attr !== "description").length
+                    }
                     className="border border-gray-300 px-4 py-2 text-center"
                   ></td>
                 </tr>
