@@ -46,7 +46,7 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
                         className="border border-gray-300 px-4 py-2 text-center font-bold min-w-[150px]"
                         rowSpan={group.products.length}
                       >
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-between min-w-full">
                           {group.companyName}
                           <button
                             className="ml-4 text-[#7032ff] hover:text-[#6600cc]"
