@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Dropdown from "../Dropdown"
 import EcosystemProductChart from "./EcosystemProductChart"
 import EcosystemProductTable from "./EcosystemProductTable"
@@ -8,8 +8,11 @@ export default function EcosystemProductComparison({ companies }) {
   const [yAttribute, setYAttribute] = useState("")
   const [graphType, setGraphType] = useState("")
 
-  const graphTypesSingle = ["Bar", "Line", "Doughnut", "Polar Area"]
-  const graphTypesDouble = ["Scatter", "Bubble"]
+  const graphTypesSingle = useMemo(
+    () => ["Bar", "Line", "Doughnut", "Polar Area"],
+    []
+  )
+  const graphTypesDouble = useMemo(() => ["Scatter", "Bubble"], [])
 
   const groupedProducts =
     companies
