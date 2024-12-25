@@ -110,7 +110,7 @@ export default function EcosystemCountryProfiles({
               return renderContent(value)
             }
             if (key === "type" || key === "content") {
-              return null // Skip rendering "type" and "content"
+              return null
             }
             return (
               <div key={key} className="mt-2">

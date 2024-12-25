@@ -11,7 +11,7 @@ export default function Dropdown({ attributes, selectedValue, onChange }) {
         ...attributes.map((attr) => measureText(attr)),
         measureText(selectedValue)
       )
-      const newWidth = longestOptionWidth + 32 // Add padding
+      const newWidth = longestOptionWidth + 32
 
       if (dropdownWidth !== newWidth) {
         setDropdownWidth(newWidth)
