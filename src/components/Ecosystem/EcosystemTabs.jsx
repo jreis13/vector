@@ -11,7 +11,7 @@ const EcosystemTabs = ({ sections, currentTab, setCurrentTab }) => {
                 <button
                   className={`rounded-full px-4 py-2 text-lg font-medium transition-all duration-300 ${
                     currentTab === section.id
-                      ? "bg-[#e8e8e8] text-[#34333d] shadow-lg"
+                      ? "bg-[#e8e8e8] text-[#34333d] shadow-md"
                       : "bg-[#403f4c] text-[#e8e8e8] hover:bg-[#565656]"
                   }`}
                   onClick={() => setCurrentTab(section.id)}
