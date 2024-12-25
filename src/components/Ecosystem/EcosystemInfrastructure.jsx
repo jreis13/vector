@@ -106,14 +106,14 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
     }, interval)
   }
 
+  const handleMapClick = (event) => {
+    if (!event.target.closest(".clickable-country")) {
+      resetZoom()
+    }
+  }
+
   return (
-    <div className="flex min-h-screen relative">
-      <button
-        onClick={resetZoom}
-        className="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded z-10"
-      >
-        Reset
-      </button>
+    <div className="flex min-h-screen relative" onClick={handleMapClick}>
       <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
         <ComposableMap
           projection="geoAzimuthalEqualArea"
@@ -136,7 +136,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
                       }
                       className={
                         countryHasVertiports
-                          ? "cursor-pointer"
+                          ? "clickable-country cursor-pointer"
                           : "cursor-default"
                       }
                       style={{
