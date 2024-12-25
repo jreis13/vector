@@ -6,6 +6,10 @@ import EcosystemProductTable from "./EcosystemProductTable"
 export default function EcosystemProductComparison({ companies }) {
   const [xAttribute, setXAttribute] = useState("")
   const [yAttribute, setYAttribute] = useState("")
+  const [graphType, setGraphType] = useState("")
+
+  const graphTypesSingle = ["Bar", "Line", "Doughnut", "Polar Area"]
+  const graphTypesDouble = ["Scatter", "Bubble"]
 
   const groupedProducts =
     companies
@@ -28,7 +32,7 @@ export default function EcosystemProductComparison({ companies }) {
         group.products.map((product) => {
           const value = product[attribute]
           if (typeof value === "string") {
-            return parseFloat(value.replace(/[^0-9.]/g, ""));
+            return parseFloat(value.replace(/[^0-9.]/g, ""))
           } else if (typeof value === "number") {
             return value
           } else {
@@ -45,10 +49,21 @@ export default function EcosystemProductComparison({ companies }) {
     if (!xAttribute && numericAttributes.length > 0) {
       setXAttribute(numericAttributes[0])
     }
-    if (!yAttribute && numericAttributes.length > 1) {
-      setYAttribute(numericAttributes[1] || numericAttributes[0])
+    if (!graphType) {
+      if (!yAttribute) {
+        setGraphType(graphTypesSingle[0])
+      } else {
+        setGraphType(graphTypesDouble[0])
+      }
     }
-  }, [numericAttributes, xAttribute, yAttribute])
+  }, [
+    numericAttributes,
+    xAttribute,
+    yAttribute,
+    graphType,
+    graphTypesSingle,
+    graphTypesDouble,
+  ])
 
   const labels = groupedProducts.flatMap((group) =>
     group.products.map((product) => `${group.companyName} - ${product.name}`)
@@ -59,7 +74,7 @@ export default function EcosystemProductComparison({ companies }) {
       group.products.map((product) => {
         const value = product[attribute]
         if (typeof value === "string") {
-          return parseFloat(value.replace(/[^0-9.]/g, ""));
+          return parseFloat(value.replace(/[^0-9.]/g, ""))
         } else if (typeof value === "number") {
           return value
         } else {
@@ -75,6 +90,23 @@ export default function EcosystemProductComparison({ companies }) {
     return <div>No products available for comparison</div>
   }
 
+  const availableGraphTypes = yAttribute ? graphTypesDouble : graphTypesSingle
+
+  const handleXChange = (value) => {
+    if (value === yAttribute) setYAttribute("")
+    setXAttribute(value)
+  }
+
+  const handleYChange = (value) => {
+    if (value === xAttribute) return
+    setYAttribute(value)
+    setGraphType(value === "" ? graphTypesSingle[0] : graphTypesDouble[0])
+  }
+
+  const handleGraphTypeChange = (value) => {
+    setGraphType(value)
+  }
+
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div className="mb-16">
@@ -88,27 +120,42 @@ export default function EcosystemProductComparison({ companies }) {
           <Dropdown
             attributes={numericAttributes}
             selectedValue={xAttribute}
-            onChange={setXAttribute}
+            onChange={handleXChange}
           />
         </div>
 
         <div>
           <Dropdown
-            attributes={numericAttributes}
-            selectedValue={yAttribute}
-            onChange={setYAttribute}
+            attributes={[
+              "None",
+              ...numericAttributes.filter((attr) => attr !== xAttribute),
+            ]}
+            selectedValue={yAttribute || "None"}
+            onChange={(value) => handleYChange(value === "None" ? "" : value)}
+          />
+        </div>
+
+        <div className="ml-auto">
+          <Dropdown
+            attributes={availableGraphTypes}
+            selectedValue={graphType}
+            onChange={handleGraphTypeChange}
           />
         </div>
       </div>
 
       <div>
-        {xData.length > 0 && yData.length > 0 && (
+        {xData.length > 0 && (
           <EcosystemProductChart
             labels={labels}
             xData={xData}
             yData={yData}
             xLabel={xAttribute.charAt(0).toUpperCase() + xAttribute.slice(1)}
-            yLabel={yAttribute.charAt(0).toUpperCase() + yAttribute.slice(1)}
+            yLabel={
+              yAttribute &&
+              yAttribute.charAt(0).toUpperCase() + yAttribute.slice(1)
+            }
+            graphType={graphType}
           />
         )}
       </div>

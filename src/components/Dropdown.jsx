@@ -40,11 +40,7 @@ export default function Dropdown({ attributes, selectedValue, onChange }) {
   }, [])
 
   return (
-    <div
-      className="relative"
-      style={{ width: `${dropdownWidth}px` }}
-      ref={dropdownRef}
-    >
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => {
           setIsOpen((prev) => !prev)
@@ -54,10 +50,7 @@ export default function Dropdown({ attributes, selectedValue, onChange }) {
         {selectedValue.charAt(0).toUpperCase() + selectedValue.slice(1)}
       </button>
       {isOpen && (
-        <ul
-          className="absolute z-10 mt-2 rounded-lg border border-gray-700 bg-[#34333d]"
-          style={{ width: `${dropdownWidth}px` }}
-        >
+        <ul className="absolute z-10 mt-2 rounded-lg border border-gray-700 bg-[#34333d]">
           {attributes.map((attr) => (
             <li
               key={attr}
