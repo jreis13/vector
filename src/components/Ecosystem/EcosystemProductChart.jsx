@@ -145,19 +145,50 @@ export default function EcosystemProductChart({
     },
   }
 
+  const areaGraphStyle = {
+    width: "100%",
+    maxWidth: "800px",
+    height: "auto",
+    margin: "0 auto",
+  }
+
   switch (graphType) {
     case "Scatter":
-      return <Scatter data={scatterData} options={chartOptions} />
+      return (
+        <div>
+          <Scatter data={scatterData} options={chartOptions} />
+        </div>
+      )
     case "Bubble":
-      return <Bubble data={bubbleData} options={chartOptions} />
+      return (
+        <div>
+          <Bubble data={bubbleData} options={chartOptions} />
+        </div>
+      )
     case "Bar":
-      return <Bar data={generalData} options={chartOptions} />
+      return (
+        <div>
+          <Bar data={generalData} options={chartOptions} />
+        </div>
+      )
     case "Line":
-      return <Line data={generalData} options={chartOptions} />
+      return (
+        <div>
+          <Line data={generalData} options={chartOptions} />
+        </div>
+      )
     case "Doughnut":
-      return <Doughnut data={generalData} />
+      return (
+        <div style={areaGraphStyle}>
+          <Doughnut data={generalData} />
+        </div>
+      )
     case "Polar Area":
-      return <PolarArea data={generalData} />
+      return (
+        <div style={areaGraphStyle}>
+          <PolarArea data={generalData} />
+        </div>
+      )
     default:
       return null
   }
