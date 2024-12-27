@@ -1,26 +1,39 @@
 "use client"
 
+import { motion } from "framer-motion"
+
 export default function Button({ onClick, href, children }) {
+  const buttonStyles =
+    "inline-flex w-full max-w-xs justify-center rounded-full border p-4 uppercase transition-colors duration-300 font-medium"
+
+  const hoverStyles = "hover:bg-[#7032ff] hover:text-white"
+
   if (onClick) {
     return (
-      <button
-        className="inline-flex w-full max-w-xs cursor-pointer justify-center rounded-full border p-4 uppercase transition-colors duration-300 hover:bg-[#7032ff] hover:font-medium"
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className={`${buttonStyles} ${hoverStyles}`}
         onClick={onClick}
         type="button"
       >
         <p>{children}</p>
-      </button>
+      </motion.button>
     )
   }
 
-  if (!href) return null
+  if (href) {
+    return (
+      <motion.a
+        href={href}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className={`${buttonStyles} ${hoverStyles}`}
+      >
+        <p>{children}</p>
+      </motion.a>
+    )
+  }
 
-  return (
-    <a
-      href={href}
-      className="inline-flex w-full max-w-xs cursor-pointer justify-center rounded-full border border-current p-4 uppercase transition-colors duration-300 hover:bg-[#7032ff] hover:font-medium"
-    >
-      <p>{children}</p>
-    </a>
-  )
+  return null
 }
