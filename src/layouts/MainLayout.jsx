@@ -11,6 +11,7 @@ import {
   questionFeatures,
 } from "src/common/data/featureData"
 
+import ScrollReveal from "src/animations/scrollReveal"
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
@@ -50,68 +51,56 @@ export default function MainLayout() {
             <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
           </div>
         </MainHero>
-        <div className="flex flex-col items-center py-8 lg:px-16">
-          <div id="questions" className="py-4">
-            <CardList features={questionFeatures.map(splitDescription)} />
+        <ScrollReveal id="questions">
+          <CardList features={questionFeatures.map(splitDescription)} />
+        </ScrollReveal>
+        <ScrollReveal id="benefits">
+          <CardList
+            title="Benefits"
+            features={benefitsFeatures.map(splitDescription)}
+          />
+        </ScrollReveal>
+        <ScrollReveal id="offering">
+          <CardList
+            title="What do we do?"
+            features={
+              offeringFeatures &&
+              offeringFeatures
+                .filter((f) => !f.sectionImage)
+                .map(splitDescription)
+            }
+            sectionImage={
+              offeringFeatures.find((f) => f.sectionImage)?.sectionImage
+            }
+            imageOnRight
+          />
+        </ScrollReveal>
+        <ScrollReveal id="customers">
+          <CardList
+            title="Who are our products for?"
+            features={
+              customersFeatures && customersFeatures.map(splitDescription)
+            }
+            isCustomersGrid={true}
+          />
+        </ScrollReveal>
+        <ScrollReveal id="goals">
+          <CardList
+            title="What are we aiming for?"
+            features={
+              goalsFeatures &&
+              goalsFeatures.filter((f) => !f.sectionImage).map(splitDescription)
+            }
+            sectionImage={
+              goalsFeatures.find((f) => f.sectionImage)?.sectionImage
+            }
+          />
+        </ScrollReveal>
+        <ScrollReveal>
+          <div id="subscribe" className="py-8">
+            <CTA />
           </div>
-          <div className="flex w-full flex-col items-center px-6 text-center lg:px-16">
-            <h2>Same here,</h2>
-            <h2>
-              Join us in our mission to track Europe’s emerging business
-              ecosystems and get ahead of the game with our reporting.
-            </h2>
-          </div>
-        </div>
-
-        <div className="pt-8">
-          <div id="benefits" className="py-8">
-            <CardList
-              title="Benefits"
-              features={benefitsFeatures.map(splitDescription)}
-            />
-          </div>
-          <div id="offering" className="py-8">
-            <CardList
-              title="What do we do?"
-              features={
-                offeringFeatures &&
-                offeringFeatures
-                  .filter((f) => !f.sectionImage)
-                  .map(splitDescription)
-              }
-              sectionImage={
-                offeringFeatures.find((f) => f.sectionImage)?.sectionImage
-              }
-              imageOnRight
-            />
-          </div>
-          <div id="customers" className="py-8">
-            <CardList
-              title="Who are our products for?"
-              features={
-                customersFeatures && customersFeatures.map(splitDescription)
-              }
-              isCustomersGrid={true}
-            />
-          </div>
-          <div id="goals" className="py-8">
-            <CardList
-              title="What are we aiming for?"
-              features={
-                goalsFeatures &&
-                goalsFeatures
-                  .filter((f) => !f.sectionImage)
-                  .map(splitDescription)
-              }
-              sectionImage={
-                goalsFeatures.find((f) => f.sectionImage)?.sectionImage
-              }
-            />
-          </div>
-        </div>
-        <div id="subscribe" className="py-8">
-          <CTA />
-        </div>
+        </ScrollReveal>
       </div>
       <Footer />
     </div>
