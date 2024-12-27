@@ -11,7 +11,7 @@ import {
   questionFeatures,
 } from "src/common/data/featureData"
 
-import ScrollReveal from "src/animations/scrollReveal"
+import ScrollReveal from "src/animations/ScrollReveal"
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
