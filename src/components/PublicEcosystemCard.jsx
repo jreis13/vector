@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import HoverScale from "src/animations/HoverScale"
 
 export default function PublicEcosystemCard({ ecosystem }) {
   const router = useRouter()
@@ -15,7 +16,7 @@ export default function PublicEcosystemCard({ ecosystem }) {
   }
 
   return (
-    <div className="mb-6 flex flex-col cursor-pointer rounded-lg border overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl lg:w-[600px] lg:h-auto">
+    <HoverScale className="mb-6 flex flex-col cursor-pointer rounded-lg border overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl lg:w-[600px] lg:h-auto">
       <div
         className="h-[250px] bg-cover bg-center"
         style={{
@@ -44,6 +45,6 @@ export default function PublicEcosystemCard({ ecosystem }) {
           </button>
         </div>
       </div>
-    </div>
+    </HoverScale>
   )
 }
