@@ -1,6 +1,6 @@
 "use client"
 
-const EcosystemTabs = ({ sections, currentTab, setCurrentTab }) => {
+export default function EcosystemTabs({ sections, currentTab, setCurrentTab }) {
   return (
     <div className="mb-4 mt-8 flex items-center justify-center">
       <nav className="flex items-center justify-center">
@@ -25,5 +25,3 @@ const EcosystemTabs = ({ sections, currentTab, setCurrentTab }) => {
     </div>
   )
 }
-
-export default EcosystemTabs
