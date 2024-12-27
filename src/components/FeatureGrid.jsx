@@ -1,12 +1,12 @@
 import Image from "next/image"
 import expVectorAvatar from "public/expVectorAvatar.png"
+import HoverScale from "src/animations/HoverScale"
 
 export default function FeatureGrid({
   title,
   features,
   imageOnLeft,
   isCustomersGrid,
-  centerImage,
 }) {
   const getGridCols = () => {
     const count = features?.length || 0
@@ -16,7 +16,7 @@ export default function FeatureGrid({
   }
 
   return (
-    (<div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
+    <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>
@@ -41,42 +41,46 @@ export default function FeatureGrid({
                   style={{
                     maxWidth: "100%",
                     height: "auto",
-                    objectFit: "contain"
-                  }} />
+                    objectFit: "contain",
+                  }}
+                />
               </div>
             </div>
           </>
         )}
-        <div className={`grid ${getGridCols()} gap-4`}>
+        <div className={`grid ${getGridCols()} gap-6`}>
           {features &&
             features.map((feature, index) => (
-              <div key={index} className="p-4">
-                <div className="flex flex-col items-center text-center">
-                  {feature.name && (
-                    <h3 className="py-4 font-bold">{feature.name}</h3>
-                  )}
-                  {feature.description && (
-                    <p className="py-2">{feature.description}</p>
-                  )}
-                </div>
-                {feature.image && (
-                  <div className="flex items-center justify-center">
-                    <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-80 lg:w-80">
-                      <Image
-                        src={feature.image}
-                        alt={feature.name || feature.description}
-                        fill
-                        sizes="100vw"
-                        style={{
-                          objectFit: "contain"
-                        }} />
-                    </div>
+              <div key={index} className="relative p-4 overflow-hidden">
+                <HoverScale className="h-full w-full flex flex-col items-center justify-center">
+                  <div className="flex flex-col items-center text-center">
+                    {feature.name && (
+                      <h3 className="py-4 font-bold">{feature.name}</h3>
+                    )}
+                    {feature.description && (
+                      <p className="py-2">{feature.description}</p>
+                    )}
                   </div>
-                )}
+                  {feature.image && (
+                    <div className="flex items-center justify-center">
+                      <div className="relative mb-4 h-48 w-48 lg:mb-0 lg:h-80 lg:w-80">
+                        <Image
+                          src={feature.image}
+                          alt={feature.name || feature.description}
+                          fill
+                          sizes="100vw"
+                          style={{
+                            objectFit: "contain",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </HoverScale>
               </div>
             ))}
         </div>
       </div>
-    </div>)
-  );
+    </div>
+  )
 }
