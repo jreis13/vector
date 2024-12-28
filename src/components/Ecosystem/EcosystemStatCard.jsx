@@ -1,4 +1,8 @@
-import { faCompress, faExpand } from "@fortawesome/free-solid-svg-icons"
+import {
+  faCircleInfo,
+  faCompress,
+  faExpand,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
@@ -6,10 +10,22 @@ import { useEffect, useRef, useState } from "react"
 export default function EcosystemStatCard({ title, value }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isExpandable, setIsExpandable] = useState(false)
+  const [showSource, setShowSource] = useState(false)
   const contentRef = useRef(null)
+  const sourceRef = useRef(null)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded)
+  }
+
+  const toggleSource = () => {
+    setShowSource(!showSource)
+  }
+
+  const closeSourceOnOutsideClick = (e) => {
+    if (sourceRef.current && !sourceRef.current.contains(e.target)) {
+      setShowSource(false)
+    }
   }
 
   useEffect(() => {
@@ -19,6 +35,20 @@ export default function EcosystemStatCard({ title, value }) {
     }
   }, [value])
 
+  useEffect(() => {
+    if (showSource) {
+      document.addEventListener("mousedown", closeSourceOnOutsideClick)
+    } else {
+      document.removeEventListener("mousedown", closeSourceOnOutsideClick)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", closeSourceOnOutsideClick)
+    }
+  }, [showSource])
+
+  const hasSource = value?.source
+
   return (
     <motion.div
       layout
@@ -27,17 +57,47 @@ export default function EcosystemStatCard({ title, value }) {
       }`}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      {isExpandable && (
-        <button
-          onClick={toggleExpand}
-          className="absolute top-2 right-2 text-[#e8e8e8] p-1 rounded-full focus:outline-none"
-          aria-label={isExpanded ? "Collapse" : "Expand"}
-        >
-          <FontAwesomeIcon
-            icon={isExpanded ? faCompress : faExpand}
-            size="sm"
-          />
-        </button>
+      {(isExpandable || hasSource) && (
+        <div className="absolute top-2 right-2 flex space-x-2">
+          {isExpandable && (
+            <button
+              onClick={toggleExpand}
+              className="text-[#e8e8e8] p-1 rounded-full focus:outline-none"
+              aria-label={isExpanded ? "Collapse" : "Expand"}
+            >
+              <FontAwesomeIcon
+                icon={isExpanded ? faCompress : faExpand}
+                size="sm"
+              />
+            </button>
+          )}
+          {hasSource && (
+            <div className="relative">
+              <button
+                onClick={toggleSource}
+                className="text-[#e8e8e8] p-1 rounded-full focus:outline-none"
+                aria-label="Source Info"
+              >
+                <FontAwesomeIcon icon={faCircleInfo} size="sm" />
+              </button>
+              {showSource && (
+                <div
+                  ref={sourceRef}
+                  className="absolute top-8 right-0 bg-[#444] text-sm text-[#a0d7ff] p-2 rounded shadow-lg w-64 z-50"
+                >
+                  <a
+                    href={value.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-xs break-words underline"
+                  >
+                    {value.source}
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       )}
       <h3 className="text-lg font-bold mb-2">{title}</h3>
       <div
