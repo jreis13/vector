@@ -22,7 +22,7 @@ export default function EcosystemStatCard({ title, value }) {
   return (
     <motion.div
       layout
-      className={`bg-gray-800 text-white p-4 rounded-lg shadow relative ${
+      className={`bg-[#34333d] text-[#e8e8e8] p-4 rounded-lg shadow relative ${
         isExpanded ? "h-auto" : "overflow-hidden"
       }`}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -30,7 +30,7 @@ export default function EcosystemStatCard({ title, value }) {
       {isExpandable && (
         <button
           onClick={toggleExpand}
-          className="absolute top-2 right-2 text-white p-1 rounded-full focus:outline-none"
+          className="absolute top-2 right-2 text-[#e8e8e8] p-1 rounded-full focus:outline-none"
           aria-label={isExpanded ? "Collapse" : "Expand"}
         >
           <FontAwesomeIcon
@@ -42,14 +42,14 @@ export default function EcosystemStatCard({ title, value }) {
       <h3 className="text-lg font-bold mb-2">{title}</h3>
       <div
         ref={contentRef}
-        className={`text-md text-gray-300 ${
+        className={`text-md text-[#e8e8e8] ${
           !isExpanded && isExpandable ? "max-h-[200px]" : "h-auto"
         }`}
       >
         {typeof value === "string" ? (
           <p>{value}</p>
         ) : Array.isArray(value) ? (
-          <ul className="text-sm text-gray-300 mt-2 list-none space-y-2">
+          <ul className="text-sm text-[#e8e8e8] mt-2 list-none space-y-2">
             {value.map((item, idx) => (
               <li key={idx}>
                 {typeof item === "string" ? (
@@ -62,7 +62,7 @@ export default function EcosystemStatCard({ title, value }) {
                       </h4>
                     )}
                     {item.description && (
-                      <p className="mt-1 text-gray-300">{item.description}</p>
+                      <p className="mt-1 text-[#e8e8e8]">{item.description}</p>
                     )}
                     {item.details && (
                       <ul className="list-none space-y-1 ml-4">
@@ -79,14 +79,14 @@ export default function EcosystemStatCard({ title, value }) {
             ))}
           </ul>
         ) : typeof value === "object" ? (
-          <div className="text-sm text-gray-300 mt-2">
+          <div className="text-sm text-[#e8e8e8] mt-2">
             {value.subtitle && (
               <h4 className="text-md font-semibold text-gray-200">
                 {value.subtitle}
               </h4>
             )}
             {value.description && (
-              <p className="mt-1 text-gray-300">{value.description}</p>
+              <p className="mt-1 text-[#e8e8e8]">{value.description}</p>
             )}
             {value.details && (
               <ul className="list-none space-y-1 ml-4">

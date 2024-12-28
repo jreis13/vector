@@ -87,7 +87,7 @@ export default function EcosystemCountryProfiles({
               {page.data.map((company) => (
                 <div
                   key={company.id}
-                  className="m-4 bg-gray-800 text-white p-4 rounded-lg shadow"
+                  className="m-4 bg-[#34333d] text-[#e8e8e8] p-4 rounded-lg shadow"
                 >
                   <div className="flex items-center space-x-4 mb-4">
                     <Image
@@ -98,7 +98,7 @@ export default function EcosystemCountryProfiles({
                     />
                     <h3 className="text-lg font-bold">{company.name}</h3>
                   </div>
-                  <p className="text-sm text-gray-300">
+                  <p className="text-sm text-[#e8e8e8]">
                     {company.summary || "No description available"}
                   </p>
                 </div>
@@ -190,7 +190,7 @@ export default function EcosystemCountryProfiles({
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Country Details"
-        className="bg-white text-gray-800 p-6 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto flex flex-col z-[1050]"
+        className="bg-[#e8e8e8] text-gray-800 p-6 rounded-lg shadow-lg max-w-5xl w-full h-[90vh] mx-auto flex flex-col z-[1050]"
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1040]"
       >
         {selectedCountry && (
@@ -215,14 +215,14 @@ export default function EcosystemCountryProfiles({
               <button
                 disabled={currentPageIndex === 0}
                 onClick={handlePrevPage}
-                className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                className="px-4 py-2 bg-[#e8e8e8] rounded disabled:opacity-50"
               >
                 Previous
               </button>
               <button
                 disabled={currentPageIndex >= countryPages.length - 1}
                 onClick={handleNextPage}
-                className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                className="px-4 py-2 bg-[#e8e8e8] rounded disabled:opacity-50"
               >
                 Next
               </button>
