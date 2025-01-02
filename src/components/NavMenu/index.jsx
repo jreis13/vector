@@ -30,7 +30,7 @@ export default function NavMenu() {
       ]
     : [
         ...PATHS.filter(
-          (path) => path.name !== "Login" && path.name !== "Companies"
+          (path) => path.name !== "Login" && path.name !== "Profile"
         ),
         { name: "Login", path: "/api/auth/login" },
       ]
