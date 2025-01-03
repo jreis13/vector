@@ -1,7 +1,7 @@
 "use client"
 
 import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
-import { faCirclePlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
+import { faCircleXmark, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import Button from "../Button"
@@ -115,9 +115,9 @@ export default function SubscribeContent() {
           {emails.length < 5 && (
             <button
               onClick={handleAddEmail}
-              className="mb-4 block rounded bg-[#e8e8e8] text-[#403f4c] px-2 py-1 text-sm"
+              className="mb-4 block rounded text-[#403f4c] px-2 py-1 text-sm"
             >
-              <FontAwesomeIcon aria-hidden="true" icon={faCirclePlus} />
+              <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
             </button>
           )}
           <div className="mb-4">
