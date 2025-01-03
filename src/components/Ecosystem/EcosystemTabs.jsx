@@ -17,6 +17,9 @@ export default function EcosystemTabs({ sections, currentTab, setCurrentTab }) {
                   onClick={() => setCurrentTab(section.id)}
                 >
                   {section.title}
+                  {section.info && (
+                    <p className="text-[#d87103] text-xs">{section.info}</p>
+                  )}
                 </button>
               </li>
             ))}

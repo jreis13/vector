@@ -19,8 +19,8 @@ export default function EcosystemDetails({ ecosystem }) {
     { title: "Active Investors", id: "activeInvestors" },
     { title: "Product Comparison", id: "productComparison" },
     { title: "Infrastructure", id: "infrastructure" },
-    { title: "Routes", id: "routes" },
-    { title: "Market Research", id: "marketResearch" },
+    { title: "Routes", id: "routes", info: "(Coming Soon)" },
+    { title: "Market Research", id: "marketResearch", info: "(Coming Soon)" },
   ]
 
   return (
