@@ -42,7 +42,7 @@ export default async function handler(req, res) {
           try {
             userId = await getAuth0UserIdByEmail(email)
           } catch (err) {
-            userId = await createAuth0User(email) // No email triggered
+            userId = await createAuth0User(email)
           }
 
           await updateUserMetadata(userId, { subscribed: true })
