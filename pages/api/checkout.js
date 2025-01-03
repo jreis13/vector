@@ -15,15 +15,16 @@ export default async function handler(req, res) {
     }
 
     try {
+      const lineItems = subscriptions.map((subscription) => ({
+        price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
+        quantity: 1,
+        metadata: { email: subscription.email },
+      }))
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
-        line_items: [
-          {
-            price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
-            quantity: 1,
-          },
-        ],
+        line_items: lineItems,
         metadata: {
           emails: subscriptions.map((sub) => sub.email).join(","),
         },
