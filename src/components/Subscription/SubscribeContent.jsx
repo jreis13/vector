@@ -52,14 +52,31 @@ export default function SubscribeContent() {
   const handleSubscribe = async () => {
     if (!validateSubscriptions()) return
 
-    const response = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subscriptions }),
-    })
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriptions }),
+      })
 
-    const { url } = await response.json()
-    window.location.href = url
+      if (!response.ok) {
+        const { error } = await response.json()
+        setError(error || "Failed to create checkout session.")
+        return
+      }
+
+      const { url } = await response.json()
+
+      if (!url) {
+        setError("No URL returned from the server.")
+        return
+      }
+
+      window.location.href = url
+    } catch (err) {
+      console.error("Checkout request failed:", err)
+      setError("Something went wrong while processing the subscription.")
+    }
   }
 
   return (
@@ -71,27 +88,17 @@ export default function SubscribeContent() {
         </p>
         {error && <p className="text-red-500">{error}</p>}
         <div className="mt-6">
-          {subscriptions.map((subscription, index) => (
-            <div key={index} className="mb-4">
+          {emails.map((email, index) => (
+            <div key={index} className="mb-4 flex items-center">
               <input
                 type="email"
-                value={subscription.email}
+                value={email}
                 placeholder="Enter email"
-                onChange={(e) => handleChange(index, "email", e.target.value)}
-                className="mr-2 rounded border px-2 py-1"
-              />
-              <input
-                type="number"
-                value={subscription.quantity}
-                min="1"
-                placeholder="Quantity"
-                onChange={(e) =>
-                  handleChange(index, "quantity", parseInt(e.target.value, 10))
-                }
-                className="mr-2 rounded border px-2 py-1"
+                onChange={(e) => handleChange(index, e.target.value)}
+                className="mr-2 flex-grow rounded border px-2 py-1"
               />
               <button
-                onClick={() => handleRemoveSubscription(index)}
+                onClick={() => handleRemoveEmail(index)}
                 className="text-red-500"
               >
                 Remove
@@ -99,10 +106,10 @@ export default function SubscribeContent() {
             </div>
           ))}
           <button
-            onClick={handleAddSubscription}
-            className="mb-4 block rounded bg-gray-200 px-2 py-1 text-sm"
+            onClick={handleAddEmail}
+            className="mb-4 block rounded px-2 py-1 text-sm"
           >
-            Add Another Subscription
+            Add Another Email
           </button>
           <Button onClick={handleSubscribe}>
             Subscribe with{" "}
