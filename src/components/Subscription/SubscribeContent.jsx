@@ -1,6 +1,7 @@
 "use client"
 
-import { faCcStripe, faPlus, faTimes } from "@fortawesome/free-brands-svg-icons"
+import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
+import { faCirclePlus, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import Button from "../Button"
@@ -107,7 +108,7 @@ export default function SubscribeContent() {
                 onClick={() => handleRemoveEmail(index)}
                 className="text-red-500"
               >
-                <FontAwesomeIcon aria-hidden="true" icon={faTimes} />
+                <FontAwesomeIcon aria-hidden="true" icon={faCircleXmark} />
               </button>
             </div>
           ))}
@@ -116,7 +117,7 @@ export default function SubscribeContent() {
               onClick={handleAddEmail}
               className="mb-4 block rounded bg-[#e8e8e8] text-[#403f4c] px-2 py-1 text-sm"
             >
-              <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
+              <FontAwesomeIcon aria-hidden="true" icon={faCirclePlus} />
             </button>
           )}
           <div className="mb-4">
