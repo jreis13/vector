@@ -26,18 +26,30 @@ export default async function handler(req, res) {
       process.env.STRIPE_WEBHOOK_SECRET
     )
   } catch (err) {
-    console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
+    const emails = session.metadata.emails.split(",")
 
     try {
-      const userId = await getAuth0UserIdByEmail(session.customer_email)
-      await updateUserMetadata(userId, { subscribed: true })
+      const mainEmail = emails[0]
+      const associatedEmails = emails.slice(1)
+
+      const mainUserId = await getAuth0UserIdByEmail(mainEmail)
+      await updateUserMetadata(mainUserId, {
+        subscribed: true,
+        associatedEmails,
+      })
+
+      await Promise.all(
+        associatedEmails.map(async (email) => {
+          const userId = await getAuth0UserIdByEmail(email)
+          await updateUserMetadata(userId, { subscribed: true })
+        })
+      )
     } catch (error) {
-      console.error("Error updating Auth0 metadata:", error.message)
       return res.status(500).send("Failed to update user metadata.")
     }
   }

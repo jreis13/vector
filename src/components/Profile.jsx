@@ -47,8 +47,6 @@ export default function Profile() {
   return (
     <div className="flex flex-col px-6 py-8 lg:px-16 lg:py-16">
       <h2 className="text-3xl font-bold">Profile</h2>
-      {console.log(user)}
-      {console.log(userInfo)}
       {user && userInfo && (
         <div className="py-4">
           <p>
@@ -74,6 +72,17 @@ export default function Profile() {
               </p>
             </div>
           )}
+          {userInfo.associatedEmails &&
+            userInfo.associatedEmails.length > 0 && (
+              <div className="py-4">
+                <h3 className="text-xl font-bold">Associated Emails</h3>
+                <ul>
+                  {userInfo.associatedEmails.map((email, index) => (
+                    <li key={index}>{email}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
         </div>
       )}
     </div>
