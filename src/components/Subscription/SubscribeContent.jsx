@@ -24,9 +24,7 @@ export default function SubscribeContent() {
 
   const handleAddEmail = () => {
     if (emails.length >= 5) {
-      setError(
-        "If you wish to add more than 5 emails please get in touch with us."
-      )
+      setError("You can only add up to 5 emails.")
       return
     }
     setEmails([...emails, ""])
@@ -118,7 +116,7 @@ export default function SubscribeContent() {
           )}
           <div className="mb-4">
             <p className="text-lg">
-              Total Price: €{(getTierPrice(emails.length) / 100).toFixed(2)}
+              Total Price: €{getTierPrice(emails.length).toFixed(2)}
             </p>
           </div>
           <Button onClick={handleSubscribe}>
