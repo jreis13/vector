@@ -22,6 +22,12 @@ export default function SubscribeContent() {
     return tier ? tier.price : pricingTiers[pricingTiers.length - 1].price
   }
 
+  const calculateTotalPrice = () => {
+    return emails.reduce((total, _, index) => {
+      return total + getTierPrice(index + 1)
+    }, 0)
+  }
+
   const handleAddEmail = () => {
     if (emails.length >= 5) {
       setError("You can only add up to 5 emails.")
@@ -116,7 +122,7 @@ export default function SubscribeContent() {
           )}
           <div className="mb-4">
             <p className="text-lg">
-              Total Price: €{getTierPrice(emails.length).toFixed(2)}
+              Total Price: €{(calculateTotalPrice() / 100).toFixed(2)}
             </p>
           </div>
           <Button onClick={handleSubscribe}>
