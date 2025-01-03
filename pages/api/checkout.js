@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         mode: "subscription",
         line_items: [
           {
-            price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
+            price: "price_1QcxMjH8mb7EVuIwUchyBOKp",
             quantity: subscriptions.length,
           },
         ],
