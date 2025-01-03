@@ -25,7 +25,6 @@ export default async function handler(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     )
-    console.log("Stripe Webhook Event:", event)
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
@@ -43,9 +42,7 @@ export default async function handler(req, res) {
           try {
             userId = await getAuth0UserIdByEmail(email)
           } catch (err) {
-            console.log(`User not found, creating new user: ${email}`)
-            userId = await createAuth0User(email)
-            await sendWelcomeEmail(email)
+            userId = await createAuth0User(email) // Triggers the Welcome Email
           }
 
           await updateUserMetadata(userId, { subscribed: true })
@@ -105,7 +102,7 @@ async function createAuth0User(email) {
   }
 
   const user = await response.json()
-  return user.user_id
+  return user.user_id // Auth0 automatically triggers the Welcome Email
 }
 
 async function updateUserMetadata(userId, metadata) {
@@ -128,28 +125,6 @@ async function updateUserMetadata(userId, metadata) {
   }
 
   console.log("Metadata update response:", await response.json())
-}
-
-async function sendWelcomeEmail(email) {
-  const response = await fetch(
-    `${process.env.AUTH0_DOMAIN}/passwordless/start`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        client_id: process.env.AUTH0_CLIENT_ID,
-        connection: "email",
-        email,
-        send: "link",
-      }),
-    }
-  )
-
-  if (!response.ok) {
-    throw new Error(`Failed to send welcome email: ${response.statusText}`)
-  }
-
-  console.log("Welcome email sent successfully to", email)
 }
 
 async function getManagementToken() {
