@@ -25,6 +25,7 @@ export default async function handler(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     )
+    console.log("Stripe Webhook Event:", event)
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
@@ -37,7 +38,16 @@ export default async function handler(req, res) {
     try {
       await Promise.all(
         emails.map(async (email) => {
-          const userId = await getAuth0UserIdByEmail(email)
+          let userId
+
+          try {
+            userId = await getAuth0UserIdByEmail(email)
+          } catch (err) {
+            console.log(`User not found, creating new user: ${email}`)
+            userId = await createAuth0User(email)
+            await sendWelcomeEmail(email)
+          }
+
           await updateUserMetadata(userId, { subscribed: true })
         })
       )
@@ -70,17 +80,76 @@ async function getAuth0UserIdByEmail(email) {
   return users[0].user_id
 }
 
+async function createAuth0User(email) {
+  const token = await getManagementToken()
+
+  const response = await fetch(
+    `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        connection: "email",
+        email_verified: true,
+        app_metadata: { subscribed: false },
+      }),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to create user: ${response.statusText}`)
+  }
+
+  const user = await response.json()
+  return user.user_id
+}
+
 async function updateUserMetadata(userId, metadata) {
   const token = await getManagementToken()
 
-  await fetch(`${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ app_metadata: metadata }),
-  })
+  const response = await fetch(
+    `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ app_metadata: metadata }),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to update metadata: ${response.statusText}`)
+  }
+
+  console.log("Metadata update response:", await response.json())
+}
+
+async function sendWelcomeEmail(email) {
+  const response = await fetch(
+    `${process.env.AUTH0_DOMAIN}/passwordless/start`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        client_id: process.env.AUTH0_CLIENT_ID,
+        connection: "email",
+        email,
+        send: "link",
+      }),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to send welcome email: ${response.statusText}`)
+  }
+
+  console.log("Welcome email sent successfully to", email)
 }
 
 async function getManagementToken() {

@@ -9,8 +9,28 @@ export default function SubscribeContent() {
   const [emails, setEmails] = useState([""])
   const [error, setError] = useState("")
 
+  const pricingTiers = [
+    { quantity: 1, price: 3000 },
+    { quantity: 2, price: 2900 },
+    { quantity: 3, price: 2800 },
+    { quantity: 4, price: 2750 },
+    { quantity: 5, price: 2500 },
+  ]
+
+  const getTierPrice = (quantity) => {
+    const tier = pricingTiers.find((tier) => quantity <= tier.quantity)
+    return tier ? tier.price : pricingTiers[pricingTiers.length - 1].price
+  }
+
   const handleAddEmail = () => {
+    if (emails.length >= 5) {
+      setError(
+        "If you wish to add more than 5 emails please get in touch with us."
+      )
+      return
+    }
     setEmails([...emails, ""])
+    setError("")
   }
 
   const handleChange = (index, value) => {
@@ -22,6 +42,7 @@ export default function SubscribeContent() {
   const handleRemoveEmail = (index) => {
     const updatedEmails = emails.filter((_, i) => i !== index)
     setEmails(updatedEmails)
+    setError("")
   }
 
   const validateEmails = () => {
@@ -77,7 +98,7 @@ export default function SubscribeContent() {
                 value={email}
                 placeholder="Enter email"
                 onChange={(e) => handleChange(index, e.target.value)}
-                className="mr-2 flex-grow rounded border px-2 py-1 bg-[#e8e8e8] text-[#34333d]"
+                className="mr-2 flex-grow rounded border px-2 py-1"
               />
               <button
                 onClick={() => handleRemoveEmail(index)}
@@ -87,12 +108,19 @@ export default function SubscribeContent() {
               </button>
             </div>
           ))}
-          <button
-            onClick={handleAddEmail}
-            className="mb-4 block rounded bg-gray-200 px-2 py-1 text-sm bg-[#e8e8e8] text-[#34333d]"
-          >
-            Add Another Email
-          </button>
+          {emails.length < 5 && (
+            <button
+              onClick={handleAddEmail}
+              className="mb-4 block rounded bg-gray-200 px-2 py-1 text-sm"
+            >
+              Add Another Email
+            </button>
+          )}
+          <div className="mb-4">
+            <p className="text-lg">
+              Total Price: €{(getTierPrice(emails.length) / 100).toFixed(2)}
+            </p>
+          </div>
           <Button onClick={handleSubscribe}>
             Subscribe with{" "}
             <FontAwesomeIcon aria-hidden="true" icon={faCcStripe} />
