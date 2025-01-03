@@ -40,13 +40,14 @@ export default function SubscribeContent() {
   const handleSubscribe = async () => {
     if (!validateEmails()) return
 
+    const payload = { subscriptions: emails.map((email) => ({ email })) }
+    console.log("Payload being sent:", payload)
+
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          subscriptions: emails.map((email) => ({ email })),
-        }),
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) {

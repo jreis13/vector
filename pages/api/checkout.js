@@ -21,6 +21,8 @@ export default async function handler(req, res) {
         metadata: { email: subscription.email },
       }))
 
+      console.log("Creating session with lineItems:", lineItems)
+
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
@@ -31,6 +33,8 @@ export default async function handler(req, res) {
         success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
+
+      console.log("Session created successfully:", session.url)
 
       return res.status(200).json({ url: session.url })
     } catch (err) {
