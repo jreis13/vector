@@ -101,7 +101,7 @@ export default function SubscribeContent() {
                 value={email}
                 placeholder="Enter email"
                 onChange={(e) => handleChange(index, e.target.value)}
-                className="mr-2 flex-grow rounded border px-2 py-1"
+                className="mr-2 flex-grow rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
               />
               <button
                 onClick={() => handleRemoveEmail(index)}
@@ -114,7 +114,7 @@ export default function SubscribeContent() {
           {emails.length < 5 && (
             <button
               onClick={handleAddEmail}
-              className="mb-4 block rounded bg-gray-200 px-2 py-1 text-sm"
+              className="mb-4 block rounded text-[#403f4c] px-2 py-1 text-sm"
             >
               Add Another Email
             </button>
