@@ -23,9 +23,8 @@ export default function SubscribeContent() {
   }
 
   const calculateTotalPrice = () => {
-    return emails.reduce((total, _, index) => {
-      return total + getTierPrice(index + 1)
-    }, 0)
+    const unitPrice = getTierPrice(emails.length)
+    return unitPrice * emails.length
   }
 
   const handleAddEmail = () => {
