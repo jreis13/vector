@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { subscriptions } = req.body
 
-    console.log("Subscriptions received:", subscriptions)
-
     if (
       !subscriptions ||
       !Array.isArray(subscriptions) ||
@@ -17,27 +15,31 @@ export default async function handler(req, res) {
     }
 
     try {
-      const lineItems = subscriptions.map(() => ({
-        price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
-        quantity: 1,
-      }))
+      const sessions = await Promise.all(
+        subscriptions.map(async (subscription) => {
+          const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            mode: "subscription",
+            line_items: [
+              {
+                price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
+                quantity: 1,
+              },
+            ],
+            metadata: {
+              email: subscription.email,
+            },
+            success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
+          })
 
-      console.log("Line items:", lineItems)
+          return { email: subscription.email, url: session.url }
+        })
+      )
 
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        mode: "subscription",
-        line_items: lineItems,
-        metadata: {
-          emails: subscriptions.map((sub) => sub.email).join(","),
-        },
-        success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
-      })
+      console.log("Sessions created successfully:", sessions)
 
-      console.log("Session created successfully:", session.url)
-
-      return res.status(200).json({ url: session.url })
+      return res.status(200).json({ sessions })
     } catch (err) {
       console.error("Stripe session creation failed:", err)
       return res

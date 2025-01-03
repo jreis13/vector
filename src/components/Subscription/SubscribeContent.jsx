@@ -40,32 +40,33 @@ export default function SubscribeContent() {
   const handleSubscribe = async () => {
     if (!validateEmails()) return
 
-    const payload = { subscriptions: emails.map((email) => ({ email })) }
-    console.log("Payload being sent:", payload)
-
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          subscriptions: emails.map((email) => ({ email })),
+        }),
       })
 
       if (!response.ok) {
         const { error } = await response.json()
-        setError(error || "Failed to create checkout session.")
+        setError(error || "Failed to create checkout sessions.")
         return
       }
 
-      const { url } = await response.json()
-      if (!url) {
-        setError("No URL returned from the server.")
+      const { sessions } = await response.json()
+
+      if (!sessions || sessions.length === 0) {
+        setError("No sessions returned from the server.")
         return
       }
 
-      window.location.href = url
+      // Redirect the user to the first session URL (you can customize this logic)
+      window.location.href = sessions[0].url
     } catch (err) {
       console.error("Checkout request failed:", err)
-      setError("Something went wrong while processing the subscription.")
+      setError("Something went wrong while processing the subscriptions.")
     }
   }
 
