@@ -25,24 +25,25 @@ export default async function handler(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     )
+    console.log("Stripe Webhook Event:", event)
   } catch (err) {
+    console.error("Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
-    const metadata = session.metadata.emails
+    console.log("Checkout Session Data:", session)
+
+    const email = session.metadata.email
 
     try {
-      const emails = metadata.split(",").map((entry) => entry.split(":")[1])
-
-      await Promise.all(
-        emails.map(async (email) => {
-          const userId = await getAuth0UserIdByEmail(email)
-          await updateUserMetadata(userId, { subscribed: true })
-        })
-      )
+      const userId = await getAuth0UserIdByEmail(email)
+      console.log("Auth0 User ID:", userId)
+      await updateUserMetadata(userId, { subscribed: true })
+      console.log("User metadata updated successfully")
     } catch (error) {
+      console.error("Error updating user metadata:", error.message)
       return res.status(500).send("Failed to update user metadata.")
     }
   }
@@ -71,14 +72,23 @@ async function getAuth0UserIdByEmail(email) {
 async function updateUserMetadata(userId, metadata) {
   const token = await getManagementToken()
 
-  await fetch(`${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ app_metadata: metadata }),
-  })
+  const response = await fetch(
+    `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ app_metadata: metadata }),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to update metadata: ${response.statusText}`)
+  }
+
+  console.log("Metadata update response:", await response.json())
 }
 
 async function getManagementToken() {

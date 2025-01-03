@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from "react"
-
 import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
+import { useState } from "react"
 import Button from "../Button"
 
 export default function SubscribeContent() {
@@ -62,16 +60,11 @@ export default function SubscribeContent() {
         return
       }
 
-      // Redirect the user to the first session URL (you can customize this logic)
       window.location.href = sessions[0].url
     } catch (err) {
       console.error("Checkout request failed:", err)
       setError("Something went wrong while processing the subscriptions.")
     }
-  }
-
-  if (typeof window === "undefined") {
-    return null
   }
 
   return (
