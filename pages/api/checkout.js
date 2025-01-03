@@ -15,25 +15,21 @@ export default async function handler(req, res) {
     }
 
     try {
-      const lineItems = subscriptions.map((subscription) => ({
-        price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V", // Replace with your actual price ID
-        quantity: 1,
-      }))
-
-      console.log("Line items:", lineItems)
-
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
-        line_items: lineItems,
+        line_items: [
+          {
+            price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
+            quantity: 1,
+          },
+        ],
         metadata: {
           emails: subscriptions.map((sub) => sub.email).join(","),
         },
         success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
-
-      console.log("Checkout session created:", session.url)
 
       return res.status(200).json({ url: session.url })
     } catch (err) {
