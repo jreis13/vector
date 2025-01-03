@@ -31,18 +31,15 @@ export default async function handler(req, res) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
+    const metadata = session.metadata.emails
 
     try {
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id)
+      const emails = metadata.split(",").map((entry) => entry.split(":")[1])
 
       await Promise.all(
-        lineItems.data.map(async (item) => {
-          const email = item.metadata.email
-
-          if (email) {
-            const userId = await getAuth0UserIdByEmail(email)
-            await updateUserMetadata(userId, { subscribed: true })
-          }
+        emails.map(async (email) => {
+          const userId = await getAuth0UserIdByEmail(email)
+          await updateUserMetadata(userId, { subscribed: true })
         })
       )
     } catch (error) {

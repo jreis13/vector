@@ -15,21 +15,23 @@ export default async function handler(req, res) {
     }
 
     try {
-      const lineItems = subscriptions.map((subscription) => ({
+      const lineItems = subscriptions.map(() => ({
         price: "price_1QUdY7H8mb7EVuIwB4Y5Q87V",
         quantity: 1,
-        metadata: { email: subscription.email },
       }))
 
+      const metadata = subscriptions
+        .map((sub, index) => `email_${index + 1}:${sub.email}`)
+        .join(",")
+
       console.log("Creating session with lineItems:", lineItems)
+      console.log("Metadata:", metadata)
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
         line_items: lineItems,
-        metadata: {
-          emails: subscriptions.map((sub) => sub.email).join(","),
-        },
+        metadata: { emails: metadata },
         success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
