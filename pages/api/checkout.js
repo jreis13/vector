@@ -6,6 +6,8 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { subscriptions } = req.body
 
+    console.log("Subscriptions received:", subscriptions)
+
     if (
       !subscriptions ||
       !Array.isArray(subscriptions) ||
@@ -20,18 +22,15 @@ export default async function handler(req, res) {
         quantity: 1,
       }))
 
-      const metadata = subscriptions
-        .map((sub, index) => `email_${index + 1}:${sub.email}`)
-        .join(",")
-
-      console.log("Creating session with lineItems:", lineItems)
-      console.log("Metadata:", metadata)
+      console.log("Line items:", lineItems)
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
         line_items: lineItems,
-        metadata: { emails: metadata },
+        metadata: {
+          emails: subscriptions.map((sub) => sub.email).join(","),
+        },
         success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
@@ -40,7 +39,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({ url: session.url })
     } catch (err) {
-      console.error("Stripe session creation failed:", err.message)
+      console.error("Stripe session creation failed:", err)
       return res
         .status(500)
         .json({ error: "Failed to create Stripe Checkout session." })
