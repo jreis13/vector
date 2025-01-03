@@ -8,40 +8,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 
 export default function SubscribeContent() {
-  const [subscriptions, setSubscriptions] = useState([
-    { email: "", quantity: 1 },
-  ])
+  const [emails, setEmails] = useState([""])
   const [error, setError] = useState("")
 
-  const handleAddSubscription = () => {
-    setSubscriptions([...subscriptions, { email: "", quantity: 1 }])
+  const handleAddEmail = () => {
+    setEmails([...emails, ""])
   }
 
-  const handleChange = (index, field, value) => {
-    const updatedSubscriptions = [...subscriptions]
-    updatedSubscriptions[index][field] = value
-    setSubscriptions(updatedSubscriptions)
+  const handleChange = (index, value) => {
+    const updatedEmails = [...emails]
+    updatedEmails[index] = value
+    setEmails(updatedEmails)
   }
 
-  const handleRemoveSubscription = (index) => {
-    const updatedSubscriptions = subscriptions.filter((_, i) => i !== index)
-    setSubscriptions(updatedSubscriptions)
+  const handleRemoveEmail = (index) => {
+    const updatedEmails = emails.filter((_, i) => i !== index)
+    setEmails(updatedEmails)
   }
 
-  const validateSubscriptions = () => {
-    for (const sub of subscriptions) {
-      if (!sub.email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(sub.email)) {
-        setError("Please enter valid email addresses for all subscriptions.")
-        return false
-      }
-      if (
-        !sub.quantity ||
-        sub.quantity < 1 ||
-        !Number.isInteger(sub.quantity)
-      ) {
-        setError(
-          "Please enter valid quantities (positive integers) for all subscriptions."
-        )
+  const validateEmails = () => {
+    for (const email of emails) {
+      if (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+        setError("Please enter valid email addresses.")
         return false
       }
     }
@@ -50,13 +38,15 @@ export default function SubscribeContent() {
   }
 
   const handleSubscribe = async () => {
-    if (!validateSubscriptions()) return
+    if (!validateEmails()) return
 
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscriptions }),
+        body: JSON.stringify({
+          subscriptions: emails.map((email) => ({ email })),
+        }),
       })
 
       if (!response.ok) {
@@ -66,7 +56,6 @@ export default function SubscribeContent() {
       }
 
       const { url } = await response.json()
-
       if (!url) {
         setError("No URL returned from the server.")
         return
@@ -77,6 +66,10 @@ export default function SubscribeContent() {
       console.error("Checkout request failed:", err)
       setError("Something went wrong while processing the subscription.")
     }
+  }
+
+  if (typeof window === "undefined") {
+    return null
   }
 
   return (
@@ -107,7 +100,7 @@ export default function SubscribeContent() {
           ))}
           <button
             onClick={handleAddEmail}
-            className="mb-4 block rounded px-2 py-1 text-sm"
+            className="mb-4 block rounded bg-gray-200 px-2 py-1 text-sm"
           >
             Add Another Email
           </button>
