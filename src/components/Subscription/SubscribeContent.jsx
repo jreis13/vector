@@ -121,7 +121,7 @@ export default function SubscribeContent() {
           )}
           <div className="mb-4">
             <p className="text-lg">
-              Total Price: €{(calculateTotalPrice() / 100).toFixed(2)}
+              Total Price: €{calculateTotalPrice().toFixed(2)}
             </p>
           </div>
           <Button onClick={handleSubscribe}>
