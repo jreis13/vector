@@ -49,18 +49,12 @@ export default function SubscribeContent() {
 
       if (!response.ok) {
         const { error } = await response.json()
-        setError(error || "Failed to create checkout sessions.")
+        setError(error || "Failed to create checkout session.")
         return
       }
 
-      const { sessions } = await response.json()
-
-      if (!sessions || sessions.length === 0) {
-        setError("No sessions returned from the server.")
-        return
-      }
-
-      window.location.href = sessions[0].url
+      const { url } = await response.json()
+      window.location.href = url
     } catch (err) {
       console.error("Checkout request failed:", err)
       setError("Something went wrong while processing the subscriptions.")
