@@ -1,32 +1,9 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
-import { useEffect, useState } from "react"
 
 export default function Profile() {
-  const { user, error: authError, isLoading } = useUser()
-  const [userInfo, setUserInfo] = useState(null)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    async function fetchUserInfo() {
-      if (!user) return
-
-      try {
-        const response = await fetch(`/api/user/info?email=${user.email}`)
-        if (!response.ok) {
-          throw new Error("Failed to fetch user information")
-        }
-        const data = await response.json()
-        setUserInfo(data)
-      } catch (err) {
-        console.error("Error fetching user information:", err.message)
-        setError(err.message)
-      }
-    }
-
-    fetchUserInfo()
-  }, [user])
+  const { user, error, isLoading } = useUser()
 
   if (isLoading) {
     return (
@@ -36,43 +13,69 @@ export default function Profile() {
     )
   }
 
-  if (authError || error) {
+  if (error) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-red-500">{authError || error}</p>
+        <p className="text-red-500">{error.message}</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col px-6 py-8 lg:px-16 lg:py-16">
-      <h2 className="text-3xl font-bold">Profile</h2>
-      {user && userInfo && (
-        <div className="py-4">
-          <p>
-            <strong>Name:</strong> {userInfo.customer.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {userInfo.customer.email}
-          </p>
-          {userInfo.subscription && (
-            <div className="py-4">
-              <p>
-                <strong>Subscription Status: </strong>
-                <span className="text-[#00FF00]">
-                  {userInfo.subscription.status.charAt(0).toUpperCase() +
-                    userInfo.subscription.status.slice(1)}
-                </span>
-              </p>
-              <p>
-                <strong>Subscription Ends: </strong>
-                {new Date(
-                  userInfo.subscription.current_period_end * 1000
-                ).toLocaleDateString()}
-              </p>
+    <div className="flex justify-center items-center my-12 text-[#403f4c]">
+      {user && (
+        <div className="bg-[#e8e8e8] shadow-lg rounded-lg p-8 w-full max-w-md">
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl font-bold mt-4">
+              {user.app_metadata?.firstName && user.app_metadata?.lastName
+                ? `${user.app_metadata.firstName} ${user.app_metadata.lastName}`
+                : "N/A"}
+            </h2>
+            <p className=" text-sm">{user.email || "N/A"}</p>
+          </div>
+          <div className="mt-6">
+            <div className="flex justify-between py-2">
+              <span>Company:</span>
+              <span>{user.app_metadata?.companyName || "N/A"}</span>
             </div>
-          )}
+            <div className="flex justify-between py-2">
+              <span>Persona:</span>
+              <span>{user.app_metadata?.persona || "N/A"}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Subscription:</span>
+              <span
+                className={`${
+                  user.app_metadata?.subscribed
+                    ? "text-green-500"
+                    : "text-red-500"
+                } font-semibold`}
+              >
+                {user.app_metadata?.subscribed ? "Active" : "Inactive"}
+              </span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Subscription Expires:</span>
+              <span>
+                {console.log(user)}
+                {user.created_at
+                  ? new Date(
+                      new Date(user.created_at).setFullYear(
+                        new Date(user.created_at).getFullYear() + 1
+                      )
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : "N/A"}
+              </span>
+            </div>
+          </div>
         </div>
+      )}
+      {!user && (
+        <div className="text-gray-500 text-center">No user data available.</div>
       )}
     </div>
   )
