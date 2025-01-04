@@ -41,12 +41,13 @@ export default async function handler(req, res) {
 
     try {
       await Promise.all(
-        emails.map(async (email) => {
+        emails.map(async (email, index) => {
           let userId
 
           try {
             userId = await getAuth0UserIdByEmail(email)
           } catch (err) {
+            console.error("User not found, creating:", email)
             userId = await createAuth0User(email)
           }
 
@@ -59,6 +60,7 @@ export default async function handler(req, res) {
             role: roles[index],
           }
 
+          console.log("Updating user metadata for:", userId, metadata)
           await updateUserMetadata(userId, metadata)
         })
       )
