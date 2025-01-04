@@ -33,6 +33,11 @@ export default async function handler(req, res) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
     const emails = session.metadata.emails.split(",")
+    const firstNames = session.metadata.firstNames.split(",")
+    const lastNames = session.metadata.lastNames.split(",")
+    const companyNames = session.metadata.companyNames.split(",")
+    const personas = session.metadata.personas.split(",")
+    const roles = session.metadata.roles.split(",")
 
     try {
       await Promise.all(
@@ -45,7 +50,16 @@ export default async function handler(req, res) {
             userId = await createAuth0User(email)
           }
 
-          await updateUserMetadata(userId, { subscribed: true })
+          const metadata = {
+            subscribed: true,
+            firstName: firstNames[index],
+            lastName: lastNames[index],
+            companyName: companyNames[index],
+            persona: personas[index],
+            role: roles[index],
+          }
+
+          await updateUserMetadata(userId, metadata)
         })
       )
 

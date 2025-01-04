@@ -17,6 +17,11 @@ export default async function handler(req, res) {
     try {
       const metadata = {
         emails: subscriptions.map((sub) => sub.email).join(","),
+        firstNames: subscriptions.map((sub) => sub.firstName).join(","),
+        lastNames: subscriptions.map((sub) => sub.lastName).join(","),
+        companyNames: subscriptions.map((sub) => sub.companyName).join(","),
+        personas: subscriptions.map((sub) => sub.persona).join(","),
+        roles: subscriptions.map((sub) => sub.role).join(","),
       }
 
       const session = await stripe.checkout.sessions.create({
