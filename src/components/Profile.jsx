@@ -57,7 +57,6 @@ export default function Profile() {
             <div className="flex justify-between py-2">
               <span>Subscription Expires:</span>
               <span>
-                {console.log(user)}
                 {user.created_at
                   ? new Date(
                       new Date(user.created_at).setFullYear(
