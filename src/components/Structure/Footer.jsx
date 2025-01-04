@@ -18,7 +18,7 @@ export default function Footer() {
           </span>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center gap-8">
           <a
             href="/path/to/privacy-policy.pdf"
             target="_blank"

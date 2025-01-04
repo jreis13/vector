@@ -9,7 +9,7 @@ export default function CompetitorCard({ competitor }) {
           alt={`${competitor.name} logo`}
           fill
           sizes="100vw"
-          objectFit="contain"
+          style={{ objectFit: "contain" }}
         />
       </div>
       <div className="text-center">

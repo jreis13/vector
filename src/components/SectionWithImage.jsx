@@ -29,7 +29,7 @@ export default function SectionWithImage({
             width="auto"
             height="auto"
             sizes="(max-width: 768px) 100vw, 400px"
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
           />
         </div>
 

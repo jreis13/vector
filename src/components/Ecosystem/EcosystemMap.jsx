@@ -116,7 +116,7 @@ export default function EcosystemMap({ companies }) {
                     alt={name}
                     width={50}
                     height={50}
-                    objectFit="contain"
+                    style={{ objectFit: "contain" }}
                   />
                 )}
                 <h4>{name}</h4>
