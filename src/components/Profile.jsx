@@ -72,17 +72,6 @@ export default function Profile() {
               </p>
             </div>
           )}
-          {userInfo.associatedEmails &&
-            userInfo.associatedEmails.length > 0 && (
-              <div className="py-4">
-                <h3 className="text-xl font-bold">Associated Emails</h3>
-                <ul>
-                  {userInfo.associatedEmails.map((email, index) => (
-                    <li key={index}>{email}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
         </div>
       )}
     </div>
