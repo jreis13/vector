@@ -93,8 +93,8 @@ export default function EcosystemCountryProfiles({
                     <Image
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      height={50}
                       width={50}
+                      height={50}
                     />
                     <h3 className="text-lg font-bold">{company.name}</h3>
                   </div>
@@ -203,8 +203,9 @@ export default function EcosystemCountryProfiles({
               <Image
                 src={closeIconDark}
                 alt="Close"
+                width={24}
+                height={24}
                 className="cursor-pointer"
-                style={{ width: "100%", height: "auto" }}
               />
             </button>
             <div className="flex-grow overflow-y-auto p-4">

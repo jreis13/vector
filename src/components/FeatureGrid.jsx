@@ -38,11 +38,8 @@ export default function FeatureGrid({
                 <Image
                   src={expVectorAvatar}
                   alt="Exponential Vector Logo"
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                  }}
+                  layout="intrinsic"
+                  objectFit="contain"
                 />
               </div>
             </div>
@@ -69,9 +66,7 @@ export default function FeatureGrid({
                           alt={feature.name || feature.description}
                           fill
                           sizes="100vw"
-                          style={{
-                            objectFit: "contain",
-                          }}
+                          objectFit="contain"
                         />
                       </div>
                     </div>

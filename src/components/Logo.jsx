@@ -19,22 +19,19 @@ export default function Logo() {
   }, [])
 
   return (
-    (<a
+    <a
       href="/"
       className="transition-text-opacity text-4xl font-semibold leading-[42px] duration-300 hover:text-[#7032ff] hover:text-opacity-70"
     >
       {isDesktop ? (
-        <div className="flex">
+        <div className="flex items-center">
           <Image
             alt="Exponential Vector Logo"
             src={expVectorLogo}
             width={80}
             height={80}
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
-          <p>exponentialvector</p>
+          />
+          <p className="ml-2">exponentialvector</p>
         </div>
       ) : (
         <Image
@@ -42,11 +39,8 @@ export default function Logo() {
           src={expVectorLogo}
           width={80}
           height={80}
-          style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+        />
       )}
-    </a>)
-  );
+    </a>
+  )
 }

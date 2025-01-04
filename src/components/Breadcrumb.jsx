@@ -70,7 +70,7 @@ export default function Breadcrumb({ sections }) {
   }
 
   return (
-    (<div className="fixed bottom-0 left-0 right-0 z-20 flex flex-col items-center">
+    <div className="fixed bottom-0 left-0 right-0 z-20 flex flex-col items-center">
       <nav
         className={`flex w-full transform justify-center transition-all duration-300 ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
@@ -94,10 +94,7 @@ export default function Breadcrumb({ sections }) {
                     alt={section.title}
                     width={24}
                     height={24}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                  />
                 </button>
               </li>
             ))}
@@ -114,12 +111,11 @@ export default function Breadcrumb({ sections }) {
           <Image
             src={isVisible ? arrowDown : arrowUp}
             alt={isVisible ? "Arrow Down" : "Arrow Up"}
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+            width={24}
+            height={24}
+          />
         </button>
       </div>
-    </div>)
-  );
+    </div>
+  )
 }

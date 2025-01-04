@@ -18,7 +18,23 @@ export default function Footer() {
           </span>
         </div>
 
-        <div>
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <a
+            href="/path/to/privacy-policy.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#e8e8e8] hover:underline"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="/path/to/terms-and-conditions.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#e8e8e8] hover:underline"
+          >
+            Terms & Conditions
+          </a>
           <NavLinks isDesktop={true} paths={socialPATHS} />
         </div>
       </div>

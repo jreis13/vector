@@ -7,7 +7,7 @@ import Link from "../Link"
 
 export default function CompanyCardsClickable({ title, data }) {
   return (
-    (<div className="flex flex-col py-8 lg:py-16">
+    <div className="flex flex-col py-8 lg:py-16">
       <h2 className="pb-4 text-lg font-bold">{title}</h2>
       <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
         {data &&
@@ -23,10 +23,8 @@ export default function CompanyCardsClickable({ title, data }) {
                   width={100}
                   height={100}
                   className={title === "Founding Team" ? "" : "object-contain"}
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                  objectFit={title === "Founding Team" ? undefined : "contain"}
+                />
               </div>
               <div className="text-center">
                 <span className="block font-semibold">{item.name}</span>
@@ -51,6 +49,6 @@ export default function CompanyCardsClickable({ title, data }) {
             </div>
           ))}
       </div>
-    </div>)
-  );
+    </div>
+  )
 }

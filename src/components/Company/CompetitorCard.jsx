@@ -2,16 +2,15 @@ import Image from "next/image"
 
 export default function CompetitorCard({ competitor }) {
   return (
-    (<div className="group relative flex flex-col items-center p-4">
+    <div className="group relative flex flex-col items-center p-4">
       <div className="relative mb-4 h-24 w-24">
         <Image
           src={competitor.logo}
           alt={`${competitor.name} logo`}
           fill
           sizes="100vw"
-          style={{
-            objectFit: "contain"
-          }} />
+          objectFit="contain"
+        />
       </div>
       <div className="text-center">
         <h3 className="text-xl font-bold">{competitor.name}</h3>
@@ -33,6 +32,6 @@ export default function CompetitorCard({ competitor }) {
           </p>
         </div>
       </div>
-    </div>)
-  );
+    </div>
+  )
 }
