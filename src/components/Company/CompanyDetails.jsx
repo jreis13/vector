@@ -1,3 +1,5 @@
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import CompanyCardsClickable from "./CompanyCardsClickable"
@@ -21,17 +23,31 @@ export default function CompanyDetails({ company, ecosystemName }) {
     router.push(`/ecosystems/${normalizedEcosystemName}`)
   }
 
+  const companyWebsite = company?.stats?.data?.find(
+    (stat) => stat.label === "Website"
+  )?.value
+
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
-        <div className="pb-8">
+        <div className="pb-8 flex items-center gap-4">
           <Image
             src={company.logo}
             alt={`${company.name} logo`}
             width={96}
             height={96}
           />
+          <a
+            href={companyWebsite}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer"
+          >
+            <FontAwesomeIcon icon={faExternalLinkAlt} />
+          </a>
         </div>
+
+        <div>{console.log(company)}</div>
 
         <p className="pb-8">{company.summary}</p>
 
