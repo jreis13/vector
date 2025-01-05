@@ -70,7 +70,7 @@ export default function CompaniesPage({ companies, ecosystemName }) {
           Page {currentPage + 1} of {totalPages}
         </p>
         {currentPage < totalPages - 1 && (
-          <button onClick={handlePrev} className="py-2 text-3xl">
+          <button onClick={handleNext} className="py-2 text-3xl">
             <FontAwesomeIcon icon={faArrowCircleRight} />
           </button>
         )}
