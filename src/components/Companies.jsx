@@ -62,7 +62,7 @@ export default function CompaniesPage({ companies, ecosystemName }) {
 
       <div className="flex justify-between items-center mt-8">
         {currentPage > 0 && (
-          <button onClick={handleNext} className="py-2 text-3xl">
+          <button onClick={handlePrev} className="py-2 text-3xl">
             <FontAwesomeIcon icon={faArrowCircleLeft} />
           </button>
         )}
@@ -70,7 +70,7 @@ export default function CompaniesPage({ companies, ecosystemName }) {
           Page {currentPage + 1} of {totalPages}
         </p>
         {currentPage < totalPages - 1 && (
-          <button onClick={handleNext} className="py-2 text-3xl">
+          <button onClick={handlePrev} className="py-2 text-3xl">
             <FontAwesomeIcon icon={faArrowCircleRight} />
           </button>
         )}
