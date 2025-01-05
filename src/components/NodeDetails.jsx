@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 
-export default function NodeDetails({ nodes }) {
+export default function NodeDetails({ nodes, ecosystem }) {
   const [expandedIndex, setExpandedIndex] = useState(null)
 
   const toggleNode = (index) => {
@@ -16,6 +16,7 @@ export default function NodeDetails({ nodes }) {
     <div className="mt-16">
       <div className="px-16 flex justify-center">
         <div className="container">
+          <h2 className="text-3xl font-bold mb-16">{ecosystem.name}</h2>
           <div className="w-full grid gap-10">
             {nodes.map((node, index) => (
               <div key={node.name}>

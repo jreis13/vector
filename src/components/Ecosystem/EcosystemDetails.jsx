@@ -39,7 +39,7 @@ export default function EcosystemDetails({ ecosystem }) {
         {currentTab === "overview" && (
           <>
             <NodeGraph ecosystem={ecosystem} />
-            <NodeDetails nodes={flattenedNodes} />
+            <NodeDetails ecosystem={ecosystem} nodes={flattenedNodes} />
           </>
         )}
         {currentTab === "companies" && (
