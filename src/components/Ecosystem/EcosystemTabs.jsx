@@ -2,7 +2,7 @@
 
 export default function EcosystemTabs({ sections, currentTab, setCurrentTab }) {
   return (
-    <div className="mb-4 mt-8 flex items-center justify-center">
+    <div className="mb-4 mt-8 flex items-center justify-center px-8">
       <nav className="flex items-center justify-center">
         <ol className="flex list-none space-x-8 rounded-full bg-[#34333d] p-4 px-8">
           {sections &&
