@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import flattenNodes from "src/common/utils/flattenNodes"
 import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
 import NodeDetails from "../NodeDetails"
@@ -24,6 +25,8 @@ export default function EcosystemDetails({ ecosystem }) {
     { title: "Market Research", id: "marketResearch", info: "(Coming Soon)" },
   ]
 
+  const flattenedNodes = flattenNodes(ecosystem.nodes)
+
   return (
     <div>
       <EcosystemTabs
@@ -36,7 +39,7 @@ export default function EcosystemDetails({ ecosystem }) {
         {currentTab === "overview" && (
           <>
             <NodeGraph ecosystem={ecosystem} />
-            <NodeDetails nodes={ecosystem.nodes} />
+            <NodeDetails nodes={flattenedNodes} />
           </>
         )}
         {currentTab === "companies" && (
