@@ -2,6 +2,7 @@ import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCardsClickable from "./CompanyCardsClickable"
 import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
 import CompanyStats from "./CompanyStats"
@@ -49,44 +50,54 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <div>{console.log(company)}</div>
 
-        <p className="pb-8">{company.summary}</p>
+        <p className="pb-8 text-xl leading-8">{company.summary}</p>
 
         {company.stats && <CompanyStats stats={company.stats.data} />}
 
-        {company.foundingTeam && (
-          <CompanyCardsClickable
-            title={company.foundingTeam.title}
-            data={company.foundingTeam.data}
-          />
-        )}
+        <ScrollReveal id="foundingTeam">
+          {company.foundingTeam && (
+            <CompanyCardsClickable
+              title={company.foundingTeam.title}
+              data={company.foundingTeam.data}
+            />
+          )}
+        </ScrollReveal>
 
-        {company.investors && (
-          <CompanyCardsClickable
-            title={company.investors.title}
-            data={company.investors.data}
-          />
-        )}
+        <ScrollReveal id="investors">
+          {company.investors && (
+            <CompanyCardsClickable
+              title={company.investors.title}
+              data={company.investors.data}
+            />
+          )}
+        </ScrollReveal>
 
-        {company.customerGrowth && (
-          <CompanyText
-            title={company.customerGrowth.title}
-            data={company.customerGrowth.data}
-          />
-        )}
+        <ScrollReveal id="customerGrowth">
+          {company.customerGrowth && (
+            <CompanyText
+              title={company.customerGrowth.title}
+              data={company.customerGrowth.data}
+            />
+          )}
+        </ScrollReveal>
 
-        {company.patents && (
-          <CompanyText
-            title={company.patents.title}
-            data={company.patents.data}
-          />
-        )}
+        <ScrollReveal id="patents">
+          {company.patents && (
+            <CompanyText
+              title={company.patents.title}
+              data={company.patents.data}
+            />
+          )}
+        </ScrollReveal>
 
-        {company.financials && (
-          <CompanyCardsNonClickable
-            title={company.financials.title}
-            data={company.financials.data}
-          />
-        )}
+        <ScrollReveal id="financials">
+          {company.financials && (
+            <CompanyCardsNonClickable
+              title={company.financials.title}
+              data={company.financials.data}
+            />
+          )}
+        </ScrollReveal>
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ import Link from "../Link"
 export default function CompanyCardsClickable({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
-      <h2 className="pb-4 text-lg font-bold">{title}</h2>
+      <h2 className="pb-4">{title}</h2>
       <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
         {data &&
           data.map((item, index) => (
@@ -27,9 +27,13 @@ export default function CompanyCardsClickable({ title, data }) {
                 />
               </div>
               <div className="text-center">
-                <span className="block font-semibold">{item.name}</span>
-                <p>{item.title || item.description}</p>
-                {item.value && <p className="mt-2">{item.value}</p>}
+                <span className="block font-semibold text-xl">{item.name}</span>
+                <p className="text-[#b8b8b8] text-lg font-medium">
+                  {item.title || item.description}
+                </p>
+                {item.value && (
+                  <p className="mt-2 text-xl font-semibold">{item.value}</p>
+                )}
               </div>
               {item.link && (
                 <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-75 text-[#e8e8e8] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">

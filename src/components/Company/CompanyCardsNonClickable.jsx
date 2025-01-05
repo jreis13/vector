@@ -56,7 +56,7 @@ export default function CompanyCardsNonClickable({ title, data }) {
           key !== "icon" && key !== "logo" && key !== "name" && key !== "label"
       )
       .map(([key, value]) => (
-        <p key={key} className="text-center">
+        <p key={key} className="text-center text-[#b8b8b8] text-lg font-medium">
           {value}
         </p>
       ))
@@ -64,7 +64,7 @@ export default function CompanyCardsNonClickable({ title, data }) {
 
   return (
     <div className="flex flex-col py-8 lg:py-16">
-      <h2 className="pb-4 text-lg font-bold">{title}</h2>
+      <h2 className="pb-4">{title}</h2>
       <div className={`grid grid-cols-1 gap-4 pb-8 md:grid-cols-2`}>
         {data &&
           data.map((item, index) => (
@@ -90,7 +90,9 @@ export default function CompanyCardsNonClickable({ title, data }) {
                 )}
               </div>
               <div className="text-center">
-                <h3 className="font-semibold">{item.name || item.label}</h3>
+                <h3 className="text-xl font-semibold">
+                  {item.name || item.label}
+                </h3>
                 {renderItemContent(item)}
               </div>
             </div>
