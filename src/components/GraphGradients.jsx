@@ -22,28 +22,28 @@ const GradientDefinitions = ({ svg }) => {
 
   createGradient(
     "gradientLevel0",
-    "rgba(150, 50, 200, 1)",
-    "rgba(187, 68, 240, 1)"
+    "rgba(51, 0, 102, 1)",
+    "rgba(75, 30, 121, 1)"
   )
   createGradient(
     "gradientLevel1",
-    "rgba(200, 100, 200, 1)",
-    "rgba(170, 85, 230, 1)"
+    "rgba(75, 30, 121, 1)",
+    "rgba(112, 50, 255, 1)"
   )
   createGradient(
     "gradientLevel2",
-    "rgba(240, 130, 180, 1)",
-    "rgba(200, 120, 220, 1)"
+    "rgba(112, 50, 255, 1)",
+    "rgba(150, 50, 200, 1)"
   )
   createGradient(
     "gradientLevel3",
-    "rgba(255, 160, 130, 1)",
-    "rgba(240, 150, 180, 1)"
+    "rgba(216, 113, 3, 1)",
+    "rgba(255, 153, 102, 1)"
   )
   createGradient(
     "gradientLevel4",
     "rgba(255, 200, 150, 1)",
-    "rgba(255, 153, 102, 1)"
+    "rgba(255, 160, 130, 1)"
   )
 
   return null

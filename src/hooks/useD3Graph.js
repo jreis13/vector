@@ -360,7 +360,7 @@ export const transformNetworkData = (ecosystem) => {
       group: 1,
       fixed: true,
       name: ecosystem.name,
-      radius: 70,
+      radius: 80,
     },
   ]
   const links = []
@@ -375,11 +375,14 @@ export const transformNetworkData = (ecosystem) => {
 
         const existingNode = nodes.find((node) => node.id === nodeId)
         if (!existingNode) {
+          const baseRadius = 30
+          const scaleFactor = 1 + (1.5 - 1) * (3 - groupLevel)
+          const radius = baseRadius * scaleFactor
           nodes.push({
             id: nodeId,
             group: groupLevel,
             name: item.name,
-            radius: Math.max(20, 40 - groupLevel * 5),
+            radius: radius,
             data: item.data || null,
             title: item.title || "",
           })
