@@ -28,7 +28,7 @@ export default function CompanyCard({
       const normalizedEcosystemName = normalizeName(ecosystemName)
       const normalizedCompanyName = normalizeName(company.name)
       const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
-      window.open(url, "_blank")
+      window.open(url, "_self")
     }
   }
 

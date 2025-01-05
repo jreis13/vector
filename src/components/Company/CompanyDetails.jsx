@@ -1,4 +1,7 @@
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
+import {
+  faCircleArrowLeft,
+  faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -20,8 +23,8 @@ export default function CompanyDetails({ company, ecosystemName }) {
   }
 
   const handleBackClick = () => {
-    const normalizedEcosystemName = encodeURIComponent(ecosystemName)
-    router.push(`/ecosystems/${normalizedEcosystemName}`)
+    const url = `/ecosystems/${ecosystemName}?tab=companies`
+    window.open(url, "_self")
   }
 
   const companyWebsite = company?.stats?.data?.find(
@@ -31,6 +34,13 @@ export default function CompanyDetails({ company, ecosystemName }) {
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
+        <button
+          onClick={handleBackClick}
+          className="text-4xl cursor-pointer fixed bottom-4 p-8 left-4"
+        >
+          <FontAwesomeIcon icon={faCircleArrowLeft} />
+        </button>
+
         <div className="pb-8 flex items-center gap-4">
           <Image
             src={company.logo}

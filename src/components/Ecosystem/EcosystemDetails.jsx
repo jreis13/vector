@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import flattenNodes from "src/common/utils/flattenNodes"
 import NodeGraph from "src/components/NodeGraph"
 import CompaniesPage from "../Companies"
@@ -12,7 +13,10 @@ import EcosystemProductComparison from "./EcosystemProductComparison"
 import EcosystemTabs from "./EcosystemTabs"
 
 export default function EcosystemDetails({ ecosystem }) {
-  const [currentTab, setCurrentTab] = useState("overview")
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const initialTab = searchParams.get("tab") || "overview"
+  const [currentTab, setCurrentTab] = useState(initialTab)
 
   const sections = [
     { title: "Overview", id: "overview" },
@@ -27,12 +31,26 @@ export default function EcosystemDetails({ ecosystem }) {
 
   const flattenedNodes = flattenNodes(ecosystem.nodes)
 
+  const handleTabChange = (newTab) => {
+    setCurrentTab(newTab)
+    const url = `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}?tab=${newTab}`
+    router.push(url, { shallow: true })
+  }
+
+  useEffect(() => {
+    setCurrentTab(initialTab)
+  }, [initialTab])
+
+  useEffect(() => {
+    setCurrentTab(initialTab)
+  }, [initialTab])
+
   return (
     <div>
       <EcosystemTabs
         sections={sections}
         currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
+        setCurrentTab={handleTabChange}
       />
 
       <div className="mt-4 p-8">

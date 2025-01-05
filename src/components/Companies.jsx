@@ -11,7 +11,7 @@ import CompanyCard from "./CompanyCard"
 
 export default function CompaniesPage({ companies, ecosystemName }) {
   const [currentPage, setCurrentPage] = useState(0)
-  const companiesPerPage = 3
+  const companiesPerPage = 6
 
   const totalPages = Math.ceil(companies.length / companiesPerPage)
 

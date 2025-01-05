@@ -8,7 +8,7 @@ export default function EcosystemCard({ ecosystem }) {
 
   const handleCardClick = () => {
     router.push(
-      `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}`
+      `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}?tab=overview`
     )
   }
 

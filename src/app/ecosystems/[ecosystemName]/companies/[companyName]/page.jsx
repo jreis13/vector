@@ -38,7 +38,7 @@ export default function CompanyPage({ params }) {
 
   return (
     <div>
-      <CompanyLayout company={company} />
+      <CompanyLayout company={company} ecosystemName={ecosystemName} />
     </div>
   )
 }
