@@ -23,7 +23,7 @@ export default function ActiveInvestors({ companies }) {
     }))
 
   const [currentPage, setCurrentPage] = useState(0)
-  const investorsPerPage = 6
+  const investorsPerPage = 9
   const totalPages = Math.ceil(allInvestors.length / investorsPerPage)
 
   const handleNext = () => {

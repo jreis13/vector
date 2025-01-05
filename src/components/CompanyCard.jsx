@@ -23,12 +23,17 @@ export default function CompanyCard({
 
   const normalizeName = (name) => name.replace(/\s+/g, "").toLowerCase()
 
-  const handleCardClick = () => {
+  const handleCardClick = (event) => {
     if (isClickable) {
       const normalizedEcosystemName = normalizeName(ecosystemName)
       const normalizedCompanyName = normalizeName(company.name)
       const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
-      window.open(url, "_self")
+
+      if (event.ctrlKey || event.metaKey || event.button === 1) {
+        window.open(url, "_blank")
+      } else {
+        window.open(url, "_self")
+      }
     }
   }
 
@@ -39,7 +44,7 @@ export default function CompanyCard({
           ? "cursor-pointer hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
           : ""
       }`}
-      onClick={isClickable ? handleCardClick : undefined}
+      onMouseDown={isClickable ? handleCardClick : undefined}
     >
       <div>
         <div className="mb-4 flex items-center">
