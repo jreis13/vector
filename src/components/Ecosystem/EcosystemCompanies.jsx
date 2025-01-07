@@ -53,21 +53,6 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
     setCurrentPage((prev) => (prev - 1 >= 0 ? prev - 1 : prev))
   }
 
-  const pageVariants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction) => ({
-      x: direction > 0 ? -1000 : 1000,
-      opacity: 0,
-    }),
-  }
-
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <EcosystemCompaniesFilter
@@ -81,12 +66,10 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={`${currentPage}-${filters.industry}-${filters.fundingStage}-${filters.fundingAmount}`}
-          variants={pageVariants}
-          custom={direction}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{ duration: 0.5, type: "tween" }}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.3 }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {currentCompanies.map((company) => (
