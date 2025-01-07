@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import CompanyCard from "./CompanyCard"
 
-export default function CompaniesPage({ companies, ecosystemName }) {
+export default function EcosystemCompanies({ companies, ecosystemName }) {
   const [currentPage, setCurrentPage] = useState(0)
   const companiesPerPage = 6
 
