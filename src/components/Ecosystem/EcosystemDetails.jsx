@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
-import EcosystemCompanies from "../EcosystemCompanies"
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
+import EcosystemCompanies from "./EcosystemCompanies"
 import EcosystemCountryProfiles from "./EcosystemCountryProfiles"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemMarketResearch from "./EcosystemMarketResearch"
