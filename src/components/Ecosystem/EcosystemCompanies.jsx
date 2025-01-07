@@ -41,15 +41,11 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
     currentPage * companiesPerPage + companiesPerPage
   )
 
-  const [direction, setDirection] = useState(1)
-
   const handleNext = () => {
-    setDirection(1)
     setCurrentPage((prev) => (prev + 1 < totalFilteredPages ? prev + 1 : prev))
   }
 
   const handlePrev = () => {
-    setDirection(-1)
     setCurrentPage((prev) => (prev - 1 >= 0 ? prev - 1 : prev))
   }
 
@@ -63,7 +59,7 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
         fundingAmountRanges={fundingAmountRanges}
       />
 
-      <AnimatePresence mode="wait" custom={direction}>
+      <AnimatePresence mode="wait">
         <motion.div
           key={`${currentPage}-${filters.industry}-${filters.fundingStage}-${filters.fundingAmount}`}
           initial={{ opacity: 0, x: 50 }}
