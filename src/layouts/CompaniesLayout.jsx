@@ -1,4 +1,4 @@
-import Companies from "src/components/Companies"
+import Companies from "src/components/EcosystemCompanies"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 

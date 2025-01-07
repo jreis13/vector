@@ -15,8 +15,8 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
-import Disclaimer from "src/components/Disclaimer"
 import MainHero from "src/components/MainHero"
+import Note from "src/components/Note"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
@@ -36,14 +36,20 @@ function splitDescription(feature) {
 }
 
 export default function MainLayout() {
-  const [showDisclaimer, setShowDisclaimer] = useState(true)
+  const [showNote, setshowNote] = useState(true)
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      {showDisclaimer && (
-        <Disclaimer onDismiss={() => setShowDisclaimer(false)} />
+
+      {showNote && (
+        <div className="absolute mt-32 z-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <Note onDismiss={() => setshowNote(false)}>
+            Disclaimer: This website is currently under development. <br /> Some
+            features might not be available for public use.
+          </Note>
+        </div>
       )}
       <div className="flex flex-grow flex-col">
         <MainHero>
