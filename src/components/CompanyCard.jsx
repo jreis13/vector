@@ -54,7 +54,7 @@ export default function CompanyCard({
               alt={`${company.name} logo`}
               width={64}
               height={64}
-              className="object-contain"
+              style={{ objectFit: "contain" }}
             />
           </div>
           <div>
