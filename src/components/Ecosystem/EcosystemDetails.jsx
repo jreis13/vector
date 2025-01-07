@@ -2,14 +2,15 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import flattenNodes from "src/common/utils/flattenNodes"
-import NodeGraph from "src/components/NodeGraph"
-import CompaniesPage from "../Companies"
-import NodeDetails from "../NodeDetails"
+
+import EcosystemCompanies from "../EcosystemCompanies"
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCountryProfiles from "./EcosystemCountryProfiles"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
+import EcosystemMarketResearch from "./EcosystemMarketResearch"
+import EcosystemOverview from "./EcosystemOverview"
 import EcosystemProductComparison from "./EcosystemProductComparison"
+import EcosystemRoutes from "./EcosystemRoutes"
 import EcosystemTabs from "./EcosystemTabs"
 
 export default function EcosystemDetails({ ecosystem }) {
@@ -28,8 +29,6 @@ export default function EcosystemDetails({ ecosystem }) {
     { title: "Routes", id: "routes", info: "(Coming Soon)" },
     { title: "Market Research", id: "marketResearch", info: "(Coming Soon)" },
   ]
-
-  const flattenedNodes = flattenNodes(ecosystem.nodes)
 
   const handleTabChange = (newTab) => {
     setCurrentTab(newTab)
@@ -55,13 +54,10 @@ export default function EcosystemDetails({ ecosystem }) {
 
       <div className="mt-4 p-8">
         {currentTab === "overview" && (
-          <>
-            <NodeGraph ecosystem={ecosystem} />
-            <NodeDetails ecosystem={ecosystem} nodes={flattenedNodes} />
-          </>
+          <EcosystemOverview ecosystem={ecosystem} />
         )}
         {currentTab === "companies" && (
-          <CompaniesPage
+          <EcosystemCompanies
             companies={ecosystem.companies}
             ecosystemName={ecosystem.name}
           />
@@ -81,22 +77,8 @@ export default function EcosystemDetails({ ecosystem }) {
         {currentTab === "infrastructure" && (
           <EcosystemInfrastructure ecosystem={ecosystem} />
         )}
-        {currentTab === "routes" && (
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-center">Coming Soon</h3>
-            <p className="font-bold text-center">
-              Information about Routes will be available soon.
-            </p>
-          </div>
-        )}
-        {currentTab === "marketResearch" && (
-          <div>
-            <h3 className="text-2xl font-bold mb-4 text-center">Coming Soon</h3>
-            <p className="font-bold text-center">
-              Information about Market Research will be available soon.
-            </p>
-          </div>
-        )}
+        {currentTab === "routes" && <EcosystemRoutes />}
+        {currentTab === "marketResearch" && <EcosystemMarketResearch />}
       </div>
     </div>
   )
