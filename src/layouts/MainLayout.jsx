@@ -1,7 +1,5 @@
 "use client"
 
-import { useState } from "react"
-
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
   benefitsFeatures,
@@ -16,7 +14,6 @@ import Breadcrumb from "src/components/Breadcrumb"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import MainHero from "src/components/MainHero"
-import Note from "src/components/Note"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
@@ -36,21 +33,10 @@ function splitDescription(feature) {
 }
 
 export default function MainLayout() {
-  const [showNote, setshowNote] = useState(true)
-
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-
-      {showNote && (
-        <div className="absolute mt-32 z-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <Note onDismiss={() => setshowNote(false)}>
-            Disclaimer: This website is currently under development. <br /> Some
-            features might not be available for public use.
-          </Note>
-        </div>
-      )}
       <div className="flex flex-grow flex-col">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
