@@ -13,7 +13,7 @@ export default function Footer() {
             <Logo />
           </div>
           <span className="text-[#e8e8e8] md:ml-4">
-            © 2024 <a href="#">Exponential Vector S.R.O</a>. All Rights
+            © 2025 <a href="#">Exponential Vector S.R.O</a>. All Rights
             Reserved.
           </span>
         </div>
