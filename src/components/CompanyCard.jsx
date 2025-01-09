@@ -39,7 +39,7 @@ export default function CompanyCard({
 
   return (
     <div
-      className={`mb-6 flex h-[400px] flex-col justify-between rounded-lg p-4 transition-all duration-300 ${
+      className={`mb-6 flex h-[400px] flex-col bg-[#34333d] text-[#e8e8e8] justify-between rounded-lg p-4 transition-all duration-300 ${
         isClickable
           ? "cursor-pointer hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg"
           : ""
