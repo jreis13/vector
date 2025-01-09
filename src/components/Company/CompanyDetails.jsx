@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCardsClickable from "./CompanyCardsClickable"
 import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
+import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
 
@@ -106,6 +107,12 @@ export default function CompanyDetails({ company, ecosystemName }) {
               title={company.financials.title}
               data={company.financials.data}
             />
+          )}
+        </ScrollReveal>
+
+        <ScrollReveal id="products">
+          {company.products && (
+            <CompanyProductStatCard product={company.products} />
           )}
         </ScrollReveal>
       </div>
