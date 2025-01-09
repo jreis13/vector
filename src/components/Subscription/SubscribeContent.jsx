@@ -158,128 +158,127 @@ export default function SubscribeContent() {
   return (
     <div className="flex flex-grow flex-col items-center justify-center py-8 text-center">
       <div>
-        <h2 className="text-3xl font-bold">Subscribe to Exponential Vector</h2>
-        <p className="mt-4 text-lg">
+        <h2>Subscribe to Exponential Vector</h2>
+        <p className="mt-4">
           Complete your subscription to access the platform.
         </p>
         {error && <p className="text-red-500">{error}</p>}
-        <div className="mt-6">
-          {subscribers.map((subscriber, index) => (
-            <div key={index} className="mb-6 px-4">
-              <div className="grid gap-2 grid-cols-2">
+        <div className="mt-6 w-full max-w-3xl">
+          <AnimatePresence>
+            {subscribers.map((subscriber, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+                className="mb-6 px-4"
+              >
+                <div className="grid gap-4 grid-cols-2">
+                  <input
+                    type="text"
+                    value={subscriber.firstName}
+                    placeholder="First Name"
+                    onChange={(e) =>
+                      handleChange(index, "firstName", e.target.value)
+                    }
+                    className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    value={subscriber.lastName}
+                    placeholder="Last Name"
+                    onChange={(e) =>
+                      handleChange(index, "lastName", e.target.value)
+                    }
+                    className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                  />
+                </div>
                 <input
-                  type="text"
-                  value={subscriber.firstName}
-                  placeholder="First Name"
-                  onChange={(e) =>
-                    handleChange(index, "firstName", e.target.value)
-                  }
-                  className="rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
+                  type="email"
+                  value={subscriber.email}
+                  placeholder="Email"
+                  onChange={(e) => handleChange(index, "email", e.target.value)}
+                  className="mt-4 w-full rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
                 />
-                <input
-                  type="text"
-                  value={subscriber.lastName}
-                  placeholder="Last Name"
-                  onChange={(e) =>
-                    handleChange(index, "lastName", e.target.value)
-                  }
-                  className="rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
-                />
-              </div>
-              <input
-                type="email"
-                value={subscriber.email}
-                placeholder="Email"
-                onChange={(e) => handleChange(index, "email", e.target.value)}
-                className="mt-2 w-full rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
-              />
-              <div className="mt-2 grid gap-2 grid-cols-2">
-                <input
-                  type="text"
-                  value={subscriber.companyName}
-                  placeholder="Company"
-                  onChange={(e) =>
-                    handleChange(index, "companyName", e.target.value)
-                  }
-                  className="rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
-                />
-                <select
-                  value={subscriber.persona}
-                  onChange={(e) =>
-                    handleChange(index, "persona", e.target.value)
-                  }
-                  className="rounded border text-[#403f4c] bg-[#e8e8e8] px-2 py-1"
-                >
-                  <option value="">Select Persona</option>
-                  <option value="Manufacturer">
-                    Manufacturer - Select if you represent a company that
-                    manufactures Advanced Air Mobility aircraft.
-                  </option>
-                  <option value="Supplier">
-                    Supplier - Select if you represent a company that supplies
-                    parts to AAM manufacturers.
-                  </option>
-                  <option value="Edifice">
-                    Edifice - Select if you represent a company building
-                    infrastructure for AAM aircraft.
-                  </option>
-                  <option value="Investor">
-                    Investor - Select if you represent an investment entity.
-                  </option>
-                  <option value="Government official">
-                    Government official - Select if you represent a government
-                    body.
-                  </option>
-                  <option value="Enthusiast">
-                    Enthusiast - Select if you don’t fall into any of the above
-                    categories.
-                  </option>
-                </select>
-              </div>
-              <div className="flex flex-col items-center justify-center mt-2 space-y-1">
-                {subscribers.length > 1 && (
-                  <button
-                    onClick={() => handleRemoveSubscriber(index)}
-                    className="text-red-500 w-fit"
+                <div className="mt-4 grid gap-4 grid-cols-2">
+                  <input
+                    type="text"
+                    value={subscriber.companyName}
+                    placeholder="Company"
+                    onChange={(e) =>
+                      handleChange(index, "companyName", e.target.value)
+                    }
+                    className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                  />
+                  <select
+                    value={subscriber.persona}
+                    onChange={(e) =>
+                      handleChange(index, "persona", e.target.value)
+                    }
+                    className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
                   >
-                    <FontAwesomeIcon aria-hidden="true" icon={faCircleXmark} />
-                  </button>
-                )}
-                {subscribers.length < 5 && (
-                  <button
-                    onClick={handleAddSubscriber}
-                    className="text-[#e8e8e8] w-fit"
-                  >
-                    <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
+                    <option value="">Select Persona</option>
+                    <option value="Manufacturer">Manufacturer</option>
+                    <option value="Supplier">Supplier</option>
+                    <option value="Edifice">Edifice</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Government official">
+                      Government Official
+                    </option>
+                    <option value="Enthusiast">Enthusiast</option>
+                  </select>
+                </div>
+                <div className="flex items-center justify-end mt-4 space-x-4">
+                  {subscribers.length > 1 && (
+                    <button
+                      onClick={() => handleRemoveSubscriber(index)}
+                      className="text-red-500"
+                    >
+                      <FontAwesomeIcon
+                        aria-hidden="true"
+                        icon={faCircleXmark}
+                      />
+                    </button>
+                  )}
+                  {index === subscribers.length - 1 && (
+                    <button
+                      onClick={handleAddSubscriber}
+                      className="text-[#e8e8e8]"
+                    >
+                      <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
           <div className="mb-4">
             <p className="text-lg">
               Total Price: €{calculateTotalPrice().toFixed(2)}
             </p>
-            <p className="text-sm">
-              {" "}
+            <p className="text-sm text-gray-400">
               (Prices displayed don’t include VAT or additional fees.)
             </p>
           </div>
-          <Button onClick={handleSubscribe}>
+          <Button
+            onClick={handleSubscribe}
+            className="bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
+          >
             Subscribe with{" "}
             <FontAwesomeIcon aria-hidden="true" icon={faCcStripe} />
           </Button>
         </div>
         <div className="mt-16">
-          <div className="px-8">
-            <div className="container mx-auto">
-              <div className="mb-8 text-center ">
-                <div className="mb-4 text-4xl">Important Info</div>
+          <div className="px-8 md:px-0">
+            <div>
+              <div className="mb-8 text-center">
+                <h2 className="mb-4">Important Info</h2>
               </div>
-              <div className="max-w-3xl mx-auto grid gap-10">
+              <div className="max-w-3xl grid gap-10">
                 {info.map(({ title }) => (
                   <div key={title}>
-                    <div className="pb-6 font-bold">{title}</div>
+                    <div className="pb-6">{title}</div>
                   </div>
                 ))}
               </div>
@@ -288,11 +287,11 @@ export default function SubscribeContent() {
         </div>
         <div className="mt-16">
           <div className="px-8">
-            <div className="container mx-auto">
-              <div className="mb-8 text-center ">
-                <div className="mb-4 text-4xl">FAQ</div>
+            <div>
+              <div className="mb-8 text-center">
+                <h2 className="mb-4">FAQ</h2>
               </div>
-              <div className="max-w-3xl mx-auto grid gap-10">
+              <div className="max-w-3xl w-full mx-auto space-y-4">
                 {faqs.map(({ title, desc }, index) => (
                   <div key={title}>
                     <div
@@ -306,18 +305,15 @@ export default function SubscribeContent() {
                         }
                       />
                     </div>
-                    <AnimatePresence>
-                      {expandedFAQ === index && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="border-t border-gray-200 pt-4 overflow-hidden"
-                        >
-                          <div className="font-normal text-left">{desc}</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div
+                      className={`transition-all duration-300 ease-in-out ${
+                        expandedFAQ === index
+                          ? "max-h-screen opacity-100"
+                          : "max-h-0 opacity-0"
+                      } overflow-hidden`}
+                    >
+                      <div className="font-normal text-left">{desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
