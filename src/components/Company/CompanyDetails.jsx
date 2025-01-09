@@ -111,8 +111,15 @@ export default function CompanyDetails({ company, ecosystemName }) {
         </ScrollReveal>
 
         <ScrollReveal id="products">
-          {company.products && (
-            <CompanyProductStatCard product={company.products} />
+          <h2 className="pb-4">{company.products?.title}</h2>
+          {company.products?.data.length > 0 ? (
+            <div className="flex flex-wrap gap-6 justify-center">
+              {company.products.data.map((product, index) => (
+                <CompanyProductStatCard key={index} product={product} />
+              ))}
+            </div>
+          ) : (
+            <p>No products available for this company.</p>
           )}
         </ScrollReveal>
       </div>
