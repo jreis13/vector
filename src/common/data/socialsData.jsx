@@ -10,7 +10,7 @@ export const PATHS = [
   },
   {
     name: "Linkedin",
-    path: "https://www.linkedin.com",
+    path: "https://www.linkedin.com/company/exponential-vector/",
     type: "image",
     icon: <Linkedin />,
   },
