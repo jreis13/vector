@@ -14,7 +14,7 @@ export default function CompanyCardsClickable({ title, data }) {
           data.map((item, index) => (
             <div
               key={index}
-              className="group relative flex flex-col items-center p-4 transition-shadow duration-300 ease-in-out hover:shadow-lg"
+              className="group relative flex flex-col items-center p-4 transition-shadow duration-300 ease-in-out"
             >
               <div className="mb-4 flex h-24 w-24 items-center justify-center">
                 <Image
