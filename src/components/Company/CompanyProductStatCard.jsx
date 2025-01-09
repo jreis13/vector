@@ -2,8 +2,8 @@ import Image from "next/image"
 
 export default function CompanyProductStatCard({ product }) {
   return product.image ? (
-    <div className="relative flex bg-[#34333d] flex-col rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl w-[700px] min-h-[400px]">
-      <div className="absolute inset-0">
+    <div className="flex bg-[#34333d] rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl w-[700px] min-h-[400px]">
+      <div className="relative flex-shrink-0 w-1/2 h-full">
         <Image
           src={product.image}
           alt={product.name}
@@ -13,7 +13,7 @@ export default function CompanyProductStatCard({ product }) {
           priority
         />
       </div>
-      <div className="relative z-10 flex flex-col justify-between p-6 text-white">
+      <div className="flex flex-col justify-between p-6 text-white w-1/2">
         <div>
           <h3
             className="text-2xl font-bold mb-4"
