@@ -42,7 +42,7 @@ export default function EcosystemCompaniesFilter({
 
   return (
     <motion.div
-      className="relative flex justify-end m-4"
+      className="relative flex justify-end ml-4 mb-4"
       initial="minimized"
       animate={isExpanded ? "expanded" : "minimized"}
     >
