@@ -1,56 +1,50 @@
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons"
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import placeholder from "public/icons/avatarIcon.svg"
-import Link from "../Link"
 
 export default function CompanyCardsClickable({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
-      <h2 className="pb-4">{title}</h2>
-      <div className="grid grid-cols-1 gap-4 pb-8 md:grid-cols-2">
+      <h2 className="mb-8">{title}</h2>
+      <div className="grid place-items-center gap-y-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {data &&
           data.map((item, index) => (
-            <div
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
               key={index}
-              className="group relative flex flex-col items-center p-4 transition-shadow duration-300 ease-in-out"
+              className="w-[250px]" // Fixed width for uniform spacing
             >
-              <div className="mb-4 flex h-24 w-24 items-center justify-center">
-                <Image
-                  src={item.photo || item.logo || placeholder}
-                  alt={`${item.name} photo`}
-                  width={100}
-                  height={100}
-                  className={title === "Founding Team" ? "" : "object-contain"}
-                  objectFit={title === "Founding Team" ? undefined : "contain"}
-                />
-              </div>
-              <div className="text-center">
-                <span className="block font-semibold text-xl">{item.name}</span>
-                <p className="text-[#b8b8b8] text-lg font-medium">
-                  {item.title || item.description}
-                </p>
-                {item.value && (
-                  <p className="mt-2 text-xl font-semibold">{item.value}</p>
-                )}
-              </div>
-              {item.link && (
-                <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-75 text-[#e8e8e8] opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
-                  <Link blank to={item.link}>
-                    <FontAwesomeIcon
-                      aria-hidden="true"
-                      icon={
-                        title === "Founding Team"
-                          ? faLinkedin
-                          : faExternalLinkAlt
+              <div className="flex flex-col">
+                <div className="group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4 transition-shadow duration-300 ease-in-out">
+                  <div className="mb-4 flex h-24 w-24 items-center justify-center">
+                    <Image
+                      src={item.photo || item.logo || placeholder}
+                      alt={`${item.name} photo`}
+                      width={100}
+                      height={100}
+                      className={
+                        title === "Founding Team" ? "" : "object-contain"
                       }
-                      className="text-2xl"
+                      objectFit={
+                        title === "Founding Team" ? undefined : "contain"
+                      }
                     />
-                  </Link>
+                  </div>
+                  <div className="text-center">
+                    <span className="block font-semibold text-xl">
+                      {item.name}
+                    </span>
+                    <p className="text-[#b8b8b8] text-lg font-medium">
+                      {item.title || item.description}
+                    </p>
+                    {item.value && (
+                      <p className="mt-2 text-xl font-semibold">{item.value}</p>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
+            </a>
           ))}
       </div>
     </div>
