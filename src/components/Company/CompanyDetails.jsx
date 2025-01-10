@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import ScrollReveal from "src/animations/ScrollReveal"
-import CompanyCardsClickable from "./CompanyCardsClickable"
-import CompanyCardsNonClickable from "./CompanyCardsNonClickable"
+import { default as CompanyCard } from "./CompanyCard"
 import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
 import CompanyText from "./CompanyText"
@@ -67,7 +66,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="foundingTeam">
           {company.foundingTeam && (
-            <CompanyCardsClickable
+            <CompanyCard
               title={company.foundingTeam.title}
               data={company.foundingTeam.data}
             />
@@ -76,7 +75,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="investors">
           {company.investors && (
-            <CompanyCardsClickable
+            <CompanyCard
               title={company.investors.title}
               data={company.investors.data}
             />
@@ -103,7 +102,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="financials">
           {company.financials && (
-            <CompanyCardsNonClickable
+            <CompanyCard
               title={company.financials.title}
               data={company.financials.data}
             />
