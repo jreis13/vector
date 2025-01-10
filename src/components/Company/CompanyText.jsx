@@ -1,7 +1,7 @@
 export default function CompanyText({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
-      <h2 className="pb-4">{title}</h2>
+      <h2 className="mb-8">{title}</h2>
       <div className="pb-8 leading-8 text-xl">
         {data &&
           data
