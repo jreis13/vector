@@ -123,12 +123,12 @@ export default function ActiveInvestors({ companies, data }) {
         )}
       </div>
 
-      <div className="overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+      <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500">
         <div className="flex items-center gap-4">
           <h2>Active Investors</h2>
           <span className="text-md text-gray-400">(Past 13 months)</span>
         </div>
-        <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg shadow-md mt-4">
+        <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4">
           <thead>
             <tr>
               <th className="px-6 py-3 border-b border-[#e8e8e8] text-lg font-semibold text-[#e8e8e8]">

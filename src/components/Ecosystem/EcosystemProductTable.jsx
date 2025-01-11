@@ -31,8 +31,8 @@ export default function EcosystemProductTable({ groupedProducts, attributes }) {
   }
 
   return (
-    <div className="overflow-x-auto" style={{ scrollbarWidth: "none" }}>
-      <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg shadow-md">
+    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500 pb-4">
+      <table className="w-full min-w-max table-auto text-left text-[#e8e8e8]">
         <thead>
           <tr>
             <th className="px-6 py-3 border-b border-[#e8e8e8] text-lg font-semibold text-[#e8e8e8]">

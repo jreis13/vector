@@ -25,7 +25,11 @@ export default function EcosystemProductComparison({ companies }) {
   const allAttributes = new Set()
   groupedProducts.forEach((group) => {
     group.products.forEach((product) => {
-      Object.keys(product).forEach((key) => allAttributes.add(key))
+      Object.keys(product).forEach((key) => {
+        if (key !== "image") {
+          allAttributes.add(key)
+        }
+      })
     })
   })
 
@@ -35,7 +39,7 @@ export default function EcosystemProductComparison({ companies }) {
         group.products.map((product) => {
           const value = product[attribute]
           if (typeof value === "string") {
-            return parseFloat(value.replace(/[^0-9.]/g, ""));
+            return parseFloat(value.replace(/[^0-9.]/g, ""))
           } else if (typeof value === "number") {
             return value
           } else {
@@ -77,7 +81,7 @@ export default function EcosystemProductComparison({ companies }) {
       group.products.map((product) => {
         const value = product[attribute]
         if (typeof value === "string") {
-          return parseFloat(value.replace(/[^0-9.]/g, ""));
+          return parseFloat(value.replace(/[^0-9.]/g, ""))
         } else if (typeof value === "number") {
           return value
         } else {
