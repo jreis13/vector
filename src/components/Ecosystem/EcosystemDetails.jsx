@@ -69,7 +69,10 @@ export default function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "activeInvestors" && (
-          <EcosystemActiveInvestors companies={ecosystem.companies} />
+          <EcosystemActiveInvestors
+            companies={ecosystem.companies}
+            data={ecosystem.activeInvestors}
+          />
         )}
         {currentTab === "productComparison" && (
           <EcosystemProductComparison companies={ecosystem.companies} />
