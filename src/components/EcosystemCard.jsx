@@ -1,7 +1,6 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import HoverScale from "src/animations/HoverScale"
 
 export default function EcosystemCard({ ecosystem }) {
   const router = useRouter()
@@ -13,8 +12,8 @@ export default function EcosystemCard({ ecosystem }) {
   }
 
   return (
-    <HoverScale
-      className="mb-6 flex flex-col cursor-pointer rounded-lg border overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl lg:w-[600px] lg:h-auto"
+    <div
+      className="mb-6 flex flex-col cursor-pointer rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-xl lg:w-[600px] lg:h-auto"
       onClick={handleCardClick}
     >
       <div
@@ -23,12 +22,12 @@ export default function EcosystemCard({ ecosystem }) {
           backgroundImage: `url(${ecosystem.logo})`,
         }}
       ></div>
-      <div className="bg-[#e8e8e8] px-10 py-6 flex flex-col justify-between flex-grow">
+      <div className="bg-[#34333d] px-10 py-6 flex flex-col justify-between flex-grow">
         <div className="mb-4">
-          <h3 className="text-2xl text-[#403f4c] font-bold mb-2">
+          <h3 className="text-2xl text-[#e8e8e8] font-bold mb-2">
             {ecosystem.name}
           </h3>
-          <p className="text-gray-700">{ecosystem.summary}</p>
+          <p className="text-gray-400">{ecosystem.summary}</p>
         </div>
         {ecosystem.mainStats && (
           <div className="text-gray-900">
@@ -37,15 +36,13 @@ export default function EcosystemCard({ ecosystem }) {
                 key={index}
                 className="grid grid-cols-2 gap-x-4 py-1 items-center"
               >
-                <span className="text-gray-600">{stat.label}:</span>
-                <span className="font-semibold text-gray-800 text-right">
-                  {stat.value}
-                </span>
+                <span className="text-gray-300">{stat.label}:</span>
+                <span className="text-gray-300 text-right">{stat.value}</span>
               </div>
             ))}
           </div>
         )}
       </div>
-    </HoverScale>
+    </div>
   )
 }
