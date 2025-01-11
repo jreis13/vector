@@ -41,6 +41,8 @@ export default function ActiveInvestors({ companies, data }) {
     currentPage * investorsPerPage + investorsPerPage
   )
 
+  const [visibleCompanies, setVisibleCompanies] = useState([])
+
   if (!allInvestors.length) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -48,8 +50,6 @@ export default function ActiveInvestors({ companies, data }) {
       </div>
     )
   }
-
-  const [visibleCompanies, setVisibleCompanies] = useState([])
 
   const toggleCompanyVisibility = (companyName) => {
     if (visibleCompanies.includes(companyName)) {
