@@ -6,7 +6,7 @@ export default function Button({ onClick, href, children }) {
   const buttonStyles =
     "inline-flex w-full max-w-xs justify-center rounded-full border p-4 uppercase transition-colors duration-300 font-medium"
 
-  const hoverStyles = "hover:bg-[#7032ff] hover:text-white"
+  const hoverStyles = "hover:bg-[#7032ff] hover:text-[#e8e8e8]"
 
   if (onClick) {
     return (
