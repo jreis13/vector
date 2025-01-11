@@ -85,3 +85,22 @@ body {
   color: #7032ff;
   opacity: 0.7;
 }
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #34333d;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  transition: background-color;
+  transition-duration: 1s;
+  background-color: rgba(0, 0, 0, 0.5);
+}
