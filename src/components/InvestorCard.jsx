@@ -4,7 +4,7 @@ export default function InvestorCard({ investor }) {
   return (
     <div className="flex flex-col justify-between rounded-lg p-4 bg-[#34333d] text-[#e8e8e8]">
       <div>
-        <div className="mb-4 flex items-center">
+        <div className="flex items-center mb-2">
           <div className="mr-4 flex h-16 w-16 items-center justify-center overflow-hidden">
             <Image
               src={investor.logo}
@@ -14,22 +14,19 @@ export default function InvestorCard({ investor }) {
               style={{ objectFit: "contain" }}
             />
           </div>
-          <div>
-            <h3 className="text-xl font-bold">{investor.name}</h3>
-          </div>
+          <h3 className="text-xl font-bold">{investor.name}</h3>
         </div>
-        <div className="mb-4">
-          <p>{investor.summary}</p>
-        </div>
+        <span className="text-sm text-gray-400">{investor.description}</span>
       </div>
-      <div className="mt-4 flex flex-col justify-end">
-        {investor.mainStats &&
-          investor.mainStats.map((stat, index) => (
-            <div key={index} className="flex justify-between py-1">
-              <span>{stat.label}:</span>
-              <span className="text-right">{stat.value}</span>
-            </div>
-          ))}
+      <div className="flex mt-4 flex-col justify-end">
+        <div className="flex justify-between py-1">
+          <span>Type:</span>
+          <span className="text-right">{investor.type}</span>
+        </div>
+        <div className="flex justify-between py-1">
+          <span>Stages:</span>
+          <span className="text-right">{investor.stages}</span>
+        </div>
       </div>
     </div>
   )

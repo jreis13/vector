@@ -22,6 +22,9 @@ export default function ActiveInvestors({ companies, data }) {
     .map((investor) => ({
       name: investor.value,
       logo: investor.logo || placeholder,
+      description: investor.description,
+      type: investor.type,
+      stages: investor.stages,
     }))
 
   const [currentPage, setCurrentPage] = useState(0)
