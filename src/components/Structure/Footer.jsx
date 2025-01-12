@@ -20,7 +20,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center gap-8">
           <a
-            href="/path/to/privacy-policy.pdf"
+            href="/files/Privacy_Policy_Exponential_Vector.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#e8e8e8] hover:underline"
@@ -28,7 +28,7 @@ export default function Footer() {
             Privacy Policy
           </a>
           <a
-            href="/path/to/terms-and-conditions.pdf"
+            href="/files/Exponential_Vector_Terms_Conditions.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#e8e8e8] hover:underline"
