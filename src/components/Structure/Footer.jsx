@@ -28,7 +28,7 @@ export default function Footer() {
             Privacy Policy
           </a>
           <a
-            href="/files/Exponential_Vector_Terms_Conditions.pdf"
+            href="/files/Terms_and_Conditions_Exponential_Vector.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[#e8e8e8] hover:underline"
