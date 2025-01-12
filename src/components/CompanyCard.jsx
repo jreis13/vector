@@ -66,7 +66,7 @@ export default function CompanyCard({
         </div>
       </div>
       <div className="mt-4 flex flex-col justify-end">
-        <div className="mb-4">
+        <div>
           {company.mainStats &&
             company.mainStats.map((stat, index) => (
               <div key={index} className="flex justify-between py-1">
