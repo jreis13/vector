@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function InvestorCard({ investor }) {
   return (
     <div className="flex flex-col justify-between rounded-lg p-4 bg-[#34333d] text-[#e8e8e8]">
-      <a href={investor.link || ""} target="_blank" rel="noreferrer">
+      <a href={investor.link || null} target="_blank" rel="noreferrer">
         <div>
           <div className="flex items-center mb-2">
             <div className="mr-4 flex h-16 w-16 items-center justify-center overflow-hidden">
