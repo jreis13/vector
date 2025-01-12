@@ -25,7 +25,15 @@ export default function ActiveInvestors({ companies, data }) {
       description: investor.description,
       type: investor.type,
       stages: investor.stages,
+      link: investor.link,
     }))
+    .filter(
+      (investor) =>
+        investor.name &&
+        investor.description &&
+        investor.type &&
+        investor.stages
+    )
 
   const [currentPage, setCurrentPage] = useState(0)
   const investorsPerPage = 9
