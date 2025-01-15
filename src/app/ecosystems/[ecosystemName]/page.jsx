@@ -20,6 +20,11 @@ export default function EcosystemPage({ params }) {
         if (response.ok) {
           const userData = await response.json()
           setUser(userData)
+
+          if (!userData.app_metadata?.subscribedTo?.includes(ecosystemName)) {
+            setAccessDenied(true)
+            setLoading(false)
+          }
         } else {
           const currentPath = encodeURIComponent(window.location.pathname)
           router.replace(`/api/auth/login?returnTo=${currentPath}`)
@@ -32,7 +37,7 @@ export default function EcosystemPage({ params }) {
     }
 
     fetchUser()
-  }, [router])
+  }, [router, ecosystemName])
 
   useEffect(() => {
     async function fetchEcosystem() {
@@ -50,19 +55,10 @@ export default function EcosystemPage({ params }) {
       }
     }
 
-    if (user) {
-      // Check if the user is subscribed to this ecosystem
-      if (
-        !user.app_metadata?.subscribed ||
-        !user.app_metadata.subscribed.includes(ecosystemName)
-      ) {
-        setAccessDenied(true)
-        setLoading(false)
-      } else {
-        fetchEcosystem()
-      }
+    if (user && !accessDenied) {
+      fetchEcosystem()
     }
-  }, [user, ecosystemName])
+  }, [user, accessDenied, ecosystemName])
 
   if (loading) {
     return (
@@ -75,7 +71,7 @@ export default function EcosystemPage({ params }) {
   if (accessDenied) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>You do not have access to this ecosystem. Please subscribe.</p>
+        <p>Access Denied. Please subscribe to access this ecosystem.</p>
       </div>
     )
   }
