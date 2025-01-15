@@ -38,6 +38,7 @@ export default async function handler(req, res) {
     const companyNames = session.metadata.companyNames.split(",")
     const personas = session.metadata.personas.split(",")
     const roles = session.metadata.roles.split(",")
+    const ecosystems = session.metadata.ecosystems.split(",")
 
     try {
       await Promise.all(
@@ -52,7 +53,7 @@ export default async function handler(req, res) {
           }
 
           const metadata = {
-            subscribed: true,
+            subscribed: ecosystems, // Store array of ecosystems
             firstName: firstNames[index],
             lastName: lastNames[index],
             companyName: companyNames[index],
@@ -108,7 +109,7 @@ async function createAuth0User(email) {
         email,
         connection: "email",
         email_verified: true,
-        app_metadata: { subscribed: false },
+        app_metadata: { subscribed: [] },
       }),
     }
   )

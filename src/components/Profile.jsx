@@ -31,7 +31,7 @@ export default function Profile() {
                 ? `${user.app_metadata.firstName} ${user.app_metadata.lastName}`
                 : "N/A"}
             </h2>
-            <p className=" text-sm">{user.email || "N/A"}</p>
+            <p className="text-sm">{user.email || "N/A"}</p>
           </div>
           <div className="mt-6">
             <div className="flex justify-between py-2">
@@ -46,12 +46,16 @@ export default function Profile() {
               <span>Subscription:</span>
               <span
                 className={`${
-                  user.app_metadata?.subscribed
+                  user.app_metadata?.subscribed &&
+                  user.app_metadata.subscribed.length > 0
                     ? "text-green-500"
                     : "text-red-500"
                 } font-semibold`}
               >
-                {user.app_metadata?.subscribed ? "Active" : "Inactive"}
+                {user.app_metadata?.subscribed &&
+                user.app_metadata.subscribed.length > 0
+                  ? "Active"
+                  : "Inactive"}
               </span>
             </div>
             <div className="flex justify-between py-2">
@@ -69,6 +73,19 @@ export default function Profile() {
                     })
                   : "N/A"}
               </span>
+            </div>
+            <div className="mt-6">
+              <h3 className="text-lg font-bold mb-2">Subscribed Ecosystems:</h3>
+              {user.app_metadata?.subscribed &&
+              user.app_metadata.subscribed.length > 0 ? (
+                <ul className="list-disc list-inside">
+                  {user.app_metadata.subscribed.map((ecosystem, index) => (
+                    <li key={index}>{ecosystem}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500">No ecosystems subscribed.</p>
+              )}
             </div>
           </div>
         </div>

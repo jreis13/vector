@@ -21,17 +21,17 @@ export default function SubscribeContent() {
       companyName: "",
       persona: "",
       role: "",
+      ecosystems: [],
     },
   ])
   const [error, setError] = useState("")
   const [expandedFAQ, setExpandedFAQ] = useState(null)
 
-  const pricingTiers = [
-    { quantity: 1, price: 3000 },
-    { quantity: 2, price: 2900 },
-    { quantity: 3, price: 2800 },
-    { quantity: 4, price: 2750 },
-    { quantity: 5, price: 2500 },
+  const ecosystemsOptions = [
+    {
+      id: "evtolandvtolaircrafts",
+      name: "EVTOL and VTOL Aircrafts",
+    },
   ]
 
   const faqs = [
@@ -41,11 +41,11 @@ export default function SubscribeContent() {
     },
     {
       title: "Why are some personas restricted to access all features?",
-      desc: "Some of the features are explicitly developed for specific stakeholders and require a degree of confidentially to be used. Given this, we restrict these features to pre selected organizations. For more information, please consult the product overview brochure.",
+      desc: "Some of the features are explicitly developed for specific stakeholders and require a degree of confidentiality to be used. Given this, we restrict these features to pre-selected organizations. For more information, please consult the product overview brochure.",
     },
     {
       title: "I’m unsure about this subscription, can I request a free trial?",
-      desc: "We usually only issue free trials to pre selected companies that we designate as COI (Company of interest) for our products. However, feel free to email us at enquiries@exponentialvector.eu your use case and the reasons why you are unsure about subscribing and we will decide on the case by case basis.",
+      desc: "We usually only issue free trials to pre-selected companies that we designate as COI (Company of Interest) for our products. However, feel free to email us at enquiries@exponentialvector.eu your use case and the reasons why you are unsure about subscribing, and we will decide on a case-by-case basis.",
     },
   ]
 
@@ -56,22 +56,32 @@ export default function SubscribeContent() {
     },
     {
       title:
-        "The first email provided will be considered the Title holder of the license. This user can manage subsequent licences issued to the same organization.",
+        "The first email provided will be considered the Title holder of the license. This user can manage subsequent licenses issued to the same organization.",
     },
     {
       title:
-        "Generic company emails without any employee directly mentioned in the email domain will be suspended. If you have a specific case of such instance, please emails us the details at support@exponentialvector.eu",
+        "Generic company emails without any employee directly mentioned in the email domain will be suspended. If you have a specific case of such an instance, please email us the details at support@exponentialvector.eu",
     },
   ]
 
-  const getTierPrice = (quantity) => {
-    const tier = pricingTiers.find((tier) => quantity <= tier.quantity)
-    return tier ? tier.price : pricingTiers[pricingTiers.length - 1].price
-  }
+  const pricingTiers = [
+    { quantity: 1, price: 3000 },
+    { quantity: 2, price: 2900 },
+    { quantity: 3, price: 2800 },
+    { quantity: 4, price: 2750 },
+    { quantity: 5, price: 2500 },
+  ]
 
   const calculateTotalPrice = () => {
-    const unitPrice = getTierPrice(subscribers.length)
-    return unitPrice * subscribers.length
+    const totalSubscriptions = subscribers.length
+    const tier = pricingTiers.find(
+      (tier) => totalSubscriptions <= tier.quantity
+    )
+    const basePricePerSubscriber = tier
+      ? tier.price
+      : pricingTiers[pricingTiers.length - 1].price
+
+    return totalSubscriptions * basePricePerSubscriber
   }
 
   const handleAddSubscriber = () => {
@@ -88,6 +98,7 @@ export default function SubscribeContent() {
         companyName: "",
         persona: "",
         role: "",
+        ecosystems: [],
       },
     ])
     setError("")
@@ -99,10 +110,17 @@ export default function SubscribeContent() {
     setSubscribers(updatedSubscribers)
   }
 
-  const handleRemoveSubscriber = (index) => {
-    const updatedSubscribers = subscribers.filter((_, i) => i !== index)
+  const handleEcosystemChange = (index, ecosystemId) => {
+    const updatedSubscribers = [...subscribers]
+    const subscriber = updatedSubscribers[index]
+    if (subscriber.ecosystems.includes(ecosystemId)) {
+      subscriber.ecosystems = subscriber.ecosystems.filter(
+        (id) => id !== ecosystemId
+      )
+    } else {
+      subscriber.ecosystems.push(ecosystemId)
+    }
     setSubscribers(updatedSubscribers)
-    setError("")
   }
 
   const validateSubscribers = () => {
@@ -113,11 +131,10 @@ export default function SubscribeContent() {
         !sub.firstName ||
         !sub.lastName ||
         !sub.companyName ||
-        !sub.persona
+        !sub.persona ||
+        sub.ecosystems.length === 0
       ) {
-        setError(
-          "Please fill in all fields and provide valid data for each subscriber."
-        )
+        setError("Please fill in all fields and select at least one ecosystem.")
         return false
       }
     }
@@ -146,7 +163,6 @@ export default function SubscribeContent() {
       const { url } = await response.json()
       window.location.href = url
     } catch (err) {
-      console.error("Checkout request failed:", err)
       setError("Something went wrong while processing the subscriptions.")
     }
   }
@@ -229,10 +245,30 @@ export default function SubscribeContent() {
                     <option value="Enthusiast">Enthusiast</option>
                   </select>
                 </div>
+                <div className="mt-4">
+                  <select
+                    value={subscriber.ecosystems[0] || ""}
+                    onChange={(e) =>
+                      handleChange(index, "ecosystems", [e.target.value])
+                    }
+                    className="w-full rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                  >
+                    <option value="">Select Ecosystem</option>
+                    {ecosystemsOptions.map((eco) => (
+                      <option key={eco.id} value={eco.id}>
+                        {eco.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="flex items-center justify-end mt-4 space-x-4">
                   {subscribers.length > 1 && (
                     <button
-                      onClick={() => handleRemoveSubscriber(index)}
+                      onClick={() =>
+                        setSubscribers(
+                          subscribers.filter((_, i) => i !== index)
+                        )
+                      }
                       className="text-red-500"
                     >
                       <FontAwesomeIcon
@@ -254,9 +290,7 @@ export default function SubscribeContent() {
             ))}
           </AnimatePresence>
           <div className="mb-4">
-            <p className="text-lg">
-              Total Price: €{calculateTotalPrice().toFixed(2)}
-            </p>
+            <p className="text-lg">Total Price: €{calculateTotalPrice()}</p>
             <p className="text-sm text-gray-400">
               (Prices displayed don’t include VAT or additional fees.)
             </p>

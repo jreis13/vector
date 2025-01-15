@@ -22,17 +22,20 @@ export default async function handler(req, res) {
         companyNames: subscriptions.map((sub) => sub.companyName).join(","),
         personas: subscriptions.map((sub) => sub.persona).join(","),
         roles: subscriptions.map((sub) => sub.role).join(","),
+        ecosystems: subscriptions.flatMap((sub) => sub.ecosystems).join(","),
       }
+
+      const lineItems = subscriptions.flatMap((sub) =>
+        sub.ecosystems.map((ecosystemId) => ({
+          price: `price_for_${ecosystemId}`,
+          quantity: 1,
+        }))
+      )
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
-        line_items: [
-          {
-            price: "price_1QcxMjH8mb7EVuIwUchyBOKp",
-            quantity: subscriptions.length,
-          },
-        ],
+        line_items: lineItems,
         metadata,
         success_url: `${process.env.AUTH0_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
