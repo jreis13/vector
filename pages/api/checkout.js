@@ -2,10 +2,8 @@ import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
-// Map ecosystems to their Stripe price IDs
 const ecosystemPriceMapping = {
-  evtolandvtolaircrafts: "price_1QcxMjH8mb7EVuIwUchyBOKp", // Example ID
-  urbanmobility: "price_1QcxNkH8mb7EVuIwWxyzBOKp", // Example additional ecosystem
+  evtolandvtolaircrafts: "price_1QcxMjH8mb7EVuIwUchyBOKp",
 }
 
 export default async function handler(req, res) {
@@ -21,7 +19,6 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Construct metadata for the Stripe session
       const metadata = {
         emails: subscriptions.map((sub) => sub.email).join(","),
         firstNames: subscriptions.map((sub) => sub.firstName).join(","),
@@ -32,24 +29,26 @@ export default async function handler(req, res) {
         ecosystems: subscriptions.flatMap((sub) => sub.ecosystems).join(","),
       }
 
-      // Construct line items for Stripe Checkout
-      const lineItems = subscriptions.flatMap((sub) =>
+      const priceQuantities = subscriptions.flatMap((sub) =>
         sub.ecosystems.map((ecosystemId) => {
           const priceId = ecosystemPriceMapping[ecosystemId]
           if (!priceId) {
             throw new Error(`No price ID found for ecosystem: ${ecosystemId}`)
           }
-          return {
-            price: priceId,
-            quantity: 1,
-          }
+          return priceId
         })
       )
 
-      console.log("Line Items Payload:", JSON.stringify(lineItems, null, 2)) // Debugging line items
-      console.log("Metadata Payload:", JSON.stringify(metadata, null, 2)) // Debugging metadata
+      const lineItems = Object.entries(
+        priceQuantities.reduce((acc, priceId) => {
+          acc[priceId] = (acc[priceId] || 0) + 1
+          return acc
+        }, {})
+      ).map(([price, quantity]) => ({
+        price,
+        quantity,
+      }))
 
-      // Create Stripe Checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
@@ -59,10 +58,10 @@ export default async function handler(req, res) {
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
 
-      console.log("Stripe Session Created:", session.id) // Debugging session
+      console.log("Stripe Session Created:", session.id)
       return res.status(200).json({ url: session.url })
     } catch (err) {
-      console.error("Stripe Session Creation Error:", err) // Log full error
+      console.error("Stripe Session Creation Error:", err)
       return res
         .status(500)
         .json({ error: "Failed to create Stripe Checkout session." })
