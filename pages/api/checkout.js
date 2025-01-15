@@ -4,6 +4,7 @@ const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
 const ecosystemPriceMapping = {
   evtolandvtolaircrafts: "price_1QcxMjH8mb7EVuIwUchyBOKp",
+  urbanmobility: "price_1QcxNkH8mb7EVuIwWxyzBOKp", // Example of additional ecosystem
 }
 
 export default async function handler(req, res) {
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
         companyNames: subscriptions.map((sub) => sub.companyName).join(","),
         personas: subscriptions.map((sub) => sub.persona).join(","),
         roles: subscriptions.map((sub) => sub.role).join(","),
-        ecosystems: subscriptions.flatMap((sub) => sub.ecosystems).join(","),
+        ecosystems: subscriptions.flatMap((sub) => sub.ecosystems).join(","), // Flatten ecosystems
       }
 
       const lineItems = subscriptions.flatMap((sub) =>
