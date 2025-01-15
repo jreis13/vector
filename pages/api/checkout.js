@@ -2,6 +2,10 @@ import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
+const ecosystemPriceMapping = {
+  evtolandvtolaircrafts: "price_1QcxMjH8mb7EVuIwUchyBOKp",
+}
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { subscriptions } = req.body
@@ -26,10 +30,16 @@ export default async function handler(req, res) {
       }
 
       const lineItems = subscriptions.flatMap((sub) =>
-        sub.ecosystems.map((ecosystemId) => ({
-          price: `price_for_${ecosystemId}`,
-          quantity: 1,
-        }))
+        sub.ecosystems.map((ecosystemId) => {
+          const priceId = ecosystemPriceMapping[ecosystemId]
+          if (!priceId) {
+            throw new Error(`No price ID found for ecosystem: ${ecosystemId}`)
+          }
+          return {
+            price: priceId,
+            quantity: 1,
+          }
+        })
       )
 
       const session = await stripe.checkout.sessions.create({
