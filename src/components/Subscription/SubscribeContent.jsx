@@ -52,7 +52,7 @@ export default function SubscribeContent() {
   const info = [
     {
       title:
-        "Licenses are issued per email (per person). Each company personal email you add, we will issue a license for the given email.",
+        "Licenses are issued per email (per person). Each corporate email you add, we will issue licenses for the provided email(s).",
     },
     {
       title:
