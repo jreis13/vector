@@ -45,6 +45,7 @@ export default async function handler(req, res) {
         emails.map(async (email, index) => {
           let userId
 
+          // Fetch or create the Auth0 user
           try {
             userId = await getAuth0UserIdByEmail(email)
           } catch (err) {
@@ -52,8 +53,10 @@ export default async function handler(req, res) {
             userId = await createAuth0User(email)
           }
 
+          // Update the user's metadata with subscribed ecosystems
           const metadata = {
-            subscribed: ecosystems, // Store array of ecosystems
+            subscribed: true, // Boolean for easy checks
+            subscribedTo: ecosystems, // Array of subscribed ecosystems
             firstName: firstNames[index],
             lastName: lastNames[index],
             companyName: companyNames[index],
@@ -76,6 +79,7 @@ export default async function handler(req, res) {
   res.status(200).json({ received: true })
 }
 
+// Helper functions remain unchanged
 async function getAuth0UserIdByEmail(email) {
   const token = await getManagementToken()
 
@@ -109,7 +113,7 @@ async function createAuth0User(email) {
         email,
         connection: "email",
         email_verified: true,
-        app_metadata: { subscribed: [] },
+        app_metadata: { subscribed: false, subscribedTo: [] },
       }),
     }
   )
