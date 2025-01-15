@@ -46,16 +46,12 @@ export default function Profile() {
               <span>Subscription:</span>
               <span
                 className={`${
-                  user.app_metadata?.subscribed &&
-                  user.app_metadata.subscribed.length > 0
+                  user.app_metadata?.subscribed
                     ? "text-green-500"
                     : "text-red-500"
                 } font-semibold`}
               >
-                {user.app_metadata?.subscribed &&
-                user.app_metadata.subscribed.length > 0
-                  ? "Active"
-                  : "Inactive"}
+                {user.app_metadata?.subscribed ? "Active" : "Inactive"}
               </span>
             </div>
             <div className="flex justify-between py-2">
@@ -77,10 +73,12 @@ export default function Profile() {
             <div className="mt-6">
               <h3 className="text-lg font-bold mb-2">Subscribed Ecosystems:</h3>
               {user.app_metadata?.subscribed &&
-              user.app_metadata.subscribed.length > 0 ? (
+              user.app_metadata.subscribedTo.length > 0 ? (
                 <ul className="list-disc list-inside">
-                  {user.app_metadata.subscribed.map((ecosystem, index) => (
-                    <li key={index}>{ecosystem}</li>
+                  {user.app_metadata.subscribedTo.map((ecosystem, index) => (
+                    <li className="list-none" key={index}>
+                      {ecosystem}
+                    </li>
                   ))}
                 </ul>
               ) : (

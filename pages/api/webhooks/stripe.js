@@ -45,7 +45,6 @@ export default async function handler(req, res) {
         emails.map(async (email, index) => {
           let userId
 
-          // Fetch or create the Auth0 user
           try {
             userId = await getAuth0UserIdByEmail(email)
           } catch (err) {
@@ -53,10 +52,16 @@ export default async function handler(req, res) {
             userId = await createAuth0User(email)
           }
 
-          // Update the user's metadata with subscribed ecosystems
+          const existingMetadata = await fetchUserMetadata(userId)
+
+          const updatedSubscribedTo = [
+            ...(existingMetadata.subscribedTo || []),
+            ...ecosystems,
+          ].filter((value, idx, self) => self.indexOf(value) === idx)
+
           const metadata = {
-            subscribed: true, // Boolean for easy checks
-            subscribedTo: ecosystems, // Array of subscribed ecosystems
+            subscribed: true,
+            subscribedTo: updatedSubscribedTo,
             firstName: firstNames[index],
             lastName: lastNames[index],
             companyName: companyNames[index],
@@ -79,7 +84,27 @@ export default async function handler(req, res) {
   res.status(200).json({ received: true })
 }
 
-// Helper functions remain unchanged
+async function fetchUserMetadata(userId) {
+  const token = await getManagementToken()
+
+  const response = await fetch(
+    `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch user metadata: ${response.statusText}`)
+  }
+
+  const user = await response.json()
+  return user.app_metadata || {}
+}
+
 async function getAuth0UserIdByEmail(email) {
   const token = await getManagementToken()
 
