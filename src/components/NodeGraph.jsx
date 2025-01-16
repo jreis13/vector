@@ -7,7 +7,11 @@ const NodeGraph = ({ ecosystem }) => {
   const svgRef = useRef()
   useD3Graph(svgRef, ecosystem)
 
-  return <svg ref={svgRef}></svg>
+  return (
+    <div className="w-full h-[80vh]">
+      <svg ref={svgRef} className="w-full h-full"></svg>
+    </div>
+  )
 }
 
 export default NodeGraph
