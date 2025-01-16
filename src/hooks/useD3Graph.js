@@ -53,14 +53,14 @@ export const useD3Graph = (svgRef, ecosystem, csvData = []) => {
         d3
           .forceLink(networkData.links)
           .id((d) => d.id)
-          .distance(150)
-          .strength(0.7)
+          .distance(200)
+          .strength(0.8)
       )
-      .force("charge", d3.forceManyBody().strength(-500))
+      .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force(
         "collision",
-        d3.forceCollide().radius((d) => d.radius + 25)
+        d3.forceCollide().radius((d) => d.radius + 15)
       )
       .force("x", d3.forceX(width / 2).strength(0.1))
       .force("y", d3.forceY(height / 2).strength(0.1))
@@ -365,8 +365,11 @@ export const transformNetworkData = (ecosystem) => {
   ]
   const links = []
 
-  const addNodesAndLinks = (parentId, data, groupLevel) => {
+  const addNodesAndLinks = (parentId, data, groupLevel = 2) => {
     if (!data) return
+
+    const baseRadius = 50
+    const scaleFactor = 0.7
 
     if (Array.isArray(data)) {
       data.forEach((item) => {
@@ -375,9 +378,7 @@ export const transformNetworkData = (ecosystem) => {
 
         const existingNode = nodes.find((node) => node.id === nodeId)
         if (!existingNode) {
-          const baseRadius = 30
-          const scaleFactor = 1 + (1.5 - 1) * (3 - groupLevel)
-          const radius = baseRadius * scaleFactor
+          const radius = baseRadius * Math.pow(scaleFactor, groupLevel - 1)
           nodes.push({
             id: nodeId,
             group: groupLevel,
@@ -398,7 +399,7 @@ export const transformNetworkData = (ecosystem) => {
   }
 
   if (Array.isArray(ecosystem.nodes)) {
-    addNodesAndLinks(ecosystem.name, ecosystem.nodes, 2)
+    addNodesAndLinks(ecosystem.name, ecosystem.nodes)
   }
 
   return { nodes, links }
