@@ -25,14 +25,14 @@ export default function NavMenu() {
 
   const authPaths = user
     ? [
-        ...PATHS.filter((path) => path.name !== "Login"),
+        ...PATHS.filter((path) => path.name !== "Login / Sign up"),
         { name: "Logout", path: "/api/auth/logout" },
       ]
     : [
         ...PATHS.filter(
-          (path) => path.name !== "Login" && path.name !== "Profile"
+          (path) => path.name !== "Login / Sign up" && path.name !== "Profile"
         ),
-        { name: "Login", path: "/api/auth/login" },
+        { name: "Login / Sign up", path: "/api/auth/login" },
       ]
 
   return (
