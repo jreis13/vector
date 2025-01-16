@@ -1,6 +1,6 @@
 export const PATHS = [
   { name: "Ecosystems", path: "/ecosystems/" },
-  { name: "Login", path: "/login/" },
+  { name: "Login / Sign up", path: "/login/" },
   { name: "Profile", path: "/profile/" },
 ]
 
