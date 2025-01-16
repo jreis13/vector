@@ -1,5 +1,6 @@
 import Image from "next/image"
 import expVectorAvatar from "public/expVectorAvatar.png"
+import HoverScale from "src/animations/HoverScale"
 
 export default function FeatureGrid({
   title,
@@ -47,7 +48,7 @@ export default function FeatureGrid({
           {features &&
             features.map((feature, index) => (
               <div key={index} className="relative p-4 overflow-hidden">
-                <div className="h-full w-full flex flex-col items-center justify-center">
+                <HoverScale className="h-full w-full flex flex-col items-center justify-center">
                   <div className="flex flex-col items-center text-center">
                     {feature.name && (
                       <h3 className="py-4 font-bold">{feature.name}</h3>
@@ -69,7 +70,7 @@ export default function FeatureGrid({
                       </div>
                     </div>
                   )}
-                </div>
+                </HoverScale>
               </div>
             ))}
         </div>
