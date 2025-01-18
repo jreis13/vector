@@ -8,8 +8,8 @@ const NodeGraph = ({ nodeGroup }) => {
   useD3Graph(svgRef, nodeGroup)
 
   return (
-    <div className="w-full h-[80vh]">
-      <svg ref={svgRef} className="w-full h-full"></svg>
+    <div className="w-full">
+      <svg ref={svgRef}></svg>
     </div>
   )
 }
