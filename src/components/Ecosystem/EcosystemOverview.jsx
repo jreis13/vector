@@ -27,44 +27,40 @@ export default function EcosystemOverview({ ecosystem }) {
 
   return (
     <div className="flex flex-col mt-8">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentPage}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="flex h-[70vh]">
-            <div className="flex flex-col justify-center items-center">
-              {currentPage > 0 && (
-                <button onClick={handlePrev} className="py-2 ml-16 text-3xl">
-                  <FontAwesomeIcon icon={faArrowCircleLeft} />
-                </button>
-              )}
-            </div>
-            <div className="grid grid-cols-2 flex-1 px-6 lg:px-16">
-              <NodeGraph nodeGroup={currentGroup} />
-              <NodeDetails
-                nodes={currentGroup.nodes}
-                nodeGroup={currentGroup}
-              />
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              {currentPage < totalPages - 1 && (
-                <button onClick={handleNext} className="py-2 mr-16 text-3xl">
-                  <FontAwesomeIcon icon={faArrowCircleRight} />
-                </button>
-              )}
-            </div>
+      <div className="flex h-[70vh]">
+        {currentPage > 0 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handlePrev} className="py-2 ml-16 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
+            </button>
           </div>
-        </motion.div>
-        <div className="text-center mt-4 px-16">
-          <p className="text-gray-400">
-            Page {currentPage + 1} of {totalPages}
-          </p>
-        </div>
-      </AnimatePresence>
+        )}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-2 flex-1 px-6 lg:px-16"
+          >
+            <NodeGraph nodeGroup={currentGroup} />
+            <NodeDetails nodes={currentGroup.nodes} nodeGroup={currentGroup} />
+          </motion.div>
+        </AnimatePresence>
+        {currentPage < totalPages - 1 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handleNext} className="py-2 mr-16 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleRight} />
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="text-center mt-4 px-16">
+        <p className="text-gray-400">
+          Page {currentPage + 1} of {totalPages}
+        </p>
+      </div>
     </div>
   )
 }
