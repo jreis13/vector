@@ -52,7 +52,9 @@ export default function ActiveInvestors({ companies, data }) {
     currentPage * investorsPerPage + investorsPerPage
   )
 
-  const [visibleCompanies, setVisibleCompanies] = useState([])
+  const [visibleCompanies, setVisibleCompanies] = useState(
+    data.map((group) => group.companyName)
+  )
 
   if (!allInvestors.length) {
     return (

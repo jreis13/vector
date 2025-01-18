@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "framer-motion"
 import React, { useState } from "react"
 
 export default function EcosystemProductTable({ groupedProducts, attributes }) {
-  const [visibleCompanies, setVisibleCompanies] = useState([])
+  const [visibleCompanies, setVisibleCompanies] = useState(
+    groupedProducts.map((group) => group.companyName)
+  )
 
   const toggleCompanyVisibility = (companyName) => {
     setVisibleCompanies((prev) =>
