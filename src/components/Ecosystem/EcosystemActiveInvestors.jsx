@@ -102,21 +102,21 @@ export default function ActiveInvestors({ companies, data }) {
       id="ActiveInvestors"
       className="flex flex-col px-6 py-8 lg:px-16 lg:py-16 min-h-screen"
     >
-      <AnimatePresence mode="wait">
-        <div className="flex h-full">
-          {currentPage > 0 && (
-            <div className="flex flex-col justify-center items-center">
-              <button onClick={handlePrev} className="py-2 mr-4 text-3xl">
-                <FontAwesomeIcon icon={faArrowCircleLeft} />
-              </button>
-            </div>
-          )}
+      <div className="flex h-full">
+        {currentPage > 0 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handlePrev} className="py-2 mr-4 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
+            </button>
+          </div>
+        )}
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
             style={{ minHeight: "450px" }}
           >
@@ -124,15 +124,15 @@ export default function ActiveInvestors({ companies, data }) {
               <InvestorCard key={index} investor={investor} />
             ))}
           </motion.div>
-          {currentPage < totalPages - 1 && (
-            <div className="flex flex-col justify-center items-center">
-              <button onClick={handleNext} className="py-2 ml-4 text-3xl">
-                <FontAwesomeIcon icon={faArrowCircleRight} />
-              </button>
-            </div>
-          )}
-        </div>
-      </AnimatePresence>
+        </AnimatePresence>
+        {currentPage < totalPages - 1 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handleNext} className="py-2 ml-4 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleRight} />
+            </button>
+          </div>
+        )}
+      </div>
 
       <div className="text-center mt-4">
         <p className="text-gray-400">

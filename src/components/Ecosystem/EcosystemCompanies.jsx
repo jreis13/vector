@@ -59,23 +59,21 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
         fundingAmountRanges={fundingAmountRanges}
       />
 
-      <AnimatePresence mode="wait">
-        <div className="flex h-full">
-          {filteredCompanies.length > 0 && (
-            <div className="flex flex-col justify-center items-center">
-              {currentPage > 0 && (
-                <button onClick={handlePrev} className="py-2 mr-4 text-3xl">
-                  <FontAwesomeIcon icon={faArrowCircleLeft} />
-                </button>
-              )}
-            </div>
-          )}
+      <div className="flex h-full">
+        {currentPage > 0 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handlePrev} className="py-2 mr-4 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleLeft} />
+            </button>
+          </div>
+        )}
+        <AnimatePresence mode="wait">
           <motion.div
             key={`${currentPage}-${filters.industry}-${filters.fundingStage}-${filters.fundingAmount}`}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5 }}
             className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {currentCompanies.map((company) => (
@@ -86,24 +84,22 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
               />
             ))}
           </motion.div>
-          {filteredCompanies.length > 0 && (
-            <div className="flex flex-col justify-center items-center">
-              {currentPage < totalFilteredPages - 1 && (
-                <button onClick={handleNext} className="py-2 ml-4 text-3xl">
-                  <FontAwesomeIcon icon={faArrowCircleRight} />
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-        {filteredCompanies.length > 0 && (
-          <div className="text-center mt-4">
-            <p className="text-gray-400">
-              Page {currentPage + 1} of {totalFilteredPages}
-            </p>
+        </AnimatePresence>
+        {currentPage < totalFilteredPages - 1 && (
+          <div className="flex flex-col justify-center items-center">
+            <button onClick={handleNext} className="py-2 ml-4 text-3xl">
+              <FontAwesomeIcon icon={faArrowCircleRight} />
+            </button>
           </div>
         )}
-      </AnimatePresence>
+      </div>
+      {filteredCompanies.length > 0 && (
+        <div className="text-center mt-4">
+          <p className="text-gray-400">
+            Page {currentPage + 1} of {totalFilteredPages}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
