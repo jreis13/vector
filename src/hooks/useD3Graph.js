@@ -11,81 +11,61 @@ export const useD3Graph = (svgRef, data) => {
     svg.selectAll("*").remove()
 
     const container = svg.node().parentElement
-    const width = container.offsetWidth
-    const height = container.offsetHeight
-    const radius = Math.min(width, height) / 2 - 50
+    const width = container.offsetWidth * 0.8
+    const height = container.offsetHeight * 0.8
 
-    const transformData = (node) => {
-      const children = []
-      if (node.nodes) {
-        children.push(...node.nodes.map(transformData))
-      }
-      if (node.subnodes) {
-        children.push(...node.subnodes.map(transformData))
-      }
-      return { ...node, children: children.length > 0 ? children : undefined }
-    }
+    const root = d3.hierarchy(data, (d) => d.nodes || d.subnodes)
 
-    const rootData = transformData(data)
-    const root = d3.hierarchy(rootData)
-
-    const tree = d3
-      .tree()
-      .size([2 * Math.PI, radius])
-      .separation((a, b) => (a.parent === b.parent ? 2 : 3))
+    const tree = d3.tree().size([height, width])
 
     const treeData = tree(root)
 
     const svgGroup = svg
       .append("g")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("transform", `translate(${width / 2}, ${height / 3})`)
+      .attr(
+        "transform",
+        `translate(${(container.offsetWidth - width) / 2}, ${(container.offsetHeight - height) / 2})`
+      )
 
-    const links = svgGroup
+    svgGroup
       .selectAll(".link")
       .data(treeData.links())
       .join("path")
       .attr(
         "d",
-        d3
-          .linkRadial()
-          .angle((d) => d.x)
-          .radius((d) => d.y)
+        (d) => `
+        M${d.source.y},${d.source.x}
+        H${(d.source.y + d.target.y) / 2}
+        V${d.target.x}
+        H${d.target.y}
+      `
       )
       .attr("fill", "none")
       .attr("stroke", "#ccc")
-      .attr("stroke-width", 1.5)
+      .attr("stroke-width", 2)
 
     const nodes = svgGroup
       .selectAll(".node")
       .data(treeData.descendants())
       .join("g")
-      .attr(
-        "transform",
-        (d) => `rotate(${(d.x * 180) / Math.PI - 90}) translate(${d.y},0)`
-      )
+      .attr("transform", (d) => `translate(${d.y},${d.x})`)
 
     nodes
       .append("circle")
-      .attr("r", 15)
-      .attr("fill", "#6b7280")
-      .attr("stroke", "#000")
-      .attr("stroke-width", 2)
+      .attr("r", (d) => (d.depth === 0 ? 20 : 15))
+      .attr("fill", (d) => (d.depth === 0 ? "#4B5563" : "#6B7280"))
 
     nodes
       .append("text")
-      .attr("dy", "0.35em")
-      .attr("x", (d) => (d.x < Math.PI ? 16 : -16))
-      .attr("text-anchor", (d) => (d.x < Math.PI ? "start" : "end"))
-      .attr("transform", (d) => (d.x >= Math.PI ? "rotate(180)" : null))
-      .text((d) => d.data.title)
-      .style("font-size", "16px")
+      .attr("dy", (d) => (d.depth === 0 ? 40 : 30))
+      .attr("text-anchor", "middle")
+      .text((d) => d.data.name)
+      .style("font-size", (d) => (d.depth === 0 ? "24px" : "16px"))
       .style("fill", "#ddd")
       .style("pointer-events", "none")
 
     svg
-      .attr("viewBox", `0 0 ${width} ${height}`)
+      .attr("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .classed("block", true)
   }, [data, svgRef])
