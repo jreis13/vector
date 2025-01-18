@@ -25,7 +25,7 @@ export default function NodeDetails({ nodeGroup }) {
         {breadcrumbs.map((breadcrumb, index) => (
           <motion.span
             key={breadcrumb.name}
-            className={`cursor-pointer ${
+            className={`cursor-pointer flex items-center ${
               index === breadcrumbs.length - 1
                 ? "font-bold text-lg"
                 : "text-gray-400"
@@ -66,7 +66,7 @@ export default function NodeDetails({ nodeGroup }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="flex justify-between items-center py-4 px-6 cursor-pointer"
+            className="flex gap-4 items-center py-4 px-6 cursor-pointer"
             onClick={() => handleNodeClick(subnode)}
           >
             <span className="font-bold">{subnode.name}</span>
