@@ -26,7 +26,7 @@ export default function EcosystemOverview({ ecosystem }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col mt-8">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPage}
@@ -35,28 +35,34 @@ export default function EcosystemOverview({ ecosystem }) {
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.3 }}
         >
-          <h1 className="text-3xl font-bold text-center mt-8">
-            {currentGroup.name}
-          </h1>
-          <div className="flex align-center">
-            <NodeGraph nodeGroup={currentGroup} />
-            <NodeDetails nodes={currentGroup.nodes} nodeGroup={currentGroup} />
+          <div className="flex h-[70vh]">
+            <div className="flex flex-col justify-center items-center">
+              {currentPage > 0 && (
+                <button onClick={handlePrev} className="py-2 ml-16 text-3xl">
+                  <FontAwesomeIcon icon={faArrowCircleLeft} />
+                </button>
+              )}
+            </div>
+            <div className="grid grid-cols-2 flex-1 px-6 lg:px-16">
+              <NodeGraph nodeGroup={currentGroup} />
+              <NodeDetails
+                nodes={currentGroup.nodes}
+                nodeGroup={currentGroup}
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              {currentPage < totalPages - 1 && (
+                <button onClick={handleNext} className="py-2 mr-16 text-3xl">
+                  <FontAwesomeIcon icon={faArrowCircleRight} />
+                </button>
+              )}
+            </div>
           </div>
         </motion.div>
-        <div className="flex justify-between items-center mt-8 px-16">
-          {currentPage > 0 && (
-            <button onClick={handlePrev} className="py-2 text-3xl">
-              <FontAwesomeIcon icon={faArrowCircleLeft} />
-            </button>
-          )}
-          <p className="text-gray-400 text-center w-full">
+        <div className="text-center mt-4 px-16">
+          <p className="text-gray-400">
             Page {currentPage + 1} of {totalPages}
           </p>
-          {currentPage < totalPages - 1 && (
-            <button onClick={handleNext} className="py-2 text-3xl">
-              <FontAwesomeIcon icon={faArrowCircleRight} />
-            </button>
-          )}
         </div>
       </AnimatePresence>
     </div>

@@ -20,26 +20,20 @@ export const useD3Graph = (svgRef, data) => {
 
     const treeData = tree(root)
 
-    const svgGroup = svg
-      .append("g")
-      .attr(
-        "transform",
-        `translate(${(container.offsetWidth - width) / 2}, ${(container.offsetHeight - height) / 2})`
-      )
+    const svgGroup = svg.append("g")
 
     svgGroup
       .selectAll(".link")
       .data(treeData.links())
       .join("path")
-      .attr(
-        "d",
-        (d) => `
-        M${d.source.y},${d.source.x}
-        H${(d.source.y + d.target.y) / 2}
-        V${d.target.x}
-        H${d.target.y}
-      `
-      )
+      .attr("d", (d) => {
+        const midX = (d.source.x + d.target.x) / 2
+        const midY = (d.source.y + d.target.y) / 2
+        return `
+            M${d.source.y},${d.source.x}
+            C${midY},${d.source.x} ${midY},${d.target.x} ${d.target.y},${d.target.x}
+          `
+      })
       .attr("fill", "none")
       .attr("stroke", "#ccc")
       .attr("stroke-width", 2)
@@ -64,9 +58,12 @@ export const useD3Graph = (svgRef, data) => {
       .style("fill", "#ddd")
       .style("pointer-events", "none")
 
+    const bbox = svgGroup.node().getBBox()
+
     svg
-      .attr("viewBox", `0 0 ${container.offsetWidth} ${container.offsetHeight}`)
-      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`)
+      .attr("width", bbox.width)
+      .attr("height", bbox.height)
       .classed("block", true)
   }, [data, svgRef])
 }

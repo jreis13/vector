@@ -21,13 +21,13 @@ export default function NodeDetails({ nodeGroup }) {
 
   return (
     <div className="mt-16 px-16">
-      <div className="flex items-center mb-4 text-sm">
+      <div className="flex items-center mb-4">
         {breadcrumbs.map((breadcrumb, index) => (
           <motion.span
             key={breadcrumb.name}
             className={`cursor-pointer flex items-center ${
               index === breadcrumbs.length - 1
-                ? "font-bold text-lg"
+                ? "font-bold text-3xl"
                 : "text-gray-400"
             }`}
             onClick={() => handleBreadcrumbClick(index)}
