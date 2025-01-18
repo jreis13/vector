@@ -76,25 +76,24 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
             />
           ))}
         </motion.div>
+        {filteredCompanies.length > 0 && (
+          <div className="flex justify-between items-center mt-8">
+            {currentPage > 0 && (
+              <button onClick={handlePrev} className="py-2 text-3xl">
+                <FontAwesomeIcon icon={faArrowCircleLeft} />
+              </button>
+            )}
+            <p className="text-gray-400 text-center w-full">
+              Page {currentPage + 1} of {totalFilteredPages}
+            </p>
+            {currentPage < totalFilteredPages - 1 && (
+              <button onClick={handleNext} className="py-2 text-3xl">
+                <FontAwesomeIcon icon={faArrowCircleRight} />
+              </button>
+            )}
+          </div>
+        )}
       </AnimatePresence>
-
-      {filteredCompanies.length > 0 && (
-        <div className="flex justify-between items-center mt-8">
-          {currentPage > 0 && (
-            <button onClick={handlePrev} className="py-2 text-3xl">
-              <FontAwesomeIcon icon={faArrowCircleLeft} />
-            </button>
-          )}
-          <p className="text-gray-400 text-center w-full">
-            Page {currentPage + 1} of {totalFilteredPages}
-          </p>
-          {currentPage < totalFilteredPages - 1 && (
-            <button onClick={handleNext} className="py-2 text-3xl">
-              <FontAwesomeIcon icon={faArrowCircleRight} />
-            </button>
-          )}
-        </div>
-      )}
     </div>
   )
 }
