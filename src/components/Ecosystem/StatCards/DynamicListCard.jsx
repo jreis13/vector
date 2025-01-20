@@ -50,7 +50,6 @@ export default function DynamicListCard({ data }) {
         </div>
       )
     } else if (typeof item === "object" && item.details) {
-      // Recursively render nested details
       return (
         <div key={index} className="ml-4 mb-4">
           <strong>{item.subtitle || "Details"}:</strong>
@@ -64,7 +63,6 @@ export default function DynamicListCard({ data }) {
         </div>
       )
     } else if (Array.isArray(item)) {
-      // Render an array of items
       return (
         <ul key={index} className="list-disc pl-5">
           {item.map((nestedItem, nestedIndex) =>
