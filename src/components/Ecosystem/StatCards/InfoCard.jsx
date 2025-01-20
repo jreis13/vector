@@ -3,7 +3,7 @@
 export default function InfoCard({ data }) {
   return (
     <div>
-      <p>{data.value || "N/A"}</p>
+      <p className="ml-2">{data.value || "N/A"}</p>
     </div>
   )
 }

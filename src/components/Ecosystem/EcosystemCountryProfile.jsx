@@ -147,7 +147,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                             </div>
                           )}
                           <div className="w-full">
-                            <h3 className="mb-2">{key}</h3>
+                            <h3 className="mb-2 text-2xl">{key}</h3>
                             {value.type === "list" ||
                             value.type === "nested-list" ? (
                               <DynamicListCard data={value} />
@@ -186,7 +186,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                         </div>
                       )}
                       <div className="w-full">
-                        <h3 className="mb-2">{key}</h3>
+                        <h3 className="mb-2 text-2xl">{key}</h3>
                         {(() => {
                           switch (value.type) {
                             case "list":
@@ -196,7 +196,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                               return (
                                 <div className="relative">
                                   <iframe
-                                    className="w-full h-[calc(100vh-100px)] border-none"
+                                    className="w-full h-full border-none"
                                     src={value.value}
                                     allowFullScreen
                                   ></iframe>

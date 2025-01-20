@@ -50,21 +50,9 @@ export default function DynamicListCard({ data }) {
       )
     } else if (typeof item === "object" && item.subtitle) {
       return (
-        <div key={index} className="mb-2 flex">
-          <p>{item.subtitle}:</p> {item.description || "N/A"}
-        </div>
-      )
-    } else if (typeof item === "object" && item.details) {
-      return (
-        <div key={index} className="ml-4 mb-4">
-          <p>{item.subtitle || "Details"}:</p>
-          <ul className="list-disc pl-5">
-            {Object.entries(item.details).map(([key, detail], detailIndex) => (
-              <li key={detailIndex}>
-                <p>{key}:</p> {detail.value || "N/A"}
-              </li>
-            ))}
-          </ul>
+        <div key={index} className="mb-2 flex flex-col ml-2">
+          <p className="font-bold text-xl">{item.subtitle}:</p>
+          <p className="ml-2">{item.description || "N/A"}</p>
         </div>
       )
     } else if (Array.isArray(item)) {
