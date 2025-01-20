@@ -12,7 +12,7 @@ export default function InfoCard({ data }) {
   return (
     <div className="flex items-center gap-4">
       {isPercentage && <PercentageChart percentage={percentage} />}
-      <p className="ml-2">{data.value || "N/A"}</p>
+      <p>{data.value || "N/A"}</p>
     </div>
   )
 }

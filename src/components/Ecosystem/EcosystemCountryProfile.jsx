@@ -8,13 +8,12 @@ import {
   faCircleNodes,
   faFilePen,
   faHandHoldingDollar,
-  faJetFighter,
+  faHashtag,
   faListCheck,
   faMedal,
   faMoneyBill1Wave,
   faPeopleRoof,
   faPersonWalkingDashedLineArrowRight,
-  faPlane,
   faPlaneCircleCheck,
   faRocket,
   faScaleBalanced,
@@ -76,11 +75,8 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
     if (normalizedTitle.includes("public transport")) {
       return faBus
     }
-    if (normalizedTitle.includes("airport")) {
-      return faPlane
-    }
-    if (normalizedTitle.includes("vertiport")) {
-      return faJetFighter
+    if (normalizedTitle.includes("number")) {
+      return faHashtag
     }
     if (normalizedTitle.includes("internet")) {
       return faWifi
