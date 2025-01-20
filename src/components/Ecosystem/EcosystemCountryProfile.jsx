@@ -116,6 +116,10 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
     return null
   }
 
+  const hasHtmlType = (details) => {
+    return Object.values(details).some((detail) => detail.type === "html")
+  }
+
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-4xl font-bold mb-16">{countryName}</h1>
@@ -124,8 +128,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
         {reports.map((report, reportIndex) => (
           <div key={reportIndex}>
             <h2 className="mb-8">{report.title}</h2>
-
-            {report.title === "Market Demand and Adoption Metrics" ? (
+            {hasHtmlType(report.details) ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                 <div className="space-y-6">
                   {Object.entries(report.details)

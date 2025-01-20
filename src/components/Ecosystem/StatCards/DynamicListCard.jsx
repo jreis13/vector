@@ -32,31 +32,36 @@ export default function DynamicListCard({ data }) {
   }
 
   const renderContent = (item, index) => {
+    console.log(item.details)
     if (typeof item === "object" && item.type === "percentage") {
       const percentage = parseFloat(item.description.match(/-?\d+/)?.[0]) || 0
 
       return (
-        <div key={index} className="flex items-center justify-between gap-4">
-          <div>
-            <strong>{item.subtitle}:</strong> {item.description}
-          </div>
+        <div
+          key={index}
+          className="flex flex-col items-center justify-center gap-2 p-4 h-fit"
+        >
           {renderChart(percentage)}
+          <div className="text-center flex flex-col gap-2">
+            <p>{item.subtitle}:</p>
+            <p>{item.description}</p>
+          </div>
         </div>
       )
     } else if (typeof item === "object" && item.subtitle) {
       return (
-        <div key={index} className="mb-2">
-          <strong>{item.subtitle}:</strong> {item.description || "N/A"}
+        <div key={index} className="mb-2 flex">
+          <p>{item.subtitle}:</p> {item.description || "N/A"}
         </div>
       )
     } else if (typeof item === "object" && item.details) {
       return (
         <div key={index} className="ml-4 mb-4">
-          <strong>{item.subtitle || "Details"}:</strong>
+          <p>{item.subtitle || "Details"}:</p>
           <ul className="list-disc pl-5">
             {Object.entries(item.details).map(([key, detail], detailIndex) => (
               <li key={detailIndex}>
-                <strong>{key}:</strong> {detail.value || "N/A"}
+                <p>{key}:</p> {detail.value || "N/A"}
               </li>
             ))}
           </ul>
@@ -81,13 +86,15 @@ export default function DynamicListCard({ data }) {
     return null
   }
 
+  const hasPercentage = data.value.some((item) => item.type === "percentage")
+
   return (
-    <div>
-      <div>
-        {Array.isArray(data.value)
-          ? data.value.map((item, index) => renderContent(item, index))
-          : renderContent(data.value, 0)}
-      </div>
+    <div
+      className={`grid grid-cols-1 gap-4 ${hasPercentage ? "lg:grid-cols-3" : ""}`}
+    >
+      {Array.isArray(data.value)
+        ? data.value.map((item, index) => renderContent(item, index))
+        : renderContent(data.value, 0)}
     </div>
   )
 }
