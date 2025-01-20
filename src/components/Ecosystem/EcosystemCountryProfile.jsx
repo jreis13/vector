@@ -123,14 +123,14 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
 
       <div className="space-y-16">
         {reports.map((report, reportIndex) => (
-          <ScrollReveal id={reportIndex}>
+          <ScrollReveal key={reportIndex} id={reportIndex}>
             <div key={reportIndex}>
               <h2 className="mb-8">{report.title}</h2>
               {hasHtmlType(report.details) ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                   <div className="space-y-6">
                     {Object.entries(report.details)
-                      .filter(([key, value]) => value.type !== "html")
+                      .filter(([, value]) => value.type !== "html")
                       .map(([key, value], idx) => {
                         const icon = determineTitleIcon(key, value?.value || "")
 
@@ -160,8 +160,8 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
 
                   <div className="relative">
                     {Object.entries(report.details)
-                      .filter(([key, value]) => value.type === "html")
-                      .map(([key, value], idx) => (
+                      .filter(([, value]) => value.type === "html")
+                      .map(([, value], idx) => (
                         <iframe
                           key={idx}
                           className="w-full h-[calc(100vh-100px)] border-none"
