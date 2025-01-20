@@ -22,11 +22,11 @@ export default function DynamicListCard({ data }) {
       return (
         <div
           key={index}
-          className="flex flex-col items-center justify-center gap-2 p-4 h-fit"
+          className="flex flex-col items-center text-center p-4 h-fit"
         >
           <PercentageChart percentage={percentage} />
-          <div className="text-center flex flex-col gap-2">
-            <p>{item.subtitle}</p>
+          <div className="flex flex-col gap-2">
+            <p className="font-bold text-lg">{item.subtitle}</p>
             <p>{item.description}</p>
           </div>
         </div>
@@ -35,47 +35,35 @@ export default function DynamicListCard({ data }) {
       return (
         <div
           key={index}
-          className={`flex flex-col ${
-            item.subtitle === "Mobile" ||
-            item.subtitle === "Fixed Broadband" ||
-            item.subtitle === "Visitors"
-              ? "items-center justify-center"
-              : ""
-          } p-4 h-fit`}
+          className="flex flex-col items-center text-center py-4 h-fit w-fit"
         >
-          <div
-            className={`flex ${
-              item.subtitle === "Mobile" ||
-              item.subtitle === "Fixed Broadband" ||
-              item.subtitle === "Visitors" ||
-              item.subtitle.includes("Spending") ||
-              item.subtitle.includes("Spent") ||
-              item.subtitle.includes("Public")
-                ? "items-center justify-center"
-                : "items-start"
-            } text-4xl`}
-          >
+          <div className="flex items-center justify-center text-4xl mb-2">
             {item.subtitle === "Mobile" ? (
-              <FontAwesomeIcon icon={faMobileAlt} />
+              <FontAwesomeIcon className="text-[#7032ff]" icon={faMobileAlt} />
             ) : item.subtitle === "Fixed Broadband" ? (
-              <FontAwesomeIcon icon={faWifi} />
+              <FontAwesomeIcon className="text-[#7032ff]" icon={faWifi} />
             ) : item.subtitle === "Visitors" ? (
-              <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon className="text-[#7032ff]" icon={faUser} />
             ) : item.subtitle.includes("Spending") ? (
-              <FontAwesomeIcon icon={faMoneyBill1Wave} />
+              <FontAwesomeIcon
+                className="text-[#7032ff]"
+                icon={faMoneyBill1Wave}
+              />
             ) : item.subtitle.includes("Spent") ? (
-              <FontAwesomeIcon icon={faMoneyBillTransfer} />
+              <FontAwesomeIcon
+                className="text-[#7032ff]"
+                icon={faMoneyBillTransfer}
+              />
             ) : item.subtitle.includes("Public") ? (
-              <FontAwesomeIcon icon={faFileInvoiceDollar} />
+              <FontAwesomeIcon
+                className="text-[#7032ff]"
+                icon={faFileInvoiceDollar}
+              />
             ) : null}
           </div>
-          <div className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2">
             <p className="font-bold text-xl">{item.subtitle}</p>
-            <p
-              className={`text-lg ${item.subtitle === "Mobile" || item.subtitle === "Fixed Broadband" || item.subtitle === "Visitors" ? "text-center" : ""}`}
-            >
-              {item.description || "N/A"}
-            </p>
+            <p>{item.description || "N/A"}</p>
           </div>
         </div>
       )
@@ -90,10 +78,10 @@ export default function DynamicListCard({ data }) {
     } else if (typeof item === "string") {
       return (
         <li
-          className="list-none flex flex-col items-center gap-2 p-4"
+          className="flex flex-col items-center text-center py-4 h-fit w-fit"
           key={index}
         >
-          <div className="text-4xl">
+          <div className="text-4xl text-[#7032ff]">
             {item.includes("Airports") ? (
               <FontAwesomeIcon icon={faPlane} />
             ) : item.includes("Airfields") ? (
@@ -102,7 +90,7 @@ export default function DynamicListCard({ data }) {
               <FontAwesomeIcon icon={faRobot} />
             ) : null}
           </div>
-          <span className="text-center">{item}</span>
+          <span>{item}</span>
         </li>
       )
     }
@@ -122,7 +110,7 @@ export default function DynamicListCard({ data }) {
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 text-center ${getGridColumns(data.value.length)}`}
+      className={`grid grid-cols-1 lg:grid-cols-3 gap-4 justify-start text-center`}
     >
       {Array.isArray(data.value)
         ? data.value.map((item, index) => renderContent(item, index))

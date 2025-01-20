@@ -138,7 +138,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                             <div className="flex-shrink-0">
                               <FontAwesomeIcon
                                 icon={icon}
-                                className="text-4xl"
+                                className="text-4xl text-[#7032ff]"
                               />
                             </div>
                           )}
@@ -178,7 +178,10 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                     <div key={idx} className="flex items-start gap-4 p-4">
                       {icon && (
                         <div className="flex-shrink-0">
-                          <FontAwesomeIcon icon={icon} className="text-4xl" />
+                          <FontAwesomeIcon
+                            icon={icon}
+                            className="text-4xl text-[#7032ff]"
+                          />
                         </div>
                       )}
                       <div className="w-full">

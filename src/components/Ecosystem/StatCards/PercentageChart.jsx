@@ -10,7 +10,7 @@ export default function PercentageChart({ percentage }) {
     datasets: [
       {
         data: [percentage, 100 - percentage],
-        backgroundColor: ["#7032ff", "#e0e0e0"],
+        backgroundColor: ["#d87103", "#e0e0e0"],
         borderWidth: 0,
       },
     ],
