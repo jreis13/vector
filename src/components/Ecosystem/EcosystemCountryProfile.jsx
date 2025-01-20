@@ -123,7 +123,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
 
       <div className="space-y-16">
         {reports.map((report, reportIndex) => (
-          <ScrollReveal>
+          <ScrollReveal id={reportIndex}>
             <div key={reportIndex}>
               <h2 className="mb-8">{report.title}</h2>
               {hasHtmlType(report.details) ? (
