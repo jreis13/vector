@@ -24,6 +24,7 @@ import {
   faWifi,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import ScrollReveal from "src/animations/ScrollReveal"
 import DynamicListCard from "./StatCards/DynamicListCard"
 import InfoCard from "./StatCards/InfoCard"
 
@@ -122,96 +123,98 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
 
       <div className="space-y-16">
         {reports.map((report, reportIndex) => (
-          <div key={reportIndex}>
-            <h2 className="mb-8">{report.title}</h2>
-            {hasHtmlType(report.details) ? (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                <div className="space-y-6">
-                  {Object.entries(report.details)
-                    .filter(([key, value]) => value.type !== "html")
-                    .map(([key, value], idx) => {
-                      const icon = determineTitleIcon(key, value?.value || "")
+          <ScrollReveal>
+            <div key={reportIndex}>
+              <h2 className="mb-8">{report.title}</h2>
+              {hasHtmlType(report.details) ? (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                  <div className="space-y-6">
+                    {Object.entries(report.details)
+                      .filter(([key, value]) => value.type !== "html")
+                      .map(([key, value], idx) => {
+                        const icon = determineTitleIcon(key, value?.value || "")
 
-                      return (
-                        <div key={idx} className="flex items-start gap-4 p-4">
-                          {icon && (
-                            <div className="flex-shrink-0">
-                              <FontAwesomeIcon
-                                icon={icon}
-                                className="text-4xl text-[#7032ff]"
-                              />
-                            </div>
-                          )}
-                          <div className="w-full">
-                            <h3 className="mb-2 text-2xl">{key}</h3>
-                            {value.type === "list" ||
-                            value.type === "nested-list" ? (
-                              <DynamicListCard data={value} />
-                            ) : (
-                              <InfoCard data={value} />
+                        return (
+                          <div key={idx} className="flex items-start gap-4 p-4">
+                            {icon && (
+                              <div className="flex-shrink-0">
+                                <FontAwesomeIcon
+                                  icon={icon}
+                                  className="text-4xl text-[#7032ff]"
+                                />
+                              </div>
                             )}
+                            <div className="w-full">
+                              <h3 className="mb-2 text-2xl">{key}</h3>
+                              {value.type === "list" ||
+                              value.type === "nested-list" ? (
+                                <DynamicListCard data={value} />
+                              ) : (
+                                <InfoCard data={value} />
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      )
-                    })}
-                </div>
+                        )
+                      })}
+                  </div>
 
-                <div className="relative">
-                  {Object.entries(report.details)
-                    .filter(([key, value]) => value.type === "html")
-                    .map(([key, value], idx) => (
-                      <iframe
-                        key={idx}
-                        className="w-full h-[calc(100vh-100px)] border-none"
-                        src={value.value}
-                        allowFullScreen
-                      ></iframe>
-                    ))}
+                  <div className="relative">
+                    {Object.entries(report.details)
+                      .filter(([key, value]) => value.type === "html")
+                      .map(([key, value], idx) => (
+                        <iframe
+                          key={idx}
+                          className="w-full h-[calc(100vh-100px)] border-none"
+                          src={value.value}
+                          allowFullScreen
+                        ></iframe>
+                      ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                {Object.entries(report.details).map(([key, value], idx) => {
-                  const icon = determineTitleIcon(key, value?.value || "")
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                  {Object.entries(report.details).map(([key, value], idx) => {
+                    const icon = determineTitleIcon(key, value?.value || "")
 
-                  return (
-                    <div key={idx} className="flex items-start gap-4 p-4">
-                      {icon && (
-                        <div className="flex-shrink-0">
-                          <FontAwesomeIcon
-                            icon={icon}
-                            className="text-4xl text-[#7032ff]"
-                          />
+                    return (
+                      <div key={idx} className="flex items-start gap-4 p-4">
+                        {icon && (
+                          <div className="flex-shrink-0">
+                            <FontAwesomeIcon
+                              icon={icon}
+                              className="text-4xl text-[#7032ff]"
+                            />
+                          </div>
+                        )}
+                        <div className="w-full">
+                          <h3 className="mb-2 text-2xl">{key}</h3>
+                          {(() => {
+                            switch (value.type) {
+                              case "list":
+                              case "nested-list":
+                                return <DynamicListCard data={value} />
+                              case "html":
+                                return (
+                                  <div className="relative">
+                                    <iframe
+                                      className="w-full h-full border-none"
+                                      src={value.value}
+                                      allowFullScreen
+                                    ></iframe>
+                                  </div>
+                                )
+                              default:
+                                return <InfoCard data={value} />
+                            }
+                          })()}
                         </div>
-                      )}
-                      <div className="w-full">
-                        <h3 className="mb-2 text-2xl">{key}</h3>
-                        {(() => {
-                          switch (value.type) {
-                            case "list":
-                            case "nested-list":
-                              return <DynamicListCard data={value} />
-                            case "html":
-                              return (
-                                <div className="relative">
-                                  <iframe
-                                    className="w-full h-full border-none"
-                                    src={value.value}
-                                    allowFullScreen
-                                  ></iframe>
-                                </div>
-                              )
-                            default:
-                              return <InfoCard data={value} />
-                          }
-                        })()}
                       </div>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          </ScrollReveal>
         ))}
       </div>
 
