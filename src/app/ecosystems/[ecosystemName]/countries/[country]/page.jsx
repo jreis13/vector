@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import "src/common/styles/_reset.css"
 import EcosystemCountryLayout from "src/layouts/EcosystemCountryLayout"
 
 export default function CountryPage({ params }) {

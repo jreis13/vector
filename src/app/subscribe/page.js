@@ -1,4 +1,4 @@
-import "../../common/styles/_reset.css"
+import "src/common/styles/_reset.css"
 
 import SubscribeContent from "src/components/Subscription/SubscribeContent"
 import SubscriptionLayout from "src/layouts/SubscriptionLayout"

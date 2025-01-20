@@ -1,5 +1,5 @@
+import "src/common/styles/_reset.css"
 import ProfileLayout from "src/layouts/ProfileLayout"
-import "../../common/styles/_reset.css"
 
 export default function Profile() {
   return (

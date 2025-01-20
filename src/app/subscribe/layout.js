@@ -1,5 +1,5 @@
 import { UserProvider } from "@auth0/nextjs-auth0/client"
-import "../../common/styles/globals.css"
+import "src/common/styles/globals.css"
 
 export const metadata = {
   title: "Exponential Vector",

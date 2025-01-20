@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import "src/common/styles/_reset.css"
 import EcosystemLayout from "src/layouts/EcosystemLayout"
-import "../../../common/styles/_reset.css"
 
 export default function EcosystemPage({ params }) {
   const { ecosystemName } = params

@@ -1,5 +1,5 @@
+import "src/common/styles/_reset.css"
 import EcosystemsLayout from "src/layouts/EcosystemsLayout"
-import "../../common/styles/_reset.css"
 
 export default function EcosystemsPage() {
   return (

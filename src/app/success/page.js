@@ -1,4 +1,4 @@
-import "../../common/styles/_reset.css"
+import "src./common/styles/_reset.css"
 
 import SuccessContent from "src/components/Subscription/SuccessContent"
 import SubscriptionLayout from "src/layouts/SubscriptionLayout"
