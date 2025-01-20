@@ -1,9 +1,11 @@
+"use client"
+
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js"
 import { Doughnut } from "react-chartjs-2"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-export default function DynamicListCard({ title, data }) {
+export default function DynamicListCard({ data }) {
   const renderChart = (percentage) => {
     const chartData = {
       datasets: [
@@ -29,7 +31,7 @@ export default function DynamicListCard({ title, data }) {
     )
   }
 
-  const renderContent = (item, index, parentKey = "") => {
+  const renderContent = (item, index) => {
     if (typeof item === "object" && item.type === "percentage") {
       const percentage = parseFloat(item.description.match(/-?\d+/)?.[0]) || 0
 
@@ -43,20 +45,39 @@ export default function DynamicListCard({ title, data }) {
       )
     } else if (typeof item === "object" && item.subtitle) {
       return (
-        <div key={index}>
-          <strong>{item.subtitle}:</strong> {item.description}
+        <div key={index} className="mb-2">
+          <strong>{item.subtitle}:</strong> {item.description || "N/A"}
+        </div>
+      )
+    } else if (typeof item === "object" && item.details) {
+      // Recursively render nested details
+      return (
+        <div key={index} className="ml-4 mb-4">
+          <strong>{item.subtitle || "Details"}:</strong>
+          <ul className="list-disc pl-5">
+            {Object.entries(item.details).map(([key, detail], detailIndex) => (
+              <li key={detailIndex}>
+                <strong>{key}:</strong> {detail.value || "N/A"}
+              </li>
+            ))}
+          </ul>
         </div>
       )
     } else if (Array.isArray(item)) {
+      // Render an array of items
       return (
-        <ul key={index} className="list-disc ml-5">
+        <ul key={index} className="list-disc pl-5">
           {item.map((nestedItem, nestedIndex) =>
-            renderContent(nestedItem, nestedIndex, `${parentKey}-${index}`)
+            renderContent(nestedItem, nestedIndex)
           )}
         </ul>
       )
     } else if (typeof item === "string") {
-      return <li key={index}>{item}</li>
+      return (
+        <li className="list-none" key={index}>
+          {item}
+        </li>
+      )
     }
 
     return null
@@ -66,8 +87,8 @@ export default function DynamicListCard({ title, data }) {
     <div>
       <div>
         {Array.isArray(data.value)
-          ? data.value.map((item, index) => renderContent(item, index, title))
-          : renderContent(data.value, 0, title)}
+          ? data.value.map((item, index) => renderContent(item, index))
+          : renderContent(data.value, 0)}
       </div>
     </div>
   )

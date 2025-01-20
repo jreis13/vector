@@ -6,6 +6,7 @@ import {
   faCircleNodes,
   faListCheck,
   faScaleBalanced,
+  faTrophy,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -20,8 +21,10 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
     )
   }
 
-  const determineTitleIcon = (title) => {
+  const determineTitleIcon = (title, value) => {
     const normalizedTitle = title.toLowerCase()
+    const normalizedData =
+      value && typeof value === "string" ? value.toLowerCase() : ""
 
     if (
       normalizedTitle.includes("regulator") ||
@@ -41,6 +44,14 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
     if (normalizedTitle.includes("noise")) {
       return faVolumeXmark
     }
+    if (
+      normalizedData.includes("ˢᵗ") ||
+      normalizedData.includes("ⁿᵈ") ||
+      normalizedData.includes("ʳᵈ") ||
+      normalizedData.includes("ᵗʰ")
+    ) {
+      return faTrophy
+    }
 
     return null
   }
@@ -56,10 +67,10 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {Object.entries(report.details).map(([key, value], idx) => {
-                const icon = determineTitleIcon(key)
+                const icon = determineTitleIcon(key, value?.value || "")
 
                 return (
-                  <div key={idx} className="flex items-start gap-4">
+                  <div key={idx} className="flex items-start gap-4 p-4">
                     {icon && (
                       <div className="flex-shrink-0">
                         <FontAwesomeIcon icon={icon} className="text-4xl" />
@@ -71,7 +82,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                         switch (value.type) {
                           case "list":
                           case "nested-list":
-                            return <DynamicListCard title={key} data={value} />
+                            return <DynamicListCard data={value} />
                           case "html":
                             return (
                               <div className="relative">
@@ -83,7 +94,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
                               </div>
                             )
                           default:
-                            return <InfoCard title={key} data={value} />
+                            return <InfoCard data={value} />
                         }
                       })()}
                     </div>
