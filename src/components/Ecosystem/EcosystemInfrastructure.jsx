@@ -49,7 +49,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
 
   const adjustForProjection = (coordinates) => {
     const [lng, lat] = coordinates
-    const rotation = [-10, -52]
+    const rotation = [-10, -52] // Map projection rotation
     return [lng + rotation[0], lat + rotation[1]]
   }
 
@@ -76,7 +76,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
     setCountryVertiports([])
     setProjectionConfig({
       center: [0, 0],
-      scale: 800,
+      scale: 700,
     })
   }
 
@@ -89,7 +89,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
 
   return (
     <div className="flex min-h-screen relative" onClick={handleMapClick}>
-      <div className="map-container w-full max-w-[90vw] h-[70vh] mx-auto overflow-hidden">
+      <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
         <AnimatePresence>
           <motion.div
             key={selectedCountry || "initialMap"}
@@ -105,8 +105,8 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
               projection="geoAzimuthalEqualArea"
               projectionConfig={{
                 rotate: [-10, -52, 0],
-                scale: 700,
-                center: [0, 0],
+                scale: projectionConfig.scale,
+                center: projectionConfig.center,
               }}
               style={{ width: "100%", height: "100%" }}
             >
