@@ -1,17 +1,8 @@
 "use client"
 
-import {
-  faFileInvoiceDollar,
-  faHelicopter,
-  faMobileAlt,
-  faMoneyBill1Wave,
-  faMoneyBillTransfer,
-  faPlane,
-  faRobot,
-  faUser,
-  faWifi,
-} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Image from "next/image"
+import icons from "src/common/icons/icons"
 import PercentageChart from "./PercentageChart"
 
 export default function DynamicListCard({ data }) {
@@ -38,32 +29,24 @@ export default function DynamicListCard({ data }) {
           className="flex flex-col items-center text-center py-4 h-fit w-fit"
         >
           <div className="flex items-center justify-center text-4xl mb-2">
-            {item.subtitle === "Mobile" ? (
-              <FontAwesomeIcon className="text-[#7032ff]" icon={faMobileAlt} />
-            ) : item.subtitle === "Fixed Broadband" ? (
-              <FontAwesomeIcon className="text-[#7032ff]" icon={faWifi} />
-            ) : item.subtitle === "Visitors" ? (
-              <FontAwesomeIcon className="text-[#7032ff]" icon={faUser} />
-            ) : item.subtitle.includes("Spending") ? (
+            {item.icon ? (
               <FontAwesomeIcon
                 className="text-[#7032ff]"
-                icon={faMoneyBill1Wave}
+                icon={icons[item.icon]}
               />
-            ) : item.subtitle.includes("Spent") ? (
-              <FontAwesomeIcon
-                className="text-[#7032ff]"
-                icon={faMoneyBillTransfer}
-              />
-            ) : item.subtitle.includes("Public") ? (
-              <FontAwesomeIcon
-                className="text-[#7032ff]"
-                icon={faFileInvoiceDollar}
+            ) : item.logo ? (
+              <Image
+                src={item.logo}
+                alt={item.subtitle}
+                width={80}
+                height={80}
+                className="w-20 h-20 object-contain"
               />
             ) : null}
           </div>
           <div className="flex flex-col gap-2">
             <p className="font-bold text-xl">{item.subtitle}</p>
-            <p>{item.description || "N/A"}</p>
+            <p>{item.description || ""}</p>
           </div>
         </div>
       )
@@ -82,12 +65,16 @@ export default function DynamicListCard({ data }) {
           key={index}
         >
           <div className="text-4xl text-[#7032ff]">
-            {item.includes("Airports") ? (
-              <FontAwesomeIcon icon={faPlane} />
-            ) : item.includes("Airfields") ? (
-              <FontAwesomeIcon icon={faHelicopter} />
-            ) : item.includes("estimation") ? (
-              <FontAwesomeIcon icon={faRobot} />
+            {data.icon ? (
+              <FontAwesomeIcon icon={icons[data.icon]} />
+            ) : data.logo ? (
+              <Image
+                src={data.logo}
+                alt={item}
+                width={50}
+                height={50}
+                className="rounded"
+              />
             ) : null}
           </div>
           <span>{item}</span>
@@ -96,16 +83,6 @@ export default function DynamicListCard({ data }) {
     }
 
     return null
-  }
-
-  const getGridColumns = (length) => {
-    if (length % 3 === 0) {
-      return "lg:grid-cols-3"
-    } else if (length % 2 === 0) {
-      return "lg:grid-cols-2"
-    } else {
-      return "lg:grid-cols-3"
-    }
   }
 
   return (
