@@ -58,7 +58,6 @@ export default async function handler(req, res) {
         cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
       })
 
-      console.log("Stripe Session Created:", session.id)
       return res.status(200).json({ url: session.url })
     } catch (err) {
       console.error("Stripe Session Creation Error:", err)

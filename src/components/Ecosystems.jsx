@@ -23,7 +23,7 @@ export default function EcosystemsPage() {
           setUser(userData)
         }
       } catch (err) {
-        console.log("User not logged in:", err.message)
+        setError(err.message)
       }
     }
 

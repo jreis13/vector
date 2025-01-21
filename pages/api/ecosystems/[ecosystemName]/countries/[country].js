@@ -32,8 +32,6 @@ function normalizeName(name) {
 export default async function handler(req, res) {
   await runMiddleware(req, res, corsMiddleware)
 
-  console.log("Incoming request:", req.query)
-
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method Not Allowed" })
   }
@@ -58,30 +56,19 @@ export default async function handler(req, res) {
     const normalizedEcosystemName = normalizeName(ecosystemName)
     const normalizedCountryName = normalizeName(country)
 
-    console.log("Normalized Ecosystem Name:", normalizedEcosystemName)
-    console.log("Normalized Country Name:", normalizedCountryName)
-
     const ecosystem = ecosystems.find(
       (e) => normalizeName(e.name) === normalizedEcosystemName
     )
 
     if (!ecosystem) {
-      console.log("Ecosystem not found")
       return res.status(404).json({ error: "Ecosystem not found" })
     }
-
-    console.log(
-      "Available country report keys:",
-      Object.keys(ecosystem.countryReports)
-    )
-    console.log("Looking for:", normalizedCountryName)
 
     const countryKey = Object.keys(ecosystem.countryReports).find(
       (key) => normalizeName(key) === normalizedCountryName
     )
 
     if (!countryKey) {
-      console.log("Country reports not found")
       return res.status(404).json({ error: "Country reports not found" })
     }
 

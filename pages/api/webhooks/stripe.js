@@ -69,12 +69,9 @@ export default async function handler(req, res) {
             role: roles[index],
           }
 
-          console.log("Updating user metadata for:", userId, metadata)
           await updateUserMetadata(userId, metadata)
         })
       )
-
-      console.log("All users updated successfully")
     } catch (error) {
       console.error("Error updating user metadata:", error.message)
       return res.status(500).send("Failed to update user metadata.")
@@ -169,8 +166,6 @@ async function updateUserMetadata(userId, metadata) {
   if (!response.ok) {
     throw new Error(`Failed to update metadata: ${response.statusText}`)
   }
-
-  console.log("Metadata update response:", await response.json())
 }
 
 async function getManagementToken() {

@@ -58,8 +58,6 @@ export default function CompanyDetails({ company, ecosystemName }) {
           </a>
         </div>
 
-        <div>{console.log(company)}</div>
-
         <p className="pb-8 text-xl leading-8">{company.summary}</p>
 
         {company.stats && <CompanyStats stats={company.stats.data} />}
