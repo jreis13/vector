@@ -150,13 +150,13 @@ export default function ActiveInvestors({ companies, data }) {
         <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b border-[#e8e8e8] text-lg font-semibold text-[#e8e8e8]">
+              <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
                 Company
               </th>
               {attributes.map((attr) => (
                 <th
                   key={attr}
-                  className="px-6 py-3 border-b border-[#e8e8e8] text-lg font-semibold text-[#e8e8e8] capitalize"
+                  className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8] capitalize"
                 >
                   {attr}
                 </th>
@@ -164,11 +164,15 @@ export default function ActiveInvestors({ companies, data }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((group) => (
+            {data.map((group, groupIndex) => (
               <React.Fragment key={group.companyName}>
-                <tr>
+                <tr
+                  className={`${
+                    groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
+                  }`}
+                >
                   <td
-                    className="px-6 py-4 border-b border-[#e8e8e8] text-[#e8e8e8] text-lg font-semibold"
+                    className="px-6 py-4  text-[#e8e8e8] text-lg font-semibold"
                     rowSpan={
                       visibleCompanies.includes(group.companyName)
                         ? group.investors.length + 1
@@ -200,7 +204,11 @@ export default function ActiveInvestors({ companies, data }) {
                       <motion.tr
                         key={`${group.companyName}-${index}`}
                         {...rowAnimation}
-                        className="border-b border-[#e8e8e8]"
+                        className={`${
+                          groupIndex % 2 === 0
+                            ? "bg-transparent"
+                            : "bg-[#34333d]"
+                        } `}
                       >
                         <td className="px-6 py-4">{investor.name || "N/A"}</td>
                         <td className="px-6 py-4">
