@@ -41,10 +41,14 @@ export default function EcosystemCountryProfilesMap({
 
   return (
     <div className="flex min-h-screen relative">
-      <div className="map-container w-full max-w-[90vw] h-[80vh] mx-auto overflow-hidden">
+      <div className="map-container w-full max-w-[90vw] h-[70vh] mx-auto overflow-hidden">
         <ComposableMap
           projection="geoAzimuthalEqualArea"
-          projectionConfig={{ rotate: [-10, -52, 0], scale: 800 }}
+          projectionConfig={{
+            rotate: [-10, -52, 0],
+            scale: 1000,
+            center: [0, 0],
+          }}
           style={{ width: "100%", height: "100%" }}
         >
           <g>

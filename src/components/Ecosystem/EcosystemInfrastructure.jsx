@@ -89,7 +89,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
 
   return (
     <div className="flex min-h-screen relative" onClick={handleMapClick}>
-      <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
+      <div className="map-container w-full max-w-[90vw] h-[70vh] mx-auto overflow-hidden">
         <AnimatePresence>
           <motion.div
             key={selectedCountry || "initialMap"}
@@ -105,8 +105,8 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
               projection="geoAzimuthalEqualArea"
               projectionConfig={{
                 rotate: [-10, -52, 0],
-                scale: projectionConfig.scale,
-                center: projectionConfig.center,
+                scale: 700,
+                center: [0, 0],
               }}
               style={{ width: "100%", height: "100%" }}
             >
