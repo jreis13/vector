@@ -1,5 +1,6 @@
 "use client"
 
+import { AnimatePresence, motion } from "framer-motion"
 import europeGeoUrl from "public/maps/europe.json"
 import { useEffect, useState } from "react"
 import Modal from "react-modal"
@@ -8,7 +9,6 @@ import {
   Geographies,
   Geography,
   Marker,
-  ZoomableGroup,
 } from "react-simple-maps"
 
 export default function EcosystemInfrastructure({ ecosystem = {} }) {
@@ -16,11 +16,10 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
 
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [countryVertiports, setCountryVertiports] = useState([])
-  const [zoomConfig, setZoomConfig] = useState({
-    center: [10, 50],
-    zoom: 1,
+  const [projectionConfig, setProjectionConfig] = useState({
+    center: [0, 0],
+    scale: 800,
   })
-  const [transitioning, setTransitioning] = useState(false)
 
   useEffect(() => {
     const appRoot = document.getElementById("__next")
@@ -29,41 +28,14 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
     }
   }, [])
 
-  const groupedVertiportsByCountry = Object.keys(vertiports).reduce(
-    (acc, country) => {
-      acc[country.toLowerCase().trim()] = vertiports[country]
-      return acc
-    },
-    {}
-  )
-
   const hasVertiports = (countryName) => {
-    return groupedVertiportsByCountry[countryName.toLowerCase().trim()]
+    return vertiports[countryName]
   }
 
-  const handleCountryClick = (geo) => {
-    const { name } = geo.properties
-    const vertiportsInCountry =
-      groupedVertiportsByCountry[name.toLowerCase().trim()]
+  const calculateMidpoint = (coordinates) => {
+    if (coordinates.length === 0) return [0, 0]
 
-    if (vertiportsInCountry) {
-      const targetCenter = calculateCenter(
-        vertiportsInCountry.map((v) => v.coordinates)
-      )
-      setSelectedCountry(name)
-      setCountryVertiports(vertiportsInCountry)
-      smoothZoom(targetCenter, 4)
-    }
-  }
-
-  const resetZoom = () => {
-    setSelectedCountry(null)
-    setCountryVertiports([])
-    smoothZoom([10, 50], 1)
-  }
-
-  const calculateCenter = (coordinatesList) => {
-    const total = coordinatesList.reduce(
+    const total = coordinates.reduce(
       (acc, [lng, lat]) => {
         acc.lng += lng
         acc.lat += lat
@@ -71,43 +43,46 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
       },
       { lng: 0, lat: 0 }
     )
-    const count = coordinatesList.length
+    const count = coordinates.length
     return [total.lng / count, total.lat / count]
   }
 
-  const smoothZoom = (targetCenter, targetZoom) => {
-    if (transitioning) return
-    setTransitioning(true)
+  const adjustForProjection = (coordinates) => {
+    const [lng, lat] = coordinates
+    const rotation = [-10, -52] // Map projection rotation
+    return [lng + rotation[0], lat + rotation[1]]
+  }
 
-    const duration = 500
-    const steps = 20
-    const interval = duration / steps
+  const handleCountryClick = (geo) => {
+    const countryName = geo.properties.name
+    const vertiportsInCountry = vertiports[countryName]
 
-    const [currentLng, currentLat] = zoomConfig.center
-    const currentZoom = zoomConfig.zoom
-    const [targetLng, targetLat] = targetCenter
+    if (vertiportsInCountry) {
+      const coordinates = vertiportsInCountry.map((v) => v.coordinates)
+      const midpoint = calculateMidpoint(coordinates)
+      const adjustedMidpoint = adjustForProjection(midpoint)
 
-    const stepLng = (targetLng - currentLng) / steps
-    const stepLat = (targetLat - currentLat) / steps
-    const stepZoom = (targetZoom - currentZoom) / steps
+      setSelectedCountry(countryName)
+      setCountryVertiports(vertiportsInCountry)
+      setProjectionConfig({
+        center: adjustedMidpoint,
+        scale: 2000,
+      })
+    }
+  }
 
-    let step = 0
-    const zoomInterval = setInterval(() => {
-      step++
-      setZoomConfig((prev) => ({
-        center: [prev.center[0] + stepLng, prev.center[1] + stepLat],
-        zoom: prev.zoom + stepZoom,
-      }))
-
-      if (step >= steps) {
-        clearInterval(zoomInterval)
-        setTransitioning(false)
-      }
-    }, interval)
+  const resetZoom = () => {
+    setSelectedCountry(null)
+    setCountryVertiports([])
+    setProjectionConfig({
+      center: [0, 0],
+      scale: 800,
+    })
   }
 
   const handleMapClick = (event) => {
-    if (!event.target.closest(".clickable-country")) {
+    const isCountry = event.target.closest(".clickable-country")
+    if (!isCountry) {
       resetZoom()
     }
   }
@@ -115,71 +90,97 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
   return (
     <div className="flex min-h-screen relative" onClick={handleMapClick}>
       <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
-        <ComposableMap
-          projection="geoAzimuthalEqualArea"
-          projectionConfig={{ rotate: [-10, -52, 0], scale: 800 }}
-          style={{ width: "100%", height: "100%" }}
-        >
-          <ZoomableGroup center={zoomConfig.center} zoom={zoomConfig.zoom}>
-            <Geographies geography={europeGeoUrl}>
-              {({ geographies }) =>
-                geographies.map((geo) => {
-                  const country = geo.properties.name
-                  const countryHasVertiports = hasVertiports(country)
+        <AnimatePresence>
+          <motion.div
+            key={selectedCountry || "initialMap"}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{
+              duration: 0.7,
+              ease: "easeInOut",
+            }}
+            className="absolute top-0 left-0 w-full h-full"
+          >
+            <ComposableMap
+              projection="geoAzimuthalEqualArea"
+              projectionConfig={{
+                rotate: [-10, -52, 0],
+                scale: projectionConfig.scale,
+                center: projectionConfig.center,
+              }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <Geographies geography={europeGeoUrl}>
+                {({ geographies }) =>
+                  geographies.map((geo) => {
+                    const countryName = geo.properties.name
+                    const countryHasVertiports = hasVertiports(countryName)
 
-                  return (
-                    <Geography
-                      key={geo.rsmKey}
-                      geography={geo}
-                      onClick={() =>
-                        countryHasVertiports && handleCountryClick(geo)
-                      }
-                      className={
-                        countryHasVertiports
-                          ? "clickable-country cursor-pointer"
-                          : "cursor-default"
-                      }
+                    return (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        onClick={() =>
+                          countryHasVertiports && handleCountryClick(geo)
+                        }
+                        className={
+                          countryHasVertiports
+                            ? "clickable-country cursor-pointer"
+                            : "cursor-default"
+                        }
+                        style={{
+                          default: {
+                            fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
+                            stroke: "#e8e8e8",
+                            outline: "none",
+                          },
+                          hover: {
+                            fill: countryHasVertiports ? "#330066" : "#D6D6DA",
+                            stroke: "#e8e8e8",
+                            outline: "none",
+                          },
+                          pressed: {
+                            fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
+                            stroke: "#e8e8e8",
+                            outline: "none",
+                          },
+                        }}
+                      />
+                    )
+                  })
+                }
+              </Geographies>
+              {countryVertiports.map((vertiport, index) => (
+                <motion.g
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
+                  transition={{
+                    delay: 0.4,
+                    duration: 0.7,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <Marker coordinates={vertiport.coordinates}>
+                    <circle r={5} fill="#F53" />
+                    <text
+                      textAnchor="middle"
+                      y={-10}
                       style={{
-                        default: {
-                          fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
-                          stroke: "#e8e8e8",
-                          outline: "none",
-                        },
-                        hover: {
-                          fill: countryHasVertiports ? "#330066" : "#D6D6DA",
-                          stroke: "#e8e8e8",
-                          outline: "none",
-                        },
-                        pressed: {
-                          fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
-                          stroke: "#e8e8e8",
-                          outline: "none",
-                        },
+                        fontFamily: "system-ui",
+                        fill: "#5D5A6D",
+                        fontSize: 12,
                       }}
-                    />
-                  )
-                })
-              }
-            </Geographies>
-            {selectedCountry &&
-              countryVertiports.map((vertiport, index) => (
-                <Marker key={index} coordinates={vertiport.coordinates}>
-                  <circle r={5} fill="#F53" />
-                  <text
-                    textAnchor="middle"
-                    y={-10}
-                    style={{
-                      fontFamily: "system-ui",
-                      fill: "#5D5A6D",
-                      fontSize: 12,
-                    }}
-                  >
-                    {vertiport.name}
-                  </text>
-                </Marker>
+                    >
+                      {vertiport.name}
+                    </text>
+                  </Marker>
+                </motion.g>
               ))}
-          </ZoomableGroup>
-        </ComposableMap>
+            </ComposableMap>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
