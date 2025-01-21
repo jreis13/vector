@@ -1,5 +1,6 @@
 "use client"
 
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
@@ -7,7 +8,10 @@ import icons from "src/common/icons/icons"
 import DynamicListCard from "./StatCards/DynamicListCard"
 import InfoCard from "./StatCards/InfoCard"
 
-export default function EcosystemCountryProfile({ countryName, reports }) {
+export default function EcosystemCountryProfilesDetails({
+  countryName,
+  reports,
+}) {
   const handleBackClick = () => {
     window.open(
       `/ecosystems/evtolandvtolaircrafts?tab=countryProfiles`,
@@ -134,7 +138,7 @@ export default function EcosystemCountryProfile({ countryName, reports }) {
         onClick={handleBackClick}
         className="text-4xl fixed bottom-20 p-8 left-4"
       >
-        <FontAwesomeIcon icon={icons["faCircleArrowLeft"]} />
+        <FontAwesomeIcon icon={faCircleArrowLeft} />
       </button>
     </div>
   )

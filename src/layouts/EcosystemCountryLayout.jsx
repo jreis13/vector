@@ -1,6 +1,6 @@
 "use client"
 
-import EcosystemCountryProfile from "src/components/Ecosystem/EcosystemCountryProfile"
+import EcosystemCountryProfilesDetails from "src/components/Ecosystem/EcosystemCountryProfilesDetails"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
@@ -11,7 +11,7 @@ export default function EcosystemCountryLayout({ countryName, reports }) {
 
       <div className="flex-grow">
         <div className="py-12">
-          <EcosystemCountryProfile
+          <EcosystemCountryProfilesDetails
             countryName={countryName}
             reports={reports}
           />

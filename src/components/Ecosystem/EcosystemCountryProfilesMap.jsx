@@ -2,14 +2,9 @@
 
 import { useRouter } from "next/navigation"
 import europeGeoUrl from "public/maps/europe.json"
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  ZoomableGroup,
-} from "react-simple-maps"
+import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 
-export default function EcosystemCountryProfiles({
+export default function EcosystemCountryProfilesMap({
   countryReports,
   ecosystemName,
 }) {
@@ -46,13 +41,13 @@ export default function EcosystemCountryProfiles({
 
   return (
     <div className="flex min-h-screen relative">
-      <div className="w-full max-w-[90vw] h-[80vh] mx-auto">
+      <div className="map-container w-full max-w-[90vw] h-[80vh] mx-auto overflow-hidden">
         <ComposableMap
           projection="geoAzimuthalEqualArea"
           projectionConfig={{ rotate: [-10, -52, 0], scale: 800 }}
           style={{ width: "100%", height: "100%" }}
         >
-          <ZoomableGroup center={[10, 50]} zoom={1}>
+          <g>
             <Geographies geography={europeGeoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => {
@@ -92,13 +87,13 @@ export default function EcosystemCountryProfiles({
                         countryHasReports
                           ? `View reports for ${country}`
                           : undefined
-                      } // Tooltip for clickable countries
+                      }
                     />
                   )
                 })
               }
             </Geographies>
-          </ZoomableGroup>
+          </g>
         </ComposableMap>
       </div>
     </div>
