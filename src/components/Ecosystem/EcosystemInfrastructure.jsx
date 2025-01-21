@@ -49,7 +49,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
 
   const adjustForProjection = (coordinates) => {
     const [lng, lat] = coordinates
-    const rotation = [-10, -52] // Map projection rotation
+    const rotation = [-10, -52]
     return [lng + rotation[0], lat + rotation[1]]
   }
 
