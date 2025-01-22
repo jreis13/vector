@@ -117,54 +117,55 @@ export default function EcosystemProductComparison({ companies }) {
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div className="mb-16">
+        <div className="mb-8 flex flex-col items-center gap-8 lg:flex-row lg:items-start">
+          <div>
+            <Dropdown
+              attributes={numericAttributes}
+              selectedValue={xAttribute}
+              onChange={handleXChange}
+            />
+          </div>
+
+          <div>
+            <Dropdown
+              attributes={[
+                "None",
+                ...numericAttributes.filter((attr) => attr !== xAttribute),
+              ]}
+              selectedValue={yAttribute || "None"}
+              onChange={(value) => handleYChange(value === "None" ? "" : value)}
+            />
+          </div>
+
+          <div className="ml-auto">
+            <Dropdown
+              attributes={availableGraphTypes}
+              selectedValue={graphType}
+              onChange={handleGraphTypeChange}
+            />
+          </div>
+        </div>
+        <div>
+          {xData.length > 0 && (
+            <EcosystemProductChart
+              labels={labels}
+              xData={xData}
+              yData={yData}
+              xLabel={xAttribute.charAt(0).toUpperCase() + xAttribute.slice(1)}
+              yLabel={
+                yAttribute &&
+                yAttribute.charAt(0).toUpperCase() + yAttribute.slice(1)
+              }
+              graphType={graphType}
+            />
+          )}
+        </div>
+      </div>
+      <div>
         <EcosystemProductTable
           groupedProducts={groupedProducts}
           attributes={attributesArray}
         />
-      </div>
-      <div className="mb-8 flex flex-col items-center gap-8 lg:flex-row lg:items-start">
-        <div>
-          <Dropdown
-            attributes={numericAttributes}
-            selectedValue={xAttribute}
-            onChange={handleXChange}
-          />
-        </div>
-
-        <div>
-          <Dropdown
-            attributes={[
-              "None",
-              ...numericAttributes.filter((attr) => attr !== xAttribute),
-            ]}
-            selectedValue={yAttribute || "None"}
-            onChange={(value) => handleYChange(value === "None" ? "" : value)}
-          />
-        </div>
-
-        <div className="ml-auto">
-          <Dropdown
-            attributes={availableGraphTypes}
-            selectedValue={graphType}
-            onChange={handleGraphTypeChange}
-          />
-        </div>
-      </div>
-
-      <div>
-        {xData.length > 0 && (
-          <EcosystemProductChart
-            labels={labels}
-            xData={xData}
-            yData={yData}
-            xLabel={xAttribute.charAt(0).toUpperCase() + xAttribute.slice(1)}
-            yLabel={
-              yAttribute &&
-              yAttribute.charAt(0).toUpperCase() + yAttribute.slice(1)
-            }
-            graphType={graphType}
-          />
-        )}
       </div>
     </div>
   )
