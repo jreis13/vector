@@ -20,7 +20,7 @@ export default function NodeDetails({ nodeGroup }) {
   }
 
   return (
-    <div className="mt-16 px-16">
+    <div className="px-16">
       <div className="flex items-center mb-4">
         {breadcrumbs.map((breadcrumb, index) => (
           <motion.span
