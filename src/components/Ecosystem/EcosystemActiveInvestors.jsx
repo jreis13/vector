@@ -50,7 +50,7 @@ export default function ActiveInvestors({ companies, data }) {
   const filteredInvestors = allInvestors.filter((investor) => {
     const matchesType =
       !filters.type ||
-      investor.type.toLowerCase() === filters.type.toLowerCase()
+      investor.type.toLowerCase().includes(filters.type.toLowerCase())
 
     const matchesStages =
       !filters.stages ||

@@ -22,6 +22,14 @@ export default function EcosystemActiveInvestorsFilter({
     }))
   }
 
+  const clearFilters = () => {
+    setFilters({
+      type: "",
+      stages: "",
+      country: "",
+    })
+  }
+
   const filterAnimation = {
     hidden: {
       opacity: 0,
@@ -68,94 +76,66 @@ export default function EcosystemActiveInvestorsFilter({
               exit="exit"
               variants={filterAnimation}
             >
-              <motion.div
-                className="flex gap-4 items-center"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={filterAnimation}
-                transition={{ duration: 0.3, delay: 0.1 }}
-              >
+              <motion.div className="flex gap-4 items-center">
                 <h3>Type:</h3>
                 <motion.select
+                  whileHover={{ scale: 1.05 }}
                   onChange={(e) => handleFilterChange("type", e.target.value)}
                   value={filters.type}
                   className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
-                  whileFocus={{ scale: 1.05 }}
                 >
                   <option value="">All Types</option>
                   {investorTypeOptions.map((option) => (
-                    <motion.option
-                      key={option.label}
-                      value={option.label}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <option key={option.label} value={option.label}>
                       {option.label}
-                    </motion.option>
+                    </option>
                   ))}
                 </motion.select>
               </motion.div>
 
-              <motion.div
-                className="flex gap-4 items-center"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={filterAnimation}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
+              <motion.div className="flex gap-4 items-center">
                 <h3>Stage:</h3>
                 <motion.select
+                  whileHover={{ scale: 1.05 }}
                   onChange={(e) => handleFilterChange("stages", e.target.value)}
                   value={filters.stages}
                   className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
-                  whileFocus={{ scale: 1.05 }}
                 >
                   <option value="">All Stages</option>
                   {investorStageOptions.map((option) => (
-                    <motion.option
-                      key={option.label}
-                      value={option.label}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <option key={option.label} value={option.label}>
                       {option.label}
-                    </motion.option>
+                    </option>
                   ))}
                 </motion.select>
               </motion.div>
 
-              <motion.div
-                className="flex gap-4 items-center"
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={filterAnimation}
-                transition={{ duration: 0.3, delay: 0.3 }}
-              >
+              <motion.div className="flex gap-4 items-center">
                 <h3>Country:</h3>
                 <motion.select
+                  whileHover={{ scale: 1.05 }}
                   onChange={(e) =>
                     handleFilterChange("country", e.target.value)
                   }
                   value={filters.country}
                   className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
-                  whileFocus={{ scale: 1.05 }}
                 >
                   <option value="">All Countries</option>
                   {investorCountryOptions.map((option) => (
-                    <motion.option
-                      key={option.label}
-                      value={option.label}
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <option key={option.label} value={option.label}>
                       {option.label}
-                    </motion.option>
+                    </option>
                   ))}
                 </motion.select>
               </motion.div>
+
+              <motion.button
+                onClick={clearFilters}
+                className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
+                whileHover={{ scale: 1.05 }}
+              >
+                Clear Filters
+              </motion.button>
 
               <motion.button
                 onClick={() => setIsExpanded(false)}
