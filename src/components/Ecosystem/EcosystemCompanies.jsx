@@ -11,7 +11,7 @@ import {
   fundingAmountRanges,
   fundingStageOptions,
   industryOptions,
-} from "../../common/data/filterData"
+} from "../../common/data/companiesFilterData"
 import { filterCompanies } from "../../common/utils/filterUtils"
 import CompanyCard from "../CompanyCard"
 import EcosystemCompaniesFilter from "./EcosystemCompaniesFilter"

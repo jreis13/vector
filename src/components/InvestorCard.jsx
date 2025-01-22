@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function InvestorCard({ investor }) {
   return (
     <a href={investor.link || null} target="_blank" rel="noreferrer">
-      <div className="flex flex-col justify-between rounded-lg p-4 bg-[#34333d] text-[#e8e8e8] hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg transition-all duration-300">
+      <div className="h-full flex flex-col justify-between rounded-lg p-4 bg-[#34333d] text-[#e8e8e8] hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg transition-all duration-300">
         <div>
           <div className="flex items-center mb-2">
             <div className="mr-4 flex h-16 w-16 items-center justify-center overflow-hidden">
