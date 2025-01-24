@@ -19,11 +19,15 @@ export default function EcosystemsPage() {
       try {
         const response = await fetch("/api/auth/me")
         if (response.ok) {
-          const userData = await response.json()
+          const text = await response.text()
+          const userData = text ? JSON.parse(text) : null
           setUser(userData)
+        } else {
+          setUser(null)
         }
       } catch (err) {
         setError(err.message)
+        setUser(null)
       }
     }
 
@@ -99,11 +103,6 @@ export default function EcosystemsPage() {
               <div className="mb-8">
                 <h2 className="text-3xl font-bold">Ecosystems</h2>
               </div>
-              {/* <Filter
-                categories={categoriesFilters}
-                selectedCategories={selectedCategories}
-                onChange={handleCategoryChange}
-              /> */}
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredData.map((ecosystem) =>
