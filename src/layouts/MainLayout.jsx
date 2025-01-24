@@ -2,11 +2,9 @@
 
 import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
-  benefitsFeatures,
   customersFeatures,
-  goalsFeatures,
+  evtolFeatures,
   offeringFeatures,
-  questionFeatures,
 } from "src/common/data/featureData"
 
 import ScrollReveal from "src/animations/ScrollReveal"
@@ -37,21 +35,18 @@ export default function MainLayout() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="flex flex-grow flex-col">
+      <div className="flex flex-grow flex-col gap-8">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
-            <h1>A NEW WAY TO UNDERSTAND DISRUPTION</h1>
+            <h1 className="uppercase">
+              Next-Gen Market Intelligence for Disruptive Business Models
+            </h1>
           </div>
         </MainHero>
-        <ScrollReveal id="questions">
+        {/* <ScrollReveal id="questions">
           <CardList features={questionFeatures.map(splitDescription)} />
-        </ScrollReveal>
-        <ScrollReveal id="benefits">
-          <CardList
-            title="Benefits"
-            features={benefitsFeatures.map(splitDescription)}
-          />
-        </ScrollReveal>
+        </ScrollReveal> */}
+
         <ScrollReveal id="offering">
           <CardList
             title="What do we do?"
@@ -76,7 +71,7 @@ export default function MainLayout() {
             isCustomersGrid={true}
           />
         </ScrollReveal>
-        <ScrollReveal id="goals">
+        {/* <ScrollReveal id="goals">
           <CardList
             title="What are we aiming for?"
             features={
@@ -86,6 +81,12 @@ export default function MainLayout() {
             sectionImage={
               goalsFeatures.find((f) => f.sectionImage)?.sectionImage
             }
+          />
+        </ScrollReveal> */}
+        <ScrollReveal id="benefits">
+          <CardList
+            title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
+            features={evtolFeatures.map(splitDescription)}
           />
         </ScrollReveal>
         <ScrollReveal>

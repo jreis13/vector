@@ -20,7 +20,7 @@ export default function FeatureGrid({
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>
-          <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl">
+          <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl leading-tight">
             {title}
           </h2>
           <span className="mt-4 text-[24px] font-bold text-[#7032ff]">v</span>
@@ -47,14 +47,23 @@ export default function FeatureGrid({
         <div className={`grid ${getGridCols()} gap-6`}>
           {features &&
             features.map((feature, index) => (
-              <div key={index} className="relative p-4 overflow-hidden">
+              <div
+                key={index}
+                className="relative p-4 overflow-hidden flex flex-col items-center"
+              >
                 <HoverScale className="h-full w-full flex flex-col items-center justify-center">
                   <div className="flex flex-col items-center text-center">
-                    {feature.name && (
-                      <h3 className="py-4 font-bold">{feature.name}</h3>
-                    )}
+                    <div className="flex items-center justify-center h-16">
+                      {feature.name && (
+                        <h3 className="py-4 font-bold text-lg md:text-xl lg:text-2xl">
+                          {feature.name}
+                        </h3>
+                      )}
+                    </div>
                     {feature.description && (
-                      <p className="py-2">{feature.description}</p>
+                      <p className="py-2 text-base md:text-lg lg:text-xl">
+                        {feature.description}
+                      </p>
                     )}
                   </div>
                   {feature.image && (

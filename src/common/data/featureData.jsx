@@ -1,10 +1,10 @@
-import customizeChartIcon from "/public/icons/customizeChartIcon.svg"
 import customizeIcon from "/public/icons/customizeIcon.svg"
+import dataIcon from "/public/icons/dataIcon.svg"
 import goalsIcon from "/public/icons/goalsIcon.svg"
-import growthChartIcon from "/public/icons/growthChartIcon.svg"
+import interactiveIcon from "/public/icons/interactiveIcon.svg"
+import predictiveIcon from "/public/icons/predictiveIcon.svg"
 import textIcon from "/public/icons/textIcon.svg"
 import trashIcon from "/public/icons/trashIcon.svg"
-import updatedPlatformIcon from "/public/icons/updatedPlatformIcon.svg"
 import offeringIcon from "/public/icons/workIcon.svg"
 
 export const questionFeatures = [
@@ -22,25 +22,31 @@ export const questionFeatures = [
   },
 ]
 
-export const benefitsFeatures = [
+export const evtolFeatures = [
   {
-    name: "A new way to digest reports, with interactive and customizable capabilities.",
-    image: customizeChartIcon,
+    name: "Support your Market Strategies With Data",
+    description:
+      "Uncover actionable insights on market demand, regulatory landscapes, and competitor positioning to craft a winning strategy.",
+    image: dataIcon,
   },
   {
-    name: "A constantly updated platform enabling you to stay updated about disruptive tech ecosystems.",
-    image: updatedPlatformIcon,
+    name: "Predictive Analytics for Market Readiness",
+    description:
+      " Utilize advanced forecasting tools to identify key opportunities, mitigate risks, and align your go-to-market approach with industry trends.",
+    image: predictiveIcon,
   },
   {
-    name: "Frequent industry follow-ups, covering all the latest growth trends.",
-    image: growthChartIcon,
+    name: "Interactive Platform for Agile Execution",
+    description:
+      " Our intuitive platform simplifies data visualization, enabling you to adapt quickly to market dynamics, optimize launch strategies, and ensure seamless execution.",
+    image: interactiveIcon,
   },
 ]
 
 export const offeringFeatures = [
   {
     description:
-      "We are committed to tailoring research to support Europe’s disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
+      "We are committed to tailoring research to support disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
   },
   {
     description:
