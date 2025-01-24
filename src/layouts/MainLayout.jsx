@@ -46,7 +46,12 @@ export default function MainLayout() {
         {/* <ScrollReveal id="questions">
           <CardList features={questionFeatures.map(splitDescription)} />
         </ScrollReveal> */}
-
+        <ScrollReveal id="benefits">
+          <CardList
+            title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
+            features={evtolFeatures.map(splitDescription)}
+          />
+        </ScrollReveal>
         <ScrollReveal id="offering">
           <CardList
             title="What do we do?"
@@ -83,12 +88,6 @@ export default function MainLayout() {
             }
           />
         </ScrollReveal> */}
-        <ScrollReveal id="benefits">
-          <CardList
-            title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
-            features={evtolFeatures.map(splitDescription)}
-          />
-        </ScrollReveal>
         <ScrollReveal>
           <div id="subscribe" className="py-8">
             <CTA />

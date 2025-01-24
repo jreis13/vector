@@ -6,8 +6,8 @@ import SubscribeIcon from "/public/icons/subscribeIcon.svg"
 
 export const breadcrumbSections = [
   { title: "Home", icon: HomeIcon, id: "" },
+  { title: "Benefits", icon: BenefitsIcon, id: "benefits" },
   { title: "Offering", icon: OfferingIcon, id: "offering" },
   { title: "Customers", icon: ProductIcon, id: "customers" },
-  { title: "Benefits", icon: BenefitsIcon, id: "benefits" },
   { title: "Subscribe", icon: SubscribeIcon, id: "subscribe" },
 ]
