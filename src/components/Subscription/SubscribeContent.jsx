@@ -308,18 +308,18 @@ export default function SubscribeContent() {
             />
           </Button>
           <div>
-            <div className="mb-8 text-center">
-              <h2 className="mb-4">
+            <div className="m-8 text-center">
+              <p className="mb-4 ">
                 If you wish to proceed with the checkout using alternative
                 payment methods, we also accept bank transfers and
                 cryptocurrencies. Please email us at{" "}
-              </h2>
-              <a
-                href="mailto:support@exponentialvector.eu"
-                className="text-[#7032ff]"
-              >
-                support@exponentialvector.eu
-              </a>
+                <a
+                  href="mailto:support@exponentialvector.eu"
+                  className="text-[#7032ff]"
+                >
+                  support@exponentialvector.eu
+                </a>
+              </p>
             </div>
           </div>
         </div>
