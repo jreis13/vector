@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -103,4 +104,8 @@ body {
   transition: background-color;
   transition-duration: 1s;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.number {
+  font-family: "Kameron", sans-serif;
 }
