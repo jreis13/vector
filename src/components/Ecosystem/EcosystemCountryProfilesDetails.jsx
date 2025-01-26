@@ -35,7 +35,10 @@ export default function EcosystemCountryProfilesDetails({
                     {Object.entries(report.details)
                       .filter(([, value]) => value.type !== "html")
                       .map(([key, value], idx) => (
-                        <div key={idx} className="flex items-start gap-4 p-4">
+                        <div
+                          key={idx}
+                          className="flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                        >
                           <div className="flex-shrink-0">
                             {value.icon ? (
                               <FontAwesomeIcon
@@ -53,7 +56,7 @@ export default function EcosystemCountryProfilesDetails({
                             ) : null}
                           </div>
                           <div className="w-full">
-                            <h3 className="mb-2 text-2xl">{key}</h3>
+                            <h3 className="mb-2 text-3xl">{key}</h3>
                             {value.type === "list" ||
                             value.type === "nested-list" ? (
                               <DynamicListCard data={value} />
@@ -71,7 +74,7 @@ export default function EcosystemCountryProfilesDetails({
                       .map(([, value], idx) => (
                         <iframe
                           key={idx}
-                          className="w-full h-[calc(100vh-100px)] border-none"
+                          className="w-full h-[calc(80vh-100px)] border-none px-4 bg-[#34333d] rounded-lg"
                           src={value.value}
                           allowFullScreen
                         ></iframe>
@@ -81,7 +84,10 @@ export default function EcosystemCountryProfilesDetails({
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                   {Object.entries(report.details).map(([key, value], idx) => (
-                    <div key={idx} className="flex items-start gap-4 p-4">
+                    <div
+                      key={idx}
+                      className="flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                    >
                       <div className="flex-shrink-0">
                         {value.icon ? (
                           <FontAwesomeIcon
@@ -99,7 +105,7 @@ export default function EcosystemCountryProfilesDetails({
                         ) : null}
                       </div>
                       <div className="w-full">
-                        <h3 className="mb-2 text-2xl">{key}</h3>
+                        <h3 className="mb-2 text-3xl">{key}</h3>
                         {(() => {
                           switch (value.type) {
                             case "list":
