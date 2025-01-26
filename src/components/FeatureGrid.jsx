@@ -16,7 +16,7 @@ export default function FeatureGrid({
   }
 
   return (
-    <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
+    <div className="flex flex-col items-center px-6 py-8 lg:px-16 lg:py-12 ">
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>
@@ -27,7 +27,7 @@ export default function FeatureGrid({
         </div>
       )}
       <div
-        className={`relative w-full ${isCustomersGrid ? "grid-lines-container" : ""}`}
+        className={`relative w-full ${isCustomersGrid ? "grid-lines-container" : ""} ${!isCustomersGrid ? "py-8" : ""}`}
       >
         {isCustomersGrid && (
           <>
@@ -55,7 +55,7 @@ export default function FeatureGrid({
                   <div className="flex flex-col items-center text-center">
                     <div className="flex items-center justify-center h-16">
                       {feature.name && (
-                        <h3 className="py-4 font-bold text-lg md:text-xl lg:text-2xl">
+                        <h3 className="py-4 mb-4 font-bold text-lg md:text-xl lg:text-2xl">
                           {feature.name}
                         </h3>
                       )}
