@@ -307,23 +307,19 @@ export default function SubscribeContent() {
               icon={faCcStripe}
             />
           </Button>
-        </div>
-        <div className="mt-16">
-          <div className="px-8 md:px-0">
-            <div>
-              <div className="mb-8 text-center">
-                <h2 className="mb-4">
-                  If you wish to proceed with the checkout using alternative
-                  payment methods, we also accept bank transfers and
-                  cryptocurrencies. Please email us at{" "}
-                </h2>
-                <a
-                  href="mailto:support@exponentialvector.eu"
-                  className="text-[#7032ff]"
-                >
-                  support@exponentialvector.eu
-                </a>
-              </div>
+          <div>
+            <div className="mb-8 text-center">
+              <h2 className="mb-4">
+                If you wish to proceed with the checkout using alternative
+                payment methods, we also accept bank transfers and
+                cryptocurrencies. Please email us at{" "}
+              </h2>
+              <a
+                href="mailto:support@exponentialvector.eu"
+                className="text-[#7032ff]"
+              >
+                support@exponentialvector.eu
+              </a>
             </div>
           </div>
         </div>
