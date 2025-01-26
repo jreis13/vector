@@ -13,10 +13,7 @@ export default function EcosystemCountryProfilesDetails({
   reports,
 }) {
   const handleBackClick = () => {
-    window.open(
-      `/ecosystems/evtolandvtolaircrafts?tab=countryProfiles`,
-      "_self"
-    )
+    window.open(`/ecosystems/advancedairmobility?tab=countryProfiles`, "_self")
   }
 
   const hasHtmlType = (details) => {
