@@ -7,12 +7,12 @@ import PercentageChart from "./PercentageChart"
 export default function DynamicListCard({ data }) {
   const renderContent = (item, index) => {
     if (typeof item === "object" && item.type === "percentage") {
-      const percentage = parseFloat(item.description.match(/-?\d+/)?.[0]) || 0
+      const percentage = item.percentage
 
       return (
         <div
           key={index}
-          className="flex flex-col items-center text-center p-4 h-fit"
+          className="flex flex-col items-center text-center p-4 gap-4 h-fit"
         >
           <PercentageChart percentage={percentage} />
           <div className="flex flex-col gap-2">
@@ -131,9 +131,7 @@ export default function DynamicListCard({ data }) {
   }
 
   return (
-    <div
-      className={`grid grid-cols-1 lg:grid-cols-3 gap-4 justify-start text-center`}
-    >
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-start text-center">
       {Array.isArray(data.value)
         ? data.value.map((item, index) => renderContent(item, index))
         : renderContent(data.value, 0)}
