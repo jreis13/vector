@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
 import icons from "src/common/icons/icons"
+import Breadcrumb from "../Breadcrumb"
 import DynamicListCard from "./StatCards/DynamicListCard"
 import InfoCard from "./StatCards/InfoCard"
 
@@ -16,18 +17,28 @@ export default function EcosystemCountryProfilesDetails({
     window.open(`/ecosystems/advancedairmobility?tab=countryProfiles`, "_self")
   }
 
+  const breadcrumbSections = reports.map((report) => ({
+    title: report.title,
+    icon: icons[report.icon] || "/public/icons/defaultIcon.svg",
+    id: report.title.toLowerCase().replace(/ /g, "-"),
+  }))
+
   const hasHtmlType = (details) => {
     return Object.values(details).some((detail) => detail.type === "html")
   }
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 relative">
+      <Breadcrumb sections={breadcrumbSections} />
       <h1 className="text-4xl font-bold mb-16">{countryName}</h1>
 
       <div className="space-y-16">
         {reports.map((report, reportIndex) => (
-          <ScrollReveal key={reportIndex} id={reportIndex}>
-            <div key={reportIndex}>
+          <ScrollReveal
+            key={reportIndex}
+            id={breadcrumbSections[reportIndex].id}
+          >
+            <div key={reportIndex} id={breadcrumbSections[reportIndex].id}>
               <h2 className="mb-8">{report.title}</h2>
               {hasHtmlType(report.details) ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
