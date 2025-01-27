@@ -35,7 +35,7 @@ export default function MainLayout() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="flex flex-grow flex-col gap-8 mx-6">
+      <div className="flex flex-grow flex-col gap-8 px-6">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase">
