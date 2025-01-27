@@ -282,8 +282,10 @@ export default function SubscribeContent() {
                       onClick={handleAddSubscriber}
                       className="text-[#e8e8e8]"
                     >
-                      Add another user
-                      <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
+                      <div className="flex items-center gap-2">
+                        Add another user
+                        <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
+                      </div>
                     </button>
                   )}
                 </div>
@@ -291,28 +293,44 @@ export default function SubscribeContent() {
             ))}
           </AnimatePresence>
           <div className="mb-4">
-            <p className="text-lg">Total Price: €{calculateTotalPrice()}</p>
+            <div className="flex items-center justify-center gap-4">
+              <p className="text-lg">
+                Monthly Price: €{(calculateTotalPrice() / 12).toFixed(2)}
+                <span className="text-sm text-gray-400">*</span>
+              </p>
+              <span className="text-gray-400">|</span>
+              <div>
+                <p className="text-lg">Total Price: €{calculateTotalPrice()}</p>
+              </div>
+            </div>
+
             <p className="text-sm text-gray-400">
               (Prices displayed don’t include VAT or additional fees.)
+            </p>
+            <p className="text-sm text-gray-400">
+              *Each license requires a minimum commitment of 12 months.
             </p>
           </div>
           <Button
             onClick={handleSubscribe}
             className="bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
           >
-            Subscribe with{" "}
-            <FontAwesomeIcon
-              className="text-3xl"
-              aria-hidden="true"
-              icon={faCcStripe}
-            />
+            <div className="flex items-center gap-2">
+              Subscribe with
+              <FontAwesomeIcon
+                className="text-3xl"
+                aria-hidden="true"
+                icon={faCcStripe}
+              />
+            </div>
           </Button>
           <div>
             <div className="m-8 text-center">
               <p className="mb-4 ">
                 If you wish to proceed with the checkout using alternative
                 payment methods, we also accept bank transfers and
-                cryptocurrencies. Please email us at{" "}
+                cryptocurrencies. <br />
+                Please email us at{" "}
                 <a
                   href="mailto:support@exponentialvector.eu"
                   className="text-[#7032ff]"
