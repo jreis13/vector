@@ -332,10 +332,10 @@ export default function SubscribeContent() {
                 cryptocurrencies. <br />
                 Please email us at{" "}
                 <a
-                  href="mailto:support@exponentialvector.eu"
+                  href="mailto:enquiries@exponentialvector.eu"
                   className="text-[#7032ff]"
                 >
-                  support@exponentialvector.eu
+                  enquiries@exponentialvector.eu
                 </a>
               </p>
             </div>
