@@ -1,83 +1,85 @@
-import {
-  fa0,
-  fa1,
-  fa2,
-  fa3,
-  fa4,
-  fa5,
-  fa6,
-  fa7,
-  fa8,
-  fa9,
-  faAward,
-  faBook,
-  faBus,
-  faCircleNodes,
-  faFileInvoiceDollar,
-  faFilePen,
-  faHandHoldingDollar,
-  faHashtag,
-  faHelicopter,
-  faListCheck,
-  faLocationDot,
-  faMedal,
-  faMobileAlt,
-  faMoneyBill1Wave,
-  faMoneyBillTransfer,
-  faNetworkWired,
-  faPeopleRoof,
-  faPlane,
-  faPlaneCircleCheck,
-  faRankingStar,
-  faRobot,
-  faRocket,
-  faScaleBalanced,
-  faScrewdriverWrench,
-  faTowerCell,
-  faUser,
-  faVolumeXmark,
-  faWifi,
-} from "@fortawesome/free-solid-svg-icons"
+import aerodromeIcon from "public/icons/aerodromeIcon.svg"
+import airFreightIcon from "public/icons/airFreightIcon.svg"
+import airportIcon from "public/icons/airportIcon.svg"
+import airTrafficIcon from "public/icons/airTrafficIcon.svg"
+import broadbandIcon from "public/icons/broadbandIcon.svg"
+import certificationIcon from "public/icons/certificationIcon.svg"
+import companyIcon from "public/icons/companyIcon.svg"
+import droneRegulationIcon from "public/icons/droneRegulationIcon.svg"
+import employmentIcon from "public/icons/employmentIcon.svg"
+import environmentIcon from "public/icons/environmentIcon.svg"
+import frameworkIcon from "public/icons/frameworkIcon.svg"
+import heliportIcon from "public/icons/heliportIcon.svg"
+import infrastructureIcon from "public/icons/infrastructureIcon.svg"
+import internationalIcon from "public/icons/internationalIcon.svg"
+import keyRegulatorIcon from "public/icons/keyRegulatorIcon.svg"
+import laborIcon from "public/icons/laborIcon.svg"
+import locationIcon from "public/icons/locationIcon.svg"
+import mobileIcon from "public/icons/mobileIcon.svg"
+import motorwayIcon from "public/icons/motorwayIcon.svg"
+import noisePollutionIcon from "public/icons/noisePollutionIcon.svg"
+import passengerIcon from "public/icons/passengerIcon.svg"
+import passengerPlaneIcon from "public/icons/passengerPlaneIcon.svg"
+import patentIcon from "public/icons/patentIcon.svg"
+import percentageIcon from "public/icons/percentageIcon.svg"
+import planeSpendIcon from "public/icons/planeSpendIcon.svg"
+import populationDensityIcon from "public/icons/populationDensityIcon.svg"
+import publicTransportIcon from "public/icons/publicTransportIcon.svg"
+import railwayIcon from "public/icons/railwayIcon.svg"
+import rankingIcon from "public/icons/rankingIcon.svg"
+import rdIcon from "public/icons/rdIcon.svg"
+import researchCentreIcon from "public/icons/researchCentreIcon.svg"
+import spendingIcon from "public/icons/spendingIcon.svg"
+import spentPerVisitIcon from "public/icons/spentPerVisitIcon.svg"
+import taxIcon from "public/icons/taxIcon.svg"
+import totalPopulationIcon from "public/icons/totalPopulationIcon.svg"
+import tourismIcon from "public/icons/tourismIcon.svg"
+import towerCellIcon from "public/icons/towerCellIcon.svg"
+import vertiportIcon from "public/icons/vertiportIcon.svg"
+import visitorsIcon from "public/icons/visitorsIcon.svg"
+import wifiIcon from "public/icons/wifiIcon.svg"
 
 const icons = {
-  faAward,
-  fa0,
-  fa1,
-  fa2,
-  fa3,
-  fa4,
-  fa5,
-  fa6,
-  fa7,
-  fa8,
-  fa9,
-  faBook,
-  faLocationDot,
-  faBus,
-  faListCheck,
-  faNetworkWired,
-  faHashtag,
-  faCircleNodes,
-  faFileInvoiceDollar,
-  faFilePen,
-  faHandHoldingDollar,
-  faHelicopter,
-  faMedal,
-  faUser,
-  faRobot,
-  faMobileAlt,
-  faMoneyBill1Wave,
-  faMoneyBillTransfer,
-  faPeopleRoof,
-  faPlane,
-  faPlaneCircleCheck,
-  faRankingStar,
-  faRocket,
-  faScaleBalanced,
-  faScrewdriverWrench,
-  faTowerCell,
-  faVolumeXmark,
-  faWifi,
+  keyRegulatorIcon: keyRegulatorIcon,
+  frameworkIcon: frameworkIcon,
+  certificationIcon: certificationIcon,
+  noisePollutionIcon: noisePollutionIcon,
+  environmentIcon: environmentIcon,
+  droneRegulationIcon: droneRegulationIcon,
+  towerCellIcon: towerCellIcon,
+  airTrafficIcon: airTrafficIcon,
+  taxIcon: taxIcon,
+  populationDensityIcon: populationDensityIcon,
+  visitorsIcon: visitorsIcon,
+  spendingIcon: spendingIcon,
+  spentPerVisitIcon: spentPerVisitIcon,
+  tourismIcon: tourismIcon,
+  rankingIcon: rankingIcon,
+  publicTransportIcon: publicTransportIcon,
+  totalPopulationIcon: totalPopulationIcon,
+  laborIcon: laborIcon,
+  planeSpendIcon: planeSpendIcon,
+  rdIcon: rdIcon,
+  employmentIcon: employmentIcon,
+  infrastructureIcon: infrastructureIcon,
+  aerodromeIcon: aerodromeIcon,
+  airportIcon: airportIcon,
+  heliportIcon: heliportIcon,
+  vertiportIcon: vertiportIcon,
+  locationIcon: locationIcon,
+  mobileIcon: mobileIcon,
+  broadbandIcon: broadbandIcon,
+  wifiIcon: wifiIcon,
+  motorwayIcon: motorwayIcon,
+  railwayIcon: railwayIcon,
+  passengerIcon: passengerIcon,
+  airFreightIcon: airFreightIcon,
+  passengerPlaneIcon: passengerPlaneIcon,
+  patentIcon: patentIcon,
+  percentageIcon: percentageIcon,
+  internationalIcon: internationalIcon,
+  companyIcon: companyIcon,
+  researchCentreIcon: researchCentreIcon,
 }
 
 export default icons
