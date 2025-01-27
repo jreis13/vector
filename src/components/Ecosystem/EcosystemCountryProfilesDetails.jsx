@@ -37,7 +37,7 @@ export default function EcosystemCountryProfilesDetails({
                       .map(([key, value], idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                          className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                         >
                           <div className="flex-shrink-0">
                             {value.icon ? (
@@ -57,7 +57,7 @@ export default function EcosystemCountryProfilesDetails({
                             ) : null}
                           </div>
                           <div className="w-full">
-                            <h3 className="mb-2 text-3xl">{key}</h3>
+                            <h3 className="mb-2 text-3xl ml-6">{key}</h3>
                             {value.type === "list" ||
                             value.type === "nested-list" ? (
                               <DynamicListCard data={value} />
@@ -65,6 +65,20 @@ export default function EcosystemCountryProfilesDetails({
                               <InfoCard data={value} />
                             )}
                           </div>
+                          {value.source && (
+                            <div className="absolute top-4 right-4 group">
+                              <Image
+                                src={icons.infoIcon}
+                                alt="source icon"
+                                width={20}
+                                height={20}
+                                className="cursor-pointer"
+                              />
+                              <div className="absolute hidden group-hover:block bg-black text-white text-sm rounded-lg p-2 w-52 z-10">
+                                <p>{value.source}</p>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
                   </div>
@@ -87,7 +101,7 @@ export default function EcosystemCountryProfilesDetails({
                   {Object.entries(report.details).map(([key, value], idx) => (
                     <div
                       key={idx}
-                      className="flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                      className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                     >
                       <div className="flex-shrink-0">
                         {value.icon ? (
@@ -109,7 +123,7 @@ export default function EcosystemCountryProfilesDetails({
                         ) : null}
                       </div>
                       <div className="w-full">
-                        <h3 className="mb-2 text-3xl">{key}</h3>
+                        <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                         {(() => {
                           switch (value.type) {
                             case "list":
@@ -132,6 +146,20 @@ export default function EcosystemCountryProfilesDetails({
                           }
                         })()}
                       </div>
+                      {value.source && (
+                        <div className="absolute top-4 right-4 group">
+                          <Image
+                            src={icons.infoIcon}
+                            alt="source icon"
+                            width={30}
+                            height={30}
+                            className="cursor-pointer"
+                          />
+                          <div className="absolute hidden group-hover:block bg-[#e8e8e8] text-[#34333d] text-sm rounded-lg mt-2 p-2 w-40 z-10">
+                            <p>{value.source}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

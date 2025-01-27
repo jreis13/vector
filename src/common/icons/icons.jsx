@@ -10,6 +10,7 @@ import employmentIcon from "public/icons/employmentIcon.svg"
 import environmentIcon from "public/icons/environmentIcon.svg"
 import frameworkIcon from "public/icons/frameworkIcon.svg"
 import heliportIcon from "public/icons/heliportIcon.svg"
+import infoIcon from "public/icons/infoIcon.svg"
 import infrastructureIcon from "public/icons/infrastructureIcon.svg"
 import internationalIcon from "public/icons/internationalIcon.svg"
 import keyRegulatorIcon from "public/icons/keyRegulatorIcon.svg"
@@ -80,6 +81,7 @@ const icons = {
   internationalIcon: internationalIcon,
   companyIcon: companyIcon,
   researchCentreIcon: researchCentreIcon,
+  infoIcon: infoIcon,
 }
 
 export default icons
