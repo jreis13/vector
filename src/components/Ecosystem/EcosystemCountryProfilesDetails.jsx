@@ -41,17 +41,20 @@ export default function EcosystemCountryProfilesDetails({
                         >
                           <div className="flex-shrink-0">
                             {value.icon ? (
-                              <FontAwesomeIcon
-                                icon={icons[value.icon]}
-                                className="text-4xl text-[#7032ff]"
+                              <Image
+                                src={icons[value.icon]}
+                                alt={value.subtitle || "icon"}
+                                width={40}
+                                height={40}
+                                // className="object-contain"
                               />
                             ) : value.logo ? (
                               <Image
                                 src={value.logo}
                                 alt={value.subtitle}
-                                width={80}
-                                height={80}
-                                className="w-20 h-20 object-contain"
+                                width={40}
+                                height={40}
+                                // className="object-contain"
                               />
                             ) : null}
                           </div>
@@ -90,9 +93,12 @@ export default function EcosystemCountryProfilesDetails({
                     >
                       <div className="flex-shrink-0">
                         {value.icon ? (
-                          <FontAwesomeIcon
-                            icon={icons[value.icon]}
-                            className="text-4xl text-[#7032ff]"
+                          <Image
+                            src={icons[value.icon]}
+                            alt={value.subtitle || "icon"}
+                            width={80}
+                            height={80}
+                            className="w-20 h-20 object-contain"
                           />
                         ) : value.logo ? (
                           <Image
