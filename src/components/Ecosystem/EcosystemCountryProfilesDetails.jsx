@@ -46,7 +46,6 @@ export default function EcosystemCountryProfilesDetails({
                                 alt={value.subtitle || "icon"}
                                 width={40}
                                 height={40}
-                                // className="object-contain"
                               />
                             ) : value.logo ? (
                               <Image
@@ -54,7 +53,6 @@ export default function EcosystemCountryProfilesDetails({
                                 alt={value.subtitle}
                                 width={40}
                                 height={40}
-                                // className="object-contain"
                               />
                             ) : null}
                           </div>
