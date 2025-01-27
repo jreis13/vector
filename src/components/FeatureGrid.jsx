@@ -16,7 +16,7 @@ export default function FeatureGrid({
   }
 
   return (
-    <div className="flex flex-col items-center px-6 py-8 lg:px-16 lg:py-12 ">
+    <div className="flex flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
       {title && (
         <div className="mb-8 flex items-center justify-center">
           <span className="caret font-bold text-[#7032ff]">^</span>

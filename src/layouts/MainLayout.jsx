@@ -35,7 +35,7 @@ export default function MainLayout() {
     <div className="flex min-h-screen flex-col">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="flex flex-grow flex-col gap-8">
+      <div className="flex flex-grow flex-col gap-8 mx-6">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase">
@@ -47,10 +47,12 @@ export default function MainLayout() {
           <CardList features={questionFeatures.map(splitDescription)} />
         </ScrollReveal> */}
         <ScrollReveal id="benefits">
-          <CardList
-            title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
-            features={evtolFeatures.map(splitDescription)}
-          />
+          <div className="bg-[#34333d] rounded-lg">
+            <CardList
+              title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
+              features={evtolFeatures.map(splitDescription)}
+            />
+          </div>
         </ScrollReveal>
         <ScrollReveal id="offering">
           <CardList
