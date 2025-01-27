@@ -8,7 +8,7 @@ const ScrollReveal = ({ children, className, ...props }) => {
       exit={{ opacity: 0, y: 50 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: false, amount: 0.4 }}
-      className={className}
+      className={`p-8 ${className}`}
       {...props}
     >
       {children}
