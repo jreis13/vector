@@ -92,8 +92,8 @@ export default function Breadcrumb({ sections }) {
                   <Image
                     src={section.icon}
                     alt={section.title}
-                    width={24}
-                    height={24}
+                    width={32}
+                    height={32}
                   />
                 </button>
               </li>
