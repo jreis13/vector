@@ -29,8 +29,8 @@ export default function SubscribeContent() {
 
   const ecosystemsOptions = [
     {
-      id: "evtolandvtolaircrafts",
-      name: "EVTOL and VTOL Aircrafts",
+      id: "advancedairmobility",
+      name: "Advanced Air Mobility",
     },
   ]
 
