@@ -17,12 +17,8 @@ export default function Footer() {
           </div>
 
           <div className="flex justify-center">
-            <Typography className="text-sm text-gray-400 text-center">
-              © {currentYear}{" "}
-              <a href="#" className="hover:underline">
-                Exponential Vector S.R.O
-              </a>
-              . All Rights Reserved.
+            <Typography className="text-sm text-center">
+              © {currentYear} Exponential Vector S.R.O - All Rights Reserved.
             </Typography>
           </div>
 
