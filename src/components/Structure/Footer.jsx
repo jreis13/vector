@@ -1,41 +1,70 @@
 "use client"
 
+import { IconButton, Typography } from "@material-tailwind/react"
+import Image from "next/image"
 import socialPATHS from "src/common/data/socialsData"
 import Logo from "../Logo"
-import NavLinks from "../NavMenu/NavLinks"
+
+const currentYear = new Date().getFullYear()
 
 export default function Footer() {
   return (
-    <footer className="bg-[#34333d] px-16 py-4 md:py-6">
-      <div className="flex items-center justify-between">
-        <div className="flex flex-col items-center gap-2 md:flex-row">
-          <div className="flex">
+    <footer className="bg-[#34333d] px-8 py-8">
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-3 grid-cols-1 gap-6 items-center">
+          <div className="flex justify-center lg:justify-start">
             <Logo />
           </div>
-          <span className="text-[#e8e8e8] md:ml-4">
-            © 2025 <a href="#">Exponential Vector S.R.O</a>. All Rights
-            Reserved.
-          </span>
-        </div>
 
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <a
-            href="/files/Privacy_Policy_Exponential_Vector.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#e8e8e8] hover:underline"
-          >
-            Privacy Policy
-          </a>
-          <a
-            href="/files/Terms_and_Conditions_Exponential_Vector.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#e8e8e8] hover:underline"
-          >
-            Terms & Conditions
-          </a>
-          <NavLinks isDesktop={true} paths={socialPATHS} />
+          <div className="flex justify-center">
+            <Typography className="text-sm text-gray-400 text-center">
+              © {currentYear}{" "}
+              <a href="#" className="hover:underline">
+                Exponential Vector S.R.O
+              </a>
+              . All Rights Reserved.
+            </Typography>
+          </div>
+
+          <div className="flex flex-row items-center justify-center lg:justify-end gap-6">
+            <a
+              href="/files/Privacy_Policy_Exponential_Vector.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline whitespace-nowrap"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/files/Terms_and_Conditions_Exponential_Vector.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline whitespace-nowrap"
+            >
+              Terms & Conditions
+            </a>
+
+            <div className="flex gap-3">
+              {socialPATHS.map(({ name, path, icon }) => (
+                <a
+                  key={name}
+                  href={path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton variant="text" size="lg">
+                    <Image
+                      src={icon}
+                      alt={name}
+                      width={24}
+                      height={24}
+                      className="opacity-80 hover:opacity-100 transition"
+                    />
+                  </IconButton>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

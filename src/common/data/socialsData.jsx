@@ -1,19 +1,14 @@
-import Linkedin from "src/components/icons/Linkedin"
-import X from "src/components/icons/X"
-
-export const PATHS = [
+export const socialPATHS = [
   {
-    name: "X",
+    name: "X (Twitter)",
     path: "https://x.com/exp_vector",
-    type: "image",
-    icon: <X />,
+    icon: "/icons/x.svg",
   },
   {
-    name: "Linkedin",
+    name: "LinkedIn",
     path: "https://www.linkedin.com/company/exponential-vector/",
-    type: "image",
-    icon: <Linkedin />,
+    icon: "/icons/linkedin.svg",
   },
 ]
 
-export default PATHS
+export default socialPATHS
