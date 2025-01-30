@@ -1,35 +1,48 @@
+"use client"
+
 import Image from "next/image"
-
-import Button from "./Button"
-
+import Button from "./Button" // Using your original button
 import mailIcon from "/public/icons/mailIcon.svg"
 
 export default function CTA() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-6 py-8 lg:px-16 lg:py-16">
-      <div className="grid grid-cols-1 gap-y-16 sm:gap-y-20 lg:grid-cols-2">
-        <div className="flex flex-col gap-6 lg:pt-4 justify-between">
-          <div className="flex flex-col gap-6 lg:pt-4">
-            <div className="flex flex-col gap-y-6">
-              <h2>
-                <span className="caret font-bold text-[#7032ff]">^</span>
-                Transform your understanding of the eVTOL ecosystem with our
-                innovative intelligence solutions.
-              </h2>
-            </div>
+    <section className="py-16 px-8 lg:py-28">
+      <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
+        <div className="row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12">
+          <h2 className="text-3xl md:text-5xl font-bold leading-snug">
+            <span className="text-[#7032ff] caret">^</span> Transform your
+            understanding of the eVTOL ecosystem with our innovative
+            intelligence solutions.
+          </h2>
+
+          <p className="text-gray-400 mt-6 text-xl">
+            Gain exclusive insights into cutting-edge industry trends and
+            developments. <br /> Our intelligence solutions provide deep
+            analysis and market forecasting to help you stay ahead. <br />
+            Join us now to unlock full access.
+          </p>
+
+          <div className="mt-8">
             <Button href="/api/auth/login">Join Us</Button>
           </div>
-          <div>
-            <h2>Coming Soon: Fintech Intelligence</h2>
-            <p>Join the waitlist and get notified once we go live. </p>
-          </div>
+
+          <h3 className="text-2xl font-semibold mt-12">
+            Coming Soon: Fintech Intelligence
+          </h3>
+
+          <p className="text-gray-400 mt-6 text-xl">
+            Be among the first to access valuable fintech insights shaping the
+            future of financial markets. <br /> Join the waitlist and get
+            notified once we go live.
+          </p>
         </div>
+
         <Image
           src={mailIcon}
           alt="Subscribe"
           className="w-full md:-ml-4 lg:-ml-0"
         />
       </div>
-    </div>
+    </section>
   )
 }
