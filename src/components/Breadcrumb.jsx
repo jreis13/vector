@@ -78,7 +78,7 @@ export default function Breadcrumb({ sections }) {
         style={{
           zIndex: 10,
           marginBottom: isVisible ? "" : "-10rem",
-          marginTop: isVisible ? "-10rem" : "",
+          marginTop: isVisible ? "-7rem" : "",
         }}
       >
         <ol className="mb-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-8">
@@ -101,7 +101,7 @@ export default function Breadcrumb({ sections }) {
         </ol>
       </nav>
       <div
-        className="fixed bottom-6 z-30 mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#34333d]"
+        className="fixed bottom-64 lg:bottom-32 z-30 mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#34333d]"
         style={{ left: "50%", transform: "translateX(-50%)" }}
       >
         <button
