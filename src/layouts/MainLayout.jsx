@@ -9,6 +9,7 @@ import {
 
 import ScrollReveal from "src/animations/ScrollReveal"
 import Breadcrumb from "src/components/Breadcrumb"
+import Button from "src/components/Button"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import MainHero from "src/components/MainHero"
@@ -49,6 +50,11 @@ export default function MainLayout() {
               title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
               features={evtolFeatures.map(splitDescription)}
             />
+            <div className="flex justify-center pb-8">
+              <Button blank href="/ecosystems">
+                Browse Now
+              </Button>
+            </div>
           </div>
         </ScrollReveal>
         <ScrollReveal id="offering">
