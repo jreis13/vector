@@ -43,9 +43,6 @@ export default function MainLayout() {
             </h1>
           </div>
         </MainHero>
-        {/* <ScrollReveal id="questions">
-          <CardList features={questionFeatures.map(splitDescription)} />
-        </ScrollReveal> */}
         <ScrollReveal id="benefits">
           <div className="bg-[#34333d] rounded-lg">
             <CardList
@@ -77,18 +74,6 @@ export default function MainLayout() {
             }
           />
         </ScrollReveal>
-        {/* <ScrollReveal id="goals">
-          <CardList
-            title="What are we aiming for?"
-            features={
-              goalsFeatures &&
-              goalsFeatures.filter((f) => !f.sectionImage).map(splitDescription)
-            }
-            sectionImage={
-              goalsFeatures.find((f) => f.sectionImage)?.sectionImage
-            }
-          />
-        </ScrollReveal> */}
         <ScrollReveal>
           <div id="subscribe" className="py-8">
             <CTA />
