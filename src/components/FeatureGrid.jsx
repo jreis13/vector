@@ -34,7 +34,7 @@ export default function FeatureGrid({ title, features }) {
               <HoverScale className="h-full w-full flex flex-col justify-between items-center">
                 <div className="flex flex-col items-center">
                   {feature.name && (
-                    <h3 className="py-4 mb-2 text-lg md:text-xl lg:text-2xl font-semibold">
+                    <h3 className="py-4 mb-2 text-lg md:text-xl lg:text-2xl font-semibold min-h-[64px] flex items-center justify-center">
                       {feature.name}
                     </h3>
                   )}
@@ -46,13 +46,13 @@ export default function FeatureGrid({ title, features }) {
                 </div>
                 {feature.image && (
                   <div className="flex items-center justify-center">
-                    <div className="relative h-40 md:h-48 lg:h-64 w-full flex justify-center">
+                    <div className="relative mt-4 h-40 w-40 lg:h-64 lg:w-64">
                       <Image
                         src={feature.image}
                         alt={feature.name || feature.description}
-                        className="h-full object-contain"
-                        width={256}
-                        height={256}
+                        fill
+                        sizes="100vw"
+                        style={{ objectFit: "contain" }}
                       />
                     </div>
                   </div>
