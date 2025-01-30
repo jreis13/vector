@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 
-export default function Button({ onClick, href, children }) {
+export default function Button({ onClick, href, children, blank = false }) {
   const buttonStyles =
     "inline-flex w-full max-w-xs justify-center rounded-full border uppercase transition-colors duration-300 font-medium px-6 py-3 bg-[#403f4c] md:px-8 md:py-4 text-sm md:text-base"
 
@@ -26,6 +26,8 @@ export default function Button({ onClick, href, children }) {
     return (
       <motion.a
         href={href}
+        target={blank ? "_blank" : "_self"}
+        rel={blank ? "noopener noreferrer" : undefined}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={`${buttonStyles} ${hoverStyles}`}
