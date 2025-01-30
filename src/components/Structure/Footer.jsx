@@ -54,7 +54,7 @@ export default function Footer() {
                       alt={name}
                       width={24}
                       height={24}
-                      className="opacity-80 hover:opacity-100 transition"
+                      className="opacity-100"
                     />
                   </IconButton>
                 </a>
