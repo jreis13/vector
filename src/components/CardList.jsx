@@ -7,7 +7,6 @@ export default function CardList({
   sectionImage,
   imageOnLeft,
   imageOnRight,
-  isCustomersGrid = false,
 }) {
   if (sectionImage) {
     return (
@@ -20,11 +19,6 @@ export default function CardList({
     )
   }
   return (
-    <FeatureGrid
-      title={title}
-      features={features}
-      imageOnLeft={imageOnLeft}
-      isCustomersGrid={isCustomersGrid}
-    />
+    <FeatureGrid title={title} features={features} imageOnLeft={imageOnLeft} />
   )
 }

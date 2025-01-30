@@ -75,7 +75,6 @@ export default function MainLayout() {
             features={
               customersFeatures && customersFeatures.map(splitDescription)
             }
-            isCustomersGrid={true}
           />
         </ScrollReveal>
         {/* <ScrollReveal id="goals">

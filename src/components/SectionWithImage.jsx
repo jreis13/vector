@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 
 export default function SectionWithImage({
@@ -7,48 +9,42 @@ export default function SectionWithImage({
   imageOnRight = false,
 }) {
   return (
-    <div className="flex w-full flex-col items-center px-6 py-8 lg:px-16 lg:py-12">
-      {title && (
-        <div className="mb-8 flex items-center justify-center">
-          <span className="caret font-bold text-[#7032ff]">^</span>
-          <h2 className="text-center text-2xl lg:text-3xl xl:text-4xl">
-            {title}
-          </h2>
-          <span className="mt-4 text-[24px] font-bold text-[#7032ff]">v</span>
-        </div>
-      )}
-      <div
-        className={`flex w-full flex-col items-center justify-between gap-y-8 lg:flex-row lg:gap-x-8 ${
-          imageOnRight ? "lg:flex-row-reverse" : ""
-        }`}
-      >
-        <div className="relative w-full max-w-[300px] lg:max-w-[400px] xl:max-w-[500px]">
-          <Image
-            src={sectionImage}
-            alt={`${title} section image`}
-            width="auto"
-            height="auto"
-            sizes="(max-width: 768px) 100vw, 400px"
-            style={{ objectFit: "cover" }}
-          />
+    <section className="py-16 px-8 lg:py-28">
+      <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
+        <div
+          className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${imageOnRight ? "lg:order-2" : ""}`}
+        >
+          {title && (
+            <h2 className="text-3xl md:text-5xl font-bold leading-snug text-center lg:text-left">
+              <span className="text-[#7032ff] caret">^</span> {title}
+              <span className="ml-2 text-[#7032ff] font-bold">v</span>
+            </h2>
+          )}
+
+          {features && (
+            <div className="mt-6 space-y-8">
+              {features.map((feature, index) => (
+                <div key={index}>
+                  {feature.name && (
+                    <h3 className="text-2xl font-semibold">{feature.name}</h3>
+                  )}
+                  {feature.description && (
+                    <p className="text-gray-400 text-xl mt-2">
+                      {feature.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="flex flex-col justify-center text-lg lg:text-left lg:text-xl xl:text-2xl">
-          {features &&
-            features.map((feature, index) => (
-              <div key={index} className="mb-6">
-                {feature.name && (
-                  <h3 className="py-4 text-xl lg:text-2xl xl:text-3xl">
-                    {feature.name}
-                  </h3>
-                )}
-                {feature.description && (
-                  <p className="py-2">{feature.description}</p>
-                )}
-              </div>
-            ))}
-        </div>
+        <Image
+          src={sectionImage}
+          alt={`${title} section image`}
+          className="w-full md:-ml-4 lg:-ml-0 rounded-xl object-cover"
+        />
       </div>
-    </div>
+    </section>
   )
 }
