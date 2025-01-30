@@ -18,7 +18,7 @@ export default function Header() {
     const updateMedia = () => {
       const isNowDesktop = window.innerWidth >= 960
       setIsDesktop(isNowDesktop)
-      if (isNowDesktop) setOpenNav(false) // ✅ Close menu when switching to desktop
+      if (isNowDesktop) setOpenNav(false)
     }
 
     updateMedia()
@@ -60,7 +60,6 @@ export default function Header() {
         <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
           <Logo />
 
-          {/* Desktop Navigation */}
           <ul className="hidden lg:flex items-center gap-6">
             {authPaths.map(({ name, path }) => (
               <li key={name}>
@@ -71,21 +70,19 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* Mobile Menu Toggle */}
           <IconButton
             variant="text"
             onClick={() => setOpenNav(!openNav)}
             className="lg:hidden"
           >
             {openNav ? (
-              <XMarkIcon className="h-6 w-6 text-white" />
+              <XMarkIcon className="h-6 w-6 text-[#e8e8e8]" />
             ) : (
-              <Bars3Icon className="h-6 w-6 text-white" />
+              <Bars3Icon className="h-6 w-6 text-[#e8e8e8]" />
             )}
           </IconButton>
         </div>
 
-        {/* Mobile Navigation (Dropdown) */}
         <div
           className={`absolute top-full w-content right-0 bg-[#e8e8e8] text-[#403f4c] mr-4 rounded transition-transform duration-300 ${
             openNav
