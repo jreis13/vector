@@ -39,7 +39,7 @@ export default function FeatureGrid({ title, features }) {
                     </h3>
                   )}
                   {feature.description && (
-                    <p className="py-2 text-base md:text-lg lg:text-xl text-gray-300">
+                    <p className="py-2 text-base md:text-lg lg:text-xl text-gray-400">
                       {feature.description}
                     </p>
                   )}
