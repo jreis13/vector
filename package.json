@@ -27,6 +27,7 @@
     "framer-motion": "^11.15.0",
     "leaflet": "^1.9.4",
     "next": "^14.2.20",
+    "nodemailer": "^6.10.0",
     "papaparse": "^5.4.1",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
