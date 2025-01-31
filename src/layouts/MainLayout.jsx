@@ -39,7 +39,7 @@ export default function MainLayout() {
       <div className="flex flex-grow flex-col gap-8 px-6">
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
-            <h1 className="uppercase">
+            <h1 className="uppercase text-outline">
               Next-Gen Market Intelligence for Disruptive Business Models
             </h1>
           </div>

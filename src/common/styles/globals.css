@@ -109,3 +109,11 @@ body {
 .number {
   font-family: "Kameron", sans-serif;
 }
+
+.text-outline {
+  text-shadow:
+    -1px -1px 0 #403f4c,
+    1px -1px 0 #403f4c,
+    -1px 1px 0 #403f4c,
+    1px 1px 0 #403f4c;
+}
