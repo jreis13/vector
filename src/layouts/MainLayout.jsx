@@ -12,6 +12,7 @@ import Breadcrumb from "src/components/Breadcrumb"
 import Button from "src/components/Button"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
+import EarlyAccess from "src/components/EarlyAccess"
 import MainHero from "src/components/MainHero"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
@@ -46,6 +47,7 @@ export default function MainLayout() {
         </MainHero>
         <ScrollReveal id="benefits">
           <div className="bg-[#34333d] rounded-lg">
+            <EarlyAccess />
             <CardList
               title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
               features={evtolFeatures.map(splitDescription)}
