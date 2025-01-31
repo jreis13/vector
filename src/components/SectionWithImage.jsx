@@ -15,10 +15,13 @@ export default function SectionWithImage({
           className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${imageOnRight ? "lg:order-2" : ""}`}
         >
           {title && (
-            <h2 className="text-3xl md:text-5xl font-bold leading-snug text-center lg:text-left">
-              <span className="text-[#6600cc] caret">^</span> {title}
+            <div className="mb-8 flex items-center">
+              <span className="text-[#6600cc] caret font-bold">^</span>
+              <h2 className="text-center text-3xl md:text-4xl font-bold">
+                {title}
+              </h2>
               <span className="ml-2 text-[#6600cc] font-bold">v</span>
-            </h2>
+            </div>
           )}
 
           {features && (
