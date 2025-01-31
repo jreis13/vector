@@ -103,7 +103,7 @@ export default function DynamicListCard({ data }) {
           className="flex flex-col items-center text-center py-4 h-fit w-fit"
           key={index}
         >
-          <div className="text-4xl text-[#7032ff]">
+          <div className="text-4xl text-[#6600cc]">
             {iconSrc ? (
               <Image
                 src={iconSrc}

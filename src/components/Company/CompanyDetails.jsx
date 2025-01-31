@@ -17,7 +17,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
   if (router.isFallback || !company) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#7032ff] border-t-transparent"></div>
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
       </div>
     )
   }

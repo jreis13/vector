@@ -11,11 +11,11 @@ export default function FeatureGrid({ title, features }) {
       <div className="container mx-auto">
         {title && (
           <div className="mb-8 flex items-center justify-center">
-            <span className="text-[#7032ff] caret font-bold">^</span>
+            <span className="text-[#6600cc] caret font-bold">^</span>
             <h2 className="text-center text-3xl md:text-4xl font-bold">
               {title}
             </h2>
-            <span className="ml-2 text-[#7032ff] font-bold">v</span>
+            <span className="ml-2 text-[#6600cc] font-bold">v</span>
           </div>
         )}
 

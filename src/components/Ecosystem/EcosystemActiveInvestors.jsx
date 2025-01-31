@@ -219,7 +219,7 @@ export default function ActiveInvestors({ companies, data }) {
                     <div className="flex items-center justify-between">
                       {group.companyName}
                       <button
-                        className="ml-4 text-[#7032ff] hover:text-[#6600cc]"
+                        className="ml-4 text-[#6600cc] hover:text-[#6600cc]"
                         onClick={() =>
                           toggleCompanyVisibility(group.companyName)
                         }

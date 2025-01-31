@@ -72,7 +72,7 @@ export default function EcosystemCountryProfilesMap({
                       }
                       style={{
                         default: {
-                          fill: countryHasReports ? "#7032ff" : "#D6D6DA",
+                          fill: countryHasReports ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
                           outline: "none",
                         },
@@ -82,7 +82,7 @@ export default function EcosystemCountryProfilesMap({
                           outline: "none",
                         },
                         pressed: {
-                          fill: countryHasReports ? "#7032ff" : "#D6D6DA",
+                          fill: countryHasReports ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
                           outline: "none",
                         },

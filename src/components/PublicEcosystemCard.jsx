@@ -54,7 +54,7 @@ export default function PublicEcosystemCard({ ecosystem }) {
                       >
                         <FontAwesomeIcon
                           icon={faCheckCircle}
-                          className="text-[#7032ff]"
+                          className="text-[#6600cc]"
                         />
                         <p>{item.label}: </p>
                         <p>{item.description}</p>
@@ -155,7 +155,7 @@ export default function PublicEcosystemCard({ ecosystem }) {
 
           <div className="flex justify-center">
             <button
-              className="inline-flex justify-center rounded-full bg-[#7032ff] px-6 py-3 font-bold uppercase hover:scale-105 transition-all"
+              className="inline-flex justify-center rounded-full bg-[#6600cc] px-6 py-3 font-bold uppercase hover:scale-105 transition-all"
               onClick={handleSubscribe}
             >
               Subscribe

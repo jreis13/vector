@@ -55,7 +55,7 @@ export default function EcosystemCard({ ecosystem }) {
                       >
                         <FontAwesomeIcon
                           icon={faCheckCircle}
-                          className="text-[#7032ff]"
+                          className="text-[#6600cc]"
                         />
                         <p>{item.label}: </p>
                         <p>{item.description}</p>

@@ -10,7 +10,7 @@ export default function CTA() {
       <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
         <div className="row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12">
           <h2 className="text-3xl md:text-5xl font-bold leading-snug">
-            <span className="text-[#7032ff] caret">^</span> Help us shape the
+            <span className="text-[#6600cc] caret">^</span> Help us shape the
             future of the eVTOL ecosytems.
           </h2>
 

@@ -333,7 +333,7 @@ export default function SubscribeContent() {
                 Please email us at{" "}
                 <a
                   href="mailto:enquiries@exponentialvector.eu"
-                  className="text-[#7032ff]"
+                  className="text-[#6600cc]"
                 >
                   enquiries@exponentialvector.eu
                 </a>

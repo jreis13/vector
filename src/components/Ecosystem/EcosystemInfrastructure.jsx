@@ -130,7 +130,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
                         }
                         style={{
                           default: {
-                            fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
+                            fill: countryHasVertiports ? "#6600cc" : "#D6D6DA",
                             stroke: "#e8e8e8",
                             outline: "none",
                           },
@@ -140,7 +140,7 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
                             outline: "none",
                           },
                           pressed: {
-                            fill: countryHasVertiports ? "#7032ff" : "#D6D6DA",
+                            fill: countryHasVertiports ? "#6600cc" : "#D6D6DA",
                             stroke: "#e8e8e8",
                             outline: "none",
                           },

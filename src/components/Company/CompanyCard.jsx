@@ -86,7 +86,7 @@ function CardContent({ item, title }) {
           <FontAwesomeIcon
             aria-hidden="true"
             icon={iconMapping[item.icon]}
-            className="text-4xl text-[#7032ff]"
+            className="text-4xl text-[#6600cc]"
           />
         ) : (
           <Image

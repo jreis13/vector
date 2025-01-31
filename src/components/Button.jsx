@@ -6,7 +6,7 @@ export default function Button({ onClick, href, children, blank = false }) {
   const buttonStyles =
     "inline-flex w-full max-w-xs justify-center rounded-full border uppercase transition-colors duration-300 font-medium px-6 py-3 bg-[#403f4c] md:px-8 md:py-4 text-sm md:text-base"
 
-  const hoverStyles = "hover:bg-[#7032ff] hover:text-[#e8e8e8]"
+  const hoverStyles = "hover:bg-[#6600cc] hover:text-[#e8e8e8]"
 
   if (onClick) {
     return (

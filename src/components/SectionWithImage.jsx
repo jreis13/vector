@@ -16,8 +16,8 @@ export default function SectionWithImage({
         >
           {title && (
             <h2 className="text-3xl md:text-5xl font-bold leading-snug text-center lg:text-left">
-              <span className="text-[#7032ff] caret">^</span> {title}
-              <span className="ml-2 text-[#7032ff] font-bold">v</span>
+              <span className="text-[#6600cc] caret">^</span> {title}
+              <span className="ml-2 text-[#6600cc] font-bold">v</span>
             </h2>
           )}
 
