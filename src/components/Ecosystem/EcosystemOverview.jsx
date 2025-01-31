@@ -27,7 +27,7 @@ export default function EcosystemOverview({ ecosystem }) {
 
   return (
     <div className="flex flex-col my-4">
-      <h3 className="px-6 lg:px-16 mb-8">
+      <h3 className="px-6 lg:px-16 mb-16">
         {ecosystem.overview[0].description}
       </h3>
       <div className="flex h-[70vh]">
