@@ -10,16 +10,14 @@ export default function CTA() {
       <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
         <div className="row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12">
           <h2 className="text-3xl md:text-5xl font-bold leading-snug">
-            <span className="text-[#7032ff] caret">^</span> Transform your
-            understanding of the eVTOL ecosystem with our innovative
-            intelligence solutions.
+            <span className="text-[#7032ff] caret">^</span> Help us shape the
+            future of the eVTOL ecosytems.
           </h2>
 
           <p className="text-gray-400 mt-6 text-xl">
             Gain exclusive insights into cutting-edge industry trends and
-            developments. <br /> Our intelligence solutions provide deep
-            analysis and market forecasting to help you stay ahead. <br />
-            Join us now to unlock full access.
+            developments. Our intelligence solution provides deep analysis and
+            market forecasting to help you stay ahead.
           </p>
 
           <div className="mt-8">
@@ -32,8 +30,7 @@ export default function CTA() {
 
           <p className="text-gray-400 mt-6 text-xl">
             Be among the first to access valuable fintech insights shaping the
-            future of financial markets. <br /> Join the waitlist and get
-            notified once we go live.
+            future of finance.
           </p>
         </div>
 
