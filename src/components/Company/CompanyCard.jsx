@@ -53,10 +53,10 @@ export default function CompanyCard({ title, data }) {
   return (
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="mb-8">{title}</h2>
-      <div className="grid place-items-center gap-y-8 grid-cols-1 sm:grid-cols-2">
+      <div className="grid place-items-center gap-y-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
         {data &&
           data.map((item, index) => (
-            <div key={index} className="w-[250px]">
+            <div key={index} className="w-[400px] h-full">
               {item.link ? (
                 <a
                   href={item.link}
