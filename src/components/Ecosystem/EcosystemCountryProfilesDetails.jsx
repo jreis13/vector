@@ -45,7 +45,7 @@ export default function EcosystemCountryProfilesDetails({
                       .map(([key, value], idx) => (
                         <div
                           key={idx}
-                          className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                          className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                         >
                           <div className="flex-shrink-0">
                             {value.icon ? (
@@ -109,7 +109,7 @@ export default function EcosystemCountryProfilesDetails({
                   {Object.entries(report.details).map(([key, value], idx) => (
                     <div
                       key={idx}
-                      className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                      className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                     >
                       <div className="flex-shrink-0">
                         {value.icon ? (
@@ -188,7 +188,7 @@ export default function EcosystemCountryProfilesDetails({
                         .map(([key, value], idx) => (
                           <div
                             key={idx}
-                            className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                            className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                           >
                             <div className="flex-shrink-0">
                               {value.icon ? (
@@ -252,7 +252,7 @@ export default function EcosystemCountryProfilesDetails({
                     {Object.entries(report.details).map(([key, value], idx) => (
                       <div
                         key={idx}
-                        className="relative flex items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                        className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                       >
                         <div className="flex-shrink-0">
                           {value.icon ? (
