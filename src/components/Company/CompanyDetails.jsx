@@ -9,7 +9,6 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCard from "./CompanyCard"
 import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
-import CompanyText from "./CompanyText"
 
 export default function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
@@ -91,7 +90,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="customerGrowth">
           {company.customerGrowth && (
-            <CompanyText
+            <CompanyCard
               title={company.customerGrowth.title}
               data={company.customerGrowth.data}
             />
@@ -100,7 +99,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="patents">
           {company.patents && (
-            <CompanyText
+            <CompanyCard
               title={company.patents.title}
               data={company.patents.data}
             />
