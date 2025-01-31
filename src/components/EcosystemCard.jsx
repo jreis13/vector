@@ -34,7 +34,7 @@ export default function EcosystemCard({ ecosystem }) {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-80"></div>
 
         <div className="relative z-10 px-10 py-6 flex flex-col justify-between flex-grow">
           <div>
