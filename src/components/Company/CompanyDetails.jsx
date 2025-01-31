@@ -7,6 +7,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCard from "./CompanyCard"
+import CompanyLatest from "./CompanyLatest"
 import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
 
@@ -63,7 +64,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <ScrollReveal id="latestDevelopments">
           {company.latestDevelopments && (
-            <CompanyCard
+            <CompanyLatest
               title={company.latestDevelopments.title}
               data={company.latestDevelopments.data}
             />
