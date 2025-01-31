@@ -77,9 +77,7 @@ export default function MainLayout() {
         <ScrollReveal id="customers">
           <CardList
             title="Who are our products for?"
-            features={
-              customersFeatures && customersFeatures.map(splitDescription)
-            }
+            features={customersFeatures && customersFeatures}
           />
         </ScrollReveal>
         <ScrollReveal>
