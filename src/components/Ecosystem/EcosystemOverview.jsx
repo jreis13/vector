@@ -26,7 +26,10 @@ export default function EcosystemOverview({ ecosystem }) {
   }
 
   return (
-    <div className="flex flex-col mt-8">
+    <div className="flex flex-col my-4">
+      <h3 className="px-6 lg:px-16 mb-8">
+        {ecosystem.overview[0].description}
+      </h3>
       <div className="flex h-[70vh]">
         {currentPage > 0 && (
           <div className="flex flex-col justify-center items-center">
