@@ -9,24 +9,7 @@ import arrowUp from "/public/icons/arrowUpIcon.svg"
 
 export default function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")
-  const [isVisible, setIsVisible] = useState(true)
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsVisible(false)
-      } else {
-        setIsVisible(true)
-      }
-    }
-
-    handleResize()
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
+  const [isVisible, setIsVisible] = useState(true) // Always visible
 
   useEffect(() => {
     const handleScroll = () => {
