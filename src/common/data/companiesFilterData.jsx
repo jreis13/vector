@@ -8,13 +8,24 @@ export const industryOptions = [
 ]
 
 export const fundingStageOptions = [
-  { label: "Early Stage", keywords: ["Early Stage", "Seed"] },
-  { label: "Series B", keywords: ["Series B"] },
-  { label: "Series C", keywords: ["Series C"] },
-  { label: "Series D", keywords: ["Series D"] },
-  { label: "Series E", keywords: ["Series E"] },
-  { label: "Later Stage", keywords: ["Later Stage"] },
-  { label: "IPO", keywords: ["IPO", "Public"] },
+  { label: "Seed", keywords: ["Early Stage", "Seed"] },
+  {
+    label: "Early Stage",
+    keywords: ["Early Stage", "Seed", "Series A", "Series B"],
+  },
+  {
+    label: "Later Stage",
+    keywords: [
+      "Later Stage",
+      "Late Stage",
+      "Series C",
+      "Series D",
+      "Series E",
+      "Series F",
+      "Series H",
+    ],
+  },
+  { label: "Public", keywords: ["IPO", "Public", "Post IPO"] },
 ]
 
 export const fundingAmountRanges = [
