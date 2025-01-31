@@ -62,6 +62,15 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         {company.stats && <CompanyStats stats={company.stats.data} />}
 
+        <ScrollReveal id="latestDevelopments">
+          {company.latestDevelopments && (
+            <CompanyCard
+              title={company.latestDevelopments.title}
+              data={company.latestDevelopments.data}
+            />
+          )}
+        </ScrollReveal>
+
         <ScrollReveal id="foundingTeam">
           {company.foundingTeam && (
             <CompanyCard
