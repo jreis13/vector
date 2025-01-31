@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "enquiries@exponentialvector.eu",
+      to: "support@exponentialvector.eu",
       subject: "New Waitlist Signup - Fintech Ecosystem",
       text: `${email} joined the waitlist for the Fintech Ecosystem.`,
     }
