@@ -45,27 +45,29 @@ export default function EcosystemCountryProfilesDetails({
                       .map(([key, value], idx) => (
                         <div
                           key={idx}
-                          className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                          className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                         >
-                          <div className="flex-shrink-0">
-                            {value.icon ? (
-                              <Image
-                                src={icons[value.icon]}
-                                alt={value.subtitle || "icon"}
-                                width={40}
-                                height={40}
-                              />
-                            ) : value.logo ? (
-                              <Image
-                                src={value.logo}
-                                alt={value.subtitle}
-                                width={40}
-                                height={40}
-                              />
-                            ) : null}
+                          <div className="flex items-center gap-4">
+                            <div className="flex-shrink-0">
+                              {value.icon ? (
+                                <Image
+                                  src={icons[value.icon]}
+                                  alt={value.subtitle || "icon"}
+                                  width={40}
+                                  height={40}
+                                />
+                              ) : value.logo ? (
+                                <Image
+                                  src={value.logo}
+                                  alt={value.subtitle}
+                                  width={40}
+                                  height={40}
+                                />
+                              ) : null}
+                            </div>
+                            <h3 className="mb-2 text-3xl ml-6">{key}</h3>
                           </div>
                           <div className="w-full">
-                            <h3 className="mb-2 text-3xl ml-6">{key}</h3>
                             {value.type === "list" ||
                             value.type === "nested-list" ? (
                               <DynamicListCard data={value} />
@@ -109,29 +111,31 @@ export default function EcosystemCountryProfilesDetails({
                   {Object.entries(report.details).map(([key, value], idx) => (
                     <div
                       key={idx}
-                      className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                      className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                     >
-                      <div className="flex-shrink-0">
-                        {value.icon ? (
-                          <Image
-                            src={icons[value.icon]}
-                            alt={value.subtitle || "icon"}
-                            width={80}
-                            height={80}
-                            className="w-20 h-20 object-contain"
-                          />
-                        ) : value.logo ? (
-                          <Image
-                            src={value.logo}
-                            alt={value.subtitle}
-                            width={80}
-                            height={80}
-                            className="w-20 h-20 object-contain"
-                          />
-                        ) : null}
+                      <div className="flex items-center gap-4">
+                        <div className="flex-shrink-0">
+                          {value.icon ? (
+                            <Image
+                              src={icons[value.icon]}
+                              alt={value.subtitle || "icon"}
+                              width={80}
+                              height={80}
+                              className="w-20 h-20 object-contain"
+                            />
+                          ) : value.logo ? (
+                            <Image
+                              src={value.logo}
+                              alt={value.subtitle}
+                              width={80}
+                              height={80}
+                              className="w-20 h-20 object-contain"
+                            />
+                          ) : null}
+                        </div>
+                        <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                       </div>
                       <div className="w-full">
-                        <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                         {(() => {
                           switch (value.type) {
                             case "list":
@@ -188,27 +192,29 @@ export default function EcosystemCountryProfilesDetails({
                         .map(([key, value], idx) => (
                           <div
                             key={idx}
-                            className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                            className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                           >
-                            <div className="flex-shrink-0">
-                              {value.icon ? (
-                                <Image
-                                  src={icons[value.icon]}
-                                  alt={value.subtitle || "icon"}
-                                  width={40}
-                                  height={40}
-                                />
-                              ) : value.logo ? (
-                                <Image
-                                  src={value.logo}
-                                  alt={value.subtitle}
-                                  width={40}
-                                  height={40}
-                                />
-                              ) : null}
+                            <div className="flex items-center gap-4">
+                              <div className="flex-shrink-0">
+                                {value.icon ? (
+                                  <Image
+                                    src={icons[value.icon]}
+                                    alt={value.subtitle || "icon"}
+                                    width={40}
+                                    height={40}
+                                  />
+                                ) : value.logo ? (
+                                  <Image
+                                    src={value.logo}
+                                    alt={value.subtitle}
+                                    width={40}
+                                    height={40}
+                                  />
+                                ) : null}
+                              </div>
+                              <h3 className="mb-2 text-3xl ml-6">{key}</h3>
                             </div>
                             <div className="w-full">
-                              <h3 className="mb-2 text-3xl ml-6">{key}</h3>
                               {value.type === "list" ||
                               value.type === "nested-list" ? (
                                 <DynamicListCard data={value} />
@@ -252,29 +258,31 @@ export default function EcosystemCountryProfilesDetails({
                     {Object.entries(report.details).map(([key, value], idx) => (
                       <div
                         key={idx}
-                        className="relative flex h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                        className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
                       >
-                        <div className="flex-shrink-0">
-                          {value.icon ? (
-                            <Image
-                              src={icons[value.icon]}
-                              alt={value.subtitle || "icon"}
-                              width={80}
-                              height={80}
-                              className="w-20 h-20 object-contain"
-                            />
-                          ) : value.logo ? (
-                            <Image
-                              src={value.logo}
-                              alt={value.subtitle}
-                              width={80}
-                              height={80}
-                              className="w-20 h-20 object-contain"
-                            />
-                          ) : null}
+                        <div className="flex items-center gap-4">
+                          <div className="flex-shrink-0">
+                            {value.icon ? (
+                              <Image
+                                src={icons[value.icon]}
+                                alt={value.subtitle || "icon"}
+                                width={80}
+                                height={80}
+                                className="w-20 h-20 object-contain"
+                              />
+                            ) : value.logo ? (
+                              <Image
+                                src={value.logo}
+                                alt={value.subtitle}
+                                width={80}
+                                height={80}
+                                className="w-20 h-20 object-contain"
+                              />
+                            ) : null}
+                          </div>
+                          <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                         </div>
                         <div className="w-full">
-                          <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                           {(() => {
                             switch (value.type) {
                               case "list":
