@@ -68,19 +68,19 @@ export const customersFeatures = [
       "Whatever your role in society, if you are excited about what’s coming next, and want to be part of it, you will surely enjoy our research.",
   },
   {
+    name: "Investors",
+    description:
+      "Investors seeking to quickly grasp market dynamics and stakeholder influence rely on clarity. Since time is valuable, we prioritize clear visuals over lengthy text.",
+  },
+  {
     name: "Start-ups, Scaleups, and Enterprises",
     description:
-      "Our products provide a great way for you to scout for competition and to complement your understanding of market dynamics.",
+      "Our products offer an excellent way for you to analyze competitors and enhance your understanding of market trends and industry dynamics.",
   },
   {
     name: "Organizations and Government Officials",
     description:
-      "All these new disruptions can be overwhelming and difficult to fully grasp. We are here to offer you fresh perspectives and to provide you with insights capable of assisting your decision-making process.",
-  },
-  {
-    name: "Investors",
-    description:
-      "Investors looking to quickly understand market dynamics and the relevance of every stakeholder. Since time is of the essence, we focus more on comprehensive visuals rather than lengthy text.",
+      "Our products offer an excellent way for you to analyze competitors and enhance your understanding of market trends and industry dynamics.",
   },
 ]
 
