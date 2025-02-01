@@ -13,7 +13,9 @@ export default async function handler(req, res) {
 
   try {
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -22,7 +24,7 @@ export default async function handler(req, res) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "support@exponentialvector.eu",
+      to: "enquiries@exponentialvector.eu",
       subject: "New Waitlist Signup - Fintech Ecosystem",
       text: `${email} joined the waitlist for the Fintech Ecosystem.`,
     }
@@ -31,6 +33,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ message: "Email sent successfully" })
   } catch (error) {
+    console.error("Zoho Email Error:", error)
     return res
       .status(500)
       .json({ message: "Error sending email", error: error.message })
