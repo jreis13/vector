@@ -1,47 +1,72 @@
 "use client"
 
+import { Card, CardBody, Typography } from "@material-tailwind/react"
 import Image from "next/image"
 import { useState } from "react"
 import Button from "./Button"
 import mailIcon from "/public/icons/mailIcon.svg"
 
+function Popup({ onClose }) {
+  return (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      onClick={onClose} // Close popup if user clicks outside
+    >
+      <Card
+        className="max-w-xl bg-white p-6 rounded-lg shadow-lg relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <CardBody className="w-full text-center">
+          <div className="flex justify-center">
+            <i className="fa-solid fa-check text-3xl text-gray-900"></i>
+          </div>
+          <Typography color="blue-gray" className="mb-6 mt-10" variant="h4">
+            Successfully Joined!
+          </Typography>
+          <Typography className="text-gray-500 text-lg leading-6">
+            You have been added to the waitlist! Stay tuned for updates.
+          </Typography>
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={onClose}
+              className="px-6 py-2 bg-[#d87103] text-white rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
+  )
+}
+
 export default function CTA() {
   const [email, setEmail] = useState("")
-  const [status, setStatus] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [popupVisible, setPopupVisible] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    setStatus(null)
+    setErrorMessage(null)
 
     try {
       const response = await fetch("/api/send-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       })
 
       if (response.ok) {
-        setStatus({
-          type: "success",
-          message: "You’ve been added to the waitlist!",
-        })
         setEmail("")
+        setPopupVisible(true)
       } else {
         const errorData = await response.json()
-        setStatus({
-          type: "error",
-          message: errorData.message || "Something went wrong.",
-        })
+        setErrorMessage(errorData.message || "Something went wrong.")
       }
     } catch (error) {
-      setStatus({
-        type: "error",
-        message: "Network error. Please try again later.",
-      })
+      setErrorMessage("Network error. Please try again later.")
     }
 
     setLoading(false)
@@ -58,8 +83,7 @@ export default function CTA() {
 
           <p className="text-gray-400 mt-6 text-xl">
             Gain exclusive insights into cutting-edge industry trends and
-            developments. Our intelligence solution provides deep analysis and
-            market forecasting to help you stay ahead.
+            developments.
           </p>
 
           <div className="mt-8">
@@ -69,10 +93,8 @@ export default function CTA() {
           <h3 className="text-2xl font-semibold mt-12">
             Coming Soon: Fintech Intelligence
           </h3>
-
           <p className="text-gray-400 mt-6 text-xl">
-            Be among the first to access valuable fintech insights shaping the
-            future of finance.
+            Be among the first to access valuable fintech insights.
           </p>
 
           <form
@@ -98,12 +120,8 @@ export default function CTA() {
             </button>
           </form>
 
-          {status && (
-            <p
-              className={`mt-4 text-lg ${status.type === "success" ? "text-green-500" : "text-red-500"}`}
-            >
-              {status.message}
-            </p>
+          {errorMessage && (
+            <p className="mt-4 text-lg text-red-500">{errorMessage}</p>
           )}
         </div>
 
@@ -113,6 +131,8 @@ export default function CTA() {
           className="w-full md:-ml-4 lg:-ml-0"
         />
       </div>
+
+      {popupVisible && <Popup onClose={() => setPopupVisible(false)} />}
     </section>
   )
 }
