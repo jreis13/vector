@@ -7,6 +7,7 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import icons from "src/common/icons/icons"
 import Breadcrumb from "../Breadcrumb"
 import DynamicListCard from "./StatCards/DynamicListCard"
+import DynamicTransportTable from "./StatCards/DynamicTable"
 import InfoCard from "./StatCards/InfoCard"
 
 export default function EcosystemCountryProfilesDetails({
@@ -42,10 +43,14 @@ export default function EcosystemCountryProfilesDetails({
                   <div className="space-y-6">
                     {Object.entries(report.details)
                       .filter(([, value]) => value.type !== "html")
-                      .map(([key, value], idx) => (
+                      .map(([key, value], idx, arr) => (
                         <div
                           key={idx}
-                          className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                          className={`relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg ${
+                            arr.length % 2 !== 0 && idx === arr.length - 1
+                              ? "col-span-full"
+                              : ""
+                          }`}
                         >
                           <div className="flex items-center gap-4">
                             <div className="flex-shrink-0">
@@ -107,73 +112,84 @@ export default function EcosystemCountryProfilesDetails({
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                  {Object.entries(report.details).map(([key, value], idx) => (
-                    <div
-                      key={idx}
-                      className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex-shrink-0">
-                          {value.icon ? (
-                            <Image
-                              src={icons[value.icon]}
-                              alt={value.subtitle || "icon"}
-                              width={80}
-                              height={80}
-                              className="w-20 h-20 object-contain"
-                            />
-                          ) : value.logo ? (
-                            <Image
-                              src={value.logo}
-                              alt={value.subtitle}
-                              width={80}
-                              height={80}
-                              className="w-20 h-20 object-contain"
-                            />
-                          ) : null}
-                        </div>
-                        <h3 className="mb-2 text-3xl mr-6">{key}</h3>
-                      </div>
-                      <div className="w-full">
-                        {(() => {
-                          switch (value.type) {
-                            case "list":
-                            case "nested-list":
-                              return <DynamicListCard data={value} />
-                            case "html":
-                              return (
-                                <div className="relative">
-                                  <iframe
-                                    className="w-full h-full border-none"
-                                    src={value.value}
-                                    allowFullScreen
-                                  ></iframe>
-                                </div>
-                              )
-                            case "number":
-                              return <InfoCard data={value} />
-                            default:
-                              return <InfoCard data={value} />
-                          }
-                        })()}
-                      </div>
-                      {value.source && (
-                        <div className="absolute top-4 right-4 group">
-                          <Image
-                            src={icons.infoIcon}
-                            alt="source icon"
-                            width={30}
-                            height={30}
-                            className="cursor-pointer"
-                          />
-                          <div className="absolute hidden group-hover:block bg-[#e8e8e8] text-[#34333d] text-sm rounded-lg mt-2 p-2 w-40 z-10">
-                            <p>{value.source}</p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                  {Object.entries(report.details)
+                    .filter(([, value]) => value.type !== "html")
+                    .map(([key, value], idx, arr) => (
+                      <div
+                        key={idx}
+                        className={`relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg ${
+                          idx === arr.length - 1 ? "col-span-full" : ""
+                        }`}
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex-shrink-0">
+                            {value.icon ? (
+                              <Image
+                                src={icons[value.icon]}
+                                alt={value.subtitle || "icon"}
+                                width={80}
+                                height={80}
+                                className="w-20 h-20 object-contain"
+                              />
+                            ) : value.logo ? (
+                              <Image
+                                src={value.logo}
+                                alt={value.subtitle}
+                                width={80}
+                                height={80}
+                                className="w-20 h-20 object-contain"
+                              />
+                            ) : null}
                           </div>
+                          <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                         </div>
-                      )}
-                    </div>
-                  ))}
+                        <div className="w-full">
+                          {(() => {
+                            switch (value.type) {
+                              case "list":
+                              case "nested-list":
+                                return <DynamicListCard data={value} />
+                              case "html":
+                                return (
+                                  <div className="relative">
+                                    <iframe
+                                      className="w-full h-full border-none"
+                                      src={value.value}
+                                      allowFullScreen
+                                    ></iframe>
+                                  </div>
+                                )
+                              case "number":
+                                return <InfoCard data={value} />
+                              case "table":
+                                return (
+                                  <DynamicTransportTable
+                                    reports={reports}
+                                    countryName={countryName}
+                                  />
+                                )
+                              default:
+                                return <InfoCard data={value} />
+                            }
+                          })()}
+                        </div>
+                        {value.source && (
+                          <div className="absolute top-4 right-4 group">
+                            <Image
+                              src={icons.infoIcon}
+                              alt="source icon"
+                              width={30}
+                              height={30}
+                              className="cursor-pointer"
+                            />
+                            <div className="absolute hidden group-hover:block bg-[#e8e8e8] text-[#34333d] text-sm rounded-lg mt-2 p-2 w-40 z-10">
+                              <p>{value.source}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
@@ -189,10 +205,12 @@ export default function EcosystemCountryProfilesDetails({
                     <div className="space-y-6">
                       {Object.entries(report.details)
                         .filter(([, value]) => value.type !== "html")
-                        .map(([key, value], idx) => (
+                        .map(([key, value], idx, arr) => (
                           <div
                             key={idx}
-                            className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
+                            className={`relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg ${
+                              idx === arr.length - 1 ? "col-span-full" : ""
+                            }`}
                           >
                             <div className="flex items-center gap-4">
                               <div className="flex-shrink-0">
@@ -255,72 +273,86 @@ export default function EcosystemCountryProfilesDetails({
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                    {Object.entries(report.details).map(([key, value], idx) => (
-                      <div
-                        key={idx}
-                        className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="flex-shrink-0">
-                            {value.icon ? (
-                              <Image
-                                src={icons[value.icon]}
-                                alt={value.subtitle || "icon"}
-                                width={80}
-                                height={80}
-                                className="w-20 h-20 object-contain"
-                              />
-                            ) : value.logo ? (
-                              <Image
-                                src={value.logo}
-                                alt={value.subtitle}
-                                width={80}
-                                height={80}
-                                className="w-20 h-20 object-contain"
-                              />
-                            ) : null}
-                          </div>
-                          <h3 className="mb-2 text-3xl mr-6">{key}</h3>
-                        </div>
-                        <div className="w-full">
-                          {(() => {
-                            switch (value.type) {
-                              case "list":
-                              case "nested-list":
-                                return <DynamicListCard data={value} />
-                              case "html":
-                                return (
-                                  <div className="relative">
-                                    <iframe
-                                      className="w-full h-full border-none"
-                                      src={value.value}
-                                      allowFullScreen
-                                    ></iframe>
-                                  </div>
-                                )
-                              case "number":
-                                return <InfoCard data={value} />
-                              default:
-                                return <InfoCard data={value} />
-                            }
-                          })()}
-                        </div>
-                        {value.source && (
-                          <div className="absolute top-4 right-4 group">
-                            <Image
-                              src={icons.infoIcon}
-                              alt="source icon"
-                              width={30}
-                              height={30}
-                              className="cursor-pointer"
-                            />
-                            <div className="absolute hidden group-hover:block bg-[#e8e8e8] text-[#34333d] text-sm rounded-lg mt-2 p-2 w-40 z-10">
-                              <p>{value.source}</p>
+                    {Object.entries(report.details)
+                      .filter(([, value]) => value.type !== "html")
+                      .map(([key, value], idx, arr) => (
+                        <div
+                          key={idx}
+                          className={`relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg ${
+                            arr.length % 2 !== 0 && idx === arr.length - 1
+                              ? "col-span-full"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="flex-shrink-0">
+                              {value.icon ? (
+                                <Image
+                                  src={icons[value.icon]}
+                                  alt={value.subtitle || "icon"}
+                                  width={80}
+                                  height={80}
+                                  className="w-20 h-20 object-contain"
+                                />
+                              ) : value.logo ? (
+                                <Image
+                                  src={value.logo}
+                                  alt={value.subtitle}
+                                  width={80}
+                                  height={80}
+                                  className="w-20 h-20 object-contain"
+                                />
+                              ) : null}
                             </div>
+                            <h3 className="mb-2 text-3xl mr-6">{key}</h3>
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          <div className="w-full">
+                            {(() => {
+                              switch (value.type) {
+                                case "list":
+                                case "nested-list":
+                                  return <DynamicListCard data={value} />
+                                case "html":
+                                  return (
+                                    <div className="relative">
+                                      <iframe
+                                        className="w-full h-full border-none"
+                                        src={value.value}
+                                        allowFullScreen
+                                      ></iframe>
+                                    </div>
+                                  )
+                                case "number":
+                                  return <InfoCard data={value} />
+                                case "table":
+                                  return (
+                                    <DynamicTransportTable
+                                      reports={reports}
+                                      countryName={countryName}
+                                    />
+                                  )
+
+                                default:
+                                  return <InfoCard data={value} />
+                              }
+                            })()}
+                          </div>
+                          {value.source && (
+                            <div className="absolute top-4 right-4 group">
+                              <Image
+                                src={icons.infoIcon}
+                                alt="source icon"
+                                width={30}
+                                height={30}
+                                className="cursor-pointer"
+                              />
+                              <div className="absolute hidden group-hover:block bg-[#e8e8e8] text-[#34333d] text-sm rounded-lg mt-2 p-2 w-40 z-10">
+                                <p>{value.source}</p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
                   </div>
                 )}
               </div>
