@@ -40,7 +40,7 @@ export default function EcosystemActiveInvestorsTable({ attributes, data }) {
         <h2>Active Investors</h2>
         <span className="text-md text-gray-400">(Past 13 months)</span>
       </div>
-      <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4">
+      <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4 mb-2">
         <thead>
           <tr>
             <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
