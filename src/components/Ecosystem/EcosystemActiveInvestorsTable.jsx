@@ -1,181 +1,123 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Chip,
-  Input,
-  Typography,
-} from "@material-tailwind/react"
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { AnimatePresence, motion } from "framer-motion"
 import React, { useState } from "react"
 
 export default function EcosystemActiveInvestorsTable({ attributes, data }) {
+  const rowAnimation = {
+    initial: { opacity: 0, height: 0, overflow: "hidden" },
+    animate: {
+      opacity: 1,
+      height: "auto",
+      overflow: "hidden",
+      transition: { duration: 0.3 },
+    },
+    exit: {
+      opacity: 0,
+      height: 0,
+      overflow: "hidden",
+      transition: { duration: 0 },
+    },
+  }
+
   const [visibleCompanies, setVisibleCompanies] = useState(
     data.map((group) => group.companyName)
   )
-  const [filteredData, setFilteredData] = useState(data)
-  const [sortConfig, setSortConfig] = useState({ key: "", direction: "asc" })
 
-  const toggleSort = () => {
-    const direction =
-      sortConfig.key === "companyName" && sortConfig.direction === "asc"
-        ? "desc"
-        : "asc"
-    setSortConfig({ key: "companyName", direction })
-
-    const sortedData = [...filteredData].sort((a, b) => {
-      const valueA = a.companyName.toLowerCase()
-      const valueB = b.companyName.toLowerCase()
-      return direction === "asc"
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA)
-    })
-
-    setFilteredData(sortedData)
-  }
-
-  const handleSearch = (e) => {
-    const searchTerm = e.target.value.toLowerCase()
-    if (!searchTerm) {
-      setFilteredData(data)
-      return
+  const toggleCompanyVisibility = (companyName) => {
+    if (visibleCompanies.includes(companyName)) {
+      setVisibleCompanies(
+        visibleCompanies.filter((name) => name !== companyName)
+      )
+    } else {
+      setVisibleCompanies([...visibleCompanies, companyName])
     }
-
-    const filtered = data.filter(
-      (group) =>
-        Object.values(group).join(" ").toLowerCase().includes(searchTerm) ||
-        group.investors.some((investor) =>
-          Object.values(investor).join(" ").toLowerCase().includes(searchTerm)
-        )
-    )
-
-    setFilteredData(filtered)
   }
 
   return (
-    <section>
-      <Card
-        shadow={false}
-        className="h-full w-full bg-transparent text-[#e8e8e8]"
-      >
-        <CardHeader
-          floated={false}
-          shadow={false}
-          className="rounded-none flex flex-wrap gap-4 justify-between mb-4 bg-transparent"
-        >
-          <div>
-            <h2 className="text-[#e8e8e8]">Active Investors</h2>
-            <Typography
-              variant="small"
-              className="text-gray-400 font-normal font-base"
-            >
-              Past 13 months - Last updated 02/02/2025
-            </Typography>
-          </div>
-          <div className="flex flex-wrap items-center w-full shrink-0 gap-4 md:w-max">
-            <div className="w-full md:w-72">
-              <Input
-                label="Filter"
-                className="text-[#e8e8e8] !placeholder-[#e8e8e8] focus:!text-[#e8e8e8]"
-                onChange={handleSearch}
-                icon={
-                  <MagnifyingGlassIcon className="h-5 w-5 text-[#e8e8e8]" />
+    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500">
+      <div className="flex items-center gap-4">
+        <h2>Active Investors</h2>
+        <span className="text-md text-gray-400">(Past 13 months)</span>
+      </div>
+      <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4">
+        <thead>
+          <tr>
+            <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
+              Company
+            </th>
+            {attributes.map((attr) => (
+              <th
+                key={attr}
+                className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8] capitalize"
+              >
+                {attr}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((group, groupIndex) => (
+            <React.Fragment key={group.companyName}>
+              <tr
+                className={
+                  groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
                 }
-              />
-            </div>
-          </div>
-        </CardHeader>
-        <CardBody className="overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500 mt-2 !p-0">
-          <table className="w-full min-w-max table-auto text-left mb-2">
-            <thead>
-              <tr>
-                <th
-                  className="border-b border-gray-700 !p-4 text-left cursor-pointer hover:text-purple-400 transition"
-                  onClick={toggleSort}
+              >
+                <td
+                  className="px-6 py-4 text-[#e8e8e8] text-lg font-semibold"
+                  rowSpan={
+                    visibleCompanies.includes(group.companyName)
+                      ? group.investors.length + 1
+                      : 1
+                  }
                 >
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Company{" "}
-                    {sortConfig.key === "companyName"
-                      ? sortConfig.direction === "asc"
-                        ? " ▲"
-                        : " ▼"
-                      : ""}
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Investor
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Funding Round
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Lead Investor
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Amount
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Date
-                  </Typography>
-                </th>
-                <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold font-base">
-                    Comments
-                  </Typography>
-                </th>
+                  <div className="flex items-center justify-between">
+                    {group.companyName}
+                    <button
+                      className="ml-4 text-[#6600cc] hover:text-[#6600cc]"
+                      onClick={() => toggleCompanyVisibility(group.companyName)}
+                    >
+                      <FontAwesomeIcon
+                        icon={
+                          visibleCompanies.includes(group.companyName)
+                            ? faEye
+                            : faEyeSlash
+                        }
+                      />
+                    </button>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((group, groupIndex) => (
-                <React.Fragment key={group.companyName}>
-                  <tr
-                    className={`${groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333b]"} text-[#e8e8e8]`}
-                  >
-                    <td
-                      className="!p-4 text-center font-semibold text-[#e8e8e8]"
-                      rowSpan={group.investors.length + 1}
-                    >
-                      {group.companyName}
-                    </td>
-                  </tr>
-                  {group.investors.map((investor, index) => (
-                    <tr
+              <AnimatePresence initial={false}>
+                {visibleCompanies.includes(group.companyName) &&
+                  group.investors.map((investor, index) => (
+                    <motion.tr
                       key={`${group.companyName}-${index}`}
-                      className={`${groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333b]"} text-[#e8e8e8]`}
+                      {...rowAnimation}
+                      className={
+                        groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
+                      }
                     >
-                      <td className="!p-4">{investor.name || "N/A"}</td>
-                      <td className="!p-4">{investor.fundingRound || "N/A"}</td>
-                      <td className="!p-4">
-                        <Chip
-                          size="sm"
-                          value={investor.leadInvestor === "Yes" ? "Yes" : "No"}
-                          color={
-                            investor.leadInvestor === "Yes" ? "green" : "red"
-                          }
-                        />
+                      <td className="px-6 py-4">{investor.name || "N/A"}</td>
+                      <td className="px-6 py-4">
+                        {investor.fundingRound || "N/A"}
                       </td>
-                      <td className="!p-4">
-                        {investor.amount || "Unspecified"}
+                      <td className="px-6 py-4">
+                        {investor.leadInvestor || "N/A"}
                       </td>
-                      <td className="!p-4">{investor.date || "N/A"}</td>
-                      <td className="!p-4">{investor.comments || "N/A"}</td>
-                    </tr>
+                      <td className="px-6 py-4">{investor.amount || "N/A"}</td>
+                      <td className="px-6 py-4">{investor.date || "N/A"}</td>
+                      <td className="px-6 py-4">
+                        {investor.comments || "N/A"}
+                      </td>
+                    </motion.tr>
                   ))}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </CardBody>
-      </Card>
-    </section>
+              </AnimatePresence>
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
