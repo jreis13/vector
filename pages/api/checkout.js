@@ -3,7 +3,7 @@ import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const ecosystemPriceMapping = {
-  advancedairmobility: "price_1QoU4YH8mb7EVuIwdGgFvbyl",
+  advancedairmobility: "price_1QoUVmH8mb7EVuIwKI0bbKuv",
 }
 
 export default async function handler(req, res) {
