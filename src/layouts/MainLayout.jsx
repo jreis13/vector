@@ -34,7 +34,7 @@ function splitDescription(feature) {
 
 export default function MainLayout() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col w-full overflow-x-hidden">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
       <div className="flex flex-grow flex-col gap-8 px-6">

@@ -76,8 +76,8 @@ export default function CTA() {
   }
 
   return (
-    <section className="py-16 px-8 lg:py-28">
-      <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
+    <section className="py-16 px-8 lg:py-28 w-full">
+      <div className="container mx-auto grid justify-center items-center lg:grid-cols-2 gap-12">
         <div className="row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12">
           <h2 className="text-3xl md:text-5xl font-bold leading-snug">
             <span className="text-[#6600cc] caret">^</span> Help us shape the
