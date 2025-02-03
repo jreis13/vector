@@ -16,7 +16,7 @@ export default function Overlay({ onDismiss }) {
             onClick={item.title === "Mobility" ? onDismiss : undefined}
           >
             <div
-              className={`w-full h-full flex justify-center items-center flex-col bg-black transition ${
+              className={`w-full h-full rounded-lg flex justify-center items-center flex-col bg-black transition ${
                 item.title === "Mobility"
                   ? "bg-opacity-50 group-hover:bg-opacity-0"
                   : "bg-opacity-50"
