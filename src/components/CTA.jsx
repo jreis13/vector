@@ -4,27 +4,30 @@ import { Card, CardBody, Typography } from "@material-tailwind/react"
 import Image from "next/image"
 import { useState } from "react"
 import Button from "./Button"
+import Logo from "./Logo"
 import mailIcon from "/public/icons/mailIcon.svg"
 
 function Popup({ onClose }) {
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-      onClick={onClose} // Close popup if user clicks outside
+      className="fixed inset-0 flex justify-center items-center"
+      onClick={onClose}
     >
       <Card
-        className="max-w-xl bg-white p-6 rounded-lg shadow-lg relative"
+        className="max-w-xl bg-[#34333d] p-6 rounded-lg shadow-lg relative"
         onClick={(e) => e.stopPropagation()}
       >
         <CardBody className="w-full text-center">
           <div className="flex justify-center">
             <i className="fa-solid fa-check text-3xl text-gray-900"></i>
           </div>
-          <Typography color="blue-gray" className="mb-6 mt-10" variant="h4">
+          <Logo />
+          <Typography color="white" className="mb-6 mt-10" variant="h4">
             Successfully Joined!
           </Typography>
           <Typography className="text-gray-500 text-lg leading-6">
-            You have been added to the waitlist! Stay tuned for updates.
+            You have been added to the Fintech Intelligence waitlist! <br />{" "}
+            Stay tuned for updates.
           </Typography>
           <div className="mt-6 flex justify-center">
             <button
