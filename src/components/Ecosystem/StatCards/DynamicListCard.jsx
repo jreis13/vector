@@ -121,7 +121,17 @@ export default function DynamicListCard({ data }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+    <div
+      className={`grid ${
+        Array.isArray(data.value)
+          ? data.value.length === 1
+            ? "grid-cols-1 place-items-center"
+            : data.value.length % 2 === 0
+              ? "grid-cols-2"
+              : "grid-cols-3"
+          : "grid-cols-1 place-items-center"
+      } gap-6 text-center`}
+    >
       {Array.isArray(data.value)
         ? data.value.map((item, index) => renderContent(item, index))
         : renderContent(data.value, 0)}
