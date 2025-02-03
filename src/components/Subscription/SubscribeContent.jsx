@@ -65,10 +65,10 @@ export default function SubscribeContent() {
   ]
 
   const pricingTiers = [
-    { quantity: 1, price: 3000 },
-    { quantity: 2, price: 2900 },
+    { quantity: 1, price: 3500 },
+    { quantity: 2, price: 3000 },
     { quantity: 3, price: 2800 },
-    { quantity: 4, price: 2750 },
+    { quantity: 4, price: 2650 },
     { quantity: 5, price: 2500 },
   ]
 
@@ -277,17 +277,18 @@ export default function SubscribeContent() {
                       />
                     </button>
                   )}
-                  {index === subscribers.length - 1 && (
-                    <button
-                      onClick={handleAddSubscriber}
-                      className="text-[#e8e8e8]"
-                    >
-                      <div className="flex items-center gap-2">
-                        Add another user
-                        <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
-                      </div>
-                    </button>
-                  )}
+                  {subscribers.length < 5 &&
+                    index === subscribers.length - 1 && (
+                      <button
+                        onClick={handleAddSubscriber}
+                        className="text-[#e8e8e8]"
+                      >
+                        <span className="flex items-center gap-2">
+                          Add another user
+                          <FontAwesomeIcon aria-hidden="true" icon={faPlus} />
+                        </span>
+                      </button>
+                    )}
                 </div>
               </motion.div>
             ))}
@@ -315,14 +316,14 @@ export default function SubscribeContent() {
             onClick={handleSubscribe}
             className="bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
           >
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               Subscribe with
               <FontAwesomeIcon
                 className="text-3xl"
                 aria-hidden="true"
                 icon={faCcStripe}
               />
-            </div>
+            </span>
           </Button>
           <div>
             <div className="m-8 text-center">

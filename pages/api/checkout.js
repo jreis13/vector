@@ -1,9 +1,9 @@
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
+const stripe = new Stripe(process.env.STRIPE_LIVE_KEY)
 
 const ecosystemPriceMapping = {
-  advancedairmobility: "price_1QcxMjH8mb7EVuIwUchyBOKp",
+  advancedairmobility: "price_1QoU4YH8mb7EVuIwdGgFvbyl",
 }
 
 export default async function handler(req, res) {
