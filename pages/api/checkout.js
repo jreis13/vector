@@ -1,6 +1,6 @@
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_LIVE_KEY)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const ecosystemPriceMapping = {
   advancedairmobility: "price_1QoU4YH8mb7EVuIwdGgFvbyl",
