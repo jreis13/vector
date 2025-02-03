@@ -188,6 +188,8 @@
 
 "use client"
 
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 import { AnimatePresence, motion } from "framer-motion"
 import europeGeoUrl from "public/maps/europe.json"
@@ -197,7 +199,8 @@ export default function EcosystemInfrastructure({ ecosystem = {} }) {
   return (
     <div className="flex min-h-screen relative">
       <div className="absolute inset-0 flex items-center justify-center rounded bg-black bg-opacity-50 z-50">
-        <Card className="max-w-xl">
+        <Card className="max-w-xl p-4">
+          <FontAwesomeIcon size="3x" icon={faTriangleExclamation} />
           <CardBody>
             <div className="text-center px-6">
               <Typography color="blue-gray" className="m-6" variant="h4">
