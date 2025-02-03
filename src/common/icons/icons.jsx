@@ -11,6 +11,7 @@ import employmentIcon from "public/icons/employmentIcon.svg"
 import environmentIcon from "public/icons/environmentIcon.svg"
 import frameworkIcon from "public/icons/frameworkIcon.svg"
 import governmentSpendingIcon from "public/icons/governmentSpendingIcon.svg"
+import greenIcon from "public/icons/greenIcon.svg"
 import heliportIcon from "public/icons/heliportIcon.svg"
 import infoIcon from "public/icons/infoIcon.svg"
 import infrastructureIcon from "public/icons/infrastructureIcon.svg"
@@ -92,6 +93,7 @@ const icons = {
   infrastructureMetricsIcon: infrastructureMetricsIcon,
   researchMetricsIcon: researchMetricsIcon,
   governmentSpendingIcon: governmentSpendingIcon,
+  greenIcon: greenIcon,
 }
 
 export default icons
