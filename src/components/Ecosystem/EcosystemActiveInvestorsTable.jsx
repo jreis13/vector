@@ -65,7 +65,10 @@ export default function EcosystemActiveInvestorsTable({ attributes, data }) {
         >
           <div>
             <h2 className="text-[#e8e8e8]">Active Investors</h2>
-            <Typography variant="small" className="text-gray-400 font-normal">
+            <Typography
+              variant="small"
+              className="text-gray-400 font-normal font-base"
+            >
               Past 13 months - Last updated 02/02/2025
             </Typography>
           </div>
@@ -90,7 +93,7 @@ export default function EcosystemActiveInvestorsTable({ attributes, data }) {
                   className="border-b border-gray-700 !p-4 text-left cursor-pointer hover:text-purple-400 transition"
                   onClick={toggleSort}
                 >
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Company{" "}
                     {sortConfig.key === "companyName"
                       ? sortConfig.direction === "asc"
@@ -100,32 +103,32 @@ export default function EcosystemActiveInvestorsTable({ attributes, data }) {
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Investor
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Funding Round
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Lead Investor
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Amount
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Date
                   </Typography>
                 </th>
                 <th className="border-b border-gray-700 !p-4">
-                  <Typography className="text-[#e8e8e8] font-bold">
+                  <Typography className="text-[#e8e8e8] font-bold font-base">
                     Comments
                   </Typography>
                 </th>
