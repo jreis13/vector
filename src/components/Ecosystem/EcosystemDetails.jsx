@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCompanies from "./EcosystemCompanies"
+import EcosystemCountryProfilesDashboard from "./EcosystemCountryProfilesDashboard"
 import EcosystemCountryProfilesMap from "./EcosystemCountryProfilesMap"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemMarketResearch from "./EcosystemMarketResearch"
@@ -63,11 +64,17 @@ export default function EcosystemDetails({ ecosystem }) {
           />
         )}
         {currentTab === "countryProfiles" && (
-          <EcosystemCountryProfilesMap
-            companies={ecosystem?.companies || []}
-            countryReports={ecosystem?.countryReports || {}}
-            ecosystemName={ecosystem.name}
-          />
+          <div>
+            <EcosystemCountryProfilesMap
+              companies={ecosystem?.companies || []}
+              countryReports={ecosystem?.countryReports || {}}
+              ecosystemName={ecosystem.name}
+            />
+            <EcosystemCountryProfilesDashboard
+              ecosystemName={ecosystem.name}
+              ecosystem={ecosystem}
+            />
+          </div>
         )}
         {currentTab === "activeInvestors" && (
           <EcosystemActiveInvestors

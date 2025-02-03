@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import europeGeoUrl from "public/maps/europe.json"
 import { ComposableMap, Geographies, Geography } from "react-simple-maps"
+import Tooltip from "../Tooltip"
 
 export default function EcosystemCountryProfilesMap({
   countryReports,
@@ -40,7 +41,15 @@ export default function EcosystemCountryProfilesMap({
   }
 
   return (
-    <div className="flex min-h-screen relative">
+    <section className="flex flex-col mb-16 relative container mx-auto px-8">
+      <div className="flex gap-2">
+        <h2 className="flex items-start gap-2 mb-8 relative">
+          Covered countries
+        </h2>
+        <Tooltip
+          text={"Click on the country to navigate to the country profile"}
+        />
+      </div>
       <div className="map-container w-full max-w-[90vw] h-[70vh] mx-auto overflow-hidden">
         <ComposableMap
           projection="geoAzimuthalEqualArea"
@@ -100,6 +109,6 @@ export default function EcosystemCountryProfilesMap({
           </g>
         </ComposableMap>
       </div>
-    </div>
+    </section>
   )
 }
