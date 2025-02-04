@@ -32,9 +32,9 @@ export default function SectionWithImage({
                     <h3 className="text-2xl font-semibold">{feature.name}</h3>
                   )}
                   {feature.description && (
-                    <p className="text-gray-400 text-xl mt-2">
+                    <div className="text-gray-400 text-xl mt-2">
                       {feature.description}
-                    </p>
+                    </div>
                   )}
                 </div>
               ))}
