@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-
 import { useEffect, useState } from "react"
 
 import arrowDown from "/public/icons/arrowDownIcon.svg"
@@ -9,7 +8,8 @@ import arrowUp from "/public/icons/arrowUpIcon.svg"
 
 export default function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")
-  const [isVisible, setIsVisible] = useState(true) // Always visible
+  const [isVisible, setIsVisible] = useState(true)
+  const [isAtBottom, setIsAtBottom] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +27,10 @@ export default function Breadcrumb({ sections }) {
         }
       })
       setCurrentSection(foundSection)
+
+      const scrollPosition = window.innerHeight + window.scrollY
+      const pageHeight = document.documentElement.scrollHeight
+      setIsAtBottom(scrollPosition >= pageHeight - 10)
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -53,23 +57,22 @@ export default function Breadcrumb({ sections }) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-20 flex flex-col items-center">
+    <div
+      className={`fixed bottom-20 left-0 right-0 z-20 flex flex-col items-center transition-opacity duration-300 ${
+        isAtBottom ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
       <nav
         className={`flex w-full transform justify-center transition-all duration-300 ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
-        style={{
-          zIndex: 10,
-          marginBottom: isVisible ? "" : "-10rem",
-          marginTop: isVisible ? "-7rem" : "",
-        }}
       >
-        <ol className="mb-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-8">
+        <ol className="mt-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-6 md:px-8">
           {sections &&
             sections.map((section) => (
               <li key={section.title} className="flex items-center">
                 <button
-                  className={"flex items-center space-x-1"}
+                  className="flex items-center"
                   onClick={() => scrollToSection(section.id)}
                 >
                   <Image
@@ -77,15 +80,20 @@ export default function Breadcrumb({ sections }) {
                     alt={section.title}
                     width={32}
                     height={32}
+                    className="w-8 h-8"
                   />
                 </button>
               </li>
             ))}
         </ol>
       </nav>
+
       <div
-        className="fixed bottom-64 lg:bottom-32 z-30 mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#34333d]"
-        style={{ left: "50%", transform: "translateX(-50%)" }}
+        className="fixed bottom-2 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-[#34333d]"
+        style={{
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
       >
         <button
           onClick={toggleVisibility}
@@ -94,8 +102,9 @@ export default function Breadcrumb({ sections }) {
           <Image
             src={isVisible ? arrowDown : arrowUp}
             alt={isVisible ? "Arrow Down" : "Arrow Up"}
-            width={24}
-            height={24}
+            width={32}
+            height={32}
+            className="w-8 h-8"
           />
         </button>
       </div>
