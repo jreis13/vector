@@ -4,7 +4,7 @@ import "src/common/styles/globals.css"
 export const metadata = {
   title: "Exponential Vector",
   description:
-    "Unlock equity crowdfunding analysis and real private equity data delivered directly to your inbox",
+    "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
 }
 
 export default function RootLayout({ children }) {
