@@ -45,20 +45,57 @@ export const evtolFeatures = [
 
 export const offeringFeatures = [
   {
-    description:
-      "We tailor our research to support disruptive business ecosystems, providing visibility and actionable insights to key stakeholders.",
+    description: (
+      <>
+        We tailor our research to
+        <strong> support disruptive business ecosystems</strong>, providing
+        <strong> visibility and actionable insights</strong> to key
+        stakeholders.
+      </>
+    ),
   },
   {
-    description:
-      "Designed to save countless hours of research, our platform makes complex information clear and easily digestible by prioritizing interactive visual insights over lengthy text. This approach helps stakeholders quickly understand their role, gain key insights, and navigate the industry with ease.",
+    description: (
+      <>
+        Designed to <strong>save countless hours of research</strong>, our
+        platform makes complex information
+        <strong> clear and easily digestible</strong> by prioritizing
+        <strong> interactive visual insights over lengthy text</strong>. This
+        approach helps stakeholders
+        <strong>
+          {" "}
+          quickly understand their role, gain key insights, and navigate the
+          industry with ease
+        </strong>
+        .
+      </>
+    ),
   },
   {
-    description:
-      "Our platform provides detailed company intelligence, market-ready country reports, and competitive benchmarking. For our AAM market ecosystem, we track eVTOL manufacturers, active investors, infrastructure projects, and regulatory developments, offering a clear roadmap for strategic decision-making.",
+    description: (
+      <>
+        Our <strong>platform</strong> provides{" "}
+        <strong>
+          detailed company intelligence, market-ready country reports, and
+          competitive benchmarking
+        </strong>
+        . For our AAM market ecosystem, we track{" "}
+        <strong>
+          eVTOL manufacturers, active investors, infrastructure projects, and
+          regulatory developments
+        </strong>
+        , offering a{" "}
+        <strong>clear roadmap for strategic decision-making</strong>.
+      </>
+    ),
   },
   {
-    description:
-      "Are you ready to transform your decision-making? Get in touch today.",
+    description: (
+      <>
+        <strong>Are you ready to transform your decision-making</strong>? <br />{" "}
+        Get in touch today.
+      </>
+    ),
   },
   {
     sectionImage: offeringIcon,
