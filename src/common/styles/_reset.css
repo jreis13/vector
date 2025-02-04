@@ -11,6 +11,14 @@
   -ms-user-select: none;
 }
 
+input,
+textarea {
+  caret-color: auto;
+  user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+}
+
 *,
 *::before,
 *::after {
