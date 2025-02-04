@@ -49,7 +49,7 @@ export default function MainLayout() {
           <div className="bg-[#34333d] rounded-lg">
             <EarlyAccess />
             <CardList
-              title="Next-Gen Strategy Tool for AAM and eVTOL Ecosystem"
+              title="Innovative Strategy Tool for the AAM and eVTOL Ecosystem"
               features={evtolFeatures.map(splitDescription)}
             />
             <div className="flex justify-center pb-8">
