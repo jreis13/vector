@@ -38,7 +38,7 @@ export const evtolFeatures = [
   {
     name: "Interactive Platform for Agile Execution",
     description:
-      " Our intuitive platform simplifies data visualization, enabling you to adapt quickly to market dynamics, optimize launch strategies, and ensure seamless execution.",
+      " Our intuitive platform simplifies data visualization, enabling you to adapt quickly to market dynamics, optimize strategies, and ensure seamless execution.",
     image: interactiveIcon,
   },
 ]
@@ -46,15 +46,19 @@ export const evtolFeatures = [
 export const offeringFeatures = [
   {
     description:
-      "We are committed to tailoring research to support disruptive business ecosystems by providing visibility and actionable insights to every relevant stakeholder, to ensure that European companies can grow into solid and resilient organizations, capable of shaping our continent and driving change.",
+      "We tailor our research to support disruptive business ecosystems, providing visibility and actionable insights to key stakeholders.",
   },
   {
     description:
-      "We focus on collecting publicly available information on these ecosystems and analyzing it to determine their strengths and weaknesses, and what action should relevant stakeholders take to maximize success.",
+      "Designed to save countless hours of research, our platform makes complex information clear and easily digestible by prioritizing interactive visual insights over lengthy text. This approach helps stakeholders quickly understand their role, gain key insights, and navigate the industry with ease.",
   },
   {
     description:
-      "We want to make the information easily digestible for all interested stakeholders and focus on visual mapping rather than traditional long text to reach a larger audience and to ensure that all stakeholders understand their role clearly.",
+      "Our platform provides detailed company intelligence, market-ready country reports, and competitive benchmarking. For our AAM market ecosystem, we track eVTOL manufacturers, active investors, infrastructure projects, and regulatory developments, offering a clear roadmap for strategic decision-making.",
+  },
+  {
+    description:
+      "Are you ready to transform your decision-making? Get in touch today.",
   },
   {
     sectionImage: offeringIcon,

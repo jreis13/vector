@@ -41,7 +41,7 @@ export default function MainLayout() {
         <MainHero>
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase text-outline">
-              Next-Gen Market Intelligence for Disruptive Business Models
+              Next-Gen Strategy Tools for Disruptive Business Models
             </h1>
           </div>
         </MainHero>
@@ -49,7 +49,7 @@ export default function MainLayout() {
           <div className="bg-[#34333d] rounded-lg">
             <EarlyAccess />
             <CardList
-              title="Next-Gen Market Intelligence for the eVTOL Ecosystem"
+              title="Next-Gen Strategy Tool for AAM and eVTOL Ecosystem"
               features={evtolFeatures.map(splitDescription)}
             />
             <div className="flex justify-center pb-8">
