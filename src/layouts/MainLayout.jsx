@@ -62,12 +62,7 @@ export default function MainLayout() {
         <ScrollReveal id="offering">
           <CardList
             title="What do we do?"
-            features={
-              offeringFeatures &&
-              offeringFeatures
-                .filter((f) => !f.sectionImage)
-                .map(splitDescription)
-            }
+            features={offeringFeatures}
             sectionImage={
               offeringFeatures.find((f) => f.sectionImage)?.sectionImage
             }
