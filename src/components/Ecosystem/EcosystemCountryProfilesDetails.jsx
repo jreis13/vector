@@ -1,6 +1,9 @@
 "use client"
 
-import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import {
+  faCircleArrowLeft,
+  faCircleInfo,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
@@ -60,26 +63,48 @@ export default function EcosystemCountryProfilesDetails({
                               idx === arr.length - 1 ? "col-span-full" : ""
                             }`}
                           >
-                            <div className="flex items-center gap-4">
-                              <div className="flex-shrink-0">
-                                {value.icon ? (
-                                  <Image
-                                    src={icons[value.icon]}
-                                    alt={value.subtitle || "icon"}
-                                    width={40}
-                                    height={40}
-                                  />
-                                ) : value.logo ? (
-                                  <Image
-                                    src={value.logo}
-                                    alt={value.subtitle}
-                                    width={40}
-                                    height={40}
-                                  />
-                                ) : null}
+                            <div className="flex items-center justify-between w-full">
+                              <div className="flex items-center gap-4">
+                                <div className="flex-shrink-0">
+                                  {value.icon ? (
+                                    <Image
+                                      src={icons[value.icon]}
+                                      alt={value.subtitle || "icon"}
+                                      width={40}
+                                      height={40}
+                                    />
+                                  ) : value.logo ? (
+                                    <Image
+                                      src={value.logo}
+                                      alt={value.subtitle}
+                                      width={40}
+                                      height={40}
+                                    />
+                                  ) : null}
+                                </div>
+                                <h3 className="mb-2 text-3xl">{key}</h3>
                               </div>
-                              <h3 className="mb-2 text-3xl ml-6">{key}</h3>
+                              {value.source && (
+                                <div className="relative group">
+                                  <FontAwesomeIcon
+                                    icon={faCircleInfo}
+                                    size="lg"
+                                    className="text-[#e8e8e8] cursor-pointer"
+                                  />
+                                  <div className="absolute top-6 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 hidden group-hover:block">
+                                    <a
+                                      href={value.source}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block text-xs break-words underline"
+                                    >
+                                      {value.source}
+                                    </a>
+                                  </div>
+                                </div>
+                              )}
                             </div>
+
                             <div className="w-full">
                               {value.type === "list" ||
                               value.type === "nested-list" ? (
@@ -105,28 +130,50 @@ export default function EcosystemCountryProfilesDetails({
                               : ""
                           }`}
                         >
-                          <div className="flex items-center gap-4">
-                            <div className="flex-shrink-0">
-                              {value.icon ? (
-                                <Image
-                                  src={icons[value.icon]}
-                                  alt={value.subtitle || "icon"}
-                                  width={80}
-                                  height={80}
-                                  className="w-20 h-20 object-contain"
-                                />
-                              ) : value.logo ? (
-                                <Image
-                                  src={value.logo}
-                                  alt={value.subtitle}
-                                  width={80}
-                                  height={80}
-                                  className="w-20 h-20 object-contain"
-                                />
-                              ) : null}
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-4">
+                              <div className="flex-shrink-0">
+                                {value.icon ? (
+                                  <Image
+                                    src={icons[value.icon]}
+                                    alt={value.subtitle || "icon"}
+                                    width={80}
+                                    height={80}
+                                    className="w-20 h-20 object-contain"
+                                  />
+                                ) : value.logo ? (
+                                  <Image
+                                    src={value.logo}
+                                    alt={value.subtitle}
+                                    width={80}
+                                    height={80}
+                                    className="w-20 h-20 object-contain"
+                                  />
+                                ) : null}
+                              </div>
+                              <h3 className="mb-2 text-3xl">{key}</h3>
                             </div>
-                            <h3 className="mb-2 text-3xl mr-6">{key}</h3>
+                            {value.source && (
+                              <div className="relative group">
+                                <FontAwesomeIcon
+                                  icon={faCircleInfo}
+                                  size="lg"
+                                  className="text-[#e8e8e8] cursor-pointer"
+                                />
+                                <div className="absolute top-6 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 hidden group-hover:block">
+                                  <a
+                                    href={value.source}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block text-xs break-words underline"
+                                  >
+                                    {value.source}
+                                  </a>
+                                </div>
+                              </div>
+                            )}
                           </div>
+
                           <div className="w-full">
                             {(() => {
                               switch (value.type) {
