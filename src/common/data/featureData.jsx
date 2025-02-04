@@ -46,55 +46,84 @@ export const evtolFeatures = [
 export const offeringFeatures = [
   {
     description: (
-      <>
-        We tailor our research to
-        <strong> support disruptive business ecosystems</strong>, providing
-        <strong> visibility and actionable insights</strong> to key
-        stakeholders.
-      </>
+      <div>
+        <p>
+          We tailor our research to{" "}
+          <span className="font-semibold">
+            {" "}
+            support disruptive business ecosystems
+          </span>
+          , providing
+          <span className="font-semibold">
+            {" "}
+            visibility and actionable insights
+          </span>{" "}
+          to key stakeholders.
+        </p>
+      </div>
     ),
   },
   {
     description: (
-      <>
-        Designed to <strong>save countless hours of research</strong>, our
-        platform makes complex information
-        <strong> clear and easily digestible</strong> by prioritizing
-        <strong> interactive visual insights over lengthy text</strong>. This
-        approach helps stakeholders
-        <strong>
-          {" "}
-          quickly understand their role, gain key insights, and navigate the
-          industry with ease
-        </strong>
-        .
-      </>
+      <div>
+        <p>
+          Designed to{" "}
+          <span className="font-semibold">
+            save countless hours of research
+          </span>
+          , our platform makes complex information
+          <span className="font-semibold"> clear and easily digestible</span> by
+          prioritizing
+          <span className="font-semibold">
+            {" "}
+            interactive visual insights over lengthy text
+          </span>
+          . This approach helps stakeholders
+          <span className="font-semibold">
+            {" "}
+            quickly understand their role, gain key insights, and navigate the
+            industry with ease
+          </span>
+          .
+        </p>
+      </div>
     ),
   },
   {
     description: (
-      <>
-        Our <strong>platform</strong> provides{" "}
-        <strong>
-          detailed company intelligence, market-ready country reports, and
-          competitive benchmarking
-        </strong>
-        . For our AAM market ecosystem, we track{" "}
-        <strong>
-          eVTOL manufacturers, active investors, infrastructure projects, and
-          regulatory developments
-        </strong>
-        , offering a{" "}
-        <strong>clear roadmap for strategic decision-making</strong>.
-      </>
+      <div>
+        <p>
+          Our <span className="font-semibold">platform</span> provides{" "}
+          <span className="font-semibold">
+            detailed company intelligence, market-ready country reports, and
+            competitive benchmarking
+          </span>
+          . For our AAM market ecosystem, we track{" "}
+          <span className="font-semibold">
+            eVTOL manufacturers, active investors, infrastructure projects, and
+            regulatory developments
+          </span>
+          , offering a{" "}
+          <span className="font-semibold">
+            clear roadmap for strategic decision-making
+          </span>
+          .
+        </p>
+      </div>
     ),
   },
   {
     description: (
-      <>
-        <strong>Are you ready to transform your decision-making</strong>? <br />{" "}
-        Get in touch today.
-      </>
+      <div>
+        <p>
+          <span className="font-semibold">
+            Are you ready to transform your decision-making
+          </span>
+          ?
+          <br />
+          Get in touch today.
+        </p>
+      </div>
     ),
   },
   {
