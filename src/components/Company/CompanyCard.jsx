@@ -17,6 +17,7 @@ import {
   faPercentage,
   faPiggyBank,
   faPlane,
+  faQuestion,
   faTaxi,
   faTools,
   faTruck,
@@ -47,14 +48,17 @@ const iconMapping = {
   faDollarSign,
   faMoneyBill,
   faMoneyCheckAlt,
+  faQuestion,
 }
 
 export default function CompanyCard({ title, data }) {
+  const hasData = data && data.length > 0
+
   return (
     <div className="flex flex-col py-8 lg:py-16">
       <h2 className="mb-8">{title}</h2>
       <div className="grid place-items-center gap-y-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
-        {data &&
+        {hasData ? (
           data.map((item, index) => (
             <div key={index} className="w-[400px] h-full">
               {item.link ? (
@@ -72,7 +76,19 @@ export default function CompanyCard({ title, data }) {
                 </div>
               )}
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="w-[400px] h-full flex flex-col">
+            <CardContent
+              item={{
+                name: "No data available",
+                title: "Undisclosed",
+                icon: "faQuestion",
+              }}
+              title={title}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
@@ -86,7 +102,7 @@ function CardContent({ item, title }) {
           <FontAwesomeIcon
             aria-hidden="true"
             icon={iconMapping[item.icon]}
-            className="text-4xl text-[#6600cc]"
+            className="text-4xl text-[#e8e8e8]"
           />
         ) : (
           <Image
