@@ -34,7 +34,7 @@ export default function CompanyCard({ title, data }) {
               item={{
                 name: "No data available",
                 title: "Undisclosed",
-                icon: "infoIcon", // Use a default icon from your `icons` object
+                icon: "questionIcon",
               }}
               title={title}
             />

@@ -37,6 +37,7 @@ import percentageIcon from "public/icons/percentageIcon.svg"
 import planeSpendIcon from "public/icons/planeSpendIcon.svg"
 import populationDensityIcon from "public/icons/populationDensityIcon.svg"
 import publicTransportIcon from "public/icons/publicTransportIcon.svg"
+import questionIcon from "public/icons/questionIcon.svg"
 import railwayIcon from "public/icons/railwayIcon.svg"
 import rankingIcon from "public/icons/rankingIcon.svg"
 import rdIcon from "public/icons/rdIcon.svg"
@@ -110,6 +111,7 @@ const icons = {
   assetsIcon: assetsIcon,
   liabilitiesIcon: liabilitiesIcon,
   incomeIcon: incomeIcon,
+  questionIcon: questionIcon,
 }
 
 export default icons
