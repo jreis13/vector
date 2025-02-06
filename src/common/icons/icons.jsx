@@ -2,6 +2,7 @@ import aerodromeIcon from "public/icons/aerodromeIcon.svg"
 import airFreightIcon from "public/icons/airFreightIcon.svg"
 import airportIcon from "public/icons/airportIcon.svg"
 import airTrafficIcon from "public/icons/airTrafficIcon.svg"
+import assetsIcon from "public/icons/assetsIcon.svg"
 import broadbandIcon from "public/icons/broadbandIcon.svg"
 import buyersIcon from "public/icons/buyersIcon.svg"
 import certificationIcon from "public/icons/certificationIcon.svg"
@@ -14,18 +15,21 @@ import frameworkIcon from "public/icons/frameworkIcon.svg"
 import governmentSpendingIcon from "public/icons/governmentSpendingIcon.svg"
 import greenIcon from "public/icons/greenIcon.svg"
 import heliportIcon from "public/icons/heliportIcon.svg"
+import incomeIcon from "public/icons/incomeIcon.svg"
 import infoIcon from "public/icons/infoIcon.svg"
 import infrastructureIcon from "public/icons/infrastructureIcon.svg"
 import infrastructureMetricsIcon from "public/icons/infrastructureMetricsIcon.svg"
 import internationalIcon from "public/icons/internationalIcon.svg"
 import keyRegulatorIcon from "public/icons/keyRegulatorIcon.svg"
 import laborIcon from "public/icons/laborIcon.svg"
+import liabilitiesIcon from "public/icons/liabilitiesIcon.svg"
 import locationIcon from "public/icons/locationIcon.svg"
 import lostMoneyIcon from "public/icons/lostMoneyIcon.svg"
 import mobileIcon from "public/icons/mobileIcon.svg"
 import moneyBillIcon from "public/icons/moneyBillIcon.svg"
 import motorwayIcon from "public/icons/motorwayIcon.svg"
 import noisePollutionIcon from "public/icons/noisePollutionIcon.svg"
+import ordersIcon from "public/icons/ordersIcon.svg"
 import passengerIcon from "public/icons/passengerIcon.svg"
 import passengerPlaneIcon from "public/icons/passengerPlaneIcon.svg"
 import patentIcon from "public/icons/patentIcon.svg"
@@ -102,6 +106,10 @@ const icons = {
   moneyBillIcon: moneyBillIcon,
   lostMoneyIcon: lostMoneyIcon,
   revenueIcon: revenueIcon,
+  ordersIcon: ordersIcon,
+  assetsIcon: assetsIcon,
+  liabilitiesIcon: liabilitiesIcon,
+  incomeIcon: incomeIcon,
 }
 
 export default icons
