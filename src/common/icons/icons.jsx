@@ -3,6 +3,7 @@ import airFreightIcon from "public/icons/airFreightIcon.svg"
 import airportIcon from "public/icons/airportIcon.svg"
 import airTrafficIcon from "public/icons/airTrafficIcon.svg"
 import broadbandIcon from "public/icons/broadbandIcon.svg"
+import buyersIcon from "public/icons/buyersIcon.svg"
 import certificationIcon from "public/icons/certificationIcon.svg"
 import companyIcon from "public/icons/companyIcon.svg"
 import demographicIcon from "public/icons/demographicIcon.svg"
@@ -20,7 +21,9 @@ import internationalIcon from "public/icons/internationalIcon.svg"
 import keyRegulatorIcon from "public/icons/keyRegulatorIcon.svg"
 import laborIcon from "public/icons/laborIcon.svg"
 import locationIcon from "public/icons/locationIcon.svg"
+import lostMoneyIcon from "public/icons/lostMoneyIcon.svg"
 import mobileIcon from "public/icons/mobileIcon.svg"
+import moneyBillIcon from "public/icons/moneyBillIcon.svg"
 import motorwayIcon from "public/icons/motorwayIcon.svg"
 import noisePollutionIcon from "public/icons/noisePollutionIcon.svg"
 import passengerIcon from "public/icons/passengerIcon.svg"
@@ -36,6 +39,7 @@ import rdIcon from "public/icons/rdIcon.svg"
 import regulatoryIcon from "public/icons/regulatoryIcon.svg"
 import researchCentreIcon from "public/icons/researchCentreIcon.svg"
 import researchMetricsIcon from "public/icons/researchMetricsIcon.svg"
+import revenueIcon from "public/icons/revenueIcon.svg"
 import spendingIcon from "public/icons/spendingIcon.svg"
 import spentPerVisitIcon from "public/icons/spentPerVisitIcon.svg"
 import taxIcon from "public/icons/taxIcon.svg"
@@ -94,6 +98,10 @@ const icons = {
   researchMetricsIcon: researchMetricsIcon,
   governmentSpendingIcon: governmentSpendingIcon,
   greenIcon: greenIcon,
+  buyersIcon: buyersIcon,
+  moneyBillIcon: moneyBillIcon,
+  lostMoneyIcon: lostMoneyIcon,
+  revenueIcon: revenueIcon,
 }
 
 export default icons
