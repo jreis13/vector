@@ -1,55 +1,6 @@
-import {
-  faBalanceScale,
-  faBinoculars,
-  faBuilding,
-  faChalkboardTeacher,
-  faChartLine,
-  faDollarSign,
-  faEuroSign,
-  faExchangeAlt,
-  faFire,
-  faGlobe,
-  faHandHoldingUsd,
-  faHandshake,
-  faMedkit,
-  faMoneyBill,
-  faMoneyCheckAlt,
-  faPercentage,
-  faPiggyBank,
-  faPlane,
-  faQuestion,
-  faTaxi,
-  faTools,
-  faTruck,
-} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import placeholder from "public/icons/avatarIcon.svg"
-
-const iconMapping = {
-  faPlane,
-  faTruck,
-  faMedkit,
-  faBinoculars,
-  faTaxi,
-  faBuilding,
-  faExchangeAlt,
-  faTools,
-  faHandshake,
-  faChalkboardTeacher,
-  faGlobe,
-  faEuroSign,
-  faChartLine,
-  faPercentage,
-  faBalanceScale,
-  faFire,
-  faHandHoldingUsd,
-  faPiggyBank,
-  faDollarSign,
-  faMoneyBill,
-  faMoneyCheckAlt,
-  faQuestion,
-}
+import icons from "src/common/icons/icons"
 
 export default function CompanyCard({ title, data }) {
   const hasData = data && data.length > 0
@@ -83,7 +34,7 @@ export default function CompanyCard({ title, data }) {
               item={{
                 name: "No data available",
                 title: "Undisclosed",
-                icon: "faQuestion",
+                icon: "infoIcon", // Use a default icon from your `icons` object
               }}
               title={title}
             />
@@ -95,14 +46,18 @@ export default function CompanyCard({ title, data }) {
 }
 
 function CardContent({ item, title }) {
+  const IconComponent = icons[item.icon]
+
   return (
     <div className="group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4">
       <div className="mb-4 flex h-24 w-24 items-center justify-center">
-        {item.icon ? (
-          <FontAwesomeIcon
-            aria-hidden="true"
-            icon={iconMapping[item.icon]}
-            className="text-4xl text-[#e8e8e8]"
+        {IconComponent ? (
+          <Image
+            src={IconComponent}
+            alt={item.icon}
+            height={48}
+            width={48}
+            className="w-16 h-16"
           />
         ) : (
           <Image
