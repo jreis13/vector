@@ -3,11 +3,15 @@
 import { faCcStripe } from "@fortawesome/free-brands-svg-icons"
 import {
   faChevronDown,
-  faChevronUp,
   faCircleXmark,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+} from "@material-tailwind/react"
 import { AnimatePresence, motion } from "framer-motion"
 import { useState } from "react"
 import Button from "../Button"
@@ -25,7 +29,12 @@ export default function SubscribeContent() {
     },
   ])
   const [error, setError] = useState("")
-  const [expandedFAQ, setExpandedFAQ] = useState(null)
+  const [isChecked, setIsChecked] = useState(false)
+  const [openFAQ, setOpenFAQ] = useState(null)
+
+  const handleOpenFAQ = (index) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
 
   const ecosystemsOptions = [
     {
@@ -172,14 +181,14 @@ export default function SubscribeContent() {
   }
 
   return (
-    <div className="flex flex-grow flex-col items-center justify-center py-8 text-center">
-      <div>
+    <div className="flex flex-col items-center justify-center  py-8 text-center">
+      <div className="max-w-6xl">
         <h2>Subscribe to Exponential Vector</h2>
         <p className="mt-4">
           Complete your subscription to access the platform.
         </p>
         {error && <p className="text-red-500">{error}</p>}
-        <div className="mt-6 w-full max-w-3xl">
+        <div className="mt-6 w-full">
           <AnimatePresence>
             {subscribers.map((subscriber, index) => (
               <motion.div
@@ -227,31 +236,37 @@ export default function SubscribeContent() {
                     }
                     className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
                   />
-                  <select
-                    value={subscriber.persona}
-                    onChange={(e) =>
-                      handleChange(index, "persona", e.target.value)
-                    }
-                    className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
-                  >
-                    <option value="">Select Persona</option>
-                    <option value="Manufacturer">Manufacturer</option>
-                    <option value="Supplier">Supplier</option>
-                    <option value="Edifice">Edifice</option>
-                    <option value="Investor">Investor</option>
-                    <option value="Government official">
-                      Government Official
-                    </option>
-                    <option value="Enthusiast">Enthusiast</option>
-                  </select>
+                  <div className="relative w-full">
+                    <select
+                      value={subscriber.persona}
+                      onChange={(e) =>
+                        handleChange(index, "persona", e.target.value)
+                      }
+                      className="w-full appearance-none rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 text[#e8e8e8] outline-none focus:ring-0 focus:border-gray-600 hover:bg-[#34333d] hover:border-gray-600"
+                    >
+                      <option value="">Select Persona</option>
+                      <option value="Manufacturer">Manufacturer</option>
+                      <option value="Supplier">Supplier</option>
+                      <option value="Edifice">Edifice</option>
+                      <option value="Investor">Investor</option>
+                      <option value="Government official">
+                        Government Official
+                      </option>
+                      <option value="Enthusiast">Enthusiast</option>
+                    </select>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text[#e8e8e8] text-sm pointer-events-none"
+                    />
+                  </div>
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 relative w-full">
                   <select
                     value={subscriber.ecosystems[0] || ""}
                     onChange={(e) =>
                       handleChange(index, "ecosystems", [e.target.value])
                     }
-                    className="w-full rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                    className="w-full appearance-none rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 text[#e8e8e8] outline-none focus:ring-0 focus:border-gray-600 hover:bg-[#34333d] hover:border-gray-600"
                   >
                     <option value="">Select Ecosystem</option>
                     {ecosystemsOptions.map((eco) => (
@@ -260,6 +275,10 @@ export default function SubscribeContent() {
                       </option>
                     ))}
                   </select>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text[#e8e8e8] text-sm pointer-events-none"
+                  />
                 </div>
                 <div className="flex items-center justify-end mt-4 space-x-4">
                   {subscribers.length > 1 && (
@@ -312,9 +331,36 @@ export default function SubscribeContent() {
               *Each license requires a minimum commitment of 12 months.
             </p>
           </div>
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <input
+              type="checkbox"
+              id="termsCheckbox"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+              className="h-5 w-5 cursor-pointer"
+            />
+            <label htmlFor="termsCheckbox" className="text-sm text-gray-300">
+              I have read and agree to Exponential Vector&apos;s{" "}
+              <a
+                href="/files/Privacy_Policy_Exponential_Vector.pdf"
+                target="_blank"
+                className="underline"
+              >
+                <span className="underline">Privacy Policy</span>{" "}
+              </a>
+              and{" "}
+              <a
+                href="/files/Terms_and_Conditions_Exponential_Vector.pdf"
+                target="_blank"
+              >
+                <span className="underline">Terms and Conditions.</span>
+              </a>
+            </label>
+          </div>
           <Button
             onClick={handleSubscribe}
-            className="bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
+            disabled={!isChecked}
+            className="mt-6 bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
           >
             <span className="flex items-center gap-2">
               Subscribe with
@@ -325,8 +371,9 @@ export default function SubscribeContent() {
               />
             </span>
           </Button>
+
           <div>
-            <div className="m-8 text-center">
+            <div className="m-8">
               <p className="mb-4 ">
                 If you wish to proceed with the checkout using alternative
                 payment methods, we also accept bank transfers and
@@ -348,7 +395,7 @@ export default function SubscribeContent() {
               <div className="mb-8 text-center">
                 <h2 className="mb-4">Important Info</h2>
               </div>
-              <div className="max-w-3xl grid gap-10">
+              <div className="flex flex-col mx-auto justify-center">
                 {info.map(({ title }) => (
                   <div key={title}>
                     <div className="pb-6">{title}</div>
@@ -358,40 +405,32 @@ export default function SubscribeContent() {
             </div>
           </div>
         </div>
-        <div className="mt-16">
-          <div className="px-8">
-            <div>
-              <div className="mb-8 text-center">
-                <h2 className="mb-4">FAQ</h2>
-              </div>
-              <div className="max-w-3xl w-full mx-auto space-y-4">
+        <div className="px-8">
+          <section className="py-8 px-8">
+            <div className="mb-8 text-center">
+              <h2 className="mb-4">FAQ</h2>
+            </div>
+            <div className="container mx-auto">
+              <div className="mx-auto max-w-3xl">
                 {faqs.map(({ title, desc }, index) => (
-                  <div key={title}>
-                    <div
-                      className="flex items-center justify-between pb-6 font-bold cursor-pointer"
-                      onClick={() => toggleFAQ(index)}
-                    >
-                      <span>{title}</span>
-                      <FontAwesomeIcon
-                        icon={
-                          expandedFAQ === index ? faChevronUp : faChevronDown
-                        }
-                      />
-                    </div>
-                    <div
-                      className={`transition-all duration-300 ease-in-out ${
-                        expandedFAQ === index
-                          ? "max-h-screen opacity-100"
-                          : "max-h-0 opacity-0"
-                      } overflow-hidden`}
-                    >
-                      <div className="font-normal text-left">{desc}</div>
-                    </div>
-                  </div>
+                  <Accordion
+                    key={index}
+                    open={openFAQ === index}
+                    onClick={() => handleOpenFAQ(index)}
+                  >
+                    <AccordionHeader className="text-left font-base text-[#e8e8e8] hover:text-[#e8e8e8]">
+                      {title}
+                    </AccordionHeader>
+                    <AccordionBody>
+                      <p className="text-left text-md font-normal text-[#e8e8e8]">
+                        {desc}
+                      </p>
+                    </AccordionBody>
+                  </Accordion>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
