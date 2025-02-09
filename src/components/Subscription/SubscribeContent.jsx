@@ -181,7 +181,7 @@ export default function SubscribeContent() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center  py-8 text-center">
+    <div className="flex flex-col items-center justify-center px-8 py-8 text-center">
       <div className="max-w-6xl">
         <h2>Subscribe to Exponential Vector</h2>
         <p className="mt-4">
