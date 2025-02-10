@@ -6,11 +6,43 @@ export const metadata = {
   title: "Exponential Vector",
   description:
     "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+  openGraph: {
+    title: "Exponential Vector",
+    description:
+      "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+    url: "https://exponentialvector.eu",
+    siteName: "Exponential Vector",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Exponential Vector",
+    description:
+      "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+    site: "@exp_vector",
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Structured Data for Google */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: "https://exponentialvector.eu",
+              name: "Exponential Vector",
+              alternateName: "ExponentialVector.eu",
+            }),
+          }}
+        />
+      </head>
       <body>
         <UserProvider>{children}</UserProvider>
 

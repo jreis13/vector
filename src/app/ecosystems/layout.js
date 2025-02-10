@@ -5,6 +5,21 @@ export const metadata = {
   title: "Exponential Vector",
   description:
     "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+  openGraph: {
+    title: "Exponential Vector",
+    description:
+      "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+    url: "https://exponentialvector.eu",
+    siteName: "Exponential Vector",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Exponential Vector",
+    description:
+      "Next-Gen Strategy Tools for Disruptive Business Models - AAM & eVTOL ecosystems",
+    site: "@exp_vector",
+  },
 }
 
 export default function RootLayout({ children }) {
