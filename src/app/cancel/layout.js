@@ -14,9 +14,9 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>{children}</UserProvider>
 
-        {/* Google Tag (Global Site Tag) */}
+        {/* Google Tag Manager */}
         <Script
-          strategy="afterInteractive"
+          async
           src="https://www.googletagmanager.com/gtag/js?id=AW-16826561323"
         />
         <Script
