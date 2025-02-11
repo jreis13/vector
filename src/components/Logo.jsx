@@ -31,7 +31,7 @@ export default function Logo() {
             width={80}
             height={80}
           />
-          <p className="ml-2">exponentialvector</p>
+          <h2 className="ml-2">exponentialvector</h2>
         </div>
       ) : (
         <Image
