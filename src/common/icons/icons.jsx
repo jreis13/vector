@@ -11,6 +11,7 @@ import demographicIcon from "public/icons/demographicIcon.svg"
 import droneRegulationIcon from "public/icons/droneRegulationIcon.svg"
 import employmentIcon from "public/icons/employmentIcon.svg"
 import environmentIcon from "public/icons/environmentIcon.svg"
+import exclamationIcon from "public/icons/exclamationIcon.svg"
 import frameworkIcon from "public/icons/frameworkIcon.svg"
 import governmentSpendingIcon from "public/icons/governmentSpendingIcon.svg"
 import greenIcon from "public/icons/greenIcon.svg"
@@ -112,6 +113,7 @@ const icons = {
   liabilitiesIcon: liabilitiesIcon,
   incomeIcon: incomeIcon,
   questionIcon: questionIcon,
+  exclamationIcon: exclamationIcon,
 }
 
 export default icons
