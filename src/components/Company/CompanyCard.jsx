@@ -1,5 +1,8 @@
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import placeholder from "public/icons/avatarIcon.svg"
+import { useEffect, useRef, useState } from "react"
 import icons from "src/common/icons/icons"
 
 export default function CompanyCard({ title, data }) {
@@ -11,7 +14,7 @@ export default function CompanyCard({ title, data }) {
       <div className="grid place-items-center gap-y-8 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
         {hasData ? (
           data.map((item, index) => (
-            <div key={index} className="w-[400px] h-full">
+            <div key={index} className="w-[400px] h-full relative">
               {item.link ? (
                 <a
                   href={item.link}
@@ -47,9 +50,50 @@ export default function CompanyCard({ title, data }) {
 
 function CardContent({ item, title }) {
   const IconComponent = icons[item.icon]
+  const [showSource, setShowSource] = useState(false)
+  const sourceRef = useRef(null)
+
+  const toggleSource = () => {
+    setShowSource(!showSource)
+  }
+
+  const closeSourceOnOutsideClick = (e) => {
+    if (sourceRef.current && !sourceRef.current.contains(e.target)) {
+      setShowSource(false)
+    }
+  }
+
+  useEffect(() => {
+    if (showSource) {
+      document.addEventListener("mousedown", closeSourceOnOutsideClick)
+    } else {
+      document.removeEventListener("mousedown", closeSourceOnOutsideClick)
+    }
+    return () => {
+      document.removeEventListener("mousedown", closeSourceOnOutsideClick)
+    }
+  }, [showSource])
 
   return (
     <div className="group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4">
+      <div className="absolute top-2 right-2 flex space-x-2">
+        {item.source && (
+          <div className="relative group">
+            <button
+              className="text-[#e8e8e8] p-1 rounded-full focus:outline-none"
+              aria-label="Source Info"
+            >
+              <FontAwesomeIcon icon={faCircleInfo} size="sm" />
+            </button>
+            <div
+              ref={sourceRef}
+              className="absolute top-8 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <p className="block text-xs break-words">{item.source}</p>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="mb-4 flex h-24 w-24 items-center justify-center">
         {IconComponent ? (
           <Image

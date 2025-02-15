@@ -83,16 +83,9 @@ export default function EcosystemStatCard({ title, value }) {
               {showSource && (
                 <div
                   ref={sourceRef}
-                  className="absolute top-8 right-0 bg-[#444] text-sm text-[#a0d7ff] p-2 rounded shadow-lg w-64 z-50"
+                  className="absolute top-8 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 >
-                  <a
-                    href={value.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-xs break-words underline"
-                  >
-                    {value.source}
-                  </a>
+                  <p className="block text-xs break-words">{value.source}</p>
                 </div>
               )}
             </div>

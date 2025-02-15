@@ -161,14 +161,9 @@ export default function EcosystemCountryProfilesDetails({
                                   className="text-[#e8e8e8] cursor-pointer"
                                 />
                                 <div className="absolute top-6 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 hidden group-hover:block">
-                                  <a
-                                    href={value.source}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block text-xs break-words underline"
-                                  >
+                                  <p className="block text-xs break-words">
                                     {value.source}
-                                  </a>
+                                  </p>
                                 </div>
                               </div>
                             )}
