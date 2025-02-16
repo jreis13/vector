@@ -23,10 +23,10 @@ export default async function handler(req, res) {
     })
 
     await transporter.sendMail({
-      from: `"Exponential Vector" <support@exponentialvector.eu>`,
-      to: "enquiries@exponentialvector.eu",
-      subject: "New Waitlist Signup",
-      text: `${email} joined the waitlist.`,
+      from: `"Exponential Vector Updates" <support@exponentialvector.eu>`,
+      to: "updates@exponentialvector.eu",
+      subject: "New Newsletter Subscription",
+      text: `${email} subscribed to the newsletter.`,
     })
 
     return res.status(200).json({ message: "Email sent successfully" })

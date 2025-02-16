@@ -14,6 +14,7 @@ import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import EarlyAccess from "src/components/EarlyAccess"
 import MainHero from "src/components/MainHero"
+import NewsletterCTA from "src/components/NewsletterCTA"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
@@ -57,6 +58,7 @@ export default function MainLayout() {
                 Browse Now
               </Button>
             </div>
+            <NewsletterCTA />
           </div>
         </ScrollReveal>
         <ScrollReveal id="offering">
