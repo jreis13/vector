@@ -75,9 +75,11 @@ export default function NewsletterCTA() {
   return (
     <section className="py-16 px-8 lg:py-20 w-full flex flex-col items-center text-center">
       <div className="container mx-auto flex flex-col items-center">
-        <h3 className="text-2xl font-semibold">Subscribe to Our Newsletter</h3>
+        <h3 className="text-2xl font-semibold">
+          Subscribe to Our eVTOL Newsletter
+        </h3>
         <p className="text-gray-400 mt-4 text-lg max-w-xl">
-          Stay informed with the latest trends and industry updates.
+          Stay informed with the latest insights and industry updates.
         </p>
         <form
           onSubmit={handleSubmit}
