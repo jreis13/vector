@@ -42,117 +42,107 @@ export default function EcosystemCard({ ecosystem }) {
             <p className="text-center mt-2">{ecosystem.summary}</p>
           </div>
 
-          {ecosystem.mainStats && (
-            <div className="flex justify-center text-center">
-              {ecosystem.mainStats.map((stat, index) => (
-                <div key={index} className="p-4">
-                  <p className="font-semibold text-2xl">{stat.name}</p>
-                  <div className="mt-4 space-y-1">
-                    {stat.data.map((item, itemIndex) => (
-                      <div
-                        className="flex gap-2 text-md items-center"
-                        key={itemIndex}
-                      >
-                        <FontAwesomeIcon
-                          icon={faCheckCircle}
-                          className="text-[#6600cc]"
-                        />
-                        <p>{item.label}: </p>
-                        <p>{item.description}</p>
-                      </div>
-                    ))}
+          {Array.isArray(ecosystem.mainStats) && (
+            <div className="flex flex-col mx-auto items-start">
+              <h4 className="font-semibold text-2xl p-4 mx-auto text-center">
+                Passenger eVTOL
+              </h4>
+              {ecosystem.mainStats.map((stat, index) => {
+                const [title, value] = stat.split(":")
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center py-1 text-left gap-4"
+                  >
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      className="text-[#6600cc]"
+                    />
+                    <p className="font-semibold">{title.trim()}:</p>
+                    <p>{value ? value.trim() : ""}</p>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
 
-          {ecosystem.roadmap && (
-            <div className="flex justify-center gap-2">
+          {Array.isArray(ecosystem.roadmap) && (
+            <div className="flex justify-center items-center text-center gap-8">
               <h4 className="mt-12 font-semibold">Key Features Roadmap:</h4>
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-6">
                 {ecosystem.roadmap.map((stat, index) => (
-                  <div key={index} className="relative flex items-center">
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-md font-semibold">
-                        {stat.label.includes("AI") ? (
-                          <FontAwesomeIcon
-                            icon={faBrain}
-                            className="text-blue-500 w-6 h-6"
-                          />
-                        ) : stat.label.includes("News") ? (
-                          <FontAwesomeIcon
-                            icon={faNewspaper}
-                            className="text-green-500 w-6 h-6"
-                          />
-                        ) : stat.label.includes("Deal") ? (
-                          <FontAwesomeIcon
-                            icon={faHandshake}
-                            className="text-red-500 w-6 h-6"
-                          />
-                        ) : null}
-                      </div>
-                      <div className="rounded-lg p-4 text-center">
-                        <p className="font-semibold text-md text-center">
-                          {stat.label}
-                        </p>
-                      </div>
+                  <div key={index} className="flex flex-col items-center">
+                    <div className="w-12 h-12 flex items-center justify-center">
+                      {stat.includes("AI") ? (
+                        <FontAwesomeIcon
+                          icon={faBrain}
+                          className="text-blue-500 w-6 h-6"
+                        />
+                      ) : stat.includes("News") ? (
+                        <FontAwesomeIcon
+                          icon={faNewspaper}
+                          className="text-green-500 w-6 h-6"
+                        />
+                      ) : stat.includes("Deal") ? (
+                        <FontAwesomeIcon
+                          icon={faHandshake}
+                          className="text-red-500 w-6 h-6"
+                        />
+                      ) : null}
                     </div>
+                    <p className="font-semibold">{stat}</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {ecosystem.expansions && (
-            <div className="flex gap-4 w-full justify-center">
-              <h4 className="mt-12 font-semibold self-start">
-                Regional Add-ons:
-              </h4>
-              <div className="flex justify-end items-center">
+          {Array.isArray(ecosystem.expansions) && (
+            <div className="flex justify-center items-center text-center gap-8">
+              <h4 className="mt-12 font-semibold">Regional Add-ons:</h4>
+              <div className="flex flex-wrap justify-center gap-6">
                 {ecosystem.expansions.map((expansion, index) => (
-                  <div key={index} className="flex flex-col items-center px-4">
+                  <div key={index} className="flex flex-col items-center">
                     <div className="w-12 h-12 flex items-center justify-center">
-                      {expansion.label.includes("North America") ? (
+                      {expansion.includes("North America") ? (
                         <FontAwesomeIcon
                           icon={faEarthAmericas}
                           className="text-blue-500 w-6 h-6"
                         />
-                      ) : expansion.label.includes("South America") ? (
+                      ) : expansion.includes("South America") ? (
                         <FontAwesomeIcon
                           icon={faEarthAmericas}
                           className="text-green-500 w-6 h-6"
                         />
-                      ) : expansion.label.includes("Asia") ? (
+                      ) : expansion.includes("Asia") ? (
                         <FontAwesomeIcon
                           icon={faEarthAsia}
                           className="text-red-500 w-6 h-6"
                         />
-                      ) : expansion.label.includes("MENA") ? (
+                      ) : expansion.includes("MENA") ? (
                         <FontAwesomeIcon
                           icon={faEarthAfrica}
                           className="text-yellow-500 w-6 h-6"
                         />
                       ) : null}
                     </div>
-                    <p className="font-semibold text-md text-center">
-                      {expansion.label}
-                    </p>
+                    <p className="font-semibold">{expansion}</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {ecosystem.disclaimers && (
-            <div className="flex flex-col items-center justify-center text-center pt-8">
-              {ecosystem.disclaimers.map((disclaimer, index) => (
-                <div key={index}>
-                  <p className="text-sm">{disclaimer.label}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          {Array.isArray(ecosystem.disclaimers) &&
+            ecosystem.disclaimers.length > 0 && (
+              <div className="flex flex-col items-center justify-center text-center pt-8">
+                {ecosystem.disclaimers.map((disclaimer, index) => (
+                  <div key={index}>
+                    <p className="text-sm">{disclaimer}</p>
+                  </div>
+                ))}
+              </div>
+            )}
         </div>
       </div>
     </div>
