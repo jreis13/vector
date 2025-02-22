@@ -35,6 +35,7 @@ import passengerIcon from "public/icons/passengerIcon.svg"
 import passengerPlaneIcon from "public/icons/passengerPlaneIcon.svg"
 import patentIcon from "public/icons/patentIcon.svg"
 import percentageIcon from "public/icons/percentageIcon.svg"
+import personIcon from "public/icons/personIcon.svg"
 import planeSpendIcon from "public/icons/planeSpendIcon.svg"
 import populationDensityIcon from "public/icons/populationDensityIcon.svg"
 import publicTransportIcon from "public/icons/publicTransportIcon.svg"
@@ -75,6 +76,7 @@ const icons = {
   publicTransportIcon: publicTransportIcon,
   totalPopulationIcon: totalPopulationIcon,
   laborIcon: laborIcon,
+  personIcon: personIcon,
   planeSpendIcon: planeSpendIcon,
   rdIcon: rdIcon,
   employmentIcon: employmentIcon,
