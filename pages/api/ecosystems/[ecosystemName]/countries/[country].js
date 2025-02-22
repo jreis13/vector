@@ -1,83 +1,39 @@
-import AWS from "aws-sdk"
-import cors from "cors"
-
-const corsMiddleware = cors({
-  methods: ["GET", "HEAD"],
-})
-
-function runMiddleware(req, res, fn) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
-      return resolve(result)
-    })
-  })
-}
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-})
-
-const BUCKET_NAME = process.env.S3_BUCKET_NAME
-const ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
-
-function normalizeName(name) {
-  return name.toLowerCase().replace(/\s+/g, "").trim()
-}
+const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
+const AIRTABLE_COUNTRIES_BASE_ID = process.env.AIRTABLE_COUNTRIES_BASE_ID
+const AIRTABLE_COUNTRIES_TABLE = process.env.AIRTABLE_COUNTRIES_TABLE
 
 export default async function handler(req, res) {
-  await runMiddleware(req, res, corsMiddleware)
-
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method Not Allowed" })
   }
 
+  const { ecosystemName, country } = req.query
+  if (!ecosystemName || !country) {
+    return res
+      .status(400)
+      .json({ error: "Ecosystem name and country are required" })
+  }
+
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: ECOSYSTEMS_KEY,
-    }
-
-    const data = await s3.getObject(params).promise()
-    const ecosystems = JSON.parse(data.Body.toString("utf-8"))
-
-    const { ecosystemName, country } = req.query
-
-    if (!ecosystemName || !country) {
-      return res
-        .status(400)
-        .json({ error: "Ecosystem name and country are required" })
-    }
-
-    const normalizedEcosystemName = normalizeName(ecosystemName)
-    const normalizedCountryName = normalizeName(country)
-
-    const ecosystem = ecosystems.find(
-      (e) => normalizeName(e.name) === normalizedEcosystemName
+    const response = await fetch(
+      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_COUNTRIES_TABLE}?filterByFormula=AND({ecosystem}="${decodeURIComponent(ecosystemName)}",{country}="${decodeURIComponent(country)}")`,
+      {
+        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
+      }
     )
 
-    if (!ecosystem) {
-      return res.status(404).json({ error: "Ecosystem not found" })
-    }
+    if (!response.ok)
+      throw new Error("Failed to fetch country reports from Airtable")
 
-    const countryKey = Object.keys(ecosystem.countryReports).find(
-      (key) => normalizeName(key) === normalizedCountryName
-    )
-
-    if (!countryKey) {
+    const { records } = await response.json()
+    if (records.length === 0)
       return res.status(404).json({ error: "Country reports not found" })
-    }
 
-    return res.status(200).json({
-      countryName: countryKey,
-      reports: ecosystem.countryReports[countryKey],
-    })
+    return res.status(200).json({ id: records[0].id, ...records[0].fields })
   } catch (error) {
-    console.error("Error fetching country data:", error.message)
-    return res.status(500).json({ error: "Failed to fetch country data" })
+    console.error("Error fetching country reports:", error.message)
+    return res
+      .status(500)
+      .json({ error: "Failed to fetch country reports from Airtable" })
   }
 }

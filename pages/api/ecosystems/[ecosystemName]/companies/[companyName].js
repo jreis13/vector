@@ -1,82 +1,38 @@
-import AWS from "aws-sdk"
-import cors from "cors"
-
-const corsMiddleware = cors({
-  methods: ["GET", "HEAD"],
-})
-
-function runMiddleware(req, res, fn) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
-      return resolve(result)
-    })
-  })
-}
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-})
-
-const BUCKET_NAME = process.env.S3_BUCKET_NAME
-const ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
-
-function normalizeName(name) {
-  return name.replace(/\s+/g, "").toLowerCase();
-}
+const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
+const AIRTABLE_COMPANIES_BASE_ID = process.env.AIRTABLE_COMPANIES_BASE_ID
+const AIRTABLE_COMPANIES_TABLE = process.env.AIRTABLE_COMPANIES_TABLE
 
 export default async function handler(req, res) {
-  await runMiddleware(req, res, corsMiddleware)
-
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method Not Allowed" })
   }
 
+  const { ecosystemName, companyName } = req.query
+  if (!ecosystemName || !companyName) {
+    return res
+      .status(400)
+      .json({ error: "Ecosystem name and company name are required" })
+  }
+
   try {
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: ECOSYSTEMS_KEY,
-    }
-
-    const data = await s3.getObject(params).promise()
-    const ecosystems = JSON.parse(data.Body.toString("utf-8"))
-
-    const { ecosystemName, companyName } = req.query
-
-    if (!ecosystemName || !companyName) {
-      return res
-        .status(400)
-        .json({ error: "Ecosystem name and company name are required" })
-    }
-
-    const normalizedEcosystemName = normalizeName(
-      decodeURIComponent(ecosystemName)
-    )
-    const normalizedCompanyName = normalizeName(decodeURIComponent(companyName))
-
-    const ecosystem = ecosystems.find(
-      (e) => normalizeName(e.name) === normalizedEcosystemName
+    const response = await fetch(
+      `https://api.airtable.com/v0/${AIRTABLE_COMPANIES_BASE_ID}/${AIRTABLE_COMPANIES_TABLE}?filterByFormula=AND({ecosystem}="${decodeURIComponent(ecosystemName)}",{name}="${decodeURIComponent(companyName)}")`,
+      {
+        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
+      }
     )
 
-    if (!ecosystem) {
-      return res.status(404).json({ error: "Ecosystem not found" })
-    }
+    if (!response.ok) throw new Error("Failed to fetch company from Airtable")
 
-    const company = ecosystem.companies.find(
-      (c) => normalizeName(c.name) === normalizedCompanyName
-    )
-
-    if (!company) {
+    const { records } = await response.json()
+    if (records.length === 0)
       return res.status(404).json({ error: "Company not found" })
-    }
 
-    return res.status(200).json(company)
+    return res.status(200).json({ id: records[0].id, ...records[0].fields })
   } catch (error) {
-    console.error("Error fetching company data:", error.message)
-    return res.status(500).json({ error: "Failed to fetch company data" })
+    console.error("Error fetching company:", error.message)
+    return res
+      .status(500)
+      .json({ error: "Failed to fetch company from Airtable" })
   }
 }

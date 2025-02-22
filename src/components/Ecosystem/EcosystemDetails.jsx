@@ -80,6 +80,7 @@ export default function EcosystemDetails({ ecosystem }) {
           <EcosystemActiveInvestors
             companies={ecosystem.companies}
             data={ecosystem.activeInvestors}
+            keyInvestors={ecosystem.keyInvestors}
           />
         )}
         {currentTab === "productComparison" && (

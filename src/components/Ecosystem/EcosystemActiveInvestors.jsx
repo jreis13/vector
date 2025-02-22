@@ -17,67 +17,36 @@ import InvestorCard from "../InvestorCard"
 import EcosystemActiveInvestorsFilter from "./EcosystemActiveInvestorsFilter"
 import EcosystemActiveInvestorsTable from "./EcosystemActiveInvestorsTable"
 
-export default function ActiveInvestors({ companies, data }) {
-  const allInvestors = companies
-    .flatMap((company) => company.investors?.data || [])
-    .filter(
-      (investor, index, self) =>
-        index === self.findIndex((t) => t.value === investor.value)
-    )
-    .map((investor) => ({
-      name: investor.value,
-      logo: investor.logo || placeholder,
-      description: investor.description,
-      type: investor.type,
-      stages: investor.stages,
-      link: investor.link,
-    }))
-    .filter(
-      (investor) =>
-        investor.name &&
-        investor.description &&
-        investor.type &&
-        investor.stages
-    )
+export default function EcosystemActiveInvestors({ keyInvestors, data }) {
+  const allInvestors = keyInvestors.map((investor) => ({
+    name: investor.name || investor["Name"] || "Unknown",
+    logo: investor.logo || investor["Logo"] || placeholder,
+    description:
+      investor.description ||
+      investor["Description"] ||
+      "No description available",
+    type: investor.type || investor["Type"] || "N/A",
+    stages: investor.stages || investor["Stages"] || "N/A",
+    link: investor.link || investor["Link"] || "#",
+  }))
 
-  const [filters, setFilters] = useState({
-    type: "",
-    stages: "",
-    country: "",
-  })
-
-  const filteredInvestors = allInvestors.filter((investor) => {
-    const matchesType =
-      !filters.type ||
-      investor.type.toLowerCase().includes(filters.type.toLowerCase())
-
-    const matchesStages =
-      !filters.stages ||
-      investor.stages.toLowerCase().includes(filters.stages.toLowerCase())
-
-    const matchesCountry =
-      !filters.country ||
-      investor.description.toLowerCase().includes(filters.country.toLowerCase())
-
-    return matchesType && matchesStages && matchesCountry
-  })
+  const [filters, setFilters] = useState({ type: "", stages: "", country: "" })
+  const filteredInvestors = allInvestors.filter(
+    (investor) =>
+      (!filters.type ||
+        investor.type.toLowerCase().includes(filters.type.toLowerCase())) &&
+      (!filters.stages ||
+        investor.stages.toLowerCase().includes(filters.stages.toLowerCase()))
+  )
 
   const [currentPage, setCurrentPage] = useState(0)
   const investorsPerPage = 9
   const totalPages = Math.ceil(filteredInvestors.length / investorsPerPage)
 
-  const handleNext = () => {
+  const handleNext = () =>
     setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
-  }
-
-  const handlePrev = () => {
+  const handlePrev = () =>
     setCurrentPage((prev) => (prev - 1 >= 0 ? prev - 1 : prev))
-  }
-
-  const currentInvestors = filteredInvestors.slice(
-    currentPage * investorsPerPage,
-    currentPage * investorsPerPage + investorsPerPage
-  )
 
   if (!allInvestors.length) {
     return (
@@ -86,15 +55,6 @@ export default function ActiveInvestors({ companies, data }) {
       </div>
     )
   }
-
-  const attributes = [
-    "Investor",
-    "Funding Round",
-    "Lead Investor",
-    "Amount",
-    "Date",
-    "Comments",
-  ]
 
   return (
     <div
@@ -128,9 +88,17 @@ export default function ActiveInvestors({ companies, data }) {
               className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
               style={{ minHeight: "450px" }}
             >
-              {currentInvestors.map((investor, index) => (
-                <InvestorCard key={index} investor={investor} />
-              ))}
+              {filteredInvestors
+                .slice(
+                  currentPage * investorsPerPage,
+                  (currentPage + 1) * investorsPerPage
+                )
+                .map((investor, index) => (
+                  <InvestorCard
+                    key={`${investor.name}-${index}`}
+                    investor={investor}
+                  />
+                ))}
             </motion.div>
           </AnimatePresence>
           {currentPage < totalPages - 1 && (
@@ -149,7 +117,7 @@ export default function ActiveInvestors({ companies, data }) {
         </div>
       </div>
 
-      <EcosystemActiveInvestorsTable attributes={attributes} data={data} />
+      <EcosystemActiveInvestorsTable data={data} />
     </div>
   )
 }

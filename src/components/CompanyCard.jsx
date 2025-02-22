@@ -2,15 +2,11 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 function truncateText(text, wordLimit) {
-  if (!text || typeof text !== "string") {
-    return ""
-  }
-
+  if (!text || typeof text !== "string") return ""
   const words = text.split(" ")
-  if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(" ") + "..."
-  }
-  return text
+  return words.length > wordLimit
+    ? words.slice(0, wordLimit).join(" ") + "..."
+    : text
 }
 
 export default function CompanyCard({
@@ -66,14 +62,19 @@ export default function CompanyCard({
         </div>
       </div>
       <div className="mt-4 flex flex-col justify-end">
-        <div>
-          {company.mainStats &&
-            company.mainStats.map((stat, index) => (
-              <div key={index} className="flex justify-between py-1">
-                <span>{stat.label}:</span>
-                <span className="text-right">{stat.value}</span>
-              </div>
-            ))}
+        <div className="py-2">
+          <div className="flex justify-between">
+            <span>Industry:</span>
+            <span>{company.industry}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Funding Amount:</span>
+            <span>{company.fundingAmount}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Funding Stage:</span>
+            <span>{company.fundingStage}</span>
+          </div>
         </div>
       </div>
     </div>
