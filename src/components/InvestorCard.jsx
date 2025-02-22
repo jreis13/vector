@@ -1,8 +1,6 @@
 import Image from "next/image"
 
 export default function InvestorCard({ investor }) {
-  console.log(investor)
-
   return (
     <a href={investor.link || "#"} target="_blank" rel="noreferrer">
       <div className="h-full flex flex-col justify-between rounded-lg p-4 bg-[#34333d] text-[#e8e8e8] hover:bg-[#e8e8e8] hover:text-[#403f4c] hover:shadow-lg transition-all duration-300">
