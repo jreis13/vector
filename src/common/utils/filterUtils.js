@@ -19,39 +19,36 @@ export const extractStat = (company, label) => {
   return stat ? stat.value : ""
 }
 
-export const filterCompanies = (companies, filters, options) => {
-  const { industryOptions, fundingStageOptions, fundingAmountRanges } = options
-
+export const filterCompanies = (companies, filters, fundingAmountRanges) => {
   return companies.filter((company) => {
-    const industry = extractStat(company, "Industry") || ""
-    const fundingStage = extractStat(company, "Funding Stage") || ""
-    const fundingAmountRaw = extractStat(company, "Funding Amount") || ""
+    const industry = company.industry || []
+    const fundingStage = (company.fundingStage || "").toLowerCase()
+    const fundingAmountRaw = company.fundingAmount || ""
     const fundingAmount = parseFundingAmount(fundingAmountRaw)
 
     const matchesIndustry =
       !filters.industry ||
-      industryOptions
-        .find((option) => option.label === filters.industry)
-        ?.keywords.some((keyword) =>
-          industry.toLowerCase().includes(keyword.toLowerCase())
-        )
+      (Array.isArray(industry) &&
+        industry.some(
+          (ind) => ind.toLowerCase() === filters.industry.toLowerCase()
+        ))
 
     const matchesFundingStage =
       !filters.fundingStage ||
-      fundingStageOptions
-        .find((option) => option.label === filters.fundingStage)
-        ?.keywords.some((keyword) =>
-          fundingStage.toLowerCase().includes(keyword.toLowerCase())
-        )
+      fundingStage.includes(filters.fundingStage.toLowerCase())
 
     const matchesFundingAmount =
       !filters.fundingAmount ||
-      fundingAmountRanges.some(
-        (range) =>
-          range.label === filters.fundingAmount &&
-          fundingAmount >= range.min &&
-          fundingAmount <= range.max
-      )
+      (() => {
+        const selectedRange = fundingAmountRanges.find(
+          (range) => range.label === filters.fundingAmount
+        )
+        return (
+          selectedRange &&
+          fundingAmount >= selectedRange.min &&
+          fundingAmount <= selectedRange.max
+        )
+      })()
 
     return matchesIndustry && matchesFundingStage && matchesFundingAmount
   })
