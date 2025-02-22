@@ -18,7 +18,7 @@ export default function EcosystemActiveInvestorsFilter({
   const handleFilterChange = (filterType, value) => {
     setFilters((prev) => ({
       ...prev,
-      [filterType]: prev[filterType] === value ? "" : value,
+      [filterType]: value, // ✅ Always update the value (not toggle)
     }))
   }
 
@@ -28,32 +28,11 @@ export default function EcosystemActiveInvestorsFilter({
       stages: "",
       country: "",
     })
-  }
-
-  const filterAnimation = {
-    hidden: {
-      opacity: 0,
-      x: 50,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-    exit: {
-      opacity: 0,
-      x: 50,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
+    setIsExpanded(false) // ✅ Close filters after clearing
   }
 
   return (
-    <motion.div
-      className="relative flex justify-end ml-4 mb-4"
-      initial="minimized"
-      animate={isExpanded ? "expanded" : "minimized"}
-    >
+    <motion.div className="relative flex justify-end ml-4 mb-4">
       {!isExpanded ? (
         <motion.button
           onClick={() => setIsExpanded(true)}
@@ -71,15 +50,15 @@ export default function EcosystemActiveInvestorsFilter({
             <motion.div
               key="filter-panel"
               className="flex flex-wrap justify-end items-center gap-8"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={filterAnimation}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.5 }}
             >
+              {/* ✅ Type Filter */}
               <motion.div className="flex gap-4 items-center">
                 <h3>Type:</h3>
-                <motion.select
-                  whileHover={{ scale: 1.05 }}
+                <select
                   onChange={(e) => handleFilterChange("type", e.target.value)}
                   value={filters.type}
                   className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
@@ -90,13 +69,12 @@ export default function EcosystemActiveInvestorsFilter({
                       {option.label}
                     </option>
                   ))}
-                </motion.select>
+                </select>
               </motion.div>
 
               <motion.div className="flex gap-4 items-center">
                 <h3>Stage:</h3>
-                <motion.select
-                  whileHover={{ scale: 1.05 }}
+                <select
                   onChange={(e) => handleFilterChange("stages", e.target.value)}
                   value={filters.stages}
                   className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
@@ -107,13 +85,12 @@ export default function EcosystemActiveInvestorsFilter({
                       {option.label}
                     </option>
                   ))}
-                </motion.select>
+                </select>
               </motion.div>
 
               <motion.div className="flex gap-4 items-center">
                 <h3>Country:</h3>
-                <motion.select
-                  whileHover={{ scale: 1.05 }}
+                <select
                   onChange={(e) =>
                     handleFilterChange("country", e.target.value)
                   }
@@ -126,7 +103,7 @@ export default function EcosystemActiveInvestorsFilter({
                       {option.label}
                     </option>
                   ))}
-                </motion.select>
+                </select>
               </motion.div>
 
               <motion.button
@@ -139,7 +116,7 @@ export default function EcosystemActiveInvestorsFilter({
 
               <motion.button
                 onClick={() => setIsExpanded(false)}
-                className="text-[#e8e8e8] focus:outline-none h-fit"
+                className="text-[#e8e8e8] focus:outline-none"
                 whileHover={{ scale: 1.05 }}
               >
                 <FontAwesomeIcon icon={faTimes} />

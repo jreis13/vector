@@ -30,14 +30,29 @@ export default function EcosystemActiveInvestors({ keyInvestors, data }) {
     link: investor.link || investor["Link"] || "#",
   }))
 
+  console.log("🔥 All Investors Before Filtering:", allInvestors)
+
   const [filters, setFilters] = useState({ type: "", stages: "", country: "" })
-  const filteredInvestors = allInvestors.filter(
-    (investor) =>
-      (!filters.type ||
-        investor.type.toLowerCase().includes(filters.type.toLowerCase())) &&
-      (!filters.stages ||
-        investor.stages.toLowerCase().includes(filters.stages.toLowerCase()))
-  )
+
+  const filteredInvestors = allInvestors.filter((investor) => {
+    const matchesType =
+      !filters.type ||
+      investor.type.some((t) => t.toLowerCase() === filters.type.toLowerCase())
+
+    const matchesStages =
+      !filters.stages ||
+      investor.stages.some(
+        (t) => t.toLowerCase() === filters.stages.toLowerCase()
+      )
+
+    const matchesCountry =
+      !filters.country ||
+      investor.description.toLowerCase().includes(filters.country.toLowerCase())
+
+    return matchesType && matchesStages && matchesCountry
+  })
+
+  console.log("✅ Filtered Investors:", filteredInvestors)
 
   const [currentPage, setCurrentPage] = useState(0)
   const investorsPerPage = 9
