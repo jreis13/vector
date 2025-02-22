@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation"
 import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCard from "./CompanyCard"
 import CompanyLatest from "./CompanyLatest"
-import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
 
 export default function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
 
-  if (router.isFallback || !company) {
+  if (!company) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
@@ -22,14 +21,14 @@ export default function CompanyDetails({ company, ecosystemName }) {
     )
   }
 
+  console.log(company)
+
   const handleBackClick = () => {
     const url = `/ecosystems/${ecosystemName}?tab=companies`
     window.open(url, "_self")
   }
 
-  const companyWebsite = company?.stats?.data?.find(
-    (stat) => stat.label === "Website"
-  )?.value
+  const companyWebsite = company?.Website || "#"
 
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
@@ -43,8 +42,8 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
         <div className="pb-8 flex items-center gap-4">
           <Image
-            src={company.logo}
-            alt={`${company.name} logo`}
+            src={company?.Logo || "/placeholder.png"}
+            alt={`${company?.["Company Name"]} logo`}
             width={96}
             height={96}
           />
@@ -58,77 +57,83 @@ export default function CompanyDetails({ company, ecosystemName }) {
           </a>
         </div>
 
-        <p className="pb-8 text-xl leading-8">{company.summary}</p>
+        <p className="pb-8 text-xl leading-8">{company?.["Company Summary"]}</p>
 
-        {company.stats && <CompanyStats stats={company.stats.data} />}
+        <CompanyStats stats={formatStats(company)} />
 
         <ScrollReveal id="latestDevelopments">
-          {company.latestDevelopments && (
-            <CompanyLatest
-              title={company.latestDevelopments.title}
-              data={company.latestDevelopments.data}
-            />
-          )}
+          <CompanyLatest
+            title="Latest Developments"
+            data={formatSection(company?.["Latest Developments"])}
+          />
         </ScrollReveal>
 
         <ScrollReveal id="foundingTeam">
-          {company.foundingTeam && (
-            <CompanyCard
-              title={company.foundingTeam.title}
-              data={company.foundingTeam.data}
-            />
-          )}
+          <CompanyCard
+            title="Founding Team"
+            data={formatSection(company?.["Founding Team"])}
+          />
         </ScrollReveal>
 
         <ScrollReveal id="investors">
-          {company.investors && (
-            <CompanyCard
-              title={company.investors.title}
-              data={company.investors.data}
-            />
-          )}
+          <CompanyCard
+            title="Key Investors"
+            data={formatSection(company?.["Key Investors"])}
+          />
         </ScrollReveal>
 
         <ScrollReveal id="customerGrowth">
-          {company.customerGrowth && (
-            <CompanyCard
-              title={company.customerGrowth.title}
-              data={company.customerGrowth.data}
-            />
-          )}
+          <CompanyCard
+            title="Customer Growth"
+            data={formatSection(company?.["Customer Growth"])}
+          />
         </ScrollReveal>
 
         <ScrollReveal id="patents">
-          {company.patents && (
-            <CompanyCard
-              title={company.patents.title}
-              data={company.patents.data}
-            />
-          )}
+          <CompanyCard
+            title="Patents"
+            data={formatSection(company?.["Patents"])}
+          />
         </ScrollReveal>
 
         <ScrollReveal id="financials">
-          {company.financials && (
-            <CompanyCard
-              title={company.financials.title}
-              data={company.financials.data}
-            />
-          )}
+          <CompanyCard
+            title="Financials"
+            data={formatSection(company?.["Financials"])}
+          />
         </ScrollReveal>
 
-        <ScrollReveal id="products">
-          <h2 className="pb-4">{company.products?.title}</h2>
-          {company.products?.data.length > 0 ? (
+        {/* <ScrollReveal id="products">
+          <h2 className="pb-4">Products</h2>
+          {company?.Products?.length > 0 ? (
             <div className="flex flex-wrap gap-6 justify-center">
-              {company.products.data.map((product, index) => (
+              {company.Products.map((product, index) => (
                 <CompanyProductStatCard key={index} product={product} />
               ))}
             </div>
           ) : (
             <p>No products available for this company.</p>
           )}
-        </ScrollReveal>
+        </ScrollReveal> */}
       </div>
     </div>
   )
+}
+
+// 🛠 Utility Functions
+
+function formatStats(company) {
+  return [
+    { label: "Industry", value: company?.Industry?.join(", ") || "N/A" },
+    { label: "Funding Amount", value: company?.["Funding Amount"] || "N/A" },
+    { label: "Funding Stage", value: company?.["Funding Stage"] || "N/A" },
+    { label: "Employees", value: company?.Employees || "N/A" },
+    { label: "Year Founded", value: company?.["Year Founded"] || "N/A" },
+    { label: "HQ", value: company?.HQ || "N/A" },
+  ]
+}
+
+function formatSection(data) {
+  if (!data) return []
+  return Array.isArray(data) ? data.map((item) => ({ name: item })) : []
 }

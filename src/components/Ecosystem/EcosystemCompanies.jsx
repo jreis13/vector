@@ -26,11 +26,11 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
 
   const companiesPerPage = 6
 
-  const filteredCompanies = filterCompanies(companies || [], filters, {
-    industryOptions,
-    fundingStageOptions,
-    fundingAmountRanges,
-  })
+  const filteredCompanies = filterCompanies(
+    companies || [],
+    filters,
+    fundingAmountRanges
+  )
 
   const totalFilteredPages = Math.ceil(
     filteredCompanies.length / companiesPerPage

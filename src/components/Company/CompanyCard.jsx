@@ -49,7 +49,24 @@ export default function CompanyCard({ title, data }) {
 }
 
 function CardContent({ item, title }) {
-  const IconComponent = icons[item.icon]
+  const rawName = item.name || "Unknown"
+  const parts = rawName.split("_")
+  const displayName = parts[0].trim()
+  const iconKey = parts[1] ? parts[1].trim() : "questionIcon"
+
+  const finalIcon =
+    title === "Founding Team"
+      ? "personIcon"
+      : title === "Patents"
+        ? "patentIcon"
+        : iconKey
+
+  const [label, value] = displayName.includes(" - ")
+    ? displayName.split(" - ").map((s) => s.trim())
+    : [displayName, ""]
+
+  const IconComponent = icons[finalIcon] || icons["questionIcon"]
+
   const [showSource, setShowSource] = useState(false)
   const sourceRef = useRef(null)
 
@@ -98,7 +115,7 @@ function CardContent({ item, title }) {
         {IconComponent ? (
           <Image
             src={IconComponent}
-            alt={item.icon}
+            alt={label}
             height={48}
             width={48}
             className="w-16 h-16"
@@ -106,7 +123,7 @@ function CardContent({ item, title }) {
         ) : (
           <Image
             src={item.photo || item.logo || placeholder}
-            alt={`${item.name} photo`}
+            alt={`${label} photo`}
             width={100}
             height={100}
             objectFit={title === "Founding Team" ? undefined : "contain"}
@@ -114,13 +131,12 @@ function CardContent({ item, title }) {
         )}
       </div>
       <div className="text-center">
-        <span className="block font-semibold text-xl">{item.name}</span>
+        <span className="block font-semibold text-xl">
+          {title === "Patents" ? "Number of Patents" : label}
+        </span>
         <p className="text-[#b8b8b8] text-lg font-medium">
-          {item.title || item.description}
+          {title === "Patents" ? label : value}
         </p>
-        {item.value && (
-          <p className="mt-2 text-xl font-semibold">{item.value}</p>
-        )}
       </div>
     </div>
   )

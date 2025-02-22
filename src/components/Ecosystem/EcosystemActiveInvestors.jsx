@@ -30,8 +30,6 @@ export default function EcosystemActiveInvestors({ keyInvestors, data }) {
     link: investor.link || investor["Link"] || "#",
   }))
 
-  console.log("🔥 All Investors Before Filtering:", allInvestors)
-
   const [filters, setFilters] = useState({ type: "", stages: "", country: "" })
 
   const filteredInvestors = allInvestors.filter((investor) => {
@@ -51,8 +49,6 @@ export default function EcosystemActiveInvestors({ keyInvestors, data }) {
 
     return matchesType && matchesStages && matchesCountry
   })
-
-  console.log("✅ Filtered Investors:", filteredInvestors)
 
   const [currentPage, setCurrentPage] = useState(0)
   const investorsPerPage = 9
