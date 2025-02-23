@@ -36,7 +36,7 @@ async function fetchFromAirtable(table, baseId, ecosystemId) {
       filterFormula = `SEARCH("${ecosystemId}", {Ecosystem ID})`
     }
 
-    let url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula=${encodeURIComponent(filterFormula)}`
+    let url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula={Ecosystem ID}="${ecosystemId}"`
 
     if (table === AIRTABLE_COMPANIES_TABLE) {
       url += `&sort[0][field]=Company ID&sort[0][direction]=asc`
@@ -141,9 +141,8 @@ export default async function handler(req, res) {
           ? company["Logo"][0].url
           : company["Logo"]
         : "/placeholder.png",
-      industry: company["Industry"] || "Not specified",
-      fundingAmount: company["Funding Amount"] || "Not available",
-      fundingStage: company["Funding Stage"] || "Not specified",
+      fundingAmount: company["Amount Raised (from Funding Amount)"] || "N/A",
+      fundingStage: company["Funding Round (from Funding Stage)"] || "N/A",
       keyInvestors: company["Key Investors"] || [],
     }))
 

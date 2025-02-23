@@ -17,21 +17,30 @@ export default function CompanyCard({
   const router = useRouter()
   const descriptionLimit = 30
 
-  const normalizeName = (name) => name.replace(/\s+/g, "").toLowerCase()
+  const normalizeNameForURL = (name) => name.toLowerCase().replace(/\s+/g, "")
 
   const handleCardClick = (event) => {
-    if (isClickable) {
-      const normalizedEcosystemName = normalizeName(ecosystemName)
-      const normalizedCompanyName = normalizeName(company.name)
-      const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
+    const normalizedEcosystemName = normalizeNameForURL(ecosystemName)
+    const normalizedCompanyName = encodeURIComponent(
+      company.name.trim().toLowerCase()
+    )
 
-      if (event.ctrlKey || event.metaKey || event.button === 1) {
-        window.open(url, "_blank")
-      } else {
-        window.open(url, "_self")
-      }
+    const url = `/ecosystems/${normalizedEcosystemName}/companies/${normalizedCompanyName}`
+
+    if (event.ctrlKey || event.metaKey || event.button === 1) {
+      window.open(url, "_blank")
+    } else {
+      window.open(url, "_self")
     }
   }
+
+  const fundingAmount = Array.isArray(company?.fundingAmount)
+    ? company.fundingAmount[0]
+    : company?.fundingAmount || "N/A"
+
+  const fundingStage = Array.isArray(company?.fundingStage)
+    ? company.fundingStage[0]
+    : company?.fundingStage || "N/A"
 
   return (
     <div
@@ -64,16 +73,12 @@ export default function CompanyCard({
       <div className="mt-4 flex flex-col justify-end">
         <div className="py-2">
           <div className="flex justify-between">
-            <span>Industry:</span>
-            <span>{company.industry}</span>
-          </div>
-          <div className="flex justify-between">
             <span>Funding Amount:</span>
-            <span>{company.fundingAmount}</span>
+            <span>{fundingAmount}</span>{" "}
           </div>
           <div className="flex justify-between">
             <span>Funding Stage:</span>
-            <span>{company.fundingStage}</span>
+            <span>{fundingStage}</span>
           </div>
         </div>
       </div>
