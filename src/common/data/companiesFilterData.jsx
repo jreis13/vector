@@ -1,12 +1,3 @@
-export const industryOptions = [
-  { label: "Aerospace", keywords: ["Aerospace"] },
-  { label: "Aviation", keywords: ["Aviation"] },
-  { label: "Defense", keywords: ["Defense"] },
-  { label: "Space", keywords: ["Space"] },
-  { label: "Urban Air Mobility", keywords: ["Urban Air Mobility"] },
-  { label: "EVTOL", keywords: ["EVTOL"] },
-]
-
 export const fundingStageOptions = [
   { label: "Seed", keywords: ["Early Stage", "Seed"] },
   {
