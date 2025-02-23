@@ -10,7 +10,6 @@ import { useState } from "react"
 import {
   fundingAmountRanges,
   fundingStageOptions,
-  industryOptions,
 } from "../../common/data/companiesFilterData"
 import { filterCompanies } from "../../common/utils/filterUtils"
 import CompanyCard from "../CompanyCard"
@@ -19,7 +18,6 @@ import EcosystemCompaniesFilter from "./EcosystemCompaniesFilter"
 export default function EcosystemCompanies({ companies = [], ecosystemName }) {
   const [currentPage, setCurrentPage] = useState(0)
   const [filters, setFilters] = useState({
-    industry: "",
     fundingStage: "",
     fundingAmount: "",
   })
@@ -54,7 +52,6 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
       <EcosystemCompaniesFilter
         filters={filters}
         setFilters={setFilters}
-        industryOptions={industryOptions}
         fundingStageOptions={fundingStageOptions}
         fundingAmountRanges={fundingAmountRanges}
       />
@@ -74,7 +71,7 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
           )}
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${currentPage}-${filters.industry}-${filters.fundingStage}-${filters.fundingAmount}`}
+              key={`${currentPage}-${filters.fundingStage}-${filters.fundingAmount}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
