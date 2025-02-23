@@ -21,14 +21,14 @@ export default function CompanyDetails({ company, ecosystemName }) {
     )
   }
 
-  console.log(company)
-
   const handleBackClick = () => {
     const url = `/ecosystems/${ecosystemName}?tab=companies`
     window.open(url, "_self")
   }
 
   const companyWebsite = company?.Website || "#"
+
+  console.log("Single Company Data:", company)
 
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
@@ -75,12 +75,14 @@ export default function CompanyDetails({ company, ecosystemName }) {
           />
         </ScrollReveal>
 
-        <ScrollReveal id="investors">
-          <CompanyCard
-            title="Key Investors"
-            data={formatSection(company?.["Key Investors"])}
-          />
-        </ScrollReveal>
+        <CompanyCard
+          title="Key Investors"
+          data={formatSection(
+            company?.["Key Investors"],
+            "Key Investors",
+            company
+          )}
+        />
 
         <ScrollReveal id="customerGrowth">
           <CompanyCard
@@ -120,20 +122,52 @@ export default function CompanyDetails({ company, ecosystemName }) {
   )
 }
 
-// 🛠 Utility Functions
-
 function formatStats(company) {
   return [
-    { label: "Industry", value: company?.Industry?.join(", ") || "N/A" },
-    { label: "Funding Amount", value: company?.["Funding Amount"] || "N/A" },
-    { label: "Funding Stage", value: company?.["Funding Stage"] || "N/A" },
-    { label: "Employees", value: company?.Employees || "N/A" },
+    {
+      label: "Funding Amount",
+      value: Array.isArray(company?.["Amount Raised (from Funding Amount)"])
+        ? company["Amount Raised (from Funding Amount)"][0]
+        : company?.["Amount Raised (from Funding Amount)"] || "N/A",
+    },
+    {
+      label: "Funding Stage",
+      value: Array.isArray(company?.["Funding Round (from Funding Stage)"])
+        ? company["Funding Round (from Funding Stage)"][0]
+        : company?.["Funding Round (from Funding Stage)"] || "N/A",
+    },
+    { label: "Employees", value: company?.["# of Employees"] || "N/A" },
     { label: "Year Founded", value: company?.["Year Founded"] || "N/A" },
     { label: "HQ", value: company?.HQ || "N/A" },
   ]
 }
 
-function formatSection(data) {
+function formatSection(data, title, company) {
   if (!data) return []
-  return Array.isArray(data) ? data.map((item) => ({ name: item })) : []
+
+  if (title === "Key Investors") {
+    const investorNames = company?.["Name (from Key Investors)"]
+    const investorDescriptions = company?.["Description (from Key Investors)"]
+    const investorLogos = company?.["Logo (from Key Investors)"]
+    const investorLinks = company?.["Link (from Key Investors)"]
+
+    if (Array.isArray(investorNames)) {
+      return investorNames.map((name, index) => ({
+        name,
+        description: Array.isArray(investorDescriptions)
+          ? investorDescriptions[index] || ""
+          : "",
+        logo: Array.isArray(investorLogos) ? investorLogos[index] || "" : "",
+        link: Array.isArray(investorLinks) ? investorLinks[index] || "" : "",
+      }))
+    }
+  }
+
+  if (Array.isArray(data)) {
+    return data.map((item) => ({
+      name: typeof item === "string" ? item : JSON.stringify(item),
+    }))
+  }
+
+  return [{ name: data }]
 }

@@ -92,7 +92,14 @@ function CardContent({ item, title }) {
   }, [showSource])
 
   return (
-    <div className="group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4">
+    <a
+      href={title === "Key Investors" && item.link ? item.link : undefined}
+      target={title === "Key Investors" && item.link ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      className={`group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4 ${
+        title === "Key Investors" && item.link ? "cursor-pointer" : ""
+      }`}
+    >
       <div className="absolute top-2 right-2 flex space-x-2">
         {item.source && (
           <div className="relative group">
@@ -112,32 +119,40 @@ function CardContent({ item, title }) {
         )}
       </div>
       <div className="mb-4 flex h-24 w-24 items-center justify-center">
-        {IconComponent ? (
+        {title === "Key Investors" && item.logo ? (
           <Image
-            src={IconComponent}
+            src={item.logo}
             alt={label}
-            height={48}
-            width={48}
-            className="w-16 h-16"
+            width={80} // Set a larger fixed width
+            height={80} // Set a larger fixed height
+            className="w-20 h-20 object-contain rounded-md" // Maintain aspect ratio
           />
         ) : (
           <Image
-            src={item.photo || item.logo || placeholder}
-            alt={`${label} photo`}
-            width={100}
-            height={100}
-            objectFit={title === "Founding Team" ? undefined : "contain"}
+            src={IconComponent ? IconComponent : placeholder}
+            alt={label}
+            width={80}
+            height={80}
+            className="w-20 h-20 object-contain"
           />
         )}
       </div>
       <div className="text-center">
         <span className="block font-semibold text-xl">
-          {title === "Patents" ? "Number of Patents" : label}
+          {title === "Patents"
+            ? "Number of Patents"
+            : title === "Key Investors"
+              ? item.name
+              : label}
         </span>
         <p className="text-[#b8b8b8] text-lg font-medium">
-          {title === "Patents" ? label : value}
+          {title === "Patents"
+            ? label
+            : title === "Key Investors"
+              ? item.description || ""
+              : value}
         </p>
       </div>
-    </div>
+    </a>
   )
 }
