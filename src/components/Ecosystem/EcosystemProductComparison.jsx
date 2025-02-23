@@ -3,7 +3,13 @@ import Dropdown from "../Dropdown"
 import EcosystemProductChart from "./EcosystemProductChart"
 import EcosystemProductTable from "./EcosystemProductTable"
 
-export default function EcosystemProductComparison({ companies }) {
+export default function EcosystemProductComparison({ companies, products }) {
+  console.log("Companies received in Product Comparison:", companies)
+  console.log(
+    "Products received in Product Comparison:",
+    companies.map((c) => c.products)
+  )
+
   const [xAttribute, setXAttribute] = useState("")
   const [yAttribute, setYAttribute] = useState("")
   const [graphType, setGraphType] = useState("")
@@ -16,10 +22,15 @@ export default function EcosystemProductComparison({ companies }) {
 
   const groupedProducts =
     companies
-      ?.filter((company) => company.products?.data?.length > 0)
+      ?.filter(
+        (company) =>
+          company.products &&
+          Array.isArray(company.products.data) &&
+          company.products.data.length > 0
+      )
       .map((company) => ({
         companyName: company.name,
-        products: company.products.data,
+        products: company.products.data, // ✅ Extract products from the `data` array
       })) || []
 
   const allAttributes = new Set()
@@ -94,6 +105,7 @@ export default function EcosystemProductComparison({ companies }) {
   const yData = yAttribute ? extractNumericData(yAttribute) : []
 
   if (!companies || companies.length === 0 || groupedProducts.length === 0) {
+    console.warn("⚠️ No products available for comparison!")
     return <div>No products available for comparison</div>
   }
 

@@ -3,17 +3,12 @@ import AWS from "aws-sdk"
 const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
 const AIRTABLE_ECOSYSTEMS_BASE_ID = process.env.AIRTABLE_ECOSYSTEMS_BASE_ID
 const AIRTABLE_COMPANIES_BASE_ID = process.env.AIRTABLE_COMPANIES_BASE_ID
-const AIRTABLE_COUNTRIES_BASE_ID = process.env.AIRTABLE_COUNTRIES_BASE_ID
 const AIRTABLE_ACTIVE_INVESTORS_BASE_ID =
   process.env.AIRTABLE_ACTIVE_INVESTORS_BASE_ID
-const AIRTABLE_KEY_INVESTORS_BASE_ID =
-  process.env.AIRTABLE_KEY_INVESTORS_BASE_ID
 
 const AIRTABLE_COMPANIES_TABLE = process.env.AIRTABLE_COMPANIES_TABLE
 const AIRTABLE_ACTIVE_INVESTORS_TABLE =
   process.env.AIRTABLE_ACTIVE_INVESTORS_TABLE
-const AIRTABLE_COUNTRY_PROFILES_TABLE =
-  process.env.AIRTABLE_COUNTRY_PROFILES_TABLE
 const AIRTABLE_KEY_INVESTORS_TABLE = process.env.AIRTABLE_KEY_INVESTORS_TABLE
 
 const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME
@@ -30,20 +25,10 @@ async function fetchFromAirtable(table, baseId, ecosystemId) {
     if (!baseId) throw new Error(`Base ID missing for table: ${table}`)
     if (!table) throw new Error(`Table name missing for base: ${baseId}`)
 
-    let filterFormula = `{Ecosystem ID}="${ecosystemId}"`
-
-    if (table === AIRTABLE_ACTIVE_INVESTORS_TABLE) {
-      filterFormula = `SEARCH("${ecosystemId}", {Ecosystem ID})`
-    }
-
     let url = `https://api.airtable.com/v0/${baseId}/${table}?filterByFormula={Ecosystem ID}="${ecosystemId}"`
 
     if (table === AIRTABLE_COMPANIES_TABLE) {
       url += `&sort[0][field]=Company ID&sort[0][direction]=asc`
-    }
-
-    if (table === AIRTABLE_ACTIVE_INVESTORS_TABLE) {
-      url += `&sort[0][field]=Date&sort[0][direction]=desc`
     }
 
     const response = await fetch(url, {
@@ -70,7 +55,6 @@ async function fetchFromS3() {
   try {
     const params = { Bucket: S3_BUCKET_NAME, Key: S3_ECOSYSTEMS_KEY }
     const data = await s3.getObject(params).promise()
-
     return JSON.parse(data.Body.toString("utf-8"))
   } catch (error) {
     console.error("❌ Error fetching from S3:", error.message)
@@ -108,31 +92,19 @@ export default async function handler(req, res) {
 
     const ecosystemId = ecosystemData.id.toString()
 
-    const [companies, countryProfiles, activeInvestors, keyInvestors] =
-      await Promise.all([
-        fetchFromAirtable(
-          AIRTABLE_COMPANIES_TABLE,
-          AIRTABLE_COMPANIES_BASE_ID,
-          ecosystemId
-        ),
-        fetchFromAirtable(
-          AIRTABLE_COUNTRY_PROFILES_TABLE,
-          AIRTABLE_COUNTRIES_BASE_ID,
-          ecosystemId
-        ),
-        fetchFromAirtable(
-          AIRTABLE_ACTIVE_INVESTORS_TABLE,
-          AIRTABLE_ACTIVE_INVESTORS_BASE_ID,
-          ecosystemId
-        ),
-        fetchFromAirtable(
-          AIRTABLE_KEY_INVESTORS_TABLE,
-          AIRTABLE_ACTIVE_INVESTORS_BASE_ID,
-          ecosystemId
-        ),
-      ])
+    const airtableCompanies = await fetchFromAirtable(
+      AIRTABLE_COMPANIES_TABLE,
+      AIRTABLE_COMPANIES_BASE_ID,
+      ecosystemId
+    )
 
-    const formattedCompanies = companies.map((company) => ({
+    const keyInvestors = await fetchFromAirtable(
+      AIRTABLE_KEY_INVESTORS_TABLE,
+      AIRTABLE_ACTIVE_INVESTORS_BASE_ID,
+      ecosystemId
+    )
+
+    const formattedAirtableCompanies = airtableCompanies.map((company) => ({
       id: company["Company ID"] || "Unknown",
       name: company["Company Name"] || "Unknown",
       summary: company["Company Summary"] || "No summary available",
@@ -147,16 +119,6 @@ export default async function handler(req, res) {
       keyInvestors: company["Key Investors"] || [],
     }))
 
-    const formattedActiveInvestors = activeInvestors.map((investor) => ({
-      companyName: investor["Company"] || "Unknown",
-      name: investor["Name"] || "Unknown",
-      fundingRound: investor["Funding Round"] || "Not specified",
-      leadInvestor: investor["Lead Investor"] || "N/A",
-      amount: investor["Text Amount"] || "N/A",
-      date: investor["Date"] || "N/A",
-      comments: investor["Comments"] || "N/A",
-    }))
-
     const formattedKeyInvestors = keyInvestors.map((investor) => ({
       name: investor["Name"] || "Unknown",
       logo: investor["Logo"] || "/placeholder.png",
@@ -166,12 +128,18 @@ export default async function handler(req, res) {
       link: investor["Link"] || "#",
     }))
 
+    const companiesWithProducts = ecosystemData.companies || []
+
+    const products = companiesWithProducts.flatMap(
+      (company) => company.products?.data || []
+    )
+
     return res.status(200).json({
       ...ecosystemData,
-      companies: formattedCompanies,
-      countryProfiles,
-      activeInvestors: formattedActiveInvestors,
+      companies: companiesWithProducts,
+      airtableCompanies: formattedAirtableCompanies,
       keyInvestors: formattedKeyInvestors,
+      products,
     })
   } catch (error) {
     console.error("❌ Error fetching ecosystem:", error.message)

@@ -5,8 +5,6 @@ import { useEffect, useState } from "react"
 
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCompanies from "./EcosystemCompanies"
-import EcosystemCountryProfilesDashboard from "./EcosystemCountryProfilesDashboard"
-import EcosystemCountryProfilesMap from "./EcosystemCountryProfilesMap"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemMarketResearch from "./EcosystemMarketResearch"
 import EcosystemOverview from "./EcosystemOverview"
@@ -41,10 +39,6 @@ export default function EcosystemDetails({ ecosystem }) {
     setCurrentTab(initialTab)
   }, [initialTab])
 
-  useEffect(() => {
-    setCurrentTab(initialTab)
-  }, [initialTab])
-
   return (
     <div>
       <EcosystemTabs
@@ -59,32 +53,22 @@ export default function EcosystemDetails({ ecosystem }) {
         )}
         {currentTab === "companies" && (
           <EcosystemCompanies
-            companies={ecosystem.companies}
+            companies={ecosystem.airtableCompanies}
             ecosystemName={ecosystem.name}
           />
         )}
-        {currentTab === "countryProfiles" && (
-          <div>
-            <EcosystemCountryProfilesMap
-              companies={ecosystem?.companies || []}
-              countryReports={ecosystem?.countryReports || {}}
-              ecosystemName={ecosystem.name}
-            />
-            <EcosystemCountryProfilesDashboard
-              ecosystemName={ecosystem.name}
-              ecosystem={ecosystem}
-            />
-          </div>
-        )}
         {currentTab === "activeInvestors" && (
           <EcosystemActiveInvestors
-            companies={ecosystem.companies}
+            companies={ecosystem.airtableCompanies}
             data={ecosystem.activeInvestors}
             keyInvestors={ecosystem.keyInvestors}
           />
         )}
         {currentTab === "productComparison" && (
-          <EcosystemProductComparison companies={ecosystem.companies} />
+          <EcosystemProductComparison
+            companies={ecosystem.companies}
+            products={ecosystem.products}
+          />
         )}
         {currentTab === "infrastructure" && (
           <EcosystemInfrastructure ecosystem={ecosystem} />
