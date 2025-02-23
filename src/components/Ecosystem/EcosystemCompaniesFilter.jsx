@@ -9,7 +9,6 @@ import { useState } from "react"
 export default function EcosystemCompaniesFilter({
   filters,
   setFilters,
-  industryOptions,
   fundingStageOptions,
   fundingAmountRanges,
 }) {
@@ -24,7 +23,6 @@ export default function EcosystemCompaniesFilter({
 
   const clearFilters = () => {
     setFilters({
-      industry: "",
       fundingStage: "",
       fundingAmount: "",
     })
@@ -45,23 +43,6 @@ export default function EcosystemCompaniesFilter({
         </motion.button>
       ) : (
         <motion.div className="flex gap-4 items-center">
-          <div className="flex gap-4 items-center">
-            <h3>Industry:</h3>
-            <motion.select
-              whileHover={{ scale: 1.05 }}
-              onChange={(e) => handleFilterChange("industry", e.target.value)}
-              value={filters.industry}
-              className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
-            >
-              <option value="">All Industries</option>
-              {industryOptions.map((option) => (
-                <option key={option.label} value={option.label}>
-                  {option.label}
-                </option>
-              ))}
-            </motion.select>
-          </div>
-
           <div className="flex gap-4 items-center">
             <h3>Funding Stage:</h3>
             <motion.select
