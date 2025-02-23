@@ -47,8 +47,6 @@ async function fetchFinancials(financialIds) {
 async function fetchCustomerGrowth(companyName) {
   if (!companyName) return []
 
-  console.log("🔍 Fetching Customer Growth for Company:", companyName)
-
   const url = `https://api.airtable.com/v0/${AIRTABLE_COMPANIES_BASE_ID}/${AIRTABLE_CUSTOMERS_TABLE}?filterByFormula=LOWER({Company})="${companyName.toLowerCase()}"`
 
   try {
@@ -57,10 +55,6 @@ async function fetchCustomerGrowth(companyName) {
     })
 
     const data = await response.json()
-    console.log(
-      "📥 Airtable Response for Customer Growth:",
-      JSON.stringify(data, null, 2)
-    )
 
     if (!response.ok || !data.records.length) {
       console.warn("⚠️ No Customer Growth Data Found for:", companyName)
@@ -75,10 +69,6 @@ async function fetchCustomerGrowth(companyName) {
       orderDate: record.fields["Order Date"] || "N/A",
     }))
 
-    console.log(
-      "✅ Formatted Customer Growth Data:",
-      JSON.stringify(formattedData, null, 2)
-    )
     return formattedData
   } catch (error) {
     console.error("❌ Error fetching Customer Growth:", error.message)
