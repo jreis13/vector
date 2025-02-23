@@ -30,7 +30,7 @@ export default function EcosystemProductComparison({ companies, products }) {
       )
       .map((company) => ({
         companyName: company.name,
-        products: company.products.data, // ✅ Extract products from the `data` array
+        products: company.products.data,
       })) || []
 
   const allAttributes = new Set()
