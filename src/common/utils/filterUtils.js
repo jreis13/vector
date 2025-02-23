@@ -1,19 +1,3 @@
-export const parseFundingAmount = (amount) => {
-  if (!amount) return 0
-
-  const numericPart = parseFloat(amount.replace(/[^0-9.]/g, ""))
-  const isBillion = amount.toLowerCase().includes("b")
-  const isMillion = amount.toLowerCase().includes("m")
-
-  if (isBillion) {
-    return numericPart * 1e9
-  } else if (isMillion) {
-    return numericPart * 1e6
-  }
-
-  return numericPart
-}
-
 export const extractStat = (company, label) => {
   const stat = company.stats?.data?.find((stat) => stat.label === label)
   return stat ? stat.value : ""
@@ -21,21 +5,17 @@ export const extractStat = (company, label) => {
 
 export const filterCompanies = (companies, filters, fundingAmountRanges) => {
   return companies.filter((company) => {
-    const industry = company.industry || []
-    const fundingStage = (company.fundingStage || "").toLowerCase()
-    const fundingAmountRaw = company.fundingAmount || ""
-    const fundingAmount = parseFundingAmount(fundingAmountRaw)
+    const fundingStage = Array.isArray(company.fundingStage)
+      ? company.fundingStage[0] || ""
+      : company.fundingStage || ""
 
-    const matchesIndustry =
-      !filters.industry ||
-      (Array.isArray(industry) &&
-        industry.some(
-          (ind) => ind.toLowerCase() === filters.industry.toLowerCase()
-        ))
+    const fundingAmountRaw = Array.isArray(company.fundingAmount)
+      ? company.fundingAmount[0] || ""
+      : company.fundingAmount || ""
 
     const matchesFundingStage =
       !filters.fundingStage ||
-      fundingStage.includes(filters.fundingStage.toLowerCase())
+      fundingStage.toLowerCase() === filters.fundingStage.toLowerCase()
 
     const matchesFundingAmount =
       !filters.fundingAmount ||
@@ -45,11 +25,11 @@ export const filterCompanies = (companies, filters, fundingAmountRanges) => {
         )
         return (
           selectedRange &&
-          fundingAmount >= selectedRange.min &&
-          fundingAmount <= selectedRange.max
+          Number(fundingAmountRaw) >= selectedRange.min &&
+          Number(fundingAmountRaw) <= selectedRange.max
         )
       })()
 
-    return matchesIndustry && matchesFundingStage && matchesFundingAmount
+    return matchesFundingStage && matchesFundingAmount
   })
 }
