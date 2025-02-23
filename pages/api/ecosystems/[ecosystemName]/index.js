@@ -127,7 +127,7 @@ export default async function handler(req, res) {
         ),
         fetchFromAirtable(
           AIRTABLE_KEY_INVESTORS_TABLE,
-          AIRTABLE_KEY_INVESTORS_BASE_ID,
+          AIRTABLE_ACTIVE_INVESTORS_BASE_ID,
           ecosystemId
         ),
       ])
