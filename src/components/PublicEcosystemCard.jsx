@@ -16,7 +16,7 @@ export default function PublicEcosystemCard({ ecosystem }) {
   const router = useRouter()
 
   const handleSubscribe = (e) => {
-    e.stopPropagation() // Prevents triggering card click
+    e.stopPropagation()
     const currentPath = encodeURIComponent(window.location.pathname)
     router.push(`/api/auth/login?returnTo=${currentPath}`)
   }

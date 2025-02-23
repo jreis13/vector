@@ -18,7 +18,7 @@ export default function EcosystemActiveInvestorsFilter({
   const handleFilterChange = (filterType, value) => {
     setFilters((prev) => ({
       ...prev,
-      [filterType]: value, // ✅ Always update the value (not toggle)
+      [filterType]: value,
     }))
   }
 
@@ -28,7 +28,7 @@ export default function EcosystemActiveInvestorsFilter({
       stages: "",
       country: "",
     })
-    setIsExpanded(false) // ✅ Close filters after clearing
+    setIsExpanded(false)
   }
 
   return (
@@ -55,7 +55,6 @@ export default function EcosystemActiveInvestorsFilter({
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.5 }}
             >
-              {/* ✅ Type Filter */}
               <motion.div className="flex gap-4 items-center">
                 <h3>Type:</h3>
                 <select

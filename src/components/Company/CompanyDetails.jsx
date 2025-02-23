@@ -164,7 +164,7 @@ function formatSection(data, title, company) {
         description:
           parsedItem.value !== undefined ? parsedItem.value.toString() : "N/A",
         source: parsedItem.year ? `Year: ${parsedItem.year}` : "N/A",
-        icon: parsedItem.Icon || "questionIcon", // Use the icon from Airtable, default to "?"
+        icon: parsedItem.Icon || "questionIcon",
       }
     })
   }

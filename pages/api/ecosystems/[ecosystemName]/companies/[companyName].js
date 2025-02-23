@@ -1,7 +1,7 @@
 const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
 const AIRTABLE_COMPANIES_BASE_ID = process.env.AIRTABLE_COMPANIES_BASE_ID
 const AIRTABLE_COMPANIES_TABLE = process.env.AIRTABLE_COMPANIES_TABLE
-const AIRTABLE_FINANCIALS_TABLE = process.env.AIRTABLE_FINANCIALS_TABLE // Financials table
+const AIRTABLE_FINANCIALS_TABLE = process.env.AIRTABLE_FINANCIALS_TABLE
 
 async function fetchFinancials(financialIds) {
   if (!financialIds || financialIds.length === 0) return []
@@ -27,10 +27,9 @@ async function fetchFinancials(financialIds) {
         textValue: record.fields.TextValue || "N/A",
       }
 
-      // ✅ Ensure financialData is not a stringified JSON object
       if (typeof financialData === "string") {
         try {
-          financialData = JSON.parse(financialData) // Attempt to parse if needed
+          financialData = JSON.parse(financialData)
         } catch (error) {
           console.error("❌ Error parsing financial data:", error)
         }
