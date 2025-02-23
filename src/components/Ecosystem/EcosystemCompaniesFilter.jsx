@@ -10,7 +10,8 @@ export default function EcosystemCompaniesFilter({
   filters,
   setFilters,
   fundingStageOptions,
-  fundingAmountRanges,
+  typeOptions,
+  industryOptions,
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -25,6 +26,8 @@ export default function EcosystemCompaniesFilter({
     setFilters({
       fundingStage: "",
       fundingAmount: "",
+      type: "",
+      industry: "",
     })
   }
 
@@ -44,6 +47,40 @@ export default function EcosystemCompaniesFilter({
       ) : (
         <motion.div className="flex gap-4 items-center">
           <div className="flex gap-4 items-center">
+            <h3>Industry:</h3>
+            <motion.select
+              whileHover={{ scale: 1.05 }}
+              onChange={(e) => handleFilterChange("industry", e.target.value)}
+              value={filters.industry}
+              className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
+            >
+              <option value="">All Industries</option>
+              {industryOptions.map((option) => (
+                <option key={option.label} value={option.label}>
+                  {option.label}
+                </option>
+              ))}
+            </motion.select>
+          </div>
+
+          <div className="flex gap-4 items-center">
+            <h3>Type:</h3>
+            <motion.select
+              whileHover={{ scale: 1.05 }}
+              onChange={(e) => handleFilterChange("type", e.target.value)}
+              value={filters.type}
+              className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
+            >
+              <option value="">All Types</option>
+              {typeOptions.map((option) => (
+                <option key={option.label} value={option.label}>
+                  {option.label}
+                </option>
+              ))}
+            </motion.select>
+          </div>
+
+          <div className="flex gap-4 items-center">
             <h3>Funding Stage:</h3>
             <motion.select
               whileHover={{ scale: 1.05 }}
@@ -62,25 +99,6 @@ export default function EcosystemCompaniesFilter({
             </motion.select>
           </div>
 
-          <div className="flex gap-4 items-center">
-            <h3>Funding Amount:</h3>
-            <motion.select
-              whileHover={{ scale: 1.05 }}
-              onChange={(e) =>
-                handleFilterChange("fundingAmount", e.target.value)
-              }
-              value={filters.fundingAmount}
-              className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
-            >
-              <option value="">Any</option>
-              {fundingAmountRanges.map((range) => (
-                <option key={range.label} value={range.label}>
-                  {range.label}
-                </option>
-              ))}
-            </motion.select>
-          </div>
-
           <motion.button
             onClick={clearFilters}
             className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
@@ -88,6 +106,7 @@ export default function EcosystemCompaniesFilter({
           >
             Clear Filters
           </motion.button>
+
           <motion.button
             onClick={() => setIsExpanded(false)}
             className="text-[#e8e8e8] focus:outline-none h-fit"

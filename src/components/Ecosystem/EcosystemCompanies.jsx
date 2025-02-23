@@ -10,6 +10,8 @@ import { useState } from "react"
 import {
   fundingAmountRanges,
   fundingStageOptions,
+  industryOptions,
+  typeOptions,
 } from "../../common/data/companiesFilterData"
 import { filterCompanies } from "../../common/utils/filterUtils"
 import CompanyCard from "../CompanyCard"
@@ -54,6 +56,8 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
         setFilters={setFilters}
         fundingStageOptions={fundingStageOptions}
         fundingAmountRanges={fundingAmountRanges}
+        typeOptions={typeOptions}
+        industryOptions={industryOptions}
       />
 
       {filteredCompanies.length === 0 ? (

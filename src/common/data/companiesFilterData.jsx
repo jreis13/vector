@@ -19,6 +19,12 @@ export const fundingStageOptions = [
   { label: "Public", keywords: ["IPO", "Public", "Post IPO"] },
 ]
 
+export const typeOptions = [
+  { label: "Manufacturer", keywords: ["Manufacturer"] },
+]
+
+export const industryOptions = [{ label: "eVTOL", keywords: ["eVTOL"] }]
+
 export const fundingAmountRanges = [
   { label: "< $1M", min: 0, max: 1000000 },
   { label: "$1M - $10M", min: 1000000, max: 10000000 },

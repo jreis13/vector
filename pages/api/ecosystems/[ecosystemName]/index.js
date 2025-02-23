@@ -141,7 +141,8 @@ export default async function handler(req, res) {
           ? company["Logo"][0].url
           : company["Logo"]
         : "/placeholder.png",
-      fundingAmount: company["Amount Raised (from Funding Amount)"] || "N/A",
+      type: company["Type"] || "N/A",
+      industry: company["Industry"] || "N/A",
       fundingStage: company["Funding Round (from Funding Stage)"] || "N/A",
       keyInvestors: company["Key Investors"] || [],
     }))
