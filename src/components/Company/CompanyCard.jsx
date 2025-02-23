@@ -49,23 +49,37 @@ export default function CompanyCard({ title, data }) {
 }
 
 function CardContent({ item, title }) {
-  const rawName = item.name || "Unknown"
+  let parsedItem = item
+
+  if (title === "Financials" && typeof item.name === "string") {
+    try {
+      parsedItem = JSON.parse(item.name)
+    } catch (error) {
+      console.error("❌ Error parsing Financials JSON:", error)
+    }
+  }
+
+  const rawName = parsedItem.metric || item.name || "Unknown"
   const parts = rawName.split("_")
   const displayName = parts[0].trim()
-  const iconKey = parts[1] ? parts[1].trim() : "questionIcon"
 
-  const finalIcon =
-    title === "Founding Team"
-      ? "personIcon"
-      : title === "Patents"
-        ? "patentIcon"
-        : iconKey
+  let iconKey = "questionIcon"
+
+  if (title === "Patents") {
+    iconKey = "patentIcon"
+  } else if (title === "Financials" && parsedItem.icon) {
+    iconKey = parsedItem.icon
+  } else if (title === "Founding Team") {
+    iconKey = "personIcon"
+  } else if (parts[1]) {
+    iconKey = parts[1].trim()
+  }
+
+  const finalIcon = icons[iconKey] || icons["questionIcon"]
 
   const [label, value] = displayName.includes(" - ")
     ? displayName.split(" - ").map((s) => s.trim())
     : [displayName, ""]
-
-  const IconComponent = icons[finalIcon] || icons["questionIcon"]
 
   const [showSource, setShowSource] = useState(false)
   const sourceRef = useRef(null)
@@ -92,16 +106,9 @@ function CardContent({ item, title }) {
   }, [showSource])
 
   return (
-    <a
-      href={title === "Key Investors" && item.link ? item.link : undefined}
-      target={title === "Key Investors" && item.link ? "_blank" : undefined}
-      rel="noopener noreferrer"
-      className={`group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4 ${
-        title === "Key Investors" && item.link ? "cursor-pointer" : ""
-      }`}
-    >
+    <div className="group w-full h-[250px] relative flex flex-col items-center bg-[#34333d] rounded-lg p-4">
       <div className="absolute top-2 right-2 flex space-x-2">
-        {item.source && (
+        {parsedItem.source && (
           <div className="relative group">
             <button
               className="text-[#e8e8e8] p-1 rounded-full focus:outline-none"
@@ -113,23 +120,24 @@ function CardContent({ item, title }) {
               ref={sourceRef}
               className="absolute top-8 right-0 bg-[#444] text-sm text-[#e8e8e8] p-2 rounded shadow-lg w-64 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
-              <p className="block text-xs break-words">{item.source}</p>
+              <p className="block text-xs break-words">{parsedItem.source}</p>
             </div>
           </div>
         )}
       </div>
+
       <div className="mb-4 flex h-24 w-24 items-center justify-center">
-        {title === "Key Investors" && item.logo ? (
+        {title === "Key Investors" && parsedItem.logo ? (
           <Image
-            src={item.logo}
+            src={parsedItem.logo}
             alt={label}
-            width={80} // Set a larger fixed width
-            height={80} // Set a larger fixed height
-            className="w-20 h-20 object-contain rounded-md" // Maintain aspect ratio
+            width={80}
+            height={80}
+            className="w-20 h-20 object-contain rounded-md"
           />
         ) : (
           <Image
-            src={IconComponent ? IconComponent : placeholder}
+            src={finalIcon ? finalIcon : placeholder}
             alt={label}
             width={80}
             height={80}
@@ -137,22 +145,27 @@ function CardContent({ item, title }) {
           />
         )}
       </div>
+
       <div className="text-center">
         <span className="block font-semibold text-xl">
           {title === "Patents"
             ? "Number of Patents"
             : title === "Key Investors"
-              ? item.name
-              : label}
+              ? parsedItem.name
+              : title === "Financials"
+                ? parsedItem.metric || label
+                : label}
         </span>
         <p className="text-[#b8b8b8] text-lg font-medium">
           {title === "Patents"
             ? label
             : title === "Key Investors"
-              ? item.description || ""
-              : value}
+              ? parsedItem.description || ""
+              : title === "Financials"
+                ? `${parsedItem.currency || ""} ${parsedItem.textValue || "N/A"}`
+                : value}
         </p>
       </div>
-    </a>
+    </div>
   )
 }

@@ -28,8 +28,6 @@ export default function CompanyDetails({ company, ecosystemName }) {
 
   const companyWebsite = company?.Website || "#"
 
-  console.log("Single Company Data:", company)
-
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
@@ -126,9 +124,21 @@ function formatStats(company) {
   return [
     {
       label: "Funding Amount",
-      value: Array.isArray(company?.["Amount Raised (from Funding Amount)"])
-        ? company["Amount Raised (from Funding Amount)"][0]
-        : company?.["Amount Raised (from Funding Amount)"] || "N/A",
+      value: Array.isArray(company?.["Text Amount"])
+        ? company["Text Amount"][0]
+        : company?.["Text Amount"] || "N/A",
+    },
+    {
+      label: "Type",
+      value: Array.isArray(company?.Type)
+        ? company.Type[0]
+        : company?.Type || "N/A",
+    },
+    {
+      label: "Industry",
+      value: Array.isArray(company?.Industry)
+        ? company.Industry[0]
+        : company?.Industry || "N/A",
     },
     {
       label: "Funding Stage",
@@ -144,6 +154,20 @@ function formatStats(company) {
 
 function formatSection(data, title, company) {
   if (!data) return []
+
+  if (title === "Financials") {
+    return data.map((item) => {
+      let parsedItem = typeof item === "string" ? JSON.parse(item) : item
+
+      return {
+        name: parsedItem.metric || "Unknown Metric",
+        description:
+          parsedItem.value !== undefined ? parsedItem.value.toString() : "N/A",
+        source: parsedItem.year ? `Year: ${parsedItem.year}` : "N/A",
+        icon: parsedItem.Icon || "questionIcon", // Use the icon from Airtable, default to "?"
+      }
+    })
+  }
 
   if (title === "Key Investors") {
     const investorNames = company?.["Name (from Key Investors)"]

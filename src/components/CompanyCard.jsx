@@ -34,6 +34,13 @@ export default function CompanyCard({
     }
   }
 
+  const type = Array.isArray(company?.type) ? company.type[0] : company?.type
+  const industry = Array.isArray(company?.industry)
+    ? company.industry[0]
+    : company
+      ? company.industry
+      : "N/A"
+
   const fundingAmount = Array.isArray(company?.fundingAmount)
     ? company.fundingAmount[0]
     : company?.fundingAmount || "N/A"
@@ -73,8 +80,12 @@ export default function CompanyCard({
       <div className="mt-4 flex flex-col justify-end">
         <div className="py-2">
           <div className="flex justify-between">
-            <span>Funding Amount:</span>
-            <span>{fundingAmount}</span>{" "}
+            <span>Industry:</span>
+            <span>{industry}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Type:</span>
+            <span>{type}</span>
           </div>
           <div className="flex justify-between">
             <span>Funding Stage:</span>
