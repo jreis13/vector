@@ -9,6 +9,7 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCard from "./CompanyCard"
 import CompanyLatest from "./CompanyLatest"
 import CompanyStats from "./CompanyStats"
+import CompanyTable from "./CompanyTable"
 
 export default function CompanyDetails({ company, ecosystemName }) {
   const router = useRouter()
@@ -73,19 +74,21 @@ export default function CompanyDetails({ company, ecosystemName }) {
           />
         </ScrollReveal>
 
-        <CompanyCard
-          title="Key Investors"
-          data={formatSection(
-            company?.["Key Investors"],
-            "Key Investors",
-            company
-          )}
-        />
+        <ScrollReveal id="keyInvestors">
+          <CompanyCard
+            title="Key Investors"
+            data={formatSection(
+              company?.["Key Investors"],
+              "Key Investors",
+              company
+            )}
+          />
+        </ScrollReveal>
 
         <ScrollReveal id="customerGrowth">
-          <CompanyCard
+          <CompanyTable
             title="Customer Growth"
-            data={formatSection(company?.["Customer Growth"])}
+            groupedCompanies={formatCustomerGrowth(company?.CustomerGrowth)}
           />
         </ScrollReveal>
 
@@ -194,4 +197,30 @@ function formatSection(data, title, company) {
   }
 
   return [{ name: data }]
+}
+
+function formatCustomerGrowth(data) {
+  if (!data || !Array.isArray(data)) return []
+
+  const groupedData = {}
+
+  data.forEach((item) => {
+    if (!item.company) return
+
+    if (!groupedData[item.company]) {
+      groupedData[item.company] = {
+        companyName: item.company,
+        orders: [],
+      }
+    }
+
+    groupedData[item.company].orders.push({
+      aircraftType: item.aircraftType || "N/A",
+      numberOfOrders: item.numberOfOrders || "N/A",
+      buyer: item.buyer || "N/A",
+      orderDate: item.orderDate || "N/A",
+    })
+  })
+
+  return Object.values(groupedData)
 }
