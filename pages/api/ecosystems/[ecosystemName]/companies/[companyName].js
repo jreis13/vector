@@ -62,7 +62,7 @@ async function fetchCustomerGrowth(companyName) {
     }
 
     const formattedData = data.records.map((record) => ({
-      company: record.fields["Company Name (from Company)"] || "Unknown", // ✅ FIXED: Now shows correct company name
+      company: record.fields["Company Name (from Company)"] || "Unknown",
       aircraftType: record.fields["Aircraft Type"] || "N/A",
       numberOfOrders: record.fields["Number of Orders"] || "N/A",
       buyer: record.fields.Buyer || "N/A",

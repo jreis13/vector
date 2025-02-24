@@ -56,7 +56,7 @@ export default function EcosystemActiveInvestorsTable({ data }) {
         <tbody>
           {data.map((group) => (
             <tr key={group.companyName}>
-              <td className="px-6 py-4">{group.companyName}</td>
+              <td className="px-6 py-4">{group.company}</td>
               <td className="px-6 py-4">{group.name || "N/A"}</td>
               <td className="px-6 py-4">{group.fundingRound || "N/A"}</td>
               <td className="px-6 py-4">{group.leadInvestor || "N/A"}</td>
