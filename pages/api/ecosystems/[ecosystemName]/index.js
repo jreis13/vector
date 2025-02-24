@@ -5,6 +5,10 @@ const AIRTABLE_ECOSYSTEMS_BASE_ID = process.env.AIRTABLE_ECOSYSTEMS_BASE_ID
 const AIRTABLE_COMPANIES_BASE_ID = process.env.AIRTABLE_COMPANIES_BASE_ID
 const AIRTABLE_ACTIVE_INVESTORS_BASE_ID =
   process.env.AIRTABLE_ACTIVE_INVESTORS_BASE_ID
+const AIRTABLE_COUNTRIES_BASE_ID = process.env.AIRTABLE_COUNTRIES_BASE_ID
+
+const AIRTABLE_COUNTRIES_TABLE = process.env.AIRTABLE_COUNTRIES_TABLE
+const AIRTABLE_METRIC_VALUES_TABLE = process.env.AIRTABLE_METRIC_VALUES_TABLE
 
 const AIRTABLE_COMPANIES_TABLE = process.env.AIRTABLE_COMPANIES_TABLE
 const AIRTABLE_ACTIVE_INVESTORS_TABLE =
@@ -104,6 +108,24 @@ export default async function handler(req, res) {
       ecosystemId
     )
 
+    const activeInvestors = await fetchFromAirtable(
+      AIRTABLE_ACTIVE_INVESTORS_TABLE,
+      AIRTABLE_ACTIVE_INVESTORS_BASE_ID,
+      ecosystemId
+    )
+
+    const countryProfiles = await fetchFromAirtable(
+      AIRTABLE_COUNTRIES_TABLE,
+      AIRTABLE_COUNTRIES_BASE_ID,
+      ecosystemId
+    )
+
+    const metricValues = await fetchFromAirtable(
+      AIRTABLE_METRIC_VALUES_TABLE,
+      AIRTABLE_COUNTRIES_BASE_ID,
+      ecosystemId
+    )
+
     const formattedAirtableCompanies = airtableCompanies.map((company) => ({
       id: company["Company ID"] || "Unknown",
       name: company["Company Name"] || "Unknown",
@@ -128,18 +150,62 @@ export default async function handler(req, res) {
       link: investor["Link"] || "#",
     }))
 
+    const formattedActiveInvestors = activeInvestors.map((investor) => ({
+      company: investor["Company"] || "Unknown",
+      name: investor["Name"] || "Unknown",
+      fundingRound: investor["Funding Round"] || "N/A",
+      leadInvestor: investor["Lead Investor"] || "N/A",
+      amount: investor["Text Amount"] || "N/A",
+      date: investor["Date"] || "N/A",
+      comments: investor["Comments"] || "N/A",
+    }))
+
     const companiesWithProducts = ecosystemData.companies || []
 
     const products = companiesWithProducts.flatMap(
       (company) => company.products?.data || []
     )
 
+    const formattedCountryProfiles = countryProfiles.map((profile) => ({
+      countryName: profile["Country Name"] || "Unknown",
+    }))
+
+    const formattedMetricValues = metricValues
+      .filter((metric) => metric["Value"])
+      .map((metric) => ({
+        metricName: metric["Metric Name (from Metrics Linked)"] || "Unknown",
+        value: metric["Value"] || "N/A",
+        unit: metric["Unit"] || "",
+        country: metric["Country Name (from Label)"] || "Unknown",
+        icon: metric["Icon (from Metrics Linked)"] || "questionIcon",
+      }))
+
+    const selectedMetrics = []
+    const seenMetrics = new Set()
+
+    while (selectedMetrics.length < 4 && formattedMetricValues.length > 0) {
+      const metric =
+        formattedMetricValues[
+          Math.floor(Math.random() * formattedMetricValues.length)
+        ]
+
+      if (!seenMetrics.has(metric.metricName)) {
+        seenMetrics.add(metric.metricName)
+        selectedMetrics.push(metric)
+      }
+    }
+
+    console.log("Formatted Metric Values:", formattedMetricValues)
+
     return res.status(200).json({
       ...ecosystemData,
       companies: companiesWithProducts,
       airtableCompanies: formattedAirtableCompanies,
       keyInvestors: formattedKeyInvestors,
+      activeInvestors: formattedActiveInvestors,
       products,
+      countryProfiles: formattedCountryProfiles,
+      metricRankings: selectedMetrics,
     })
   } catch (error) {
     console.error("❌ Error fetching ecosystem:", error.message)

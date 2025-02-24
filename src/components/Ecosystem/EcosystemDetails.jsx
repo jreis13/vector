@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 
 import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCompanies from "./EcosystemCompanies"
+import EcosystemCountryProfilesDashboard from "./EcosystemCountryProfilesDashboard"
+import EcosystemCountryProfilesMap from "./EcosystemCountryProfilesMap"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemMarketResearch from "./EcosystemMarketResearch"
 import EcosystemOverview from "./EcosystemOverview"
@@ -57,6 +59,20 @@ export default function EcosystemDetails({ ecosystem }) {
             ecosystemName={ecosystem.name}
           />
         )}
+
+        {currentTab === "countryProfiles" && (
+          <div>
+            <EcosystemCountryProfilesMap
+              countryProfiles={ecosystem.countryProfiles} // ✅ Fix here
+              ecosystemName={ecosystem.name}
+            />
+            <EcosystemCountryProfilesDashboard
+              ecosystemName={ecosystem.name}
+              metricRankings={ecosystem.metricRankings} // ✅ Fix here
+            />
+          </div>
+        )}
+
         {currentTab === "activeInvestors" && (
           <EcosystemActiveInvestors
             companies={ecosystem.airtableCompanies}

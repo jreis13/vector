@@ -6,36 +6,23 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps"
 import Tooltip from "../Tooltip"
 
 export default function EcosystemCountryProfilesMap({
-  countryReports,
+  countryProfiles,
   ecosystemName,
 }) {
   const router = useRouter()
 
-  const groupedCountryReports = Object.keys(countryReports).reduce(
-    (acc, country) => {
-      acc[country.toLowerCase().trim()] = countryReports[country]
-      return acc
-    },
-    {}
-  )
-
-  const hasCountryReports = (countryName) => {
-    return groupedCountryReports[countryName?.toLowerCase().trim()]
+  const hasCountryProfile = (countryName) => {
+    return countryProfiles?.some(
+      (profile) =>
+        profile.countryName.toLowerCase() === countryName.toLowerCase()
+    )
   }
 
   const handleCountryClick = (geo) => {
     const { name } = geo.properties
-
-    if (!name) return
-
-    const reports = groupedCountryReports[name.toLowerCase().trim()]
-    if (reports && ecosystemName) {
-      const sanitizedEcosystemName = ecosystemName
-        .replace(/\s+/g, "")
-        .toLowerCase()
-      const sanitizedCountryName = name.replace(/\s+/g, "").toLowerCase()
+    if (hasCountryProfile(name)) {
       router.push(
-        `/ecosystems/${sanitizedEcosystemName}/countries/${sanitizedCountryName}`
+        `/ecosystems/${ecosystemName.toLowerCase().replace(/\s+/g, "")}/countries/${name.toLowerCase().replace(/\s+/g, "")}`
       )
     }
   }
@@ -65,39 +52,36 @@ export default function EcosystemCountryProfilesMap({
               {({ geographies }) =>
                 geographies.map((geo) => {
                   const country = geo.properties.name
-                  const countryHasReports = hasCountryReports(country)
+                  const countryHasProfile = hasCountryProfile(country)
 
                   return (
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
                       onClick={() =>
-                        countryHasReports && handleCountryClick(geo)
+                        countryHasProfile && handleCountryClick(geo)
                       }
                       className={
-                        countryHasReports
+                        countryHasProfile
                           ? "cursor-pointer clickable-country"
                           : "cursor-default"
                       }
                       style={{
                         default: {
-                          fill: countryHasReports ? "#6600cc" : "#D6D6DA",
+                          fill: countryHasProfile ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
-                          outline: "none",
                         },
                         hover: {
-                          fill: countryHasReports ? "#330066" : "#D6D6DA",
+                          fill: countryHasProfile ? "#330066" : "#D6D6DA",
                           stroke: "#e8e8e8",
-                          outline: "none",
                         },
                         pressed: {
-                          fill: countryHasReports ? "#6600cc" : "#D6D6DA",
+                          fill: countryHasProfile ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
-                          outline: "none",
                         },
                       }}
                       title={
-                        countryHasReports
+                        countryHasProfile
                           ? `View reports for ${country}`
                           : undefined
                       }
