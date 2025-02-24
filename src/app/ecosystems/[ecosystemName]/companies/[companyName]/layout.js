@@ -28,7 +28,6 @@ export default function RootLayout({ children }) {
       <body>
         {children}
 
-        {/* Google Tag Manager */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-16826561323"

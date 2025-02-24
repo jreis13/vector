@@ -27,7 +27,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Structured Data for Google */}
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -46,7 +45,6 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>{children}</UserProvider>
 
-        {/* Google Tag Manager */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-16826561323"
@@ -64,7 +62,6 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Iubenda Cookie Consent Scripts */}
         <Script
           id="iubenda-config"
           type="text/javascript"

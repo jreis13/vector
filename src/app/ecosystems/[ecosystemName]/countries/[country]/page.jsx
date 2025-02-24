@@ -43,8 +43,8 @@ export default function CountryPage({ params }) {
 
   return (
     <EcosystemCountryLayout
-      countryName={countryDetails.countryName}
-      reports={countryDetails.reports}
+      countryName={countryDetails.Country}
+      reports={countryDetails.Reports}
     />
   )
 }

@@ -29,7 +29,6 @@ export default function RootLayout({ children }) {
       <body>
         <UserProvider>{children}</UserProvider>
 
-        {/* Google Tag Manager */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-16826561323"
@@ -47,7 +46,6 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* Google Ads Conversion Event */}
         <Script
           id="google-event-snippet"
           strategy="afterInteractive"
