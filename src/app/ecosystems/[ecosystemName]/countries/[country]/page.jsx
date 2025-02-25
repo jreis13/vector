@@ -4,22 +4,40 @@ import { useEffect, useState } from "react"
 import "src/common/styles/_reset.css"
 import EcosystemCountryLayout from "src/layouts/EcosystemCountryLayout"
 
-export default function CountryPage({ params }) {
+export default function CountryPage({ params = {} }) {
   const { ecosystemName, country } = params
+  const decodedCountry = decodeURIComponent(country)
+
   const [countryDetails, setCountryDetails] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (
+      !ecosystemName ||
+      !decodedCountry ||
+      ecosystemName === "undefined" ||
+      decodedCountry === "undefined"
+    ) {
+      console.error("❌ Skipping API call due to invalid parameters:", {
+        ecosystemName,
+        decodedCountry,
+      })
+      return
+    }
+
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/api/ecosystems/${ecosystemName}/countries/${country}`
+          `/api/ecosystems/${encodeURIComponent(ecosystemName)}/countries/${encodeURIComponent(decodedCountry)}`
         )
-        if (!response.ok) throw new Error("Data not found")
+
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`)
         const data = await response.json()
+
         setCountryDetails(data)
       } catch (error) {
-        console.error(error)
+        console.error("❌ Fetch failed:", error)
         setCountryDetails({ error: error.message })
       } finally {
         setLoading(false)
@@ -27,7 +45,7 @@ export default function CountryPage({ params }) {
     }
 
     fetchData()
-  }, [ecosystemName, country])
+  }, [ecosystemName, decodedCountry])
 
   if (loading) {
     return (
@@ -37,14 +55,18 @@ export default function CountryPage({ params }) {
     )
   }
 
-  if (countryDetails?.error) {
-    return <div>Error: {countryDetails.error}</div>
+  if (error || !countryDetails) {
+    return (
+      <div className="text-red-500 text-center mt-10">
+        Error: {error || "Data not found"}
+      </div>
+    )
   }
 
   return (
     <EcosystemCountryLayout
-      countryName={countryDetails.Country}
-      reports={countryDetails.Reports}
+      countryName={countryDetails?.countryName || "Unknown"}
+      reports={countryDetails?.subcategories || []}
     />
   )
 }

@@ -22,7 +22,7 @@ export default function EcosystemCountryProfilesMap({
     const { name } = geo.properties
     if (hasCountryProfile(name)) {
       router.push(
-        `/ecosystems/${ecosystemName.toLowerCase().replace(/\s+/g, "")}/countries/${name.toLowerCase().replace(/\s+/g, "")}`
+        `/ecosystems/${ecosystemName.toLowerCase().replace(/\s+/g, "")}/countries/${name}`
       )
     }
   }
@@ -70,14 +70,17 @@ export default function EcosystemCountryProfilesMap({
                         default: {
                           fill: countryHasProfile ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
+                          outline: "none",
                         },
                         hover: {
                           fill: countryHasProfile ? "#330066" : "#D6D6DA",
                           stroke: "#e8e8e8",
+                          outline: "none",
                         },
                         pressed: {
                           fill: countryHasProfile ? "#6600cc" : "#D6D6DA",
                           stroke: "#e8e8e8",
+                          outline: "none",
                         },
                       }}
                       title={

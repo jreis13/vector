@@ -5,8 +5,6 @@ const AIRTABLE_SUBCATEGORIES_TABLE = process.env.AIRTABLE_SUBCATEGORIES_TABLE
 const AIRTABLE_METRICS_TABLE = process.env.AIRTABLE_METRICS_TABLE
 const AIRTABLE_METRIC_VALUES_TABLE = process.env.AIRTABLE_METRIC_VALUES_TABLE
 const AIRTABLE_CITIES_TABLE = process.env.AIRTABLE_CITIES_TABLE
-const AIRTABLE_PUBLIC_TRANSPORT_TABLE =
-  process.env.AIRTABLE_PUBLIC_TRANSPORT_TABLE
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -14,152 +12,97 @@ export default async function handler(req, res) {
   }
 
   const { ecosystemName, country } = req.query
-  if (!ecosystemName || !country) {
+
+  if (!ecosystemName || !country || country === "undefined") {
+    console.error("❌ Missing or Invalid Parameters:", {
+      ecosystemName,
+      country,
+    })
     return res
       .status(400)
-      .json({ error: "Ecosystem name and country are required" })
+      .json({ error: "Valid ecosystem name and country are required" })
   }
 
   try {
-    console.log(
-      `🔍 Fetching country profile for: ${country} in ecosystem: ${ecosystemName}`
-    )
+    const decodedCountry = decodeURIComponent(country)
 
     const countryResponse = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_COUNTRIES_TABLE}?filterByFormula={Country Name}="${decodeURIComponent(
-        country
-      )}"`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
+      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_COUNTRIES_TABLE}?filterByFormula=LOWER({Country Name})=LOWER("${decodedCountry}")`,
+      { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
     )
 
     const { records: countryRecords } = await countryResponse.json()
-    console.log(
-      "✅ Country records fetched:",
-      JSON.stringify(countryRecords, null, 2)
-    )
-
-    if (!countryRecords || countryRecords.length === 0) {
-      console.warn("⚠️ No country profile found for:", country)
+    if (!countryRecords.length) {
+      console.error("❌ Country profile not found in Airtable.")
       return res.status(404).json({ error: "Country profile not found" })
     }
 
     const countryRecord = countryRecords[0].fields
 
     const subcategoriesResponse = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_SUBCATEGORIES_TABLE}?filterByFormula=FIND("${countryRecord["Country Name"]}", {Country (Linked)})`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
+      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_SUBCATEGORIES_TABLE}?filterByFormula=FIND("${countryRecord["Country Name"]}", {Country Linked})`,
+      { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
     )
 
     const { records: subcategories } = await subcategoriesResponse.json()
-    console.log(
-      "✅ Subcategories fetched:",
-      JSON.stringify(subcategories, null, 2)
-    )
-
-    const metricIds = subcategories.flatMap(
-      (sub) => sub.fields["Metrics (Linked)"] || []
-    )
-    const metricsQuery = metricIds.map((id) => `RECORD_ID()='${id}'`).join(",")
-
-    if (!metricsQuery) {
-      console.warn("⚠️ No metrics linked to subcategories.")
-    }
 
     const metricsResponse = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRICS_TABLE}?filterByFormula=OR(${metricsQuery})`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
+      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRICS_TABLE}`,
+      { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
     )
 
     const { records: metrics } = await metricsResponse.json()
-    console.log("✅ Metrics fetched:", JSON.stringify(metrics, null, 2))
 
-    const metricValuesQuery = metrics
-      .map((metric) => `RECORD_ID()='${metric.id}'`)
-      .join(",")
     const metricValuesResponse = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRIC_VALUES_TABLE}?filterByFormula=OR(${metricValuesQuery})`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
+      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRIC_VALUES_TABLE}?filterByFormula=AND(
+        FIND("${countryRecord["Country Name"]}", {Country Name (from Label)}),
+        {Metrics Linked} != ""
+      )`,
+      { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
     )
 
     const { records: metricValues } = await metricValuesResponse.json()
-    console.log(
-      "✅ Metric Values fetched:",
-      JSON.stringify(metricValues, null, 2)
-    )
 
     const citiesResponse = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_CITIES_TABLE}?filterByFormula=FIND("${countryRecord["Country Name"]}", {Country})`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
+      { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
     )
 
     const { records: cities } = await citiesResponse.json()
-    console.log("✅ Cities fetched:", JSON.stringify(cities, null, 2))
-
-    const publicTransportResponse = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_PUBLIC_TRANSPORT_TABLE}?filterByFormula=FIND("${countryRecord["Country Name"]}", {Country Name (from Cities)})`,
-      {
-        headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` },
-      }
-    )
-
-    const { records: publicTransport } = await publicTransportResponse.json()
-    console.log(
-      "✅ Public Transport fetched:",
-      JSON.stringify(publicTransport, null, 2)
-    )
 
     const formattedCountryData = {
-      id: countryRecords[0].id,
-      countryName: countryRecord["Country Name"],
-      region: countryRecord["Region"],
+      id: countryRecords[0]?.id || "Unknown",
+      countryName: countryRecord?.["Country Name"] || "Unknown",
+      region: countryRecord?.["Region"] || "Unknown",
       subcategories: subcategories.map((sub) => ({
         name: sub.fields["Subcategory Name"],
-        metrics: (sub.fields["Metrics (Linked)"] || [])
-          .map((metricId) => {
-            const metric = metrics.find((m) => m.id === metricId)
-            if (!metric) return null
-
-            const values = metricValues.filter(
-              (mv) => mv.fields["Metrics Linked"] === metricId
+        metrics: metrics
+          .filter((metric) =>
+            metric.fields["Subcategory Linked"]?.includes(
+              sub.fields["Subcategory Name"]
             )
+          ) // 👈 Ensure the metric belongs to this subcategory
+          .map((metric) => {
+            const values = metricValues
+              .filter((mv) =>
+                mv.fields["Metric Name (from Metrics Linked)"]?.includes(
+                  metric.fields["Metric Name"]
+                )
+              )
+              .map((mv) => ({
+                value: mv.fields["Value"] || "N/A",
+                unit: mv.fields["Unit"] || "",
+              }))
+
             return {
               name: metric.fields["Metric Name"],
               type: metric.fields["Type"],
-              values: values.map((mv) => ({
-                value: mv.fields["Value"],
-                unit: mv.fields["Unit"] || "",
-                outcome: mv.fields["Outcome Name"] || "",
-                notes: mv.fields["Notes"] || "",
-              })),
+              values, // Attach value & unit properly
             }
-          })
-          .filter(Boolean),
+          }),
       })),
       cities: cities.map((city) => city.fields["Cities"]),
-      publicTransport: publicTransport.map((transport) => ({
-        city: transport.fields["City"],
-        surveyQuestion: transport.fields["Survey Question"],
-        metricName: transport.fields["Metric Name (from Survey)"],
-        answerOption: transport.fields["Answer Option"],
-        percentage: transport.fields["Percentage"],
-        year: transport.fields["Year"],
-      })),
     }
-
-    console.log(
-      "🚀 Final Country Data:",
-      JSON.stringify(formattedCountryData, null, 2)
-    )
 
     return res.status(200).json(formattedCountryData)
   } catch (error) {

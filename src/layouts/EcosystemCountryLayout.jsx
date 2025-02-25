@@ -8,16 +8,13 @@ export default function EcosystemCountryLayout({ countryName, reports }) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-
       <div className="flex-grow">
         <div className="py-12">
           <EcosystemCountryProfilesDetails
-            countryName={countryName}
-            reports={reports}
+            countryDetails={{ countryName, subcategories: reports }}
           />
         </div>
       </div>
-
       <Footer />
     </div>
   )
