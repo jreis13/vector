@@ -195,8 +195,6 @@ export default async function handler(req, res) {
       }
     }
 
-    console.log("Formatted Metric Values:", formattedMetricValues)
-
     return res.status(200).json({
       ...ecosystemData,
       companies: companiesWithProducts,
