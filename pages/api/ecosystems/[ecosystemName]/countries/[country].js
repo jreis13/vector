@@ -7,7 +7,6 @@ const AIRTABLE_METRIC_VALUES_TABLE = process.env.AIRTABLE_METRIC_VALUES_TABLE
 
 async function fetchSubcategories(countryName) {
   try {
-    // Fetch all subcategories for the given country, sorted by RECORD_ID()
     const response = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_SUBCATEGORIES_TABLE}?filterByFormula=FIND("${countryName}", {Country Linked})&sort[0][field]=Subcategory ID&sort[0][direction]=asc`,
       { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
@@ -25,7 +24,6 @@ async function fetchMetrics(subcategories) {
   try {
     if (!subcategories.length) return []
 
-    // Get IDs of subcategories
     const subcategoryNames = subcategories.map(
       (sub) => `"${sub.fields["Subcategory Name"]}"`
     )
@@ -34,7 +32,6 @@ async function fetchMetrics(subcategories) {
       .map((name) => `{Subcategory Linked}=${name}`)
       .join(", ")})`
 
-    // Fetch only metrics linked to these subcategories, sorted by "Metric ID"
     const response = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRICS_TABLE}?filterByFormula=${encodeURIComponent(
         filterFormula
@@ -70,7 +67,6 @@ export default async function handler(req, res) {
   try {
     const decodedCountry = decodeURIComponent(country)
 
-    // Fetch country record
     const countryResponse = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_COUNTRIES_TABLE}?filterByFormula=LOWER({Country Name})=LOWER("${decodedCountry}")`,
       { headers: { Authorization: `Bearer ${AIRTABLE_ACCESS_TOKEN}` } }
@@ -84,15 +80,12 @@ export default async function handler(req, res) {
 
     const countryRecord = countryRecords[0].fields
 
-    // Fetch & sort subcategories
     const subcategories = await fetchSubcategories(
       countryRecord["Country Name"]
     )
 
-    // Fetch & sort metrics
     const metrics = await fetchMetrics(subcategories)
 
-    // Fetch metric values (for the country only)
     const metricValuesResponse = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_COUNTRIES_BASE_ID}/${AIRTABLE_METRIC_VALUES_TABLE}?filterByFormula=AND(
         FIND("${countryRecord["Country Name"]}", {Country Name (from Label)}),
@@ -103,7 +96,6 @@ export default async function handler(req, res) {
 
     const { records: metricValues } = await metricValuesResponse.json()
 
-    // Include `Metric Name copy` and subtitle logic
     const formattedCountryData = {
       id: countryRecords[0]?.id || "Unknown",
       countryName: countryRecord?.["Country Name"] || "Unknown",

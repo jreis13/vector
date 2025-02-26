@@ -13,7 +13,7 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
   }
 
   return (
-    <div className="container mx-auto py-8 relative">
+    <div className="container mx-auto py-16 relative">
       <h1 className="text-4xl font-bold mb-16">
         {countryDetails.countryName || "Unknown Country"}
       </h1>
@@ -33,7 +33,6 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
                     (val) => val.value !== ""
                   )
 
-                  // If last metric and odd count, span full width
                   const isLastOddMetric =
                     sub.metrics.length % 2 !== 0 &&
                     metricIndex === sub.metrics.length - 1
