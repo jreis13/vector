@@ -8,7 +8,10 @@ export default function CompanyTable({ groupedCompanies, title }) {
           <thead>
             <tr>
               <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
-                Aircraft Type
+                Aircraft Model
+              </th>
+              <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
+                Type
               </th>
               <th className="px-6 py-3 border-b text-lg font-semibold text-[#e8e8e8]">
                 Number of Orders
@@ -31,7 +34,10 @@ export default function CompanyTable({ groupedCompanies, title }) {
                   }
                 >
                   <td className="px-6 py-4 text-[#e8e8e8] text-lg">
-                    {order.aircraftType || "N/A"}
+                    {order.model || "N/A"}
+                  </td>
+                  <td className="px-6 py-4 text-[#e8e8e8] text-lg">
+                    {order.type || "N/A"}
                   </td>
                   <td className="px-6 py-4 text-[#e8e8e8] text-lg">
                     {order.numberOfOrders || "N/A"}

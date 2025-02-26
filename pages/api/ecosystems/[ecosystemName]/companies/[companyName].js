@@ -47,7 +47,7 @@ async function fetchFinancials(financialIds) {
 async function fetchCustomerGrowth(companyName) {
   if (!companyName) return []
 
-  const url = `https://api.airtable.com/v0/${AIRTABLE_COMPANIES_BASE_ID}/${AIRTABLE_CUSTOMERS_TABLE}?filterByFormula=LOWER({Company})="${companyName.toLowerCase()}"`
+  const url = `https://api.airtable.com/v0/${AIRTABLE_COMPANIES_BASE_ID}/${AIRTABLE_CUSTOMERS_TABLE}?filterByFormula=LOWER({Companies})="${companyName.toLowerCase()}"`
 
   try {
     const response = await fetch(url, {
@@ -63,7 +63,8 @@ async function fetchCustomerGrowth(companyName) {
 
     const formattedData = data.records.map((record) => ({
       company: record.fields["Company Name (from Company)"] || "Unknown",
-      aircraftType: record.fields["Aircraft Type"] || "N/A",
+      model: record.fields["Aircraft Model"] || "N/A",
+      type: record.fields["Type"] || "N/A",
       numberOfOrders: record.fields["Number of Orders"] || "N/A",
       buyer: record.fields.Buyer || "N/A",
       orderDate: record.fields["Order Date"] || "N/A",
