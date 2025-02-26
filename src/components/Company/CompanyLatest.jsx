@@ -8,25 +8,30 @@ export default function CompanyLatest({ title, data }) {
       <div className="w-full bg-[#34333d] rounded-lg p-6 shadow-lg">
         {Array.isArray(data) && data.length > 0 ? (
           <ul className="space-y-4">
-            {data.map((item, index) => {
+            {data.flatMap((item, index) => {
               const text = item.name || ""
-              const [label, description] = text.split(" - ")
+              return text.split(";").map((entry, subIndex) => {
+                const trimmedEntry = entry.trim()
+                const [label, description] = trimmedEntry
+                  .split(" - ")
+                  .map((s) => s.trim())
 
-              return (
-                <li
-                  key={index}
-                  className="flex items-start space-x-4 rounded-lg"
-                >
-                  <FontAwesomeIcon
-                    icon={faCalendarAlt}
-                    className="text-[#6600cc] text-lg mt-1"
-                  />
-                  <div>
-                    <p className="block text-lg font-semibold">{label}</p>
-                    <p className="text-[#b8b8b8] text-base">{description}</p>
-                  </div>
-                </li>
-              )
+                return (
+                  <li
+                    key={`${index}-${subIndex}`}
+                    className="flex items-start space-x-4 rounded-lg"
+                  >
+                    <FontAwesomeIcon
+                      icon={faCalendarAlt}
+                      className="text-[#6600cc] text-lg mt-1"
+                    />
+                    <div>
+                      <p className="block text-2xl font-semibold">{label}</p>
+                      <p className="text-[#b8b8b8]">{description}</p>
+                    </div>
+                  </li>
+                )
+              })
             })}
           </ul>
         ) : (

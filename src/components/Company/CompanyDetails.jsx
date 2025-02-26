@@ -1,7 +1,4 @@
-import {
-  faCircleArrowLeft,
-  faExternalLinkAlt,
-} from "@fortawesome/free-solid-svg-icons"
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -27,8 +24,6 @@ export default function CompanyDetails({ company, ecosystemName }) {
     window.open(url, "_self")
   }
 
-  const companyWebsite = company?.Website || "#"
-
   return (
     <div className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16">
       <div>
@@ -46,14 +41,6 @@ export default function CompanyDetails({ company, ecosystemName }) {
             width={96}
             height={96}
           />
-          <a
-            href={companyWebsite}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer"
-          >
-            <FontAwesomeIcon icon={faExternalLinkAlt} />
-          </a>
         </div>
 
         <p className="pb-8 text-xl leading-8">{company?.["Company Summary"]}</p>
@@ -215,7 +202,8 @@ function formatCustomerGrowth(data) {
     }
 
     groupedData[item.company].orders.push({
-      aircraftType: item.aircraftType || "N/A",
+      model: item.model || "N/A",
+      type: item.type || "N/A",
       numberOfOrders: item.numberOfOrders || "N/A",
       buyer: item.buyer || "N/A",
       orderDate: item.orderDate || "N/A",
