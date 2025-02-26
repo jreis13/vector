@@ -3,6 +3,7 @@
 import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
 import icons from "src/common/icons/icons"
+import DynamicListCard from "./StatCards/DynamicListCard"
 import InfoCard from "./StatCards/InfoCard"
 
 export default function EcosystemCountryProfilesDetails({ countryDetails }) {
@@ -28,12 +29,11 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 {sub.metrics.map((metric, metricIndex) => {
-                  // Filter out empty values before applying grid logic
                   const validValues = metric.values.filter(
                     (val) => val.value !== ""
                   )
 
-                  // Check if it's the last odd card that should span two columns
+                  // If last metric and odd count, span full width
                   const isLastOddMetric =
                     sub.metrics.length % 2 !== 0 &&
                     metricIndex === sub.metrics.length - 1
@@ -61,27 +61,41 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
 
                       <div className="w-full">
                         {validValues.length > 0 ? (
-                          <div
-                            className={`grid ${
-                              validValues.length % 3 === 0
-                                ? "grid-cols-3"
-                                : validValues.length % 2 === 0
-                                  ? "grid-cols-2"
-                                  : "grid-cols-1"
-                            } gap-4`}
-                          >
-                            {validValues.map((val, valIndex) => (
-                              <InfoCard
-                                key={valIndex}
-                                data={{
-                                  ...metric,
-                                  value: val.value,
-                                  unit: val.unit,
-                                  notes: val.notes,
-                                }}
-                              />
-                            ))}
-                          </div>
+                          validValues.some((val) => val.value.includes(";")) ? (
+                            <DynamicListCard
+                              title={metric.name}
+                              data={validValues.flatMap((val) =>
+                                val.value.split(";")
+                              )}
+                              icon={icons[metric.icon]}
+                            />
+                          ) : (
+                            <div
+                              className={`grid ${
+                                validValues.length % 3 === 0
+                                  ? "grid-cols-3"
+                                  : validValues.length % 2 === 0
+                                    ? "grid-cols-2"
+                                    : "grid-cols-1"
+                              } gap-4`}
+                            >
+                              {validValues.map((val, valIndex) => (
+                                <InfoCard
+                                  key={valIndex}
+                                  data={{
+                                    ...metric,
+                                    value: val.value,
+                                    unit: val.unit,
+                                    notes: val.notes,
+                                    subtitle:
+                                      val.subtitle !== metric.name
+                                        ? val.subtitle
+                                        : "",
+                                  }}
+                                />
+                              ))}
+                            </div>
+                          )
                         ) : (
                           <p className="text-3xl px-2">No data available.</p>
                         )}
@@ -93,13 +107,6 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
             </div>
           </ScrollReveal>
         ))}
-
-        {/* <div className="bg-[#222] p-6 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Public Transport</h2>
-          <DynamicTransportTable
-            reports={countryDetails.publicTransport || []}
-          />
-        </div> */}
       </div>
     </div>
   )
