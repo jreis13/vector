@@ -1,140 +1,31 @@
-"use client"
-
-import Image from "next/image"
-import icons from "src/common/icons/icons"
-import PercentageChart from "./PercentageChart"
-
 export default function DynamicListCard({ data }) {
-  const renderContent = (item, index) => {
-    if (typeof item === "object" && item.type === "percentage") {
-      return (
-        <div
-          key={index}
-          className="flex flex-col items-center text-center p-4 gap-4 h-fit"
-        >
-          <PercentageChart percentage={item.percentage} />
-          <div className="flex flex-col gap-2">
-            <p className="font-bold text-lg">{item.subtitle}</p>
-            <p>{item.description}</p>
-          </div>
-        </div>
-      )
-    } else if (typeof item === "object" && item.type === "number") {
-      return (
-        <div
-          key={index}
-          className="flex flex-col items-center text-center p-4 h-fit"
-        >
-          <div className="flex flex-col items-center justify-center text-4xl mb-2">
-            {icons[item.icon] ? (
-              <Image
-                src={icons[item.icon]}
-                alt={item.subtitle || "icon"}
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain"
-              />
-            ) : item.logo ? (
-              <Image
-                src={item.logo}
-                alt={item.subtitle}
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain"
-              />
-            ) : null}
-          </div>
-          <div className="flex flex-col gap-2 text-center">
-            <p className="font-bold text-lg">{item.subtitle}</p>
-            <p className="text-3xl">{item.description}</p>
-          </div>
-        </div>
-      )
-    } else if (typeof item === "object" && item.subtitle) {
-      return (
-        <div
-          key={index}
-          className="flex flex-col items-center text-center p-4 w-full"
-        >
-          <div className="flex flex-col items-center justify-center text-4xl mb-2">
-            {icons[item.icon] ? (
-              <Image
-                src={icons[item.icon] || "/public/icons/defaultIcon.svg"}
-                alt={item.subtitle || "icon"}
-                width={50}
-                height={50}
-              />
-            ) : item.logo ? (
-              <Image
-                src={item.logo}
-                alt={item.subtitle}
-                width={50}
-                height={50}
-              />
-            ) : null}
-          </div>
-          <h3 className="font-bold text-xl">{item.subtitle}</h3>
-          {item.description && (
-            <p className="text-sm text-gray-400 mt-2">{item.description}</p>
-          )}
-        </div>
-      )
-    } else if (Array.isArray(item)) {
-      return (
-        <ul key={index} className="list-disc pl-5">
-          {item.map((nestedItem, nestedIndex) =>
-            renderContent(nestedItem, nestedIndex)
-          )}
-        </ul>
-      )
-    } else if (typeof item === "string") {
-      return (
-        <li
-          key={index}
-          className="flex flex-col items-center text-center py-4 h-fit w-fit"
-        >
-          <div className="flex flex-col items-center text-4xl text-[#6600cc]">
-            {icons[data.icon] ? (
-              <Image
-                src={icons[data.icon]}
-                alt={item}
-                width={50}
-                height={50}
-                className="rounded"
-              />
-            ) : data.logo ? (
-              <Image
-                src={data.logo}
-                alt={item}
-                width={50}
-                height={50}
-                className="rounded"
-              />
-            ) : null}
-          </div>
-          <span>{item}</span>
-        </li>
-      )
-    }
-
-    return null
-  }
-
   return (
-    <div
-      className={`grid ${
-        Array.isArray(data.value)
-          ? data.value.length === 1
-            ? "grid-cols-1 place-items-center"
-            : data.value.length % 2 === 0
-              ? "grid-cols-2"
-              : "grid-cols-3"
-          : "grid-cols-1 place-items-center"
-      } gap-6 text-center`}
-    >
-      {Array.isArray(data.value)
-        ? data.value.map((item, index) => renderContent(item, index))
-        : renderContent(data.value, 0)}
+    <div className="flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg">
+      <div className="w-full">
+        {Array.isArray(data) && data.length > 0 ? (
+          <ul className="space-y-3">
+            {data
+              .map((entry) => entry.trim())
+              .filter((entry) => entry.length > 0)
+              .map((entry, index) => {
+                let [label, description] = entry.split(" - ")
+
+                return (
+                  <li key={index} className="flex flex-col">
+                    <p className="text-xl font-semibold">{label}</p>
+                    {description && (
+                      <p className="text-[#b8b8b8]">{description}</p>
+                    )}
+                  </li>
+                )
+              })}
+          </ul>
+        ) : (
+          <p className="text-[#b8b8b8] text-lg text-center">
+            No data available.
+          </p>
+        )}
+      </div>
     </div>
   )
 }
