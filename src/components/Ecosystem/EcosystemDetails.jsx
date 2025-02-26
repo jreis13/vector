@@ -63,12 +63,12 @@ export default function EcosystemDetails({ ecosystem }) {
         {currentTab === "countryProfiles" && (
           <div>
             <EcosystemCountryProfilesMap
-              countryProfiles={ecosystem.countryProfiles} // ✅ Fix here
+              countryProfiles={ecosystem.countryProfiles}
               ecosystemName={ecosystem.name}
             />
             <EcosystemCountryProfilesDashboard
               ecosystemName={ecosystem.name}
-              metricRankings={ecosystem.metricRankings} // ✅ Fix here
+              metricRankings={ecosystem.metricRankings}
             />
           </div>
         )}
