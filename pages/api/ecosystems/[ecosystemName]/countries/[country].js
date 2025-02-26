@@ -74,14 +74,13 @@ export default async function handler(req, res) {
       id: countryRecords[0]?.id || "Unknown",
       countryName: countryRecord?.["Country Name"] || "Unknown",
       region: countryRecord?.["Region"] || "Unknown",
-      subcategories: subcategories.map((sub) => ({
-        name: sub.fields["Subcategory Name"],
-        metrics: metrics
+      subcategories: subcategories.map((sub) => {
+        let metricsInSubcategory = metrics
           .filter((metric) =>
             metric.fields["Subcategory Linked"]?.includes(
               sub.fields["Subcategory Name"]
             )
-          ) // 👈 Ensure the metric belongs to this subcategory
+          )
           .map((metric) => {
             const values = metricValues
               .filter((mv) =>
@@ -90,17 +89,35 @@ export default async function handler(req, res) {
                 )
               )
               .map((mv) => ({
-                value: mv.fields["Value"] || "N/A",
+                value: mv.fields["Value"] || "",
                 unit: mv.fields["Unit"] || "",
+                notes: mv.fields["Notes"] || "",
               }))
 
             return {
+              id: metric.id, // Use Airtable's record ID for sorting
               name: metric.fields["Metric Name"],
+              filterName: metric.fields["Metric Name copy"], // Use for filtering
               type: metric.fields["Type"],
-              values, // Attach value & unit properly
+              icon: metric.fields["Icon"],
+              values,
             }
-          }),
-      })),
+          })
+
+        metricsInSubcategory.sort((a, b) => a.id.localeCompare(b.id))
+
+        metricsInSubcategory = metricsInSubcategory.filter((metric) => {
+          return (
+            metric.filterName !== "Perception of Public Transport" ||
+            metric.filterName === metric.name
+          )
+        })
+
+        return {
+          name: sub.fields["Subcategory Name"],
+          metrics: metricsInSubcategory,
+        }
+      }),
       cities: cities.map((city) => city.fields["Cities"]),
     }
 

@@ -1,5 +1,8 @@
 "use client"
 
+import Image from "next/image"
+import ScrollReveal from "src/animations/ScrollReveal"
+import icons from "src/common/icons/icons"
 import InfoCard from "./StatCards/InfoCard"
 
 export default function EcosystemCountryProfilesDetails({ countryDetails }) {
@@ -16,44 +19,79 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
 
       <div className="space-y-16">
         {countryDetails.subcategories.map((sub, subIndex) => (
-          <div
-            key={subIndex}
-            id={sub.name?.toLowerCase()?.replace(/ /g, "-") || ""}
-          >
-            <h2 className="mb-8">{sub.name || "Unknown Subcategory"}</h2>
+          <ScrollReveal key={subIndex}>
+            <div
+              key={subIndex}
+              id={sub.name?.toLowerCase()?.replace(/ /g, "-") || ""}
+            >
+              <h2 className="mb-8">{sub.name || "Unknown Subcategory"}</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-              {sub.metrics.map((metric, metricIndex) => (
-                <div
-                  key={metricIndex}
-                  className="relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg"
-                >
-                  <div className="flex items-center justify-between w-full">
-                    <h3 className="mb-2 text-3xl">
-                      {metric.name || "Unknown Metric"}
-                    </h3>
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                {sub.metrics.map((metric, metricIndex) => {
+                  // Filter out empty values before applying grid logic
+                  const validValues = metric.values.filter(
+                    (val) => val.value !== ""
+                  )
 
-                  <div className="w-full">
-                    {metric.values.length > 0 ? (
-                      metric.values.map((val, valIndex) => (
-                        <InfoCard
-                          key={valIndex}
-                          data={{
-                            ...metric,
-                            value: val.value,
-                            unit: val.unit,
-                          }}
-                        />
-                      ))
-                    ) : (
-                      <p className="text-gray-400">No data available</p>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  // Check if it's the last odd card that should span two columns
+                  const isLastOddMetric =
+                    sub.metrics.length % 2 !== 0 &&
+                    metricIndex === sub.metrics.length - 1
+
+                  return (
+                    <div
+                      key={metricIndex}
+                      className={`relative flex flex-col h-full items-start gap-4 p-4 bg-[#34333d] rounded-lg ${
+                        isLastOddMetric ? "md:col-span-2" : ""
+                      }`}
+                    >
+                      <div className="flex items-center gap-4 w-full">
+                        {metric.icon && (
+                          <Image
+                            src={icons[metric.icon] || ""}
+                            alt={metric.name || "Unknown Metric"}
+                            height={64}
+                            width={64}
+                          />
+                        )}
+                        <h3 className="mb-2 text-3xl">
+                          {metric.name || "Unknown Metric"}
+                        </h3>
+                      </div>
+
+                      <div className="w-full">
+                        {validValues.length > 0 ? (
+                          <div
+                            className={`grid ${
+                              validValues.length % 3 === 0
+                                ? "grid-cols-3"
+                                : validValues.length % 2 === 0
+                                  ? "grid-cols-2"
+                                  : "grid-cols-1"
+                            } gap-4`}
+                          >
+                            {validValues.map((val, valIndex) => (
+                              <InfoCard
+                                key={valIndex}
+                                data={{
+                                  ...metric,
+                                  value: val.value,
+                                  unit: val.unit,
+                                  notes: val.notes,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-3xl px-2">No data available.</p>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         ))}
 
         {/* <div className="bg-[#222] p-6 rounded-lg">
