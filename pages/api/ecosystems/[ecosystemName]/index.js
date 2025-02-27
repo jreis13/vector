@@ -150,15 +150,21 @@ export default async function handler(req, res) {
       link: investor["Link"] || "#",
     }))
 
-    const formattedActiveInvestors = activeInvestors.map((investor) => ({
-      company: investor["Company"] || "Unknown",
-      name: investor["Name"] || "Unknown",
-      fundingRound: investor["Funding Round"] || "N/A",
-      leadInvestor: investor["Lead Investor"] || "N/A",
-      amount: investor["Text Amount"] || "N/A",
-      date: investor["Date"] || "N/A",
-      comments: investor["Comments"] || "N/A",
-    }))
+    const formattedActiveInvestors = activeInvestors
+      .map((investor) => ({
+        company: investor["Company"] || "Unknown",
+        name: investor["Name"] || "Unknown",
+        fundingRound: investor["Funding Round"] || "N/A",
+        leadInvestor: investor["Lead Investor"] || "N/A",
+        amount: investor["Text Amount"] || "N/A",
+        date: investor["Date"] || "N/A",
+        comments: investor["Comments"] || "N/A",
+      }))
+      .sort((a, b) => {
+        const dateA = new Date(a.date)
+        const dateB = new Date(b.date)
+        return dateB - dateA
+      })
 
     const companiesWithProducts = ecosystemData.companies || []
 
