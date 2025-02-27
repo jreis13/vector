@@ -10,14 +10,9 @@ export default function DynamicTransportTable({ perceptionData }) {
   const [tableData, setTableData] = useState([])
   const [columns, setColumns] = useState([])
 
-  if (!perceptionData) {
-    console.warn("⚠️ No Perception of Public Transport data found!")
-    return (
-      <p className="text-center text-gray-400">No report data available.</p>
-    )
-  }
-
   useEffect(() => {
+    if (!perceptionData) return
+
     const availableCategories = Object.keys(perceptionData).filter(
       (key) => key !== "type" && key !== "icon" && key !== "source"
     )
@@ -46,6 +41,13 @@ export default function DynamicTransportTable({ perceptionData }) {
       setColumns([])
     }
   }, [selectedCategory, perceptionData])
+
+  if (!perceptionData) {
+    console.warn("⚠️ No Perception of Public Transport data found!")
+    return (
+      <p className="text-center text-gray-400">No report data available.</p>
+    )
+  }
 
   return (
     <div className="flex flex-col py-8 px-6">
