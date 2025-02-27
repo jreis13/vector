@@ -3,31 +3,22 @@
 import { useEffect, useState } from "react"
 import TableCategoryFilter from "./TableCategoryFilter"
 
-export default function DynamicTransportTable({ reports, countryName }) {
-  const defaultMainCategory = "Perception of Public Transport"
+export default function DynamicTransportTable({ perceptionData }) {
   const defaultSubCategory = "Public Transport Satisfaction"
 
   const [selectedCategory, setSelectedCategory] = useState(defaultSubCategory)
   const [tableData, setTableData] = useState([])
   const [columns, setColumns] = useState([])
 
-  const countryReport = reports.find(
-    (report) => report.details && report.details[defaultMainCategory]
-  )
-
-  const perceptionReport = countryReport
-    ? countryReport.details[defaultMainCategory]
-    : null
+  if (!perceptionData) {
+    console.warn("⚠️ No Perception of Public Transport data found!")
+    return (
+      <p className="text-center text-gray-400">No report data available.</p>
+    )
+  }
 
   useEffect(() => {
-    if (!perceptionReport) {
-      console.warn("⚠️ No Perception of Public Transport data found!")
-      setTableData([])
-      setColumns([])
-      return
-    }
-
-    const availableCategories = Object.keys(perceptionReport).filter(
+    const availableCategories = Object.keys(perceptionData).filter(
       (key) => key !== "type" && key !== "icon" && key !== "source"
     )
 
@@ -39,15 +30,13 @@ export default function DynamicTransportTable({ reports, countryName }) {
       return
     }
 
-    const categoryData = perceptionReport[selectedCategory]
+    const categoryData = perceptionData[selectedCategory]
 
     if (categoryData?.data?.length > 0) {
-      const formattedData = categoryData.data.map((entry) => {
-        return {
-          city: entry.city ?? "Unknown",
-          ...entry.values,
-        }
-      })
+      const formattedData = categoryData.data.map((entry) => ({
+        city: entry.city ?? "Unknown",
+        ...entry.values,
+      }))
 
       setTableData(formattedData)
       setColumns(["city", ...Object.keys(categoryData.data[0]?.values || {})])
@@ -56,24 +45,16 @@ export default function DynamicTransportTable({ reports, countryName }) {
       setTableData([])
       setColumns([])
     }
-  }, [selectedCategory, perceptionReport])
-
-  if (!perceptionReport) {
-    return (
-      <p className="text-center text-gray-400">No report data available.</p>
-    )
-  }
+  }, [selectedCategory, perceptionData])
 
   return (
     <div className="flex flex-col py-8 px-6">
       <TableCategoryFilter
-        categories={Object.keys(perceptionReport || {})
+        categories={Object.keys(perceptionData || {})
           .filter((key) => key !== "type" && key !== "icon" && key !== "source")
           .map((category) => ({ title: category }))}
         selectedCategories={[selectedCategory]}
-        onChange={(newCategory) => {
-          setSelectedCategory(newCategory)
-        }}
+        onChange={(newCategory) => setSelectedCategory(newCategory)}
         defaultCategory={defaultSubCategory}
       />
 

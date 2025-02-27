@@ -1,3 +1,5 @@
+import { fetchPerceptionOfPublicTransport } from "./fetchPerceptionTransport"
+
 const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
 const AIRTABLE_COUNTRIES_BASE_ID = process.env.AIRTABLE_COUNTRIES_BASE_ID
 const AIRTABLE_COUNTRIES_TABLE = process.env.AIRTABLE_COUNTRIES_TABLE
@@ -96,13 +98,20 @@ export default async function handler(req, res) {
 
     const { records: metricValues } = await metricValuesResponse.json()
 
+    const perceptionData = await fetchPerceptionOfPublicTransport(
+      countryRecord["Country Name"]
+    )
+
     const formattedCountryData = {
       id: countryRecords[0]?.id || "Unknown",
       countryName: countryRecord?.["Country Name"] || "Unknown",
       region: countryRecord?.["Region"] || "Unknown",
-      subcategories: subcategories.map((sub) => ({
-        name: sub.fields["Subcategory Name"],
-        metrics: metrics
+      subcategories: subcategories.map((sub) => {
+        const isPerceptionCategory =
+          sub.fields["Subcategory Name"] ===
+          "Demographics, Workforce and Key Market Metrics"
+
+        let filteredMetrics = metrics
           .filter((metric) =>
             metric.fields["Subcategory Linked"]?.includes(
               sub.fields["Subcategory Name"]
@@ -136,12 +145,31 @@ export default async function handler(req, res) {
               values,
             }
           })
-          .filter(
-            (metric) =>
-              metric.filterName !== "Perception of Public Transport" ||
-              metric.filterName === metric.name
-          ),
-      })),
+
+        // 🔥 Remove Airtable "Perception of Public Transport" only if it's in the correct subcategory
+        if (isPerceptionCategory) {
+          filteredMetrics = filteredMetrics.filter(
+            (metric) => metric.filterName !== "Perception of Public Transport"
+          )
+        }
+
+        // 🔥 Only add Perception of Public Transport from S3 in the right subcategory
+        if (isPerceptionCategory && perceptionData) {
+          filteredMetrics.push({
+            id: "perception-public-transport",
+            name: "Perception of Public Transport",
+            type: "table",
+            icon: perceptionData.icon || "defaultTransportIcon",
+            values: [],
+            perceptionDetails: perceptionData,
+          })
+        }
+
+        return {
+          name: sub.fields["Subcategory Name"],
+          metrics: filteredMetrics,
+        }
+      }),
     }
 
     return res.status(200).json(formattedCountryData)

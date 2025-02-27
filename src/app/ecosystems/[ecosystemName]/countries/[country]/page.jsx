@@ -13,19 +13,6 @@ export default function CountryPage({ params = {} }) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (
-      !ecosystemName ||
-      !decodedCountry ||
-      ecosystemName === "undefined" ||
-      decodedCountry === "undefined"
-    ) {
-      console.error("❌ Skipping API call due to invalid parameters:", {
-        ecosystemName,
-        decodedCountry,
-      })
-      return
-    }
-
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -33,6 +20,7 @@ export default function CountryPage({ params = {} }) {
         )
 
         if (!response.ok) throw new Error(`Error: ${response.statusText}`)
+
         const data = await response.json()
 
         setCountryDetails(data)
@@ -67,6 +55,7 @@ export default function CountryPage({ params = {} }) {
     <EcosystemCountryLayout
       countryName={countryDetails?.countryName || "Unknown"}
       reports={countryDetails?.subcategories || []}
+      perceptionData={countryDetails?.perceptionOfPublicTransport || null}
     />
   )
 }

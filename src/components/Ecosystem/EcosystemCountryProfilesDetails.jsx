@@ -4,6 +4,7 @@ import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
 import icons from "src/common/icons/icons"
 import DynamicListCard from "./StatCards/DynamicListCard"
+import DynamicTransportTable from "./StatCards/DynamicTransportTable"
 import InfoCard from "./StatCards/InfoCard"
 
 export default function EcosystemCountryProfilesDetails({ countryDetails }) {
@@ -59,7 +60,13 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
                       </div>
 
                       <div className="w-full">
-                        {validValues.length > 0 ? (
+                        {/* Handle Perception of Public Transport */}
+                        {metric.name === "Perception of Public Transport" &&
+                        metric.perceptionDetails ? (
+                          <DynamicTransportTable
+                            perceptionData={metric.perceptionDetails}
+                          />
+                        ) : validValues.length > 0 ? (
                           validValues.some((val) => val.value.includes(";")) ? (
                             <DynamicListCard
                               title={metric.name}
