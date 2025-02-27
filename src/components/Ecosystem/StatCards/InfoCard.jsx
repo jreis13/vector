@@ -21,7 +21,7 @@ export default function InfoCard({ data }) {
     <div className="px-2">
       {subtitle && <p className="font-semibold">{subtitle}</p>}
 
-      <div className="flex items-end gap-1">
+      <div className="flex items-center gap-1">
         <p className={`text-2xl ${isNumber ? "number" : ""}`}>{label}</p>
         {unit && <p className="text-xl">{unit}</p>}
       </div>
