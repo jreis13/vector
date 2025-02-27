@@ -62,6 +62,21 @@ export default function EcosystemCountryProfilesDashboard({
   ecosystemName,
   metricRankings,
 }) {
+  const validMetrics = metricRankings?.filter((metric) => {
+    if (!metric.value) return false
+    const numericLabel = metric.value.toString().replace(/,/g, "").trim() // Remove commas & trim spaces
+    const isNumber = !isNaN(numericLabel) // Ensure it's a valid number
+
+    return isNumber
+  })
+
+  // Define placeholders to ensure exactly 4 cards are shown
+
+  // Merge valid metrics with placeholders and limit to exactly 4 items
+  const displayedMetrics = [...validMetrics].slice(0, 4)
+
+  console.log(validMetrics, displayedMetrics)
+
   return (
     <section className="container mx-auto px-8">
       <div className="flex gap-2">
@@ -71,7 +86,7 @@ export default function EcosystemCountryProfilesDashboard({
         <Tooltip text="This dashboard displays the top performer in the given metric" />
       </div>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 items-stretch gap-4">
-        {metricRankings?.map((metric, index) => (
+        {displayedMetrics.map((metric, index) => (
           <KpiCard
             key={index}
             title={metric.value + (metric.unit || "")}

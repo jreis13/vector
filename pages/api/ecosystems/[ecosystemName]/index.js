@@ -180,19 +180,37 @@ export default async function handler(req, res) {
         icon: metric["Icon (from Metrics Linked)"] || "questionIcon",
       }))
 
-    const selectedMetrics = []
-    const seenMetrics = new Set()
+    const metricMap = new Map()
 
-    while (selectedMetrics.length < 4 && formattedMetricValues.length > 0) {
-      const metric =
-        formattedMetricValues[
-          Math.floor(Math.random() * formattedMetricValues.length)
-        ]
-
-      if (!seenMetrics.has(metric.metricName)) {
-        seenMetrics.add(metric.metricName)
-        selectedMetrics.push(metric)
+    // Step 1: Store only the highest value per metric category
+    formattedMetricValues.forEach((metric) => {
+      const numericValue = parseFloat(metric.value)
+      if (!isNaN(numericValue)) {
+        if (
+          !metricMap.has(metric.metricName) ||
+          numericValue > metricMap.get(metric.metricName).value
+        ) {
+          metricMap.set(metric.metricName, { ...metric, value: numericValue })
+        }
       }
+    })
+
+    // Step 2: Convert Map to array and shuffle randomly
+    const uniqueMetrics = Array.from(metricMap.values())
+    uniqueMetrics.sort(() => Math.random() - 0.5) // Random shuffle
+
+    // Step 3: Ensure we have exactly 4 metrics
+    const selectedMetrics = uniqueMetrics.slice(0, 4)
+
+    // Step 4: Add placeholders if fewer than 4 metrics exist
+    while (selectedMetrics.length < 4) {
+      selectedMetrics.push({
+        metricName: "N/A",
+        value: "--",
+        unit: "",
+        country: "Unknown",
+        icon: null,
+      })
     }
 
     return res.status(200).json({
