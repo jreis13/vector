@@ -1,25 +1,36 @@
 "use client"
 
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { motion } from "framer-motion"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import ScrollReveal from "src/animations/ScrollReveal"
 import icons from "src/common/icons/icons"
 import DynamicListCard from "./StatCards/DynamicListCard"
 import DynamicTransportTable from "./StatCards/DynamicTransportTable"
 import InfoCard from "./StatCards/InfoCard"
 
-export default function EcosystemCountryProfilesDetails({ countryDetails }) {
+export default function EcosystemCountryProfilesDetails({
+  countryDetails,
+  ecosystemName,
+}) {
+  const router = useRouter()
+  const [isHovered, setIsHovered] = useState(false)
+
   if (!countryDetails || !countryDetails.subcategories) {
     console.warn("⚠️ No valid data available yet")
     return <div className="text-yellow-500 font-bold">No data available.</div>
   }
 
   return (
-    <div className="container mx-auto py-16 relative">
+    <div className="container mx-auto py-16 relative min-h-screen">
       <h1 className="text-4xl font-bold mb-16">
         {countryDetails.countryName || "Unknown Country"}
       </h1>
 
-      <div className="space-y-16">
+      <div className="space-y-16 pb-20">
         {countryDetails.subcategories.map((sub, subIndex) => (
           <ScrollReveal key={subIndex}>
             <div
@@ -114,6 +125,38 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
           </ScrollReveal>
         ))}
       </div>
+
+      <button
+        onClick={() =>
+          router.push(`/ecosystems/${ecosystemName}?tab=countryProfiles`)
+        }
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="fixed bottom-32 left-4 flex items-center gap-2 text-lg font-semibold text-[#6600cc] rounded-full overflow-hidden px-3 py-2"
+      >
+        <motion.div
+          initial={{ width: "2.5rem" }}
+          animate={{ width: isHovered ? "16rem" : "2.5rem" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className={`absolute inset-0  rounded-full z-0 ${isHovered ? "bg-[#e8e8e8]" : ""}`}
+        />
+
+        <div
+          className={`w-10 h-10 flex items-center justify-center rounded-full z-10  ${isHovered ? "text-[#6600cc]" : "text-[#e8e8e8]"}`}
+        >
+          <FontAwesomeIcon icon={faCircleArrowLeft} className="text-3xl" />
+        </div>
+
+        <span
+          className={`whitespace-nowrap transition-all duration-300 ease-in-out z-10 ${
+            isHovered
+              ? "opacity-100 scale-100 ml-2 text-[#6600cc]"
+              : "opacity-0 scale-0"
+          }`}
+        >
+          Back to Ecosystem
+        </span>
+      </button>
     </div>
   )
 }

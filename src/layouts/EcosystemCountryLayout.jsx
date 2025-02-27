@@ -8,6 +8,7 @@ export default function EcosystemCountryLayout({
   countryName,
   reports,
   perceptionData,
+  ecosystemName,
 }) {
   return (
     <div className="flex min-h-screen flex-col">
@@ -19,6 +20,7 @@ export default function EcosystemCountryLayout({
               countryName,
               subcategories: reports,
               perceptionOfPublicTransport: perceptionData,
+              ecosystemName: ecosystemName,
             }}
           />
         </div>

@@ -56,6 +56,7 @@ export default function CountryPage({ params = {} }) {
       countryName={countryDetails?.countryName || "Unknown"}
       reports={countryDetails?.subcategories || []}
       perceptionData={countryDetails?.perceptionOfPublicTransport || null}
+      ecosystemName={ecosystemName}
     />
   )
 }
