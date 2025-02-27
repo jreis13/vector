@@ -12,7 +12,10 @@ export default function DynamicListCard({ data }) {
 
                 return (
                   <li key={index} className="flex flex-col">
-                    <p className="text-xl font-semibold">{label}</p>
+                    <p className="text-xl list-item">
+                      <span className="text-[#6600cc] font-bold">&#10752;</span>{" "}
+                      {label}
+                    </p>
                     {description && (
                       <p className="text-[#b8b8b8]">{description}</p>
                     )}
