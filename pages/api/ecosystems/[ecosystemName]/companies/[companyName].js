@@ -1,8 +1,13 @@
+import AWS from "aws-sdk"
+
 const AIRTABLE_ACCESS_TOKEN = process.env.AIRTABLE_ACCESS_TOKEN
 const AIRTABLE_COMPANIES_BASE_ID = process.env.AIRTABLE_COMPANIES_BASE_ID
 const AIRTABLE_COMPANIES_TABLE = process.env.AIRTABLE_COMPANIES_TABLE
 const AIRTABLE_FINANCIALS_TABLE = process.env.AIRTABLE_FINANCIALS_TABLE
 const AIRTABLE_CUSTOMERS_TABLE = process.env.AIRTABLE_CUSTOMERS_TABLE
+
+const S3_BUCKET_NAME = process.env.S3_BUCKET_NAME
+const S3_ECOSYSTEMS_KEY = process.env.S3_ECOSYSTEMS_KEY
 
 async function fetchFinancials(financialIds) {
   if (!financialIds || financialIds.length === 0) return []
@@ -77,6 +82,58 @@ async function fetchCustomerGrowth(companyName) {
   }
 }
 
+async function fetchProducts(companyName) {
+  try {
+    if (!companyName) {
+      console.warn("⚠️ companyName is undefined!")
+      return []
+    }
+
+    const params = {
+      Bucket: S3_BUCKET_NAME,
+      Key: S3_ECOSYSTEMS_KEY,
+    }
+
+    const s3 = new AWS.S3({
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      region: process.env.AWS_REGION,
+    })
+
+    const data = await s3.getObject(params).promise()
+    const ecosystems = JSON.parse(data.Body.toString("utf-8"))
+
+    console.log("🔍 S3 Data Loaded:", ecosystems)
+
+    // Ensure ecosystems is an array
+    if (!Array.isArray(ecosystems)) {
+      console.error("❌ 'ecosystems' is not an array or missing.")
+      return []
+    }
+
+    // Loop through each ecosystem to find the company
+    for (const ecosystem of ecosystems) {
+      if (!Array.isArray(ecosystem.companies)) continue
+
+      // Find the company inside the current ecosystem
+      const company = ecosystem.companies.find(
+        (c) => c.name?.toLowerCase() === companyName.toLowerCase()
+      )
+
+      if (company) {
+        console.log(`📦 Products for ${companyName}:`, company.products)
+        return company.products?.data || []
+      }
+    }
+
+    console.warn(`⚠️ No company found for '${companyName}' in any ecosystem.`)
+    return []
+  } catch (error) {
+    console.error("❌ Error fetching products from S3:", error.message)
+    return []
+  }
+}
+
 async function fetchCompany(companyName) {
   try {
     const url = `https://api.airtable.com/v0/${AIRTABLE_COMPANIES_BASE_ID}/${AIRTABLE_COMPANIES_TABLE}?filterByFormula=LOWER({Company Name})="${companyName.toLowerCase()}"`
@@ -100,6 +157,7 @@ async function fetchCompany(companyName) {
     }
 
     company.CustomerGrowth = await fetchCustomerGrowth(company["Company Name"])
+    company.Products = await fetchProducts(company["Company Name"])
 
     return company
   } catch (error) {

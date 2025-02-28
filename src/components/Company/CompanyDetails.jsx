@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import ScrollReveal from "src/animations/ScrollReveal"
 import CompanyCard from "./CompanyCard"
 import CompanyLatest from "./CompanyLatest"
+import CompanyProductStatCard from "./CompanyProductStatCard"
 import CompanyStats from "./CompanyStats"
 import CompanyTable from "./CompanyTable"
 
@@ -93,7 +94,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
           />
         </ScrollReveal>
 
-        {/* <ScrollReveal id="products">
+        <ScrollReveal id="products">
           <h2 className="pb-4">Products</h2>
           {company?.Products?.length > 0 ? (
             <div className="flex flex-wrap gap-6 justify-center">
@@ -104,7 +105,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
           ) : (
             <p>No products available for this company.</p>
           )}
-        </ScrollReveal> */}
+        </ScrollReveal>
       </div>
     </div>
   )
