@@ -1,19 +1,36 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import "src/common/styles/_reset.css"
+import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata"
 import EcosystemCountryLayout from "src/layouts/EcosystemCountryLayout"
 
 export default function CountryPage({ params = {} }) {
   const { ecosystemName, country } = params
   const decodedCountry = decodeURIComponent(country)
+  const router = useRouter()
 
   const [countryDetails, setCountryDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function checkAccess() {
+      const metadata = await fetchUserMetadata()
+
+      if (
+        !metadata ||
+        !metadata.subscribedTo ||
+        !metadata.subscribedTo.includes(ecosystemName)
+      ) {
+        router.push("/api/auth/login")
+        return
+      }
+
+      fetchData()
+    }
+
+    async function fetchData() {
       try {
         const response = await fetch(
           `/api/ecosystems/${encodeURIComponent(ecosystemName)}/countries/${encodeURIComponent(decodedCountry)}`
@@ -22,33 +39,28 @@ export default function CountryPage({ params = {} }) {
         if (!response.ok) throw new Error(`Error: ${response.statusText}`)
 
         const data = await response.json()
-
         setCountryDetails(data)
       } catch (error) {
         console.error("❌ Fetch failed:", error)
-        setCountryDetails({ error: error.message })
+        setError(error.message)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchData()
-  }, [ecosystemName, decodedCountry])
+    checkAccess()
+  }, [ecosystemName, decodedCountry, router])
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
+        <p>Loading...</p>
       </div>
     )
   }
 
-  if (error || !countryDetails) {
-    return (
-      <div className="text-red-500 text-center mt-10">
-        Error: {error || "Data not found"}
-      </div>
-    )
+  if (error) {
+    return <div className="text-red-500 text-center mt-10">Error: {error}</div>
   }
 
   return (

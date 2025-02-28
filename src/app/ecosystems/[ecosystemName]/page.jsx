@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata" // Import our helper
 import EcosystemLayout from "src/layouts/EcosystemLayout"
 
 export default function EcosystemPage({ params }) {
@@ -12,6 +13,21 @@ export default function EcosystemPage({ params }) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    async function checkAccess() {
+      const metadata = await fetchUserMetadata()
+
+      if (
+        !metadata ||
+        !metadata.subscribedTo ||
+        !metadata.subscribedTo.includes(ecosystemName)
+      ) {
+        router.push("/api/auth/login")
+        return
+      }
+
+      fetchEcosystem()
+    }
+
     async function fetchEcosystem() {
       try {
         const response = await fetch(`/api/ecosystems/${ecosystemName}`)
@@ -21,7 +37,6 @@ export default function EcosystemPage({ params }) {
         }
 
         const data = await response.json()
-
         setEcosystem(data)
       } catch (err) {
         console.error("Error fetching ecosystem:", err.message)
@@ -31,13 +46,13 @@ export default function EcosystemPage({ params }) {
       }
     }
 
-    fetchEcosystem()
-  }, [ecosystemName])
+    checkAccess()
+  }, [ecosystemName, router])
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Loading ecosystem data...</p>
+        <p>Loading...</p>
       </div>
     )
   }

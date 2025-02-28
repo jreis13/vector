@@ -1,11 +1,33 @@
 "use client"
 
-import "src/common/styles/_reset.css"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata"
 import useCompanyByName from "src/hooks/useCompanyByName"
 import CompanyLayout from "src/layouts/CompanyLayout"
 
 export default function CompanyPage({ params }) {
   const { ecosystemName, companyName } = params
+  const router = useRouter()
+  const [hasAccess, setHasAccess] = useState(false)
+
+  useEffect(() => {
+    async function checkAccess() {
+      const metadata = await fetchUserMetadata()
+
+      if (
+        !metadata ||
+        !metadata.subscribedTo ||
+        !metadata.subscribedTo.includes(ecosystemName)
+      ) {
+        router.push("/api/auth/login")
+      } else {
+        setHasAccess(true)
+      }
+    }
+
+    checkAccess()
+  }, [ecosystemName, router])
 
   const { company, loading, error } = useCompanyByName(
     ecosystemName,
@@ -15,7 +37,7 @@ export default function CompanyPage({ params }) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
+        <p>Loading...</p>
       </div>
     )
   }
@@ -36,9 +58,5 @@ export default function CompanyPage({ params }) {
     )
   }
 
-  return (
-    <div>
-      <CompanyLayout company={company} ecosystemName={ecosystemName} />
-    </div>
-  )
+  return <CompanyLayout company={company} ecosystemName={ecosystemName} />
 }
