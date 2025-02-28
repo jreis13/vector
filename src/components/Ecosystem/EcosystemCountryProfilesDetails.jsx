@@ -12,10 +12,7 @@ import DynamicListCard from "./StatCards/DynamicListCard"
 import DynamicTransportTable from "./StatCards/DynamicTransportTable"
 import InfoCard from "./StatCards/InfoCard"
 
-export default function EcosystemCountryProfilesDetails({
-  countryDetails,
-  ecosystemName,
-}) {
+export default function EcosystemCountryProfilesDetails({ countryDetails }) {
   const router = useRouter()
   const [isHovered, setIsHovered] = useState(false)
 
@@ -23,6 +20,8 @@ export default function EcosystemCountryProfilesDetails({
     console.warn("⚠️ No valid data available yet")
     return <div className="text-yellow-500 font-bold">No data available.</div>
   }
+
+  console.log(countryDetails.ecosystemName)
 
   return (
     <div className="container mx-auto py-16 relative min-h-screen">
@@ -128,7 +127,9 @@ export default function EcosystemCountryProfilesDetails({
 
       <button
         onClick={() =>
-          router.push(`/ecosystems/${ecosystemName}?tab=countryProfiles`)
+          router.push(
+            `/ecosystems/${countryDetails.ecosystemName}?tab=countryProfiles`
+          )
         }
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
