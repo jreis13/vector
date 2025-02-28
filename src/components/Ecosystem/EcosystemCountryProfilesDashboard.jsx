@@ -64,18 +64,12 @@ export default function EcosystemCountryProfilesDashboard({
 }) {
   const validMetrics = metricRankings?.filter((metric) => {
     if (!metric.value) return false
-    const numericLabel = metric.value.toString().replace(/,/g, "").trim() // Remove commas & trim spaces
-    const isNumber = !isNaN(numericLabel) // Ensure it's a valid number
-
+    const numericLabel = metric.value.toString().replace(/,/g, "").trim()
+    const isNumber = !isNaN(numericLabel)
     return isNumber
   })
 
-  // Define placeholders to ensure exactly 4 cards are shown
-
-  // Merge valid metrics with placeholders and limit to exactly 4 items
   const displayedMetrics = [...validMetrics].slice(0, 4)
-
-  console.log(validMetrics, displayedMetrics)
 
   return (
     <section className="container mx-auto px-8">

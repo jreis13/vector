@@ -146,14 +146,12 @@ export default async function handler(req, res) {
             }
           })
 
-        // 🔥 Remove Airtable "Perception of Public Transport" only if it's in the correct subcategory
         if (isPerceptionCategory) {
           filteredMetrics = filteredMetrics.filter(
             (metric) => metric.filterName !== "Perception of Public Transport"
           )
         }
 
-        // 🔥 Only add Perception of Public Transport from S3 in the right subcategory
         if (isPerceptionCategory && perceptionData) {
           filteredMetrics.push({
             id: "perception-public-transport",
