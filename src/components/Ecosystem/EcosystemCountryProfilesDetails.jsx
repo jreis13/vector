@@ -21,8 +21,6 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
     return <div className="text-yellow-500 font-bold">No data available.</div>
   }
 
-  console.log(countryDetails.ecosystemName)
-
   return (
     <div className="container mx-auto py-16 relative min-h-screen">
       <h1 className="text-4xl font-bold mb-16">
