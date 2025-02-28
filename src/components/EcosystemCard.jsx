@@ -11,14 +11,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
+import LoadingLayout from "src/layouts/LoadingLayout"
 
 export default function EcosystemCard({ ecosystem }) {
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleCardClick = () => {
+    setLoading(true)
     router.push(
       `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}?tab=overview`
     )
+  }
+
+  if (loading) {
+    return <LoadingLayout />
   }
 
   return (

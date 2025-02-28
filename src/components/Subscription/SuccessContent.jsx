@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import Loading from "../Loading"
 
 export default function SuccessContent() {
   const router = useRouter()
@@ -23,11 +24,7 @@ export default function SuccessContent() {
         <p className="mt-4 text-lg">
           Please wait while we redirect you to the main page.
         </p>
-        {loading && (
-          <div className="mt-6 flex items-center justify-center">
-            <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
-          </div>
-        )}
+        {loading && <Loading />}
       </div>
     </div>
   )

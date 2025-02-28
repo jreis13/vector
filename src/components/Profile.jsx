@@ -1,16 +1,13 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
+import LoadingLayout from "src/layouts/LoadingLayout"
 
 export default function Profile() {
   const { user, error, isLoading } = useUser()
 
   if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
-      </div>
-    )
+    return <LoadingLayout />
   }
 
   if (error) {

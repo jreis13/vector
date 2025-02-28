@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import LoadingLayout from "src/layouts/LoadingLayout"
 import EcosystemCard from "./EcosystemCard"
 import Overlay from "./Overlay"
 import PublicEcosystemCard from "./PublicEcosystemCard"
@@ -13,6 +14,7 @@ export default function EcosystemsPage() {
   const [filteredData, setFilteredData] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [showOverlay, setShowOverlay] = useState(true)
+  const [isNavigating, setIsNavigating] = useState(false)
 
   useEffect(() => {
     async function fetchUser() {
@@ -74,12 +76,12 @@ export default function EcosystemsPage() {
     )
   }
 
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-[#6600cc] border-t-transparent"></div>
-      </div>
-    )
+  const handleCardClick = () => {
+    setIsNavigating(true) // Set navigation state to true
+  }
+
+  if (loading || isNavigating) {
+    return <LoadingLayout />
   }
 
   if (error) {
@@ -107,7 +109,9 @@ export default function EcosystemsPage() {
             <div className="grid gap-6 grid-cols-1">
               {filteredData.map((ecosystem) =>
                 user ? (
-                  <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+                  <div key={ecosystem.id} onClick={handleCardClick}>
+                    <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
+                  </div>
                 ) : (
                   <PublicEcosystemCard
                     key={ecosystem.id}

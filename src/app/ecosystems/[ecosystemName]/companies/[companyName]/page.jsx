@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata"
 import useCompanyByName from "src/hooks/useCompanyByName"
 import CompanyLayout from "src/layouts/CompanyLayout"
+import LoadingLayout from "src/layouts/LoadingLayout"
 
 export default function CompanyPage({ params }) {
   const { ecosystemName, companyName } = params
@@ -37,7 +38,7 @@ export default function CompanyPage({ params }) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
+        <LoadingLayout />
       </div>
     )
   }

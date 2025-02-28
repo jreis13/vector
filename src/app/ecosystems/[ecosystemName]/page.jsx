@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata" // Import our helper
 import EcosystemLayout from "src/layouts/EcosystemLayout"
+import LoadingLayout from "src/layouts/LoadingLayout"
 
 export default function EcosystemPage({ params }) {
   const ecosystemName = params.ecosystemName
@@ -52,7 +53,7 @@ export default function EcosystemPage({ params }) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
+        <LoadingLayout />
       </div>
     )
   }
