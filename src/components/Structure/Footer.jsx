@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear()
 
 export default function Footer() {
   return (
-    <footer className="bg-[#34333d] px-8 py-8 w-full overflow-x-hidden">
+    <footer className="bg-[#34333d] px-8 py-8 w-screen overflow-x-hidden">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-3 grid-cols-1 gap-6 items-center">
           <div className="flex justify-center lg:justify-start">
