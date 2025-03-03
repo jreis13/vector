@@ -31,6 +31,7 @@ export default function SubscribeContent() {
   const [error, setError] = useState("")
   const [isChecked, setIsChecked] = useState(false)
   const [openFAQ, setOpenFAQ] = useState(null)
+  const [emailWarnings, setEmailWarnings] = useState({})
 
   const handleOpenFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index)
@@ -41,6 +42,14 @@ export default function SubscribeContent() {
       id: "advancedairmobility",
       name: "Advanced Air Mobility",
     },
+  ]
+
+  const restrictedDomains = [
+    "@gmail.com",
+    "@outlook.com",
+    "@hotmail.com",
+    "@yahoo.com",
+    "@icloud.com",
   ]
 
   const faqs = [
@@ -117,6 +126,18 @@ export default function SubscribeContent() {
     const updatedSubscribers = [...subscribers]
     updatedSubscribers[index][field] = value
     setSubscribers(updatedSubscribers)
+
+    if (field === "email") {
+      const isRestricted = restrictedDomains.some((domain) =>
+        value.includes(domain)
+      )
+      setEmailWarnings((prevWarnings) => ({
+        ...prevWarnings,
+        [index]: isRestricted
+          ? "Exponential Vector only assigns licenses to company emails. Contact us for further questions."
+          : "",
+      }))
+    }
   }
 
   const handleEcosystemChange = (index, ecosystemId) => {
@@ -180,10 +201,14 @@ export default function SubscribeContent() {
     setExpandedFAQ((prevIndex) => (prevIndex === index ? null : index))
   }
 
+  const containsRestrictedEmail = subscribers.some((sub) =>
+    restrictedDomains.some((domain) => sub.email.includes(domain))
+  )
+
   return (
     <div className="flex flex-col items-center justify-center px-8 py-8 text-center">
       <div className="max-w-6xl">
-        <h2>Subscribe to Exponential Vector</h2>
+        <h2 className="text-4xl font-bold">Subscribe to Exponential Vector</h2>
         <p className="mt-4">
           Complete your subscription to access the platform.
         </p>
@@ -226,6 +251,11 @@ export default function SubscribeContent() {
                   onChange={(e) => handleChange(index, "email", e.target.value)}
                   className="mt-4 w-full rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
                 />
+                {emailWarnings[index] && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {emailWarnings[index]}
+                  </p>
+                )}
                 <div className="mt-4 grid gap-4 grid-cols-2">
                   <input
                     type="text"
@@ -359,7 +389,7 @@ export default function SubscribeContent() {
           </div>
           <Button
             onClick={handleSubscribe}
-            disabled={!isChecked}
+            disabled={!isChecked || containsRestrictedEmail}
             className="mt-6 bg-[#34333d] rounded-lg px-4 py-2 focus:outline-none"
           >
             <span className="flex items-center gap-2">
