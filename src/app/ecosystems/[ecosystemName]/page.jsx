@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata" // Import our helper
+import { fetchUserMetadata } from "src/common/utils/fetchUserMetadata"
 import EcosystemLayout from "src/layouts/EcosystemLayout"
 import LoadingLayout from "src/layouts/LoadingLayout"
 

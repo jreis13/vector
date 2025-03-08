@@ -77,7 +77,7 @@ export default function EcosystemsPage() {
   }
 
   const handleCardClick = () => {
-    setIsNavigating(true) // Set navigation state to true
+    setIsNavigating(true)
   }
 
   if (loading || isNavigating) {

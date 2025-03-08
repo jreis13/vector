@@ -103,25 +103,19 @@ async function fetchProducts(companyName) {
     const data = await s3.getObject(params).promise()
     const ecosystems = JSON.parse(data.Body.toString("utf-8"))
 
-    console.log("🔍 S3 Data Loaded:", ecosystems)
-
-    // Ensure ecosystems is an array
     if (!Array.isArray(ecosystems)) {
       console.error("❌ 'ecosystems' is not an array or missing.")
       return []
     }
 
-    // Loop through each ecosystem to find the company
     for (const ecosystem of ecosystems) {
       if (!Array.isArray(ecosystem.companies)) continue
 
-      // Find the company inside the current ecosystem
       const company = ecosystem.companies.find(
         (c) => c.name?.toLowerCase() === companyName.toLowerCase()
       )
 
       if (company) {
-        console.log(`📦 Products for ${companyName}:`, company.products)
         return company.products?.data || []
       }
     }
