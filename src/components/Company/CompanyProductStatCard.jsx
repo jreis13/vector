@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function CompanyProductStatCard({ product }) {
   return product.image ? (
-    <div className="flex bg-[#34333d] rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl w-[700px] min-h-[400px]">
+    <div className="flex bg-[#34333d] rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl w-full min-h-[400px]">
       <div className="relative flex-shrink-0 w-1/2 h-full">
         <Image
           src={product.image}
@@ -16,7 +16,7 @@ export default function CompanyProductStatCard({ product }) {
       <div className="flex flex-col justify-between p-6 text-white w-1/2">
         <div>
           <h3
-            className="text-2xl font-bold mb-4"
+            className="text-3xl font-bold mb-4"
             style={{
               textShadow:
                 "1px 1px 1px #34333d, 0px 0px 1px #34333d, 1px 0px 1px #34333d, 0px 1px 1px #34333d",
@@ -49,10 +49,10 @@ export default function CompanyProductStatCard({ product }) {
                         "1px 1px 1px #34333d, 0px 0px 1px #34333d, 1px 0px 1px #34333d, 0px 1px 1px #34333d",
                     }}
                   >
-                    <span className="font-medium capitalize">
+                    <p className="font-bold capitalize text-xl">
                       {key.replace(/_/g, " ")}:
-                    </span>
-                    <span>{value}</span>
+                    </p>
+                    <p>{value}</p>
                   </div>
                 )
             )}
