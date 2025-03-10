@@ -1,17 +1,30 @@
 import Image from "next/image"
 
 export default function CompanyProductStatCard({ product }) {
+  const isVideo = product.image?.endsWith(".mp4")
+
   return product.image ? (
     <div className="flex bg-[#34333d] rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl w-full min-h-[400px]">
       <div className="relative flex-shrink-0 w-1/2 h-full">
-        <Image
-          src={product.image}
-          alt={product.name}
-          layout="fill"
-          objectFit="contain"
-          objectPosition="center"
-          priority
-        />
+        {isVideo ? (
+          <video
+            src={product.image}
+            className="w-full h-full object-contain"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        ) : (
+          <Image
+            src={product.image}
+            alt={product.name}
+            layout="fill"
+            objectFit="contain"
+            objectPosition="center"
+            priority
+          />
+        )}
       </div>
       <div className="flex flex-col justify-between p-6 text-white w-1/2">
         <div>
