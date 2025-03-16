@@ -7,6 +7,7 @@ import EcosystemActiveInvestors from "./EcosystemActiveInvestors"
 import EcosystemCompanies from "./EcosystemCompanies"
 import EcosystemCountryProfilesDashboard from "./EcosystemCountryProfilesDashboard"
 import EcosystemCountryProfilesMap from "./EcosystemCountryProfilesMap"
+import EcosystemFeed from "./EcosystemFeed"
 import EcosystemInfrastructure from "./EcosystemInfrastructure"
 import EcosystemMarketResearch from "./EcosystemMarketResearch"
 import EcosystemOverview from "./EcosystemOverview"
@@ -21,6 +22,7 @@ export default function EcosystemDetails({ ecosystem }) {
   const [currentTab, setCurrentTab] = useState(initialTab)
 
   const sections = [
+    { title: "Feed", id: "feed" },
     { title: "Overview", id: "overview" },
     { title: "Companies", id: "companies" },
     { title: "Country Profiles", id: "countryProfiles" },
@@ -50,6 +52,7 @@ export default function EcosystemDetails({ ecosystem }) {
       />
 
       <div className="mt-4 p-8">
+        {currentTab === "feed" && <EcosystemFeed />}
         {currentTab === "overview" && (
           <EcosystemOverview ecosystem={ecosystem} />
         )}
