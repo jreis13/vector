@@ -24,8 +24,8 @@ export default function EcosystemActiveInvestorsTable({ data }) {
   return (
     <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500">
       <div className="flex items-center gap-4">
-        <h2>Active Investors</h2>
-        <span className="text-md text-gray-400">(Past 13 months)</span>
+        <h2>Active Investor Tracker</h2>
+        <span className="text-md text-gray-400">(Since 2024)</span>
       </div>
       <table className="w-full min-w-max table-auto text-left text-[#e8e8e8] rounded-lg mt-4 mb-2">
         <thead>
