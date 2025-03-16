@@ -1,1 +1,1 @@
-export const categoriesFilters = [{ title: "Mobility" }]
+export const categoriesFilters = [{ title: "mobility" }]
