@@ -38,9 +38,9 @@ export default function DynamicListCard({ data }) {
                     <Image
                       src={entry.logo}
                       alt={entry.label}
-                      className="w-16 h-16 object-contain"
-                      width={24}
-                      height={24}
+                      className="w-[96px] h-[96px] object-contain"
+                      width={96}
+                      height={96}
                     />
                   )}
                   <p className="text-xl font-semibold text-white mt-2">
