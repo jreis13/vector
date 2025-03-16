@@ -13,6 +13,18 @@ export const filterCompanies = (companies, filters, fundingAmountRanges) => {
       ? company.fundingAmount[0] || ""
       : company.fundingAmount || ""
 
+    const region = Array.isArray(company.region)
+      ? company.region[0] || ""
+      : company.region || ""
+
+    const type = Array.isArray(company.type)
+      ? company.type[0] || ""
+      : company.type || ""
+
+    const industry = Array.isArray(company.industry)
+      ? company.industry[0] || ""
+      : company.industry || ""
+
     const matchesFundingStage =
       !filters.fundingStage ||
       fundingStage.toLowerCase() === filters.fundingStage.toLowerCase()
@@ -30,6 +42,22 @@ export const filterCompanies = (companies, filters, fundingAmountRanges) => {
         )
       })()
 
-    return matchesFundingStage && matchesFundingAmount
+    const matchesRegion =
+      !filters.region || region.toLowerCase() === filters.region.toLowerCase()
+
+    const matchesType =
+      !filters.type || type.toLowerCase() === filters.type.toLowerCase()
+
+    const matchesIndustry =
+      !filters.industry ||
+      industry.toLowerCase() === filters.industry.toLowerCase()
+
+    return (
+      matchesFundingStage &&
+      matchesFundingAmount &&
+      matchesRegion &&
+      matchesType &&
+      matchesIndustry
+    )
   })
 }

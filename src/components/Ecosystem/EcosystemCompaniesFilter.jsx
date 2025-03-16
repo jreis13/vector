@@ -10,6 +10,7 @@ export default function EcosystemCompaniesFilter({
   filters,
   setFilters,
   fundingStageOptions,
+  regionOptions,
   typeOptions,
   industryOptions,
 }) {
@@ -27,6 +28,7 @@ export default function EcosystemCompaniesFilter({
       fundingStage: "",
       fundingAmount: "",
       type: "",
+      region: "",
       industry: "",
     })
   }
@@ -56,6 +58,23 @@ export default function EcosystemCompaniesFilter({
             >
               <option value="">All Industries</option>
               {industryOptions.map((option) => (
+                <option key={option.label} value={option.label}>
+                  {option.label}
+                </option>
+              ))}
+            </motion.select>
+          </div>
+
+          <div className="flex gap-4 items-center">
+            <h3>Region:</h3>
+            <motion.select
+              whileHover={{ scale: 1.05 }}
+              onChange={(e) => handleFilterChange("region", e.target.value)}
+              value={filters.region}
+              className="appearance-none cursor-pointer bg-[#34333d] text-[#e8e8e8] rounded-lg px-4 py-2 focus:outline-none"
+            >
+              <option value="">All Stages</option>
+              {regionOptions.map((option) => (
                 <option key={option.label} value={option.label}>
                   {option.label}
                 </option>

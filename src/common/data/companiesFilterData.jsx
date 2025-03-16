@@ -23,7 +23,17 @@ export const typeOptions = [
   { label: "Manufacturer", keywords: ["Manufacturer"] },
 ]
 
-export const industryOptions = [{ label: "eVTOL", keywords: ["eVTOL"] }]
+export const regionOptions = [
+  { label: "Europe", keywords: ["europe"] },
+  { label: "Asia", keywords: ["asia"] },
+  { label: "North America", keywords: ["north america"] },
+]
+
+export const industryOptions = [
+  { label: "eVTOL", keywords: ["eVTOL"] },
+  { label: "STOL", keywords: ["STOL"] },
+  { label: "VLCA", keywords: ["VLCA"] },
+]
 
 export const fundingAmountRanges = [
   { label: "< $1M", min: 0, max: 1000000 },

@@ -136,6 +136,7 @@ export default async function handler(req, res) {
           : company["Logo"]
         : "/placeholder.png",
       type: company["Type"] || "N/A",
+      region: company["Region"] || "N/A",
       industry: company["Industry"] || "N/A",
       fundingStage: company["Funding Round (from Funding Stage)"] || "N/A",
       keyInvestors: company["Key Investors"] || [],

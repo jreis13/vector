@@ -11,6 +11,7 @@ import {
   fundingAmountRanges,
   fundingStageOptions,
   industryOptions,
+  regionOptions,
   typeOptions,
 } from "../../common/data/companiesFilterData"
 import { filterCompanies } from "../../common/utils/filterUtils"
@@ -57,6 +58,7 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
         fundingStageOptions={fundingStageOptions}
         fundingAmountRanges={fundingAmountRanges}
         typeOptions={typeOptions}
+        regionOptions={regionOptions}
         industryOptions={industryOptions}
       />
 
@@ -75,7 +77,7 @@ export default function EcosystemCompanies({ companies = [], ecosystemName }) {
           )}
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${currentPage}-${filters.fundingStage}-${filters.fundingAmount}`}
+              key={`${currentPage}-${filters.fundingStage}-${filters.fundingAmount}-${filters.region}-${filters.type}-${filters.industry}`}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
