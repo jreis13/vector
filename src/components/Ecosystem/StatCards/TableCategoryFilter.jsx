@@ -10,16 +10,11 @@ export default function CategoryFilter({
   categories,
   selectedCategories,
   onChange,
-  defaultCategory,
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleCategoryChange = (category) => {
     onChange(category)
-  }
-
-  const resetFilters = () => {
-    onChange(defaultCategory)
   }
 
   const filterAnimation = {
@@ -83,14 +78,6 @@ export default function CategoryFilter({
                 </div>
 
                 <div className="flex items-center gap-2 min-w-[150px]">
-                  <motion.button
-                    onClick={resetFilters}
-                    className="bg-red-500 text-white rounded-lg px-4 py-2 w-full flex-grow whitespace-nowrap"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    Reset Filters
-                  </motion.button>
-
                   <motion.button
                     onClick={() => setIsExpanded(false)}
                     className="text-[#e8e8e8] focus:outline-none"
