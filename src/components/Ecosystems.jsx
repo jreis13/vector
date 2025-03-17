@@ -1,11 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { categoriesFilters } from "src/common/data/categoriesData"
 import LoadingLayout from "src/layouts/LoadingLayout"
-import EcosystemCard from "./EcosystemCard"
-import Filter from "./Filter"
-import PublicEcosystemCard from "./PublicEcosystemCard"
+import EcosystemButton from "./EcosystemButton"
 
 export default function EcosystemsPage() {
   const [user, setUser] = useState(null)
@@ -84,6 +81,7 @@ export default function EcosystemsPage() {
 
   const handleCardClick = () => {
     setIsNavigating(true)
+    setLoading(true)
   }
 
   if (loading || isNavigating) {
@@ -101,33 +99,16 @@ export default function EcosystemsPage() {
   return (
     <div
       id="Ecosystems"
-      className="flex min-h-screen flex-col px-6 py-8 lg:px-16 lg:py-16"
+      className="flex flex-col items-center px-6 py-8 lg:px-16 lg:py-16"
     >
-      <>
-        <div>
-          <div className="flex justify-between">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold">Ecosystems</h2>
-            </div>
-          </div>
-          <Filter
-            categories={categoriesFilters}
-            selectedCategories={selectedCategories}
-            onChange={handleCategoryChange}
-          />
-          <div className="grid gap-6 grid-cols-1">
-            {filteredData.map((ecosystem) =>
-              user ? (
-                <div key={ecosystem.id} onClick={handleCardClick}>
-                  <EcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-                </div>
-              ) : (
-                <PublicEcosystemCard key={ecosystem.id} ecosystem={ecosystem} />
-              )
-            )}
-          </div>
-        </div>
-      </>
+      {filteredData.map((ecosystem) => (
+        <EcosystemButton
+          key={ecosystem.id}
+          ecosystem={ecosystem}
+          user={user}
+          setIsNavigating={setIsNavigating}
+        />
+      ))}
     </div>
   )
 }
