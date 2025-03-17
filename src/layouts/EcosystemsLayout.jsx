@@ -19,7 +19,7 @@ export default function EcosystemLayout() {
     <div className="flex min-h-screen flex-col w-full overflow-x-hidden">
       <Header />
       <div className="flex flex-grow flex-col gap-8 px-6">
-        <MainHero image="/mobility.svg" buttonText="Subscribe">
+        <MainHero image="/mobility.svg">
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase text-outline">Advanced Air Mobility</h1>
           </div>

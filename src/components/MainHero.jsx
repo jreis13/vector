@@ -15,9 +15,11 @@ export default function MainHero({ children, image, buttonText }) {
         >
           {children}
         </Typography>
-        <div className="my-6">
-          <Button href="/api/auth/login">{buttonText}</Button>
-        </div>
+        {buttonText && (
+          <div className="my-6">
+            <Button href="/api/auth/login">{buttonText}</Button>
+          </div>
+        )}
       </div>
     </div>
   )
