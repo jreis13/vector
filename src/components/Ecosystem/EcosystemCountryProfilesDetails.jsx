@@ -20,7 +20,6 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
     console.warn("⚠️ No valid data available yet")
     return <div className="text-yellow-500 font-bold">No data available.</div>
   }
-  console.log(countryDetails)
   return (
     <div className="container mx-auto py-16 relative min-h-screen">
       <div className="flex justify-between items-top">
