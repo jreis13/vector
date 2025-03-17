@@ -39,7 +39,7 @@ export default function MainLayout() {
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
       <div className="flex flex-grow flex-col gap-8 px-6">
-        <MainHero>
+        <MainHero image="/mainHero.svg" buttonText="Join Us">
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase text-outline">
               Next-Gen Strategy Tools for Disruptive Business Models
