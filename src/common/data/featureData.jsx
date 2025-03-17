@@ -1,8 +1,12 @@
+import companiesIcon from "/public/icons/companiesIcon.svg"
+import countriesIcon from "/public/icons/countriesIcon.svg"
 import customizeIcon from "/public/icons/customizeIcon.svg"
 import dataIcon from "/public/icons/dataIcon.svg"
 import goalsIcon from "/public/icons/goalsIcon.svg"
 import interactiveIcon from "/public/icons/interactiveIcon.svg"
 import predictiveIcon from "/public/icons/predictiveIcon.svg"
+import productsIcon from "/public/icons/productsIcon.svg"
+import roadmapIcon from "/public/icons/roadmapIcon.svg"
 import textIcon from "/public/icons/textIcon.svg"
 import trashIcon from "/public/icons/trashIcon.svg"
 import offeringIcon from "/public/icons/workIcon.svg"
@@ -161,5 +165,232 @@ export const goalsFeatures = [
   },
   {
     sectionImage: goalsIcon,
+  },
+]
+
+export const companiesFeatures = [
+  {
+    description: (
+      <div>
+        <p>
+          Exponential Vector is currently{" "}
+          <span className="font-semibold">
+            {" "}
+            scoutting over 25 different companies & 40 distinct investors{" "}
+          </span>
+          in the
+          <span className="font-semibold"> Advanced Air Mobility</span>{" "}
+          ecosystem.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          Our platform adds{" "}
+          <span className="font-semibold">reviewed companies</span> on a
+          <span className="font-semibold"> weekly basis</span> and communicates
+          updates
+          <span className="font-semibold"> via newsletter</span>. This makes it
+          easier for you to
+          <span className="font-semibold"> track and follow developments</span>.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          We <span className="font-semibold">continuously monitor trends</span>{" "}
+          and <span className="font-semibold">emerging players </span>
+          to ensure our database remains
+          <span className="font-semibold"> up-to-date </span>
+          and
+          <span className="font-semibold"> compreensive</span>.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          By leveraging{" "}
+          <span className="font-semibold">data-driven insights</span>, we{" "}
+          <span className="font-semibold">provide valuable intelligence </span>
+          to help you <span className="font-semibold">stay ahead</span> in the
+          evolving <span className="font-semibold">Advanced Air Mobility</span>{" "}
+          landscape.
+        </p>
+      </div>
+    ),
+  },
+  {
+    sectionImage: companiesIcon,
+  },
+]
+
+export const countriesFeatures = [
+  {
+    description: (
+      <div>
+        <p>
+          Our platform currently features
+          <span className="font-semibold"> six detailed country profiles </span>
+          offering in-depth insights into the
+          <span className="font-semibold"> Advanced Air Mobility</span>{" "}
+          landscape across key global markets.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          Each profile includes a
+          <span className="font-semibold"> comprehensive analysis</span> on
+          different
+          <span className="font-semibold"> metrics</span> including
+          <span className="font-semibold">
+            {" "}
+            Regulatory & Policy, Government Spending & Economic, Demographic,
+            Workforce & Market, Infrastructure and Research & Innovation
+          </span>
+          .
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          We continuously
+          <span className="font-semibold"> update and expand </span> our country
+          profiles to reflect the
+          <span className="font-semibold">
+            {" "}
+            latest developments, advancements and industry shifts
+          </span>
+          .
+        </p>
+      </div>
+    ),
+  },
+  {
+    sectionImage: countriesIcon,
+  },
+]
+
+export const productFeatures = [
+  {
+    description: (
+      <div>
+        <p>
+          Exponential Vector is currently analyzing
+          <span className="font-semibold"> over 30 different aircraft </span>
+          within the
+          <span className="font-semibold"> Advanced Air Mobility</span>{" "}
+          ecosystem.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          Our detailed assessments cover a wide range of vehicle types,
+          including
+          <span className="font-semibold">
+            {" "}
+            eVTOL aircraft, Hybrid-Electric VTOL Aircraft, HeV/STOL Aircraft &
+            All-Electric Aircraft (E-STOL) and next-generation urban air
+            mobility solutions
+          </span>
+          .
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          Whether you&apos;re looking to compare different aircraft models,
+          understand performance capabilities, or evaluate investment
+          opportunities, our
+          <span className="font-semibold"> Products section </span> delivers
+          <span className="font-semibold">
+            comprehensive and actionable insights
+          </span>
+          . As the AAM sector evolves, we remain committed to providing
+          high-quality analysis that supports innovation and growth in this
+          transformative industry.
+        </p>
+      </div>
+    ),
+  },
+  {
+    sectionImage: productsIcon,
+  },
+]
+
+export const roadmapFeatures = [
+  {
+    description: (
+      <div>
+        <p>
+          Down the line, Exponential Vector aims to bring
+          <span className="font-semibold"> cutting-edge intelligence </span>
+          to the
+          <span className="font-semibold"> Advanced Air Mobility</span>{" "}
+          ecosystem.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          We are actively developing innovative features such as
+          <span className="font-semibold"> AI Route Analyst</span> to optimize
+          flight paths,{" "}
+          <span className="font-semibold">AI Customer Analyst</span> for market
+          demand insights, and{" "}
+          <span className="font-semibold">Deal Sourcing Matchmaking</span> to
+          connect stakeholders with strategic investment opportunities.
+        </p>
+      </div>
+    ),
+  },
+  {
+    description: (
+      <div>
+        <p>
+          Beyond feature enhancements, we are expanding our platform’s reach
+          through
+          <span className="font-semibold"> regional add-ons </span> tailored for{" "}
+          <span className="font-semibold">
+            North America, South America, MENA (Middle East & North Africa), and
+            Asia.{" "}
+          </span>
+          Each expansion is designed to provide localized insights and market
+          trends specific to these regions. By integrating{" "}
+          <span className="font-semibold">deep market intelligence</span> with
+          <span className="font-semibold"> global scalability</span>, we empower
+          businesses, investors, and policymakers to navigate regional nuances
+          effectively.
+        </p>
+      </div>
+    ),
+  },
+  {
+    sectionImage: roadmapIcon,
   },
 ]
