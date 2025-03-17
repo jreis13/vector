@@ -70,6 +70,7 @@ export default function CountryPage({ params = {} }) {
       reports={countryDetails?.subcategories || []}
       perceptionData={countryDetails?.perceptionOfPublicTransport || null}
       ecosystemName={ecosystemName}
+      lastUpdated={countryDetails?.lastUpdated}
     />
   )
 }

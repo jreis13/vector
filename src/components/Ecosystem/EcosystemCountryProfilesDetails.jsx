@@ -20,12 +20,20 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
     console.warn("⚠️ No valid data available yet")
     return <div className="text-yellow-500 font-bold">No data available.</div>
   }
-
+  console.log(countryDetails)
   return (
     <div className="container mx-auto py-16 relative min-h-screen">
-      <h1 className="text-4xl font-bold mb-16">
-        {countryDetails.countryName || "Unknown Country"}
-      </h1>
+      <div className="flex justify-between items-top">
+        <h1 className="text-4xl font-bold mb-16">
+          {countryDetails.countryName || "Unknown Country"}
+        </h1>
+        <h3>
+          Last Updated:{" "}
+          <span className="font-semibold mx-2">
+            {countryDetails.lastUpdated}
+          </span>
+        </h3>
+      </div>
 
       <div className="space-y-16 pb-20">
         {countryDetails.subcategories.map((sub, subIndex) => (

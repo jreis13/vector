@@ -140,6 +140,7 @@ export default async function handler(req, res) {
       industry: company["Industry"] || "N/A",
       fundingStage: company["Funding Round (from Funding Stage)"] || "N/A",
       keyInvestors: company["Key Investors"] || [],
+      lastUpdated: company["Last Update"] || "N/A",
     }))
 
     const formattedKeyInvestors = keyInvestors.map((investor) => ({
@@ -175,6 +176,7 @@ export default async function handler(req, res) {
 
     const formattedCountryProfiles = countryProfiles.map((profile) => ({
       countryName: profile["Country Name"] || "Unknown",
+      lastUpdated: profile["Last Update"] || "N/A",
     }))
 
     const formattedMetricValues = metricValues

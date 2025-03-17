@@ -35,13 +35,19 @@ export default function CompanyDetails({ company, ecosystemName }) {
           <FontAwesomeIcon icon={faCircleArrowLeft} />
         </button>
 
-        <div className="pb-8 flex items-center gap-4">
+        <div className="pb-8 flex items-center justify-between gap-4">
           <Image
             src={company?.Logo || "/placeholder.png"}
             alt={`${company?.["Company Name"]} logo`}
             width={96}
             height={96}
           />
+          <h3>
+            Last Updated:{" "}
+            <span className="font-semibold mx-2">
+              {company?.["Last Update"]}
+            </span>
+          </h3>
         </div>
 
         <p className="pb-8 text-xl leading-8">{company?.["Company Summary"]}</p>

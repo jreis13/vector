@@ -106,6 +106,7 @@ export default async function handler(req, res) {
       id: countryRecords[0]?.id || "Unknown",
       countryName: countryRecord?.["Country Name"] || "Unknown",
       region: countryRecord?.["Region"] || "Unknown",
+      lastUpdated: countryRecord?.["Last Updated"] || "Unknown",
       subcategories: subcategories.map((sub) => {
         const isPerceptionCategory =
           sub.fields["Subcategory Name"] ===
