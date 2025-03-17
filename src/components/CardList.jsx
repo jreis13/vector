@@ -7,6 +7,7 @@ export default function CardList({
   sectionImage,
   imageOnLeft,
   imageOnRight,
+  isLastSection,
 }) {
   if (sectionImage) {
     return (
@@ -15,6 +16,7 @@ export default function CardList({
         sectionImage={sectionImage}
         features={features}
         imageOnRight={imageOnRight}
+        isLastSection={isLastSection}
       />
     )
   }

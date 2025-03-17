@@ -7,9 +7,10 @@ export default function SectionWithImage({
   sectionImage,
   features,
   imageOnRight = false,
+  isLastSection = false, // New prop to determine if it's the last section
 }) {
   return (
-    <section className="py-16 px-8 lg:py-28">
+    <section className={`${isLastSection ? "py-0" : "py-16 lg:py-28"} px-8`}>
       <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
         <div
           className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${imageOnRight ? "lg:order-2" : ""}`}
