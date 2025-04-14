@@ -30,7 +30,7 @@ export default function CompanyDetails({ company, ecosystemName }) {
       <div>
         <button
           onClick={handleBackClick}
-          className="text-4xl cursor-pointer fixed bottom-20 p-8 left-4"
+          className="text-4xl cursor-pointer fixed bottom-20 p-8 left-2"
         >
           <FontAwesomeIcon icon={faCircleArrowLeft} />
         </button>
