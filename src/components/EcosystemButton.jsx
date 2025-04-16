@@ -1,21 +1,15 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import Button from "./Button"
 
-export default function EcosystemButton({ ecosystem, user, setIsNavigating }) {
-  const router = useRouter()
-
+export default function EcosystemButton({ ecosystem, user }) {
   const handleClick = () => {
-    setIsNavigating(true)
-
     if (user) {
-      router.push(
-        `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}?tab=overview`
-      )
+      const targetUrl = `/ecosystems/${ecosystem.name.replace(/\s+/g, "").toLowerCase()}?tab=overview`
+      window.location.href = targetUrl
     } else {
       const currentPath = encodeURIComponent(window.location.pathname)
-      router.push(`/api/auth/login?returnTo=${currentPath}`)
+      window.location.href = `/api/auth/login?returnTo=${currentPath}`
     }
   }
 
