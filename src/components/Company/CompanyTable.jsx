@@ -29,9 +29,9 @@ export default function CompanyTable({ groupedCompanies, title }) {
               group.orders.map((order, orderIndex) => (
                 <tr
                   key={`${group.companyName}-${orderIndex}`}
-                  className={
-                    groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
-                  }
+                  className={`${
+                    orderIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
+                  }`}
                 >
                   <td className="px-6 py-4 text-[#e8e8e8] text-lg">
                     {order.model || "N/A"}
