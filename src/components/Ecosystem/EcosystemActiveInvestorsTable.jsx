@@ -54,8 +54,13 @@ export default function EcosystemActiveInvestorsTable({ data }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((group) => (
-            <tr key={group.companyName}>
+          {data.map((group, groupIndex) => (
+            <tr
+              className={`${
+                groupIndex % 2 === 0 ? "bg-transparent" : "bg-[#34333d]"
+              }`}
+              key={group.companyName}
+            >
               <td className="px-6 py-4">{group.company}</td>
               <td className="px-6 py-4">{group.name || "N/A"}</td>
               <td className="px-6 py-4">{group.fundingRound || "N/A"}</td>
