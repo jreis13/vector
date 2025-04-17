@@ -176,7 +176,7 @@ export const companiesFeatures = [
           Exponential Vector is currently{" "}
           <span className="font-semibold">
             {" "}
-            scoutting over 25 different companies & 40 distinct investors{" "}
+            scoutting over 40 different companies & 55 distinct investors{" "}
           </span>
           in the
           <span className="font-semibold"> Advanced Air Mobility</span>{" "}
@@ -292,7 +292,7 @@ export const productFeatures = [
       <div>
         <p>
           Exponential Vector is currently analyzing
-          <span className="font-semibold"> over 30 different aircraft </span>
+          <span className="font-semibold"> over 50 different aircraft </span>
           within the
           <span className="font-semibold"> Advanced Air Mobility</span>{" "}
           ecosystem.
