@@ -55,7 +55,17 @@ export default function PDFForm({
           onChange={(e) => handleChange("companyName", e.target.value)}
           className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
         />
-        <div className="relative w-full">
+        <input
+          type="text"
+          value={subscriber.position}
+          placeholder="Position"
+          onChange={(e) => handleChange("position", e.target.value)}
+          className="rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+        />
+      </div>
+
+      <div className="mt-4 grid gap-4 grid-cols-2">
+        <div>
           <select
             value={subscriber.persona}
             onChange={(e) => handleChange("persona", e.target.value)}
@@ -68,30 +78,32 @@ export default function PDFForm({
             <option value="Investor">Investor</option>
             <option value="Government official">Government Official</option>
             <option value="Enthusiast">Enthusiast</option>
+            <option value="Other">Other</option>
           </select>
           <FontAwesomeIcon
             icon={faChevronDown}
             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm pointer-events-none"
           />
         </div>
-      </div>
-      <div className="mt-4 relative w-full">
-        <select
-          value={subscriber.ecosystems[0] || ""}
-          onChange={(e) => handleChange("ecosystems", [e.target.value])}
-          className="w-full appearance-none rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 outline-none"
-        >
-          <option value="">Select Ecosystem</option>
-          {ecosystemsOptions.map((eco) => (
-            <option key={eco.id} value={eco.id}>
-              {eco.name}
-            </option>
-          ))}
-        </select>
-        <FontAwesomeIcon
-          icon={faChevronDown}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm pointer-events-none"
-        />
+
+        <div>
+          <select
+            value={subscriber.ecosystems[0] || ""}
+            onChange={(e) => handleChange("ecosystems", [e.target.value])}
+            className="w-full appearance-none rounded-lg border border-gray-600 bg-[#34333d] px-4 py-2 outline-none"
+          >
+            <option value="">Select Ecosystem</option>
+            {ecosystemsOptions.map((eco) => (
+              <option key={eco.id} value={eco.id}>
+                {eco.name}
+              </option>
+            ))}
+          </select>
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm pointer-events-none"
+          />
+        </div>
       </div>
 
       <div className="mt-6 text-lg">
