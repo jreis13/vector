@@ -181,7 +181,7 @@ export default function SubscribeContent() {
   const handlePdfPurchase = async () => {
     if (!validatePdfBuyer()) return
     try {
-      const res = await fetch("/api/checkout", {
+      const res = await fetch("/api/pdfcheckout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subscriptions: [pdfBuyer] }),
