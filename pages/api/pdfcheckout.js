@@ -30,8 +30,31 @@ export default async function handler(req, res) {
       firstName: buyer.firstName,
       lastName: buyer.lastName,
       companyName: buyer.companyName,
+      position: buyer.position,
       persona: buyer.persona,
       ecosystems: buyer.ecosystems.join(","),
+      termsAgreed: "true",
+    }
+
+    const existing = await stripe.customers.list({
+      email: buyer.email,
+      limit: 1,
+    })
+
+    let customer
+
+    if (existing.data.length > 0) {
+      customer = existing.data[0]
+      await stripe.customers.update(customer.id, {
+        name: `${buyer.firstName} ${buyer.lastName}`,
+        metadata,
+      })
+    } else {
+      customer = await stripe.customers.create({
+        email: buyer.email,
+        name: `${buyer.firstName} ${buyer.lastName}`,
+        metadata,
+      })
     }
 
     const lineItems = buyer.ecosystems.map((ecosystemId) => {
@@ -46,17 +69,17 @@ export default async function handler(req, res) {
     })
 
     const session = await stripe.checkout.sessions.create({
+      customer: customer.id,
       payment_method_types: ["card"],
       mode: "payment",
       line_items: lineItems,
-      metadata,
       success_url: `${process.env.AUTH0_BASE_URL}/pdf-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
     })
 
     return res.status(200).json({ url: session.url })
   } catch (err) {
-    console.error("Stripe PDF Checkout Error:", err)
+    console.error("❌ Stripe PDF Checkout Error:", err)
     return res.status(500).json({ error: "Failed to create checkout session." })
   }
 }
