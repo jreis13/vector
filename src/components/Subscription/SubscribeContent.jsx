@@ -32,7 +32,10 @@ export default function SubscribeContent() {
   const formRef = useRef(null)
 
   const ecosystemsOptions = [
-    { id: "advancedairmobility", name: "Advanced Air Mobility" },
+    {
+      id: "advancedairmobility_q1_2025",
+      name: "Advanced Air Mobility — Q1 2025",
+    },
   ]
   const restrictedDomains = [
     "@gmail.com",
@@ -180,17 +183,27 @@ export default function SubscribeContent() {
 
   const handlePdfPurchase = async () => {
     if (!validatePdfBuyer()) return
+
+    const selectedReports = pdfBuyer.ecosystems
+
     try {
+      const payload = {
+        ...pdfBuyer,
+        reports: selectedReports,
+      }
+
       const res = await fetch("/api/pdfcheckout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscriptions: [pdfBuyer] }),
+        body: JSON.stringify({ subscriptions: [payload] }),
       })
+
       if (!res.ok) {
         const { error } = await res.json()
         setError(error || "Failed to create checkout session.")
         return
       }
+
       const { url } = await res.json()
       window.location.href = url
     } catch {

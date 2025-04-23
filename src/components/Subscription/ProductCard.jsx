@@ -1,5 +1,6 @@
 import { CheckIcon } from "@heroicons/react/24/outline"
 import { Button, Card, CardBody, CardHeader } from "@material-tailwind/react"
+import { useRouter } from "next/navigation"
 
 export default function ProductCard({
   title,
@@ -9,11 +10,13 @@ export default function ProductCard({
   marked,
   type,
   onClick,
-  downloadLink,
+  viewLink,
 }) {
+  const router = useRouter()
+
   const handleAction = () => {
     if (type === "free") {
-      window.open(downloadLink, "_blank")
+      window.open(viewLink || "/reports/publicReport", "_blank")
     } else {
       onClick(type)
     }
@@ -60,7 +63,7 @@ export default function ProductCard({
           onClick={handleAction}
         >
           {type === "free"
-            ? "Download Free PDF"
+            ? "View Free Report"
             : type === "paid"
               ? "Get Paid PDF"
               : "Subscribe Now"}

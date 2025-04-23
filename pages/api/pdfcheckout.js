@@ -2,8 +2,8 @@ import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
-const ecosystemPriceMapping = {
-  advancedairmobility: "price_1RFHJRH8mb7EVuIwaqP3I0I8",
+const reportPriceMapping = {
+  advancedairmobility_q1_2025: "price_1RFHJRH8mb7EVuIwaqP3I0I8",
 }
 
 export default async function handler(req, res) {
@@ -23,6 +23,7 @@ export default async function handler(req, res) {
   }
 
   const buyer = subscriptions[0]
+  const reportIds = buyer.reports
 
   try {
     const metadata = {
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
       companyName: buyer.companyName,
       position: buyer.position,
       persona: buyer.persona,
-      ecosystems: buyer.ecosystems.join(","),
+      reports: reportIds.join(","),
       termsAgreed: "true",
     }
 
@@ -57,10 +58,10 @@ export default async function handler(req, res) {
       })
     }
 
-    const lineItems = buyer.ecosystems.map((ecosystemId) => {
-      const priceId = ecosystemPriceMapping[ecosystemId]
+    const lineItems = reportIds.map((reportId) => {
+      const priceId = reportPriceMapping[reportId]
       if (!priceId) {
-        throw new Error(`No price ID found for ecosystem: ${ecosystemId}`)
+        throw new Error(`No price ID found for report: ${reportId}`)
       }
       return {
         price: priceId,
@@ -73,6 +74,7 @@ export default async function handler(req, res) {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: lineItems,
+      metadata,
       success_url: `${process.env.AUTH0_BASE_URL}/pdf-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
     })

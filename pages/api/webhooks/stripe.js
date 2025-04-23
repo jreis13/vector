@@ -1,3 +1,4 @@
+import { buffer } from "micro"
 import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -9,72 +10,130 @@ export const config = {
 }
 
 export default async function handler(req, res) {
-  const rawBody = await new Promise((resolve, reject) => {
-    let data = ""
-    req.on("data", (chunk) => (data += chunk))
-    req.on("end", () => resolve(Buffer.from(data)))
-    req.on("error", (err) => reject(err))
-  })
-
-  const sig = req.headers["stripe-signature"]
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed")
+  }
 
   let event
+
   try {
+    const rawBody = await buffer(req)
+    const signature = req.headers["stripe-signature"]
+
     event = stripe.webhooks.constructEvent(
       rawBody,
-      sig,
+      signature,
       process.env.STRIPE_WEBHOOK_SECRET
     )
+
+    console.log("✅ Stripe webhook verified:", event.type)
   } catch (err) {
-    console.error("Webhook signature verification failed:", err.message)
+    console.error("❌ Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
   }
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object
-    const emails = session.metadata.emails.split(",")
-    const firstNames = session.metadata.firstNames.split(",")
-    const lastNames = session.metadata.lastNames.split(",")
-    const companyNames = session.metadata.companyNames.split(",")
-    const personas = session.metadata.personas.split(",")
-    const roles = session.metadata.roles.split(",")
-    const ecosystems = session.metadata.ecosystems.split(",")
 
-    try {
-      await Promise.all(
-        emails.map(async (email, index) => {
-          let userId
+    if (session.mode === "subscription" && session.metadata.emails) {
+      const emails = session.metadata.emails.split(",")
+      const firstNames = session.metadata.firstNames.split(",")
+      const lastNames = session.metadata.lastNames.split(",")
+      const companyNames = session.metadata.companyNames.split(",")
+      const personas = session.metadata.personas.split(",")
+      const roles = session.metadata.roles.split(",")
+      const ecosystems = session.metadata.ecosystems.split(",")
 
-          try {
-            userId = await getAuth0UserIdByEmail(email)
-          } catch (err) {
-            console.error("User not found, creating:", email)
-            userId = await createAuth0User(email)
-          }
+      try {
+        await Promise.all(
+          emails.map(async (email, index) => {
+            let userId
+            try {
+              userId = await getAuth0UserIdByEmail(email)
+            } catch {
+              userId = await createAuth0User(email)
+            }
 
-          const existingMetadata = await fetchUserMetadata(userId)
+            const existingMetadata = await fetchUserMetadata(userId)
 
-          const updatedSubscribedTo = [
-            ...(existingMetadata.subscribedTo || []),
-            ...ecosystems,
-          ].filter((value, idx, self) => self.indexOf(value) === idx)
+            const updatedSubscribedTo = [
+              ...(existingMetadata.subscribedTo || []),
+              ...ecosystems,
+            ].filter((value, idx, self) => self.indexOf(value) === idx)
 
-          const metadata = {
-            subscribed: true,
-            subscribedTo: updatedSubscribedTo,
-            firstName: firstNames[index],
-            lastName: lastNames[index],
-            companyName: companyNames[index],
-            persona: personas[index],
-            role: roles[index],
-          }
+            const metadata = {
+              ...existingMetadata,
+              subscribed: true,
+              subscribedTo: updatedSubscribedTo,
+              firstName: firstNames[index],
+              lastName: lastNames[index],
+              companyName: companyNames[index],
+              persona: personas[index],
+              role: roles[index],
+            }
 
-          await updateUserMetadata(userId, metadata)
-        })
-      )
-    } catch (error) {
-      console.error("Error updating user metadata:", error.message)
-      return res.status(500).send("Failed to update user metadata.")
+            await updateUserMetadata(userId, metadata)
+          })
+        )
+      } catch (error) {
+        console.error(
+          "Error updating user metadata (subscription):",
+          error.message
+        )
+        return res.status(500).send("Failed to update user metadata.")
+      }
+    }
+
+    if (
+      session.mode === "payment" &&
+      session.metadata.reports &&
+      session.metadata.email
+    ) {
+      const email = session.metadata.email
+      const reportIds = session.metadata.reports.split(",")
+
+      console.log("📦 Handling report purchase")
+      console.log("📧 Email:", email)
+      console.log("🧾 Reports:", reportIds)
+
+      try {
+        let userId
+        try {
+          userId = await getAuth0UserIdByEmail(email)
+          console.log("✅ Found existing Auth0 user:", userId)
+        } catch {
+          console.log("⚠️ User not found in Auth0, creating new one...")
+          userId = await createAuth0User(email)
+          console.log("✅ Created new user:", userId)
+        }
+
+        const existingMetadata = await fetchUserMetadata(userId)
+        console.log("📂 Existing metadata:", existingMetadata)
+
+        const updatedPurchasedReports = [
+          ...(existingMetadata.purchasedReports || []),
+          ...reportIds,
+        ].filter((value, idx, self) => self.indexOf(value) === idx)
+
+        const metadata = {
+          ...existingMetadata,
+          purchasedReports: updatedPurchasedReports,
+        }
+
+        await updateUserMetadata(userId, metadata)
+        console.log(
+          "✅ Updated user metadata with purchasedReports:",
+          updatedPurchasedReports
+        )
+      } catch (error) {
+        console.error(
+          "Error updating user metadata (report purchase):",
+          error.message
+        )
+        return res
+          .status(500)
+          .send("Failed to update report purchase metadata.")
+      }
     }
   }
 
@@ -135,7 +194,11 @@ async function createAuth0User(email) {
         email,
         connection: "email",
         email_verified: true,
-        app_metadata: { subscribed: false, subscribedTo: [] },
+        app_metadata: {
+          subscribed: false,
+          subscribedTo: [],
+          purchasedReports: [],
+        },
       }),
     }
   )

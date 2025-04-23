@@ -8,7 +8,7 @@ export function ProductSection({ onSelectProduct }) {
       price: "€0",
       features: ["PDF format", "Public release data", "Basic overview"],
       type: "free",
-      downloadLink: "/files/public-report.pdf",
+      viewLink: "/reports/publicReport",
     },
     {
       title: "Paid PDF Report",
