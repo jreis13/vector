@@ -5,7 +5,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 
-export default function PDFForm({
+export default function ReportForm({
   subscriber,
   setSubscriber,
   ecosystemsOptions,
@@ -19,7 +19,7 @@ export default function PDFForm({
   return (
     <div className="mt-20 w-full">
       <h2 className="text-4xl font-bold">Access the Paid Report</h2>
-      <p className="m-4">Complete your details to receive the updated PDF.</p>
+      <p className="m-4">Complete your details to gain access to the report.</p>
 
       <div className="grid gap-4 grid-cols-2">
         <input
@@ -108,22 +108,22 @@ export default function PDFForm({
 
       <div className="mt-6 text-lg">
         <p>
-          Total Price: <span className="font-semibold">€79</span>
+          Total Price: <span className="font-semibold">€450</span>
         </p>
         <p className="text-sm text-gray-400">
-          Includes one-time access to the current version of the report.
+          Includes life-time access to the current version of the report.
         </p>
       </div>
 
       <div className="flex justify-center items-center gap-2 mb-4 mt-4">
         <input
           type="checkbox"
-          id="pdfTerms"
+          id="reportTerms"
           checked={isChecked}
           onChange={(e) => setIsChecked(e.target.checked)}
           className="h-5 w-5 cursor-pointer"
         />
-        <label htmlFor="pdfTerms" className="text-sm text-gray-300">
+        <label htmlFor="reportTerms" className="text-sm text-gray-300">
           I have read and agree to Exponential Vector&apos;s{" "}
           <a
             href="/files/Privacy_Policy_Exponential_Vector.pdf"

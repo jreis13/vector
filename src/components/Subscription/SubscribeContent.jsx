@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import PDFForm from "./PDFForm"
 import { ProductSection } from "./ProductSection"
+import ReportForm from "./ReportForm"
 import SubscriptionForm from "./SubscriptionForm"
 
 export default function SubscribeContent() {
@@ -17,7 +17,7 @@ export default function SubscribeContent() {
       ecosystems: [],
     },
   ])
-  const [pdfBuyer, setPdfBuyer] = useState({
+  const [reportBuyer, setReportBuyer] = useState({
     email: "",
     firstName: "",
     lastName: "",
@@ -26,7 +26,7 @@ export default function SubscribeContent() {
     ecosystems: [],
   })
   const [emailWarnings, setEmailWarnings] = useState({})
-  const [pdfEmailWarning, setPdfEmailWarning] = useState("")
+  const [reportEmailWarning, setReportEmailWarning] = useState("")
   const [isChecked, setIsChecked] = useState(false)
   const [error, setError] = useState("")
   const formRef = useRef(null)
@@ -99,12 +99,12 @@ export default function SubscribeContent() {
     }
   }
 
-  const handlePdfChange = (field, value) => {
-    const updated = { ...pdfBuyer, [field]: value }
-    setPdfBuyer(updated)
+  const handleReportChange = (field, value) => {
+    const updated = { ...reportBuyer, [field]: value }
+    setReportBuyer(updated)
     if (field === "email") {
       const isRestricted = restrictedDomains.some((dom) => value.includes(dom))
-      setPdfEmailWarning(
+      setReportEmailWarning(
         isRestricted
           ? "Exponential Vector only assigns licenses to company emails. Contact us for further questions."
           : ""
@@ -143,8 +143,8 @@ export default function SubscribeContent() {
     return true
   }
 
-  const validatePdfBuyer = () => {
-    const s = pdfBuyer
+  const validateReportBuyer = () => {
+    const s = reportBuyer
     if (
       !s.email ||
       !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(s.email) ||
@@ -181,18 +181,18 @@ export default function SubscribeContent() {
     }
   }
 
-  const handlePdfPurchase = async () => {
-    if (!validatePdfBuyer()) return
+  const handleReportPurchase = async () => {
+    if (!validateReportBuyer()) return
 
-    const selectedReports = pdfBuyer.ecosystems
+    const selectedReports = reportBuyer.ecosystems
 
     try {
       const payload = {
-        ...pdfBuyer,
+        ...reportBuyer,
         reports: selectedReports,
       }
 
-      const res = await fetch("/api/pdfcheckout", {
+      const res = await fetch("/api/reportcheckout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ subscriptions: [payload] }),
@@ -238,15 +238,15 @@ export default function SubscribeContent() {
 
         {selectedProductType === "paid" && (
           <div ref={formRef}>
-            <PDFForm
-              subscriber={pdfBuyer}
-              setSubscriber={setPdfBuyer}
+            <ReportForm
+              subscriber={reportBuyer}
+              setSubscriber={setReportBuyer}
               ecosystemsOptions={ecosystemsOptions}
-              emailWarning={pdfEmailWarning}
-              handleChange={handlePdfChange}
+              emailWarning={reportEmailWarning}
+              handleChange={handleReportChange}
               isChecked={isChecked}
               setIsChecked={setIsChecked}
-              handlePurchase={handlePdfPurchase}
+              handlePurchase={handleReportPurchase}
             />
           </div>
         )}

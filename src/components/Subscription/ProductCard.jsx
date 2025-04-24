@@ -65,7 +65,7 @@ export default function ProductCard({
           {type === "free"
             ? "View Free Report"
             : type === "paid"
-              ? "Get Paid PDF"
+              ? "Get Paid Report"
               : "Subscribe Now"}
         </Button>
       </CardHeader>

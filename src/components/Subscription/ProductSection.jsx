@@ -3,17 +3,17 @@ import ProductCard from "./ProductCard"
 export function ProductSection({ onSelectProduct }) {
   const products = [
     {
-      title: "Free PDF Report",
+      title: "Free Report",
       desc: "Get the public version with high-level insights.",
       price: "€0",
-      features: ["PDF format", "Public release data", "Basic overview"],
+      features: ["Free", "Public release data", "Basic overview"],
       type: "free",
       viewLink: "/reports/publicReport",
     },
     {
-      title: "Paid PDF Report",
+      title: "Paid Report",
       desc: "Latest report updated until today.",
-      price: "€79",
+      price: "€450",
       features: ["Fresh insights", "Forecasts", "Raw data"],
       type: "paid",
     },

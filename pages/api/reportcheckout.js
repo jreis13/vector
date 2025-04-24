@@ -75,13 +75,13 @@ export default async function handler(req, res) {
       mode: "payment",
       line_items: lineItems,
       metadata,
-      success_url: `${process.env.AUTH0_BASE_URL}/pdf-success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.AUTH0_BASE_URL}/report-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
     })
 
     return res.status(200).json({ url: session.url })
   } catch (err) {
-    console.error("❌ Stripe PDF Checkout Error:", err)
+    console.error("❌ Stripe Report Checkout Error:", err)
     return res.status(500).json({ error: "Failed to create checkout session." })
   }
 }

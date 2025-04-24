@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import SubscriptionLayout from "src/layouts/SubscriptionLayout"
 
-export default function PdfSuccessPage() {
+export default function ReportSuccessPage() {
   const router = useRouter()
   const { user, isLoading } = useUser()
 
