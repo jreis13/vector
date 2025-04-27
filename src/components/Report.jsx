@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import LoadingLayout from "src/layouts/LoadingLayout"
 
-const FREE_REPORT_ID = "advancedairmobility_q1_2025"
+import { FREE_REPORT_ID } from "src/common/data/reportData"
 
 export default function ReportPage({ reportId }) {
   const { user, isLoading } = useUser()
