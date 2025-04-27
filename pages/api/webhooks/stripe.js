@@ -102,7 +102,7 @@ export default async function handler(req, res) {
           userId = await getAuth0UserIdByEmail(email)
           console.log("✅ Found existing Auth0 user:", userId)
         } catch {
-          console.log("⚠️ User not found in Auth0, creating new one...")
+          console.log("⚠️ User not found, creating new one...")
           userId = await createAuth0User(email)
           console.log("✅ Created new user:", userId)
         }
@@ -120,6 +120,7 @@ export default async function handler(req, res) {
           purchasedReports: updatedPurchasedReports,
         }
 
+        console.log("📤 Updating purchasedReports metadata:", metadata)
         await updateUserMetadata(userId, metadata)
         console.log(
           "✅ Updated user metadata with purchasedReports:",
