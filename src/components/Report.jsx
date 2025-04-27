@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import LoadingLayout from "src/layouts/LoadingLayout"
 
+const FREE_REPORT_ID = "advancedairmobility_q1_2025"
+
 export default function ReportPage({ reportId }) {
   const { user, isLoading } = useUser()
   const router = useRouter()
@@ -14,17 +16,21 @@ export default function ReportPage({ reportId }) {
   useEffect(() => {
     if (isLoading) return
 
-    if (!user) {
+    const isFreeReport = reportId === FREE_REPORT_ID
+
+    if (!user && !isFreeReport) {
       router.push(`/api/auth/login?returnTo=/reports/${reportId}`)
       return
     }
 
-    const hasAccess =
-      user.app_metadata?.purchasedReports?.includes(reportId) || false
+    if (user && !isFreeReport) {
+      const hasAccess =
+        user.app_metadata?.purchasedReports?.includes(reportId) || false
 
-    if (!hasAccess) {
-      router.push("/unauthorized")
-      return
+      if (!hasAccess) {
+        router.push("/unauthorized")
+        return
+      }
     }
 
     const fetchLink = async () => {
@@ -54,7 +60,7 @@ export default function ReportPage({ reportId }) {
         src={reportUrl}
         className="w-full h-[90vh] rounded-xl border border-gray-700"
         allowFullScreen
-      ></iframe>
+      />
     </div>
   )
 }

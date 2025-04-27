@@ -9,7 +9,8 @@ const FREE_REPORT_ID = "advancedairmobility_q1_2025"
 
 const REPORT_DISPLAY = {
   advancedairmobility_q1_2025: {
-    title: "Advanced Air Mobility - Q1 2025",
+    title:
+      "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
     image:
       "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_cover.png",
   },
@@ -23,11 +24,6 @@ export default function Reports() {
   useEffect(() => {
     if (isLoading) return
 
-    if (!user) {
-      router.push("/api/auth/login?returnTo=/reports")
-      return
-    }
-
     const purchased = user?.app_metadata?.purchasedReports || []
     const combined = [...purchased, FREE_REPORT_ID]
     const deduplicated = Array.from(new Set(combined))
@@ -39,7 +35,7 @@ export default function Reports() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-semibold mb-6">My Reports</h1>
+      <h1 className="text-3xl font-semibold mb-6">Reports</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {reports.map((id) => (
           <div
