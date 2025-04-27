@@ -3,11 +3,7 @@ import Stripe from "stripe"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+export const config = { api: { bodyParser: false } }
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -25,8 +21,6 @@ export default async function handler(req, res) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     )
-
-    console.log("✅ Stripe webhook verified:", event.type)
   } catch (err) {
     console.error("❌ Webhook signature verification failed:", err.message)
     return res.status(400).send(`Webhook Error: ${err.message}`)
@@ -92,19 +86,12 @@ export default async function handler(req, res) {
       const email = session.metadata.email
       const reportIds = session.metadata.reports.split(",")
 
-      console.log("📦 Handling report purchase")
-      console.log("📧 Email:", email)
-      console.log("🧾 Reports:", reportIds)
-
       try {
         let userId
         try {
           userId = await getAuth0UserIdByEmail(email)
-          console.log("✅ Found existing Auth0 user:", userId)
         } catch {
-          console.log("⚠️ User not found, creating new one...")
           userId = await createAuth0User(email)
-          console.log("✅ Created new user:", userId)
         }
 
         const existingMetadata = await fetchUserMetadata(userId)
@@ -120,12 +107,7 @@ export default async function handler(req, res) {
           purchasedReports: updatedPurchasedReports,
         }
 
-        console.log("📤 Updating purchasedReports metadata:", metadata)
         await updateUserMetadata(userId, metadata)
-        console.log(
-          "✅ Updated user metadata with purchasedReports:",
-          updatedPurchasedReports
-        )
       } catch (error) {
         console.error(
           "Error updating user metadata (report purchase):",
@@ -146,12 +128,7 @@ async function fetchUserMetadata(userId) {
 
   const response = await fetch(
     `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users/${userId}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
+    { method: "GET", headers: { Authorization: `Bearer ${token}` } }
   )
 
   if (!response.ok) {
@@ -167,9 +144,7 @@ async function getAuth0UserIdByEmail(email) {
 
   const response = await fetch(
     `${process.env.AUTH0_MANAGEMENT_API_AUDIENCE}users-by-email?email=${email}`,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
+    { headers: { Authorization: `Bearer ${token}` } }
   )
 
   const users = await response.json()

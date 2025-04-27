@@ -39,8 +39,6 @@ export default async function handler(req, res) {
       termsAgreed: "true",
     }
 
-    console.log("📝 Stripe Metadata to send:", metadata)
-
     const existing = await stripe.customers.list({
       email: buyer.email,
       limit: 1,
@@ -50,7 +48,6 @@ export default async function handler(req, res) {
 
     if (existing.data.length > 0) {
       customer = existing.data[0]
-      console.log("👤 Existing customer found:", customer.id)
       await stripe.customers.update(customer.id, {
         name: `${buyer.firstName} ${buyer.lastName}`,
         metadata,
@@ -61,7 +58,6 @@ export default async function handler(req, res) {
         name: `${buyer.firstName} ${buyer.lastName}`,
         metadata,
       })
-      console.log("🆕 Created new customer:", customer.id)
     }
 
     const lineItems = reportIds.map((reportId) => {
@@ -72,8 +68,6 @@ export default async function handler(req, res) {
       return { price: priceId, quantity: 1 }
     })
 
-    console.log("🧾 Line items:", lineItems)
-
     const session = await stripe.checkout.sessions.create({
       customer: customer.id,
       payment_method_types: ["card"],
@@ -83,8 +77,6 @@ export default async function handler(req, res) {
       success_url: `${process.env.AUTH0_BASE_URL}/report-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.AUTH0_BASE_URL}/cancel`,
     })
-
-    console.log("✅ Stripe Checkout Session created:", session.id)
 
     return res.status(200).json({ url: session.url })
   } catch (err) {
