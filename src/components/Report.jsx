@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import LoadingLayout from "src/layouts/LoadingLayout"
 
-export default function ReportPage({ params }) {
-  const { reportId } = params
+export default function ReportPage({ reportId }) {
   const { user, isLoading } = useUser()
   const router = useRouter()
   const [authorized, setAuthorized] = useState(false)
