@@ -1,10 +1,10 @@
 import Stripe from "stripe"
 
-const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const reportPriceMapping = {
   global_evtol_market_review_commercial_tracker_q1_2025:
-    "price_1RFHJRH8mb7EVuIwaqP3I0I8",
+    "price_1RIWfzH8mb7EVuIweoPDeC0E",
 }
 
 export default async function handler(req, res) {
