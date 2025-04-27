@@ -3,7 +3,8 @@ import Stripe from "stripe"
 const stripe = new Stripe(process.env.STRIPE_TEST_KEY)
 
 const reportPriceMapping = {
-  advancedairmobility_q1_2025: "price_1RFHJRH8mb7EVuIwaqP3I0I8",
+  global_evtol_market_review_commercial_tracker_q1_2025:
+    "price_1RFHJRH8mb7EVuIwaqP3I0I8",
 }
 
 export default async function handler(req, res) {
@@ -68,10 +69,7 @@ export default async function handler(req, res) {
       if (!priceId) {
         throw new Error(`No price ID found for report: ${reportId}`)
       }
-      return {
-        price: priceId,
-        quantity: 1,
-      }
+      return { price: priceId, quantity: 1 }
     })
 
     console.log("🧾 Line items:", lineItems)

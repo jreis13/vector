@@ -1,7 +1,8 @@
-export const FREE_REPORT_ID = "advancedairmobility_q1_2025"
+export const FREE_REPORT_ID =
+  "global_evtol_market_review_commercial_tracker_q1_2025_free"
 
 export const REPORT_DISPLAY = {
-  advancedairmobility_q1_2025: {
+  global_evtol_market_review_commercial_tracker_q1_2025_free: {
     title:
       "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
     image:

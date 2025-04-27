@@ -33,8 +33,8 @@ export default function SubscribeContent() {
 
   const ecosystemsOptions = [
     {
-      id: "advancedairmobility_q1_2025",
-      name: "Advanced Air Mobility — Q1 2025",
+      id: "global_evtol_market_review_commercial_tracker_q1_2025",
+      name: "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
     },
   ]
   const restrictedDomains = [
@@ -187,10 +187,7 @@ export default function SubscribeContent() {
     const selectedReports = reportBuyer.ecosystems
 
     try {
-      const payload = {
-        ...reportBuyer,
-        reports: selectedReports,
-      }
+      const payload = { ...reportBuyer, reports: selectedReports }
 
       const res = await fetch("/api/reportcheckout", {
         method: "POST",
