@@ -45,7 +45,7 @@ export default function Reports() {
           <div
             key={id}
             className="relative h-60 rounded-xl shadow-md hover:shadow-lg cursor-pointer overflow-hidden group"
-            onClick={() => router.push(`/reports/${id}`)}
+            onClick={() => window.open(`/reports/${id}`, "_blank")}
           >
             <div
               className="absolute inset-0 bg-cover transition-transform scale-100 group-hover:scale-105 duration-300"
