@@ -3,15 +3,8 @@ import ProductCard from "./ProductCard"
 export function ProductSection({ onSelectProduct }) {
   const products = [
     {
-      title: "Free Report",
-      desc: "Get the public version with high-level insights.",
-      price: "€0",
-      features: ["Free", "Public release data", "Basic overview"],
-      type: "free",
-      viewLink: "/reports/publicReport",
-    },
-    {
-      title: "Paid Report",
+      title:
+        "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
       desc: "Latest report updated until today.",
       price: "€450",
       features: ["Fresh insights", "Forecasts", "Raw data"],
@@ -36,7 +29,7 @@ export function ProductSection({ onSelectProduct }) {
         </p>
       </div>
       <div className="mt-24">
-        <div className="container mx-auto grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="container mx-auto grid gap-10 md:grid-cols-2">
           {products.map((props, key) => (
             <ProductCard key={key} {...props} onClick={onSelectProduct} />
           ))}

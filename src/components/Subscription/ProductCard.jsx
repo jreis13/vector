@@ -10,16 +10,11 @@ export default function ProductCard({
   marked,
   type,
   onClick,
-  viewLink,
 }) {
   const router = useRouter()
 
   const handleAction = () => {
-    if (type === "free") {
-      window.open(viewLink || "/reports/publicReport", "_blank")
-    } else {
-      onClick(type)
-    }
+    onClick(type)
   }
 
   return (
@@ -49,7 +44,6 @@ export default function ProductCard({
           className={`mb-6 flex gap-1 justify-center items-top ${marked ? "text-[#e8e8e8]" : ""}`}
         >
           <h3 className="text-2xl font-bold">{price}</h3>
-          {type === "free" && <span className="text-sm opacity-70">/free</span>}
           {type === "paid" && <span className="text-sm opacity-70">/once</span>}
           {type === "subscription" && (
             <span className="text-sm opacity-70">/month*</span>
@@ -62,11 +56,7 @@ export default function ProductCard({
           className={`font-inherit ${marked ? "bg-[#e8e8e8] text-[#6600cc]" : "bg-[#403f4c]"}`}
           onClick={handleAction}
         >
-          {type === "free"
-            ? "View Free Report"
-            : type === "paid"
-              ? "Get Paid Report"
-              : "Subscribe Now"}
+          {type === "paid" ? "Get Paid Report" : "Subscribe Now"}
         </Button>
       </CardHeader>
 
