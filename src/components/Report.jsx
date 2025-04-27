@@ -5,16 +5,12 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import LoadingLayout from "src/layouts/LoadingLayout"
 
-const CANVA_LINKS = {
-  advancedairmobility_q1_2025:
-    "https://www.canva.com/design/your-canva-id/embed",
-}
-
 export default function ReportPage({ params }) {
   const { reportId } = params
   const { user, isLoading } = useUser()
   const router = useRouter()
   const [authorized, setAuthorized] = useState(false)
+  const [reportUrl, setReportUrl] = useState(null)
 
   useEffect(() => {
     if (isLoading) return
@@ -27,15 +23,31 @@ export default function ReportPage({ params }) {
     const hasAccess =
       user.app_metadata?.purchasedReports?.includes(reportId) || false
 
-    if (hasAccess) {
-      setAuthorized(true)
-    } else {
+    if (!hasAccess) {
       router.push("/unauthorized")
+      return
     }
+
+    const fetchLink = async () => {
+      try {
+        const res = await fetch(`/api/get-report-link?reportId=${reportId}`)
+        const data = await res.json()
+        if (res.ok) {
+          setReportUrl(data.link)
+          setAuthorized(true)
+        } else {
+          throw new Error(data.error)
+        }
+      } catch (err) {
+        console.error("Failed to load report link:", err)
+        router.push("/unauthorized")
+      }
+    }
+
+    fetchLink()
   }, [user, isLoading, reportId, router])
 
-  if (isLoading) return <LoadingLayout />
-  if (!authorized) return null
+  if (isLoading || !authorized || !reportUrl) return <LoadingLayout />
 
   return (
     <div className="p-8">
@@ -43,7 +55,7 @@ export default function ReportPage({ params }) {
         Viewing Report: {reportId.replace(/_/g, " ").toUpperCase()}
       </h1>
       <iframe
-        src={CANVA_LINKS[reportId]}
+        src={reportUrl}
         className="w-full h-[90vh] rounded-xl border border-gray-700"
         allowFullScreen
       ></iframe>
