@@ -38,7 +38,7 @@ export default function Reports() {
           return (
             <div
               key={id}
-              className="rounded-xl overflow-hidden bg-[#1a1a1a] group transition-all duration-300"
+              className="rounded-xl overflow-hidden bg-[#1a1a1a] group transition-all duration-300 border border-[#34333d]"
             >
               <div className="w-full overflow-hidden">
                 <Image
