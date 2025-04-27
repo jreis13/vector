@@ -5,8 +5,14 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import LoadingLayout from "src/layouts/LoadingLayout"
 
-const REPORT_DISPLAY_NAMES = {
-  advancedairmobility_q1_2025: "Advanced Air Mobility Q1 2025",
+const FREE_REPORT_ID = "advancedairmobility_q1_2025"
+
+const REPORT_DISPLAY = {
+  advancedairmobility_q1_2025: {
+    title: "Advanced Air Mobility - Q1 2025",
+    image:
+      "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_cover.png",
+  },
 }
 
 export default function Reports() {
@@ -23,7 +29,10 @@ export default function Reports() {
     }
 
     const purchased = user?.app_metadata?.purchasedReports || []
-    setReports(purchased)
+    const combined = [...purchased, FREE_REPORT_ID]
+    const deduplicated = Array.from(new Set(combined))
+
+    setReports(deduplicated)
   }, [user, isLoading, router])
 
   if (isLoading) return <LoadingLayout />
@@ -35,13 +44,18 @@ export default function Reports() {
         {reports.map((id) => (
           <div
             key={id}
-            className="bg-[#1c1c1e] p-6 rounded-xl shadow-md hover:shadow-lg cursor-pointer"
+            className="relative h-60 rounded-xl shadow-md hover:shadow-lg cursor-pointer overflow-hidden group"
             onClick={() => router.push(`/reports/${id}`)}
           >
-            <h2 className="text-xl font-bold">
-              {REPORT_DISPLAY_NAMES[id] || id}
-            </h2>
-            <p className="text-gray-400 mt-2">Click to view this report</p>
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform scale-100 group-hover:scale-105 duration-300"
+              style={{ backgroundImage: `url(${REPORT_DISPLAY[id]?.image})` }}
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-60 p-6 flex flex-col justify-end">
+              <h2 className="text-xl font-bold text-white">
+                {REPORT_DISPLAY[id]?.title || id}
+              </h2>
+            </div>
           </div>
         ))}
       </div>

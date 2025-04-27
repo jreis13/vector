@@ -50,9 +50,6 @@ export default function ReportPage({ reportId }) {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">
-        Viewing Report: {reportId.replace(/_/g, " ").toUpperCase()}
-      </h1>
       <iframe
         src={reportUrl}
         className="w-full h-[90vh] rounded-xl border border-gray-700"
