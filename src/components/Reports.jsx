@@ -48,7 +48,7 @@ export default function Reports() {
             onClick={() => router.push(`/reports/${id}`)}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform scale-100 group-hover:scale-105 duration-300"
+              className="absolute inset-0 bg-cover transition-transform scale-100 group-hover:scale-105 duration-300"
               style={{ backgroundImage: `url(${REPORT_DISPLAY[id]?.image})` }}
             />
             <div className="absolute inset-0 bg-black bg-opacity-60 p-6 flex flex-col justify-end">
