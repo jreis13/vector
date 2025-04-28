@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         lastNames: subscriptions.map((sub) => sub.lastName).join(","),
         companyNames: subscriptions.map((sub) => sub.companyName).join(","),
         personas: subscriptions.map((sub) => sub.persona).join(","),
-        roles: subscriptions.map((sub) => sub.role).join(","),
+        positions: subscriptions.map((sub) => sub.position).join(","),
         ecosystems: subscriptions.flatMap((sub) => sub.ecosystems).join(","),
       }
 

@@ -21,7 +21,7 @@ export default function Profile() {
   return (
     <div className="flex justify-center items-center my-12 text-[#403f4c]">
       {user && (
-        <div className="bg-[#e8e8e8] shadow-lg rounded-lg p-8 w-full max-w-md">
+        <div className="bg-[#e8e8e8] shadow-lg rounded-lg p-8 w-full max-w-xl">
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-bold mt-4">
               {user.app_metadata?.firstName && user.app_metadata?.lastName
@@ -38,6 +38,10 @@ export default function Profile() {
             <div className="flex justify-between py-2">
               <span>Persona:</span>
               <span>{user.app_metadata?.persona || "N/A"}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Position:</span>
+              <span>{user.app_metadata?.position || "N/A"}</span>
             </div>
             <div className="flex justify-between py-2">
               <span>Subscription:</span>
@@ -67,20 +71,43 @@ export default function Profile() {
                   : "N/A"}
               </span>
             </div>
-            <div className="mt-6">
-              <h3 className="text-lg font-bold mb-2">Subscribed Ecosystems:</h3>
-              {user.app_metadata?.subscribed &&
-              user.app_metadata.subscribedTo.length > 0 ? (
-                <ul className="list-disc list-inside">
-                  {user.app_metadata.subscribedTo.map((ecosystem, index) => (
-                    <li className="list-none" key={index}>
-                      {ecosystem}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-gray-500">No ecosystems subscribed.</p>
-              )}
+            <div className="flex justify-between py-2">
+              <div className="mt-6">
+                <h3 className="text-lg font-bold mb-2">
+                  Subscribed Ecosystems:
+                </h3>
+                {user.app_metadata?.subscribed &&
+                user.app_metadata.subscribedTo.length > 0 ? (
+                  <ul className="list-disc list-inside">
+                    {user.app_metadata.subscribedTo.map((ecosystem, index) => (
+                      <li className="list-none text-[#6600cc]" key={index}>
+                        <a target="_blank" href={`/ecosystems/${ecosystem}`}>
+                          {ecosystem}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-500">No ecosystems subscribed.</p>
+                )}
+              </div>
+              <div className="mt-6">
+                <h3 className="text-lg font-bold mb-2">Purchased Reports:</h3>
+                {user.app_metadata?.purchasedReports &&
+                user.app_metadata.purchasedReports.length > 0 ? (
+                  <ul className="list-disc list-inside">
+                    {user.app_metadata.purchasedReports.map((report, index) => (
+                      <li className="list-none text-[#6600cc]" key={index}>
+                        <a target="_blank" href={`/reports/${report}`}>
+                          {report}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-500">No reports purchased.</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

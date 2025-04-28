@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       const lastNames = session.metadata.lastNames.split(",")
       const companyNames = session.metadata.companyNames.split(",")
       const personas = session.metadata.personas.split(",")
-      const roles = session.metadata.roles.split(",")
+      const positions = session.metadata.positions.split(",")
       const ecosystems = session.metadata.ecosystems.split(",")
 
       try {
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
               lastName: lastNames[index],
               companyName: companyNames[index],
               persona: personas[index],
-              role: roles[index],
+              position: positions[index],
             }
 
             await updateUserMetadata(userId, metadata)
