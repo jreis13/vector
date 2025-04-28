@@ -56,7 +56,7 @@ export default function ProductCard({
           className={`font-inherit ${marked ? "bg-[#e8e8e8] text-[#6600cc]" : "bg-[#403f4c]"}`}
           onClick={handleAction}
         >
-          {type === "paid" ? "Get Paid Report" : "Subscribe Now"}
+          {type === "paid" ? "Get Full Report" : "Subscribe Now"}
         </Button>
       </CardHeader>
 
