@@ -1,15 +1,13 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
+import { CheckIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { FREE_REPORT_ID, REPORT_DISPLAY } from "src/common/data/reportData"
 import LoadingLayout from "src/layouts/LoadingLayout"
 import Button from "./Button"
-
-import { CheckIcon } from "@heroicons/react/24/outline"
-
-import { FREE_REPORT_ID, REPORT_DISPLAY } from "src/common/data/reportData"
 
 export default function Reports() {
   const { user, isLoading } = useUser()
@@ -24,21 +22,28 @@ export default function Reports() {
     const deduplicated = Array.from(new Set(combined))
 
     setReports(deduplicated)
-  }, [user, isLoading, router])
+  }, [user, isLoading])
 
   if (isLoading) return <LoadingLayout />
 
   return (
     <div className="p-8">
       <h1 className="text-3xl font-semibold mb-6">Reports</h1>
-      <div className="flex gap-6">
+      <div className="flex flex-wrap gap-6">
         {reports.map((id) => {
           const report = REPORT_DISPLAY[id]
+          const isFreeReport = id === FREE_REPORT_ID
+          const hasPurchased =
+            user?.app_metadata?.purchasedReports?.includes(id)
+
+          const showFreeButton = isFreeReport
+          const showBuyButton = !isFreeReport && (!user || !hasPurchased)
+          const showViewButton = !isFreeReport && user && hasPurchased
 
           return (
             <div
               key={id}
-              className="rounded-xl overflow-hidden bg-[#1a1a1a] group transition-all duration-300 border border-[#34333d]"
+              className="rounded-xl overflow-hidden bg-[#1a1a1a] group transition-all duration-300 border border-[#34333d] w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
             >
               <div className="w-full overflow-hidden">
                 <Image
@@ -46,7 +51,7 @@ export default function Reports() {
                   alt={report?.title}
                   width={800}
                   height={800}
-                  className="w-full max-h-full object-fit transition-transform duration-300 bg:[#34333d] hover:bg-[#1a1a1a] group-hover:opacity-70"
+                  className="w-full max-h-full object-cover transition-transform duration-300 group-hover:opacity-70"
                 />
               </div>
 
@@ -65,16 +70,38 @@ export default function Reports() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex justify-center gap-4 mb-4">
-                  <Button
-                    alternative
-                    onClick={() => window.open(`/reports/${id}`, "_blank")}
-                  >
-                    Open Free Report
-                  </Button>
-                  <Button onClick={() => (window.location.href = "/subscribe")}>
-                    Buy Full Report
-                  </Button>
+
+                <div className="flex justify-center mb-4">
+                  {showFreeButton && (
+                    <div className="flex w-full justify-between gap-2">
+                      <Button
+                        alternative
+                        onClick={() => window.open(`/reports/${id}`, "_blank")}
+                      >
+                        Open Free Report
+                      </Button>
+                      <Button
+                        onClick={() => (window.location.href = "/subscribe")}
+                      >
+                        Buy Full Report
+                      </Button>
+                    </div>
+                  )}
+                  {showBuyButton && (
+                    <Button
+                      onClick={() => (window.location.href = "/subscribe")}
+                    >
+                      Buy Full Report
+                    </Button>
+                  )}
+                  {showViewButton && (
+                    <Button
+                      alternative
+                      onClick={() => window.open(`/reports/${id}`, "_blank")}
+                    >
+                      View Report
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
