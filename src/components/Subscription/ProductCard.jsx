@@ -70,13 +70,13 @@ export default function ProductCard({
       </CardBody>
 
       {warning && (
-        <span className="absolute bottom-2 right-4 text-xs text-[#e8e8e8]">
+        <span className="absolute bottom-2 right-4 opacity-75 text-xs text-[#e8e8e8]">
           {warning}
         </span>
       )}
 
       {offer && (
-        <span className="absolute bottom-2 right-4 text-xs text-[#e8e8e8]">
+        <span className="absolute bottom-2 right-4 opacity-75 text-xs text-[#e8e8e8]">
           {offer}
         </span>
       )}
