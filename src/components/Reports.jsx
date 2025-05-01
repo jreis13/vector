@@ -18,9 +18,21 @@ export default function Reports() {
     if (isLoading) return
 
     const purchased = user?.app_metadata?.purchasedReports || []
-    const combined = [...purchased, FREE_REPORT_ID]
-    const deduplicated = Array.from(new Set(combined))
 
+    let combined = [...purchased, FREE_REPORT_ID]
+
+    if (
+      purchased.includes(
+        "global_evtol_market_review_commercial_tracker_q1_2025"
+      )
+    ) {
+      combined = combined.filter(
+        (id) =>
+          id !== "global_evtol_market_review_commercial_tracker_q1_2025_free"
+      )
+    }
+
+    const deduplicated = Array.from(new Set(combined))
     setReports(deduplicated)
   }, [user, isLoading])
 
