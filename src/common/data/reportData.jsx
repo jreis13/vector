@@ -6,7 +6,7 @@ export const REPORT_DISPLAY = {
     title:
       "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
     image:
-      "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_cover.png",
+      "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_free_cover.png",
     features: [
       "Deep dive on eVTOL commercial transactions (94 commercial transactions)",
       "27 Manufacturer Profiles",
