@@ -4,7 +4,7 @@ export const FREE_REPORT_ID =
 export const REPORT_DISPLAY = {
   global_evtol_market_review_commercial_tracker_q1_2025_free: {
     title:
-      "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
+      "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025 - Free Sample",
     image:
       "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_free_cover.png",
     features: [
