@@ -67,13 +67,17 @@ export default function Reports() {
                 />
               </div>
 
-              <div className="p-4">
-                <h2 className="text-lg font-bold mb-2">
-                  {report?.title || id}
-                </h2>
+              <div className="p-4 px-4">
+                <h2 className="text-lg font-bold">{report?.title || id}</h2>
               </div>
 
-              <div className="px-4 max-h-0 opacity-0 overflow-hidden group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
+              <div className="border-t border-[#e8e8e8] mx-4 my-2 opacity-50" />
+
+              <div className="py-2 px-4">
+                <p className="text-md">{report?.description || id}</p>
+              </div>
+
+              <div className="p-4 max-h-0 opacity-0 overflow-hidden group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
                 <ul className="text-md space-y-2 pb-4">
                   {(report?.features || []).map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">

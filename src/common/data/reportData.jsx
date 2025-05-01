@@ -7,13 +7,15 @@ export const REPORT_DISPLAY = {
       "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025 - Free Sample",
     image:
       "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_free_cover.png",
-    features: ["20 sample slides from the full report"],
+    description: "20 sample slides from the full report",
   },
   global_evtol_market_review_commercial_tracker_q1_2025: {
     title:
       "AAM - Global eVTOL Market Review (Passenger Commercial Tracker) - Q1 2025",
     image:
       "https://expvector.s3.eu-north-1.amazonaws.com/images/reportCovers/advancedairmobility_q1_2025_cover.png",
+    description:
+      "This report examines the global interest in passenger eVTOL (electric Vertical Take-Off and Landing) aircraft, deep diving into 94 commercial transactions with the goal of identifying the region with the highest level of engagement. Additionally, the report highlights the leading manufacturers driving the competitive landscape in eVTOL sales.",
     features: [
       "Deep dive on eVTOL commercial transactions (94 commercial transactions)",
       "27 Manufacturer Profiles",
