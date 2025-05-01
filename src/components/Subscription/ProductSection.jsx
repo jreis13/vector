@@ -47,7 +47,7 @@ export function ProductSection({ onSelectProduct }) {
           Select the best path for accessing our data and ecosystem reports.
         </p>
         <p className="mb-2 font-normal text-gray-500">
-          We offer vlume discounts for the reports. We also accept payments via
+          We offer volume discounts for the reports. We also accept payments via
           Crypto or Bank Transfer. <br /> For these cases, contact us at{" "}
           <a
             href="mailto:enquiries@exponentialvector.eu"
