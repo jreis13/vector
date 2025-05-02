@@ -56,7 +56,7 @@ export default function FreeReportPopup() {
                   <DocumentTextIcon className="h-16 w-16 text-[#6600cc]" />
                   <div>
                     <h3 className="font-bold text-sm text-gray-800">
-                      Our Free Report is Here!
+                      Get a Free Sample of our Report!
                     </h3>
                     <p className="text-xs text-gray-600 mt-1">
                       Check out the free version of our Global eVTOL Market
