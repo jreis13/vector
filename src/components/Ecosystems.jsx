@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import LoadingLayout from "src/layouts/LoadingLayout"
 import EcosystemButton from "./EcosystemButton"
 
 export default function EcosystemsPage() {
@@ -82,10 +81,6 @@ export default function EcosystemsPage() {
   const handleCardClick = () => {
     setIsNavigating(true)
     setLoading(true)
-  }
-
-  if (loading || isNavigating) {
-    return <LoadingLayout />
   }
 
   if (error) {
