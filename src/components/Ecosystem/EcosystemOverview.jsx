@@ -45,7 +45,7 @@ export default function EcosystemOverview({ ecosystem }) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-2 flex-1 px-6 lg:px-16 overflow-scroll"
+            className="grid grid-cols-2 flex-1 px-6 lg:px-16 overflow-none"
           >
             <NodeGraph nodeGroup={currentGroup} />
             <NodeDetails nodes={currentGroup.nodes} nodeGroup={currentGroup} />
