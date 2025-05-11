@@ -11,7 +11,7 @@ const ScrollReveal = ({ children, className, isFirst, isLast, ...props }) => {
       transition={{ duration: isMobile ? 0.6 : 0.8, ease: "easeOut" }}
       viewport={{
         once: false,
-        amount: isMobile ? 0.1 : 0.3,
+        amount: isMobile ? 0.1 : 0.2,
       }}
       className={`p-4 sm:p-6 md:p-8 ${className}`}
       {...props}

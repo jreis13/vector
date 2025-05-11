@@ -4,7 +4,7 @@ const HoverScale = ({ children, className, ...props }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
+      transition={{ type: "spring", stiffness: 300 }}
       className={className}
       {...props}
     >
