@@ -7,13 +7,31 @@ export default function SectionWithImage({
   sectionImage,
   features,
   imageOnRight = false,
-  isLastSection = false, // New prop to determine if it's the last section
+  isLastSection = false,
+  backgroundImage,
 }) {
   return (
-    <section className={`${isLastSection ? "py-0" : "py-16 lg:py-28"} px-8`}>
+    <section
+      className={`relative overflow-hidden ${
+        isLastSection ? "py-0" : "py-16 lg:py-28"
+      } px-8`}
+    >
+      {backgroundImage && (
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <Image
+            src={backgroundImage}
+            alt="section background"
+            fill
+            className="w-full h-full opacity-20"
+          />
+        </div>
+      )}
+
       <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
         <div
-          className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${imageOnRight ? "lg:order-2" : ""}`}
+          className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${
+            imageOnRight ? "lg:order-2" : ""
+          }`}
         >
           {title && (
             <div className="mb-8 flex items-center">

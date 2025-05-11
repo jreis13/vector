@@ -8,6 +8,7 @@ export default function CardList({
   imageOnLeft,
   imageOnRight,
   isLastSection,
+  backgroundImage,
 }) {
   if (sectionImage) {
     return (
@@ -17,10 +18,16 @@ export default function CardList({
         features={features}
         imageOnRight={imageOnRight}
         isLastSection={isLastSection}
+        backgroundImage={backgroundImage}
       />
     )
   }
   return (
-    <FeatureGrid title={title} features={features} imageOnLeft={imageOnLeft} />
+    <FeatureGrid
+      title={title}
+      features={features}
+      imageOnLeft={imageOnLeft}
+      backgroundImage={backgroundImage}
+    />
   )
 }

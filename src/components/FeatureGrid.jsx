@@ -3,11 +3,22 @@
 import Image from "next/image"
 import HoverScale from "src/animations/HoverScale"
 
-export default function FeatureGrid({ title, features }) {
+export default function FeatureGrid({ title, features, backgroundImage }) {
   const isEven = features.length % 2 === 0
 
   return (
-    <section className="px-8 lg:py-28">
+    <section className="relative overflow-hidden px-8 lg:py-28">
+      {backgroundImage && (
+        <div className="absolute inset-0 -z-10 pointer-events-none">
+          <Image
+            fill
+            src={backgroundImage}
+            alt="section background"
+            className="w-full h-full opacity-20"
+          />
+        </div>
+      )}
+
       <div className="container mx-auto">
         {title && (
           <div className="mb-8 flex items-center justify-center">
