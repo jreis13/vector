@@ -42,12 +42,17 @@ export default function Breadcrumb({ sections }) {
   }, [sections])
 
   const scrollToSection = (id) => {
+    const NAVBAR_HEIGHT = 64
+
     if (id === "") {
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       const element = document.getElementById(id)
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+        const yOffset = -NAVBAR_HEIGHT
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: y, behavior: "smooth" })
       }
     }
   }
