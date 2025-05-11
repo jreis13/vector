@@ -5,6 +5,7 @@ import {
   ClockIcon,
   SparklesIcon,
 } from "@heroicons/react/24/solid"
+import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import Loading from "./Loading"
 
@@ -28,6 +29,7 @@ const statusMap = {
 
 export default function Roadmap({ title }) {
   const [roadmapData, setRoadmapData] = useState(null)
+  const [hoveredQuarter, setHoveredQuarter] = useState(null)
 
   useEffect(() => {
     async function fetchRoadmap() {
@@ -75,7 +77,9 @@ export default function Roadmap({ title }) {
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center relative"
+                  className="flex cursor-pointer flex-col items-center relative"
+                  onMouseEnter={() => setHoveredQuarter(index)}
+                  onMouseLeave={() => setHoveredQuarter(null)}
                 >
                   <div
                     className={`w-5 h-5 border-4 border-[#e8e8e8] rounded-full ${markerColor}`}
@@ -99,7 +103,12 @@ export default function Roadmap({ title }) {
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {roadmapData.items.map((quarter, qIndex) => (
-            <div key={qIndex} className="p-4">
+            <div
+              key={qIndex}
+              className={`p-4 transition-all duration-200 ${
+                hoveredQuarter === qIndex ? "bg-[#ffffff0d] rounded-lg" : ""
+              }`}
+            >
               <h3 className="text-xl font-semibold mb-4 text-[#e8e8e8] text-center">
                 {quarter.title}
               </h3>
@@ -107,8 +116,10 @@ export default function Roadmap({ title }) {
                 {quarter.items.map((item, iIndex) => {
                   const status = statusMap[item.status] || {}
                   return (
-                    <div
+                    <motion.div
                       key={iIndex}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                       className="border border-gray-300 rounded-lg p-4 bg-[#e8e8e8]"
                     >
                       <h4 className="text-lg font-semibold text-[#34333d] mb-1">
@@ -123,7 +134,7 @@ export default function Roadmap({ title }) {
                         {status.icon}
                         {status.label}
                       </div>
-                    </div>
+                    </motion.div>
                   )
                 })}
               </div>
