@@ -38,7 +38,7 @@ export default function MainLayout() {
     <div className="flex min-h-screen flex-col w-full overflow-x-hidden">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="flex flex-grow flex-col gap-8 px-6">
+      <div className="flex flex-grow flex-col gap-8">
         <MainHero image="/mainHero.svg" buttonText="Join Us">
           <div className="flex flex-col px-6 lg:px-16">
             <h1 className="uppercase text-outline">
@@ -69,12 +69,14 @@ export default function MainLayout() {
               offeringFeatures.find((f) => f.sectionImage)?.sectionImage
             }
             imageOnRight
+            backgroundImage="/haikei/blob-haikei.svg"
           />
         </ScrollReveal>
         <ScrollReveal id="customers">
           <CardList
             title="Who are our products for?"
             features={customersFeatures && customersFeatures}
+            backgroundImage="/haikei/blob-scatter-haikei.svg"
           />
         </ScrollReveal>
         <ScrollReveal>
