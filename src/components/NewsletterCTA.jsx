@@ -74,7 +74,7 @@ export default function NewsletterCTA() {
 
   return (
     <section className="py-16 px-8 lg:py-20 w-full flex flex-col items-center text-center">
-      <div className="container mx-auto flex flex-col items-center">
+      <div className="container flex flex-col items-center rounded-lg p-8 bg-[#34333d] w-full max-w-2xl">
         <h3 className="text-2xl font-semibold">
           Subscribe to Our eVTOL Newsletter
         </h3>
