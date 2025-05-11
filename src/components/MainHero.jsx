@@ -82,7 +82,7 @@ export default function MainHero({ buttonText }) {
       </div>
       <div className="max-w-6xl w-full text-left mb-6 mt-12">
         <h3 className="text-[#e8e8e8] font-bold text-3xl">
-          Advanced Air Mobility Overview
+          Advanced Air Mobility Ecosystem Overview
         </h3>
       </div>
 
