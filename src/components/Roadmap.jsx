@@ -58,7 +58,7 @@ export default function Roadmap({ title }) {
           {title || roadmapData.title}
         </h2>
 
-        <div className="relative">
+        <div className="relative hidden lg:block">
           <div className="absolute top-2 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full z-0" />
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-center">
             {roadmapData.items.map((quarter, index) => {

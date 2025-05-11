@@ -52,7 +52,7 @@ export default function MainLayout() {
             />
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 px-8 lg:px-0">
             <Roadmap title="Advanced Air Mobility Ecosystem Roadmap" />
             <NewsletterCTA />
           </div>

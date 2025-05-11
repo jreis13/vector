@@ -71,7 +71,7 @@ export default function MainHero({ buttonText }) {
   }
 
   return (
-    <div className="relative md:min-h-[calc(100vh-64px)] w-full flex flex-col justify-center items-center overflow-hidden">
+    <div className="relative md:min-h-[calc(100vh-64px)] w-full flex flex-col justify-center items-center overflow-hidden px-8 lg:px-0">
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image
           src="/haikei/layered-waves-haikei.svg"
