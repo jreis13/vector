@@ -23,7 +23,7 @@ const iconMap = {
       <ChartBarIcon className="w-6 h-6 text-green-500" />
     </div>
   ),
-  "# of commercial transactions tracked": (
+  "Commercial Transactions Tracked": (
     <div className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-100">
       <ArrowsRightLeftIcon className="w-6 h-6 text-purple-500" />
     </div>
@@ -38,7 +38,7 @@ const iconMap = {
       <GlobeEuropeAfricaIcon className="w-6 h-6 text-red-500" />
     </div>
   ),
-  "# of  Agentic simulations ran": (
+  "Agentic Simulations Ran": (
     <div className="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-100">
       <RocketLaunchIcon className="w-6 h-6 text-indigo-500" />
     </div>
