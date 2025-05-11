@@ -210,7 +210,7 @@ export default function SubscribeContent() {
 
   return (
     <div className="flex flex-col items-center justify-center px-8 py-8 text-center">
-      <div className="max-w-6xl">
+      <div className="max-w-7xl">
         <ProductSection onSelectProduct={setSelectedProductType} />
 
         {selectedProductType === "subscription" && (

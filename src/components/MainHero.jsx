@@ -80,13 +80,13 @@ export default function MainHero({ buttonText }) {
           className="object-cover opacity-40"
         />
       </div>
-      <div className="max-w-6xl w-full text-left mb-6 mt-12">
+      <div className="max-w-7xl w-full text-left mb-6 mt-12">
         <h3 className="text-[#e8e8e8] font-bold text-3xl">
           Advanced Air Mobility Ecosystem Overview
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mb-4">
         {dashboardInfo.map((item, index) => (
           <motion.div
             key={index}
