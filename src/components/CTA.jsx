@@ -101,39 +101,41 @@ export default function CTA() {
             <Button href="/api/auth/login">Join Us</Button>
           </div>
 
-          <h3 className="text-2xl font-semibold mt-12">
-            Coming Soon: Fintech Intelligence
-          </h3>
-          <p className="text-gray-400 mt-6 text-xl">
-            Be among the first to access valuable fintech insights.
-          </p>
+          <div className="bg-[#34333d] p-8 rounded-lg mt-12">
+            <h3 className="text-2xl font-semibold">
+              Coming Soon: Fintech Intelligence
+            </h3>
+            <p className="text-gray-400 mt-6 text-xl">
+              Be among the first to access valuable fintech insights.
+            </p>
 
-          <form
-            onSubmit={handleSubmit}
-            className="mt-6 flex flex-col sm:flex-row gap-4"
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="rounded-lg w-[300px] border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
-              required
-            />
-            <button
-              type="submit"
-              className={`px-6 py-3 bg-[#d87103] text-[#403f4c] text-lg font-semibold rounded-lg transition ${
-                loading ? "bg-gray-500 cursor-not-allowed" : ""
-              }`}
-              disabled={loading}
+            <form
+              onSubmit={handleSubmit}
+              className="mt-6 flex flex-col sm:flex-row gap-4"
             >
-              {loading ? "Submitting..." : "Join the Waitlist"}
-            </button>
-          </form>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded-lg w-[300px] border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+                required
+              />
+              <button
+                type="submit"
+                className={`px-6 py-3 bg-[#d87103] text-[#403f4c] text-lg font-semibold rounded-lg transition ${
+                  loading ? "bg-gray-500 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
+              >
+                {loading ? "Submitting..." : "Join the Waitlist"}
+              </button>
+            </form>
 
-          {errorMessage && (
-            <p className="mt-4 text-lg text-red-500">{errorMessage}</p>
-          )}
+            {errorMessage && (
+              <p className="mt-4 text-lg text-red-500">{errorMessage}</p>
+            )}
+          </div>
         </div>
 
         <Image
