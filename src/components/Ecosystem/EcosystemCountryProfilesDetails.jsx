@@ -75,7 +75,6 @@ export default function EcosystemCountryProfilesDetails({ countryDetails }) {
                       </div>
 
                       <div className="w-full">
-                        {/* Handle Perception of Public Transport */}
                         {metric.name === "Perception of Public Transport" &&
                         metric.perceptionDetails ? (
                           <DynamicTransportTable
