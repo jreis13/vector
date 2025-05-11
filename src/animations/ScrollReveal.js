@@ -13,7 +13,7 @@ const ScrollReveal = ({ children, className, isFirst, isLast, ...props }) => {
         once: false,
         amount: isMobile ? 0.1 : 0.2,
       }}
-      className={`p-4 sm:p-6 md:p-8 ${className}`}
+      className={`${className}`}
       {...props}
     >
       {children}
