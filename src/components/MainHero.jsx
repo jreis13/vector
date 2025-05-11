@@ -28,7 +28,7 @@ const iconMap = {
       <ArrowsRightLeftIcon className="w-6 h-6 text-purple-500" />
     </div>
   ),
-  "Aircafts in the database": (
+  "eVTOL Aircrafts": (
     <div className="w-10 h-10 flex items-center justify-center rounded-full bg-orange-100">
       <PaperAirplaneIcon className="w-6 h-6 text-orange-500" />
     </div>
