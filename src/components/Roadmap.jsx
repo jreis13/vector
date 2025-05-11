@@ -26,7 +26,7 @@ const statusMap = {
   },
 }
 
-export default function Roadmap() {
+export default function Roadmap({ title }) {
   const [roadmapData, setRoadmapData] = useState(null)
 
   useEffect(() => {
@@ -52,10 +52,10 @@ export default function Roadmap() {
   }
 
   return (
-    <section className="w-full px-6 py-16">
+    <section className="w-full py-16">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#e8e8e8]">
-          {roadmapData.title}
+          {title || roadmapData.title}
         </h2>
 
         <div className="relative">

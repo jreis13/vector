@@ -20,6 +20,9 @@ export default function EcosystemLayout() {
       <Header />
       <div className="flex flex-grow flex-col gap-8">
         <MainHero />
+        <ScrollReveal id="roadmap">
+          <Roadmap />
+        </ScrollReveal>
         <ScrollReveal id="companies">
           <CardList
             title="Companies"
@@ -52,9 +55,6 @@ export default function EcosystemLayout() {
             imageOnRight
             backgroundImage="/haikei/blob-haikei-3.svg"
           />
-        </ScrollReveal>
-        <ScrollReveal id="roadmap">
-          <Roadmap />
         </ScrollReveal>
         <Ecosystems />
       </div>

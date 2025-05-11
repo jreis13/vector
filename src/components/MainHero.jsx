@@ -71,13 +71,13 @@ export default function MainHero({ buttonText }) {
   }
 
   return (
-    <div className="relative pb-24 px-6 md:min-h-[calc(100vh-64px)] w-full text-[#e8e8e8] flex flex-col justify-center items-center">
-      <div className="absolute left-0 right-0 inset-0 -z-10 pointer-events-none">
+    <div className="relative md:min-h-[calc(100vh-64px)] w-full flex flex-col justify-center items-center overflow-hidden">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <Image
           src="/haikei/layered-waves-haikei.svg"
           alt="Haikei background"
           fill
-          className="w-full h-auto object-cover opacity-40"
+          className="object-cover opacity-40"
         />
       </div>
       <div className="max-w-6xl w-full text-left mb-6 mt-12">
