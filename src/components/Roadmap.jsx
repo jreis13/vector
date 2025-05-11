@@ -54,7 +54,7 @@ export default function Roadmap() {
   return (
     <section className="w-full px-6 py-16">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#e8e8e8]">
           {roadmapData.title}
         </h2>
 
@@ -78,14 +78,14 @@ export default function Roadmap() {
                   className="flex flex-col items-center relative"
                 >
                   <div
-                    className={`w-5 h-5 border-4 border-white rounded-full ${markerColor}`}
+                    className={`w-5 h-5 border-4 border-[#e8e8e8] rounded-full ${markerColor}`}
                     style={{
                       marginBottom: "6px",
                       position: "relative",
                       top: 0,
                     }}
                   />
-                  <div className="text-sm font-semibold text-white">
+                  <div className="text-sm font-semibold text-[#e8e8e8]">
                     {quarter.title.split(" ")[0]}
                   </div>
                   <div className="text-xs text-gray-300 -mt-1">
@@ -100,7 +100,7 @@ export default function Roadmap() {
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {roadmapData.items.map((quarter, qIndex) => (
             <div key={qIndex} className="p-4">
-              <h3 className="text-xl font-semibold mb-4 text-white">
+              <h3 className="text-xl font-semibold mb-4 text-[#e8e8e8] text-center">
                 {quarter.title}
               </h3>
               <div className="flex flex-col gap-4">
