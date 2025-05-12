@@ -86,18 +86,18 @@ export default function CTA() {
         />
       </div>
       <div className="container mx-auto grid justify-center items-center lg:grid-cols-2 gap-12">
-        <div className="row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12">
-          <h2 className="text-3xl md:text-5xl font-bold leading-snug">
+        <div className="row-start-2 mt-12 flex flex-col items-center lg:row-auto lg:mt-0 lg:pr-12">
+          <h2 className="text-3xl md:text-5xl px-8 lg:px-0 font-bold leading-snug">
             <span className="text-[#6600cc] caret">^</span> Help us shape the
             future of the eVTOL ecosystems.
           </h2>
 
-          <p className="text-gray-400 mt-6 text-xl">
+          <p className="text-gray-400 mt-6 text-xl px-8 lg:px-0">
             Gain exclusive insights into cutting-edge industry trends and
             developments.
           </p>
 
-          <div className="mt-8">
+          <div className="mt-8 w-full flex justify-center">
             <Button href="/api/auth/login">Join Us</Button>
           </div>
 
@@ -141,7 +141,7 @@ export default function CTA() {
         <Image
           src={mailIcon}
           alt="Subscribe"
-          className="w-full md:-ml-4 lg:-ml-0"
+          className="w-full md:-ml-4 lg:-ml-0 px-8 lg:px-0"
         />
       </div>
 
