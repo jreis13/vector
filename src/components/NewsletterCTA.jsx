@@ -90,7 +90,7 @@ export default function NewsletterCTA() {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded-lg w-[300px] border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
+            className="rounded-lg lg:w-[300px] border border-gray-600 bg-[#34333d] px-4 py-2 focus:outline-none"
             required
           />
           <button
