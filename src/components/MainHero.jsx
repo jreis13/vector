@@ -8,9 +8,11 @@ import {
 } from "@heroicons/react/24/outline"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import Button from "./Button"
 import Loading from "./Loading"
+import Tooltip from "./Tooltip"
 
 const iconMap = {
   "Companies Tracked": (
@@ -47,6 +49,7 @@ const iconMap = {
 
 export default function MainHero({ buttonText }) {
   const [dashboardInfo, setDashboardInfo] = useState(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     async function fetchDashboard() {
@@ -80,6 +83,14 @@ export default function MainHero({ buttonText }) {
           className="object-cover opacity-40"
         />
       </div>
+      {pathname === "/ecosystems" && (
+        <div className="flex w-full max-w-7xl">
+          <h2 className="text-4xl md:text-5xl  font-bold text-[#e8e8e8] text-left">
+            Ecosystems
+          </h2>
+          <Tooltip text="At the current stage, only the Advanced Air Mobility ecosystem is available. Stay tuned for more updates soon." />
+        </div>
+      )}
       <div className="max-w-7xl w-full text-left mb-6 mt-12">
         <h3 className="text-[#e8e8e8] font-bold text-3xl">
           Advanced Air Mobility Ecosystem Overview
