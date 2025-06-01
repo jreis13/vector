@@ -14,7 +14,7 @@ export default function MainHero() {
       <div className="max-w-7xl w-full text-left mb-6 mt-12">
         <Image src="/mainHero.svg" alt="MainHero Image" fill />
         <div className="z-10 relative text-center">
-          <h1 className="text-4xl lg:text-5xl lg:text-6xl font-bold text-left lg:text-center mb-4 text-outline">
+          <h1 className="text-4xl lg:text-6xl font-bold text-left lg:text-center mb-4 text-outline">
             Next-Gen Strategy Tools for Disruptive Business Models
           </h1>
         </div>
