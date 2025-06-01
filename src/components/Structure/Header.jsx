@@ -1,11 +1,8 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import { IconButton, Navbar } from "@material-tailwind/react"
+import { Navbar } from "@material-tailwind/react"
 import { useEffect, useState } from "react"
-import PATHS from "src/common/data/navigationData"
-import Link from "../Link"
 import Logo from "../Logo"
 
 export default function Header() {
@@ -35,18 +32,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const authPaths = user
-    ? [
-        ...PATHS.filter((path) => path.name !== "Login / Sign up"),
-        { name: "Logout", path: "/api/auth/logout" },
-      ]
-    : [
-        ...PATHS.filter(
-          (path) => path.name !== "Login / Sign up" && path.name !== "Profile"
-        ),
-        { name: "Login / Sign up", path: "/api/auth/login" },
-      ]
-
   return (
     <div className="mb-16">
       <Navbar
@@ -59,46 +44,6 @@ export default function Header() {
       >
         <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
           <Logo />
-
-          <ul className="hidden lg:flex items-center gap-6">
-            {authPaths.map(({ name, path }) => (
-              <li key={name}>
-                <Link to={path} className="hover:text-gray-400 transition">
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <IconButton
-            variant="text"
-            onClick={() => setOpenNav(!openNav)}
-            className="lg:hidden"
-          >
-            {openNav ? (
-              <XMarkIcon className="h-6 w-6 text-[#e8e8e8]" />
-            ) : (
-              <Bars3Icon className="h-6 w-6 text-[#e8e8e8]" />
-            )}
-          </IconButton>
-        </div>
-
-        <div
-          className={`absolute top-full w-content right-0 bg-[#e8e8e8] text-[#403f4c] mr-4 rounded transition-transform duration-300 ${
-            openNav
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
-        >
-          <ul className="flex flex-col gap-4 p-6">
-            {authPaths.map(({ name, path }) => (
-              <li key={name}>
-                <Link to={path} className="transition block">
-                  {name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </Navbar>
     </div>

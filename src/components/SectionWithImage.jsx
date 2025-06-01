@@ -22,7 +22,7 @@ export default function SectionWithImage({
             src={backgroundImage}
             alt="section background"
             fill
-            className="w-full h-full opacity-20"
+            className="w-full h-full opacity-20 mt-16"
           />
         </div>
       )}
@@ -35,11 +35,15 @@ export default function SectionWithImage({
         >
           {title && (
             <div className="mb-8 flex items-center">
-              <span className="text-[#6600cc] caret font-bold">^</span>
-              <h2 className="text-center text-3xl md:text-4xl font-bold">
+              <span className="text-[#6600cc] caret font-bold text-outline">
+                ^
+              </span>
+              <h2 className="text-center text-3xl md:text-4xl font-bold text-outline">
                 {title}
               </h2>
-              <span className="ml-2 text-[#6600cc] font-bold">v</span>
+              <span className="ml-2 text-[#6600cc] font-bold text-outline">
+                v
+              </span>
             </div>
           )}
 
@@ -51,7 +55,7 @@ export default function SectionWithImage({
                     <h3 className="text-2xl font-semibold">{feature.name}</h3>
                   )}
                   {feature.description && (
-                    <div className="text-gray-400 text-xl mt-2">
+                    <div className="text-gray-400 text-xl mt-2 text-outline">
                       {feature.description}
                     </div>
                   )}

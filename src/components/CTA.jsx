@@ -3,7 +3,6 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react"
 import Image from "next/image"
 import { useState } from "react"
-import Button from "./Button"
 import Logo from "./Logo"
 import mailIcon from "/public/icons/mailIcon.svg"
 
@@ -96,10 +95,6 @@ export default function CTA() {
             Gain exclusive insights into cutting-edge industry trends and
             developments.
           </p>
-
-          <div className="mt-8 w-full flex justify-center">
-            <Button href="/api/auth/login">Join Us</Button>
-          </div>
 
           <div className="bg-[#34333d] p-8 rounded-lg mt-12">
             <h3 className="text-2xl font-semibold">
