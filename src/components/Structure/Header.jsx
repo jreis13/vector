@@ -1,27 +1,11 @@
 "use client"
 
-import { useUser } from "@auth0/nextjs-auth0/client"
 import { Navbar } from "@material-tailwind/react"
 import { useEffect, useState } from "react"
 import Logo from "../Logo"
 
 export default function Header() {
-  const { user } = useUser()
-  const [openNav, setOpenNav] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const updateMedia = () => {
-      const isNowDesktop = window.innerWidth >= 960
-      setIsDesktop(isNowDesktop)
-      if (isNowDesktop) setOpenNav(false)
-    }
-
-    updateMedia()
-    window.addEventListener("resize", updateMedia)
-    return () => window.removeEventListener("resize", updateMedia)
-  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +22,7 @@ export default function Header() {
         shadow={false}
         color="transparent"
         fullWidth
-        className={`fixed top-0 left-0 w-full z-50 border-0 h-16 lg:h-20 flex items-center transition-colors duration-300 ${
+        className={`fixed left-0 top-0 z-50 flex h-16 w-full items-center border-0 transition-colors duration-300 lg:h-20 ${
           scrolled ? "bg-[#403f4c]" : "bg-transparent"
         }`}
       >

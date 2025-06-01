@@ -15,31 +15,16 @@ import Breadcrumb from "src/components/Structure/Breadcrumb"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
-function splitDescription(feature) {
-  return {
-    ...feature,
-    description: feature.description
-      ? feature.description.split(".").map((sentence, index) =>
-          sentence.trim() ? (
-            <span key={index} className="mb-2 block">
-              {sentence.trim() + "."}
-            </span>
-          ) : null
-        )
-      : feature.description,
-  }
-}
-
 export default function MainLayout() {
   return (
-    <div className="relative flex min-h-screen flex-col w-full overflow-x-hidden">
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
       <Header />
       <Breadcrumb sections={breadcrumbSections} />
-      <div className="flex flex-grow flex-col ">
+      <div className="flex grow flex-col ">
         <MainHero />
 
-        <div className="relative lg:min-h-[calc(100vh-64px)] w-full flex flex-col justify-center items-center overflow-hidden px-8 lg:px-0">
-          <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden px-8 lg:min-h-[calc(100vh-64px)] lg:px-0">
+          <div className="pointer-events-none absolute inset-0 -z-10">
             <Image
               src="/haikei/layered-waves-haikei.svg"
               alt="Inverted Haikei"

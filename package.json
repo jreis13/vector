@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "preinstall": "npx npm-force-resolutions"
   },
@@ -23,8 +23,12 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
+    "@eslint/js": "^9.28.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "globals": "^16.2.0",
     "npm-force-resolutions": "^0.0.10",
     "postcss": "^8",
     "prettier": "^3.5.3",

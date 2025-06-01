@@ -9,12 +9,12 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
   return (
     <section className="relative overflow-hidden px-8 lg:py-28">
       {backgroundImage && (
-        <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 -z-10">
           <Image
             fill
             src={backgroundImage}
             alt="section background"
-            className="w-full h-full opacity-20"
+            className="size-full opacity-20"
           />
         </div>
       )}
@@ -22,13 +22,13 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
       <div className="container mx-auto">
         {title && (
           <div className="mb-8 flex items-center justify-center">
-            <span className="text-[#6600cc] caret font-bold text-outline">
+            <span className="caret text-outline font-bold text-[#6600cc]">
               ^
             </span>
-            <h2 className="text-center text-3xl lg:text-4xl font-bold text-outline">
+            <h2 className="text-outline text-center text-3xl font-bold lg:text-4xl">
               {title}
             </h2>
-            <span className="ml-2 text-[#6600cc] font-bold text-outline">
+            <span className="text-outline ml-2 font-bold text-[#6600cc]">
               v
             </span>
           </div>
@@ -44,24 +44,24 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
           {features?.map((feature, index) => (
             <div
               key={index}
-              className="p-6 rounded-xl flex flex-col items-center text-center bg-[#34333d] h-full"
+              className="flex h-full flex-col items-center rounded-xl bg-[#34333d] p-6 text-center"
             >
-              <HoverScale className="h-full w-full flex flex-col justify-between items-center">
+              <HoverScale className="flex size-full flex-col items-center justify-between">
                 <div className="flex flex-col items-center">
                   {feature.name && (
-                    <h3 className="py-4 mb-2 text-lg lg:text-xl lg:text-2xl font-semibold min-h-[64px] flex items-center justify-center">
+                    <h3 className="mb-2 flex min-h-[64px] items-center justify-center py-4 text-lg font-semibold lg:text-2xl lg:text-xl">
                       {feature.name}
                     </h3>
                   )}
                   {feature.description && (
-                    <div className="py-2 text-base lg:text-lg lg:text-xl text-gray-400">
+                    <div className="py-2 text-base text-gray-400 lg:text-lg lg:text-xl">
                       {feature.description}
                     </div>
                   )}
                 </div>
                 {feature.image && (
                   <div className="flex items-center justify-center">
-                    <div className="relative mt-4 h-40 w-40 lg:h-64 lg:w-64">
+                    <div className="relative mt-4 size-40 lg:size-64">
                       <Image
                         src={feature.image}
                         alt={feature.name || feature.description}

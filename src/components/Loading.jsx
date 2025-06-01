@@ -1,10 +1,10 @@
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center min-h-screen p-5 bg-[#403f4c] min-w-screen">
-      <div className="flex space-x-2 animate-pulse">
-        <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-        <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-        <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+    <div className="flex min-w-full items-center justify-center bg-[#403f4c] p-5">
+      <div className="flex animate-pulse space-x-2">
+        <div className="size-3 rounded-full bg-gray-500"></div>
+        <div className="size-3 rounded-full bg-gray-500"></div>
+        <div className="size-3 rounded-full bg-gray-500"></div>
       </div>
     </div>
   )

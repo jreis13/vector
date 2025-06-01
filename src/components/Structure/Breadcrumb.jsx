@@ -7,27 +7,11 @@ import arrowDown from "/public/icons/arrowDownIcon.svg"
 import arrowUp from "/public/icons/arrowUpIcon.svg"
 
 export default function Breadcrumb({ sections }) {
-  const [currentSection, setCurrentSection] = useState("")
   const [isVisible, setIsVisible] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      let foundSection = ""
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (
-            rect.top <= window.innerHeight / 2 &&
-            rect.bottom >= window.innerHeight / 2
-          ) {
-            foundSection = section.id
-          }
-        }
-      })
-      setCurrentSection(foundSection)
-
       const scrollPosition = window.innerHeight + window.scrollY
       const pageHeight = document.documentElement.scrollHeight
       setIsAtBottom(scrollPosition >= pageHeight - 10)
@@ -63,12 +47,12 @@ export default function Breadcrumb({ sections }) {
 
   return (
     <div
-      className={`fixed bottom-20 left-0 right-0 z-20 flex flex-col items-center transition-opacity duration-300 ${
-        isAtBottom ? "opacity-0 pointer-events-none" : "opacity-100"
+      className={`fixed inset-x-0 bottom-20 z-20 flex flex-col items-center transition-opacity duration-300 ${
+        isAtBottom ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
       <nav
-        className={`flex w-full transform justify-center transition-all duration-300 ${
+        className={`flex w-full justify-center transition-all duration-300${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
       >
@@ -85,7 +69,7 @@ export default function Breadcrumb({ sections }) {
                     alt={section.title}
                     width={32}
                     height={32}
-                    className="w-8 h-8"
+                    className="size-8"
                   />
                 </button>
               </li>
@@ -94,7 +78,7 @@ export default function Breadcrumb({ sections }) {
       </nav>
 
       <div
-        className="fixed bottom-2 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-[#34333d]"
+        className="fixed bottom-2 z-30 flex size-12 items-center justify-center rounded-full bg-[#34333d]"
         style={{
           left: "50%",
           transform: "translateX(-50%)",
@@ -102,14 +86,14 @@ export default function Breadcrumb({ sections }) {
       >
         <button
           onClick={toggleVisibility}
-          className="relative flex h-full w-full items-center justify-center"
+          className="relative flex size-full items-center justify-center"
         >
           <Image
             src={isVisible ? arrowDown : arrowUp}
             alt={isVisible ? "Arrow Down" : "Arrow Up"}
             width={32}
             height={32}
-            className="w-8 h-8"
+            className="size-8"
           />
         </button>
       </div>

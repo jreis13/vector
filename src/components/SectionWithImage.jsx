@@ -17,17 +17,17 @@ export default function SectionWithImage({
       } px-8`}
     >
       {backgroundImage && (
-        <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 -z-10">
           <Image
             src={backgroundImage}
             alt="section background"
             fill
-            className="w-full h-full opacity-20 mt-16"
+            className="mt-16 size-full opacity-20"
           />
         </div>
       )}
 
-      <div className="container mx-auto grid items-center lg:grid-cols-2 gap-12">
+      <div className="container mx-auto grid items-center gap-12 lg:grid-cols-2">
         <div
           className={`row-start-2 mt-12 lg:row-auto lg:mt-0 lg:pr-12 ${
             imageOnRight ? "lg:order-2" : ""
@@ -35,13 +35,13 @@ export default function SectionWithImage({
         >
           {title && (
             <div className="mb-8 flex items-center">
-              <span className="text-[#6600cc] caret font-bold text-outline">
+              <span className="caret text-outline font-bold text-[#6600cc]">
                 ^
               </span>
-              <h2 className="text-center text-3xl lg:text-4xl font-bold text-outline">
+              <h2 className="text-outline text-center text-3xl font-bold lg:text-4xl">
                 {title}
               </h2>
-              <span className="ml-2 text-[#6600cc] font-bold text-outline">
+              <span className="text-outline ml-2 font-bold text-[#6600cc]">
                 v
               </span>
             </div>
@@ -55,7 +55,7 @@ export default function SectionWithImage({
                     <h3 className="text-2xl font-semibold">{feature.name}</h3>
                   )}
                   {feature.description && (
-                    <div className="text-gray-400 text-xl mt-2 text-outline">
+                    <div className="text-outline mt-2 text-xl text-gray-400">
                       {feature.description}
                     </div>
                   )}
@@ -68,7 +68,7 @@ export default function SectionWithImage({
         <Image
           src={sectionImage}
           alt={`${title} section image`}
-          className="w-full lg:-ml-4 lg:-ml-0 rounded-xl object-cover"
+          className="w-full rounded-xl object-cover lg:-ml-0 lg:-ml-4"
         />
       </div>
     </section>
