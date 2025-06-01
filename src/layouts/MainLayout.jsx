@@ -1,5 +1,6 @@
 "use client"
 
+import { breadcrumbSections } from "src/common/data/breadcrumbData"
 import {
   customersFeatures,
   offeringFeatures,
@@ -10,6 +11,7 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import MainHero from "src/components/MainHero"
+import Breadcrumb from "src/components/Structure/Breadcrumb"
 import Footer from "src/components/Structure/Footer"
 import Header from "src/components/Structure/Header"
 
@@ -32,6 +34,7 @@ export default function MainLayout() {
   return (
     <div className="relative flex min-h-screen flex-col w-full overflow-x-hidden">
       <Header />
+      <Breadcrumb sections={breadcrumbSections} />
       <div className="flex flex-grow flex-col ">
         <MainHero />
 
@@ -66,7 +69,7 @@ export default function MainLayout() {
           />
         </ScrollReveal>
         <ScrollReveal>
-          <div id="subscribe" className="py-8">
+          <div id="portal" className="py-8">
             <CTA />
           </div>
         </ScrollReveal>
