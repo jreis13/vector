@@ -25,7 +25,7 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
             <span className="text-[#6600cc] caret font-bold text-outline">
               ^
             </span>
-            <h2 className="text-center text-3xl md:text-4xl font-bold text-outline">
+            <h2 className="text-center text-3xl lg:text-4xl font-bold text-outline">
               {title}
             </h2>
             <span className="ml-2 text-[#6600cc] font-bold text-outline">
@@ -38,7 +38,7 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
           className={`grid gap-8 ${
             isEven
               ? "grid-cols-1 sm:grid-cols-2"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              : "grid-cols-1 lg:grid-cols-2 lg:grid-cols-3"
           }`}
         >
           {features?.map((feature, index) => (
@@ -49,12 +49,12 @@ export default function FeatureGrid({ title, features, backgroundImage }) {
               <HoverScale className="h-full w-full flex flex-col justify-between items-center">
                 <div className="flex flex-col items-center">
                   {feature.name && (
-                    <h3 className="py-4 mb-2 text-lg md:text-xl lg:text-2xl font-semibold min-h-[64px] flex items-center justify-center">
+                    <h3 className="py-4 mb-2 text-lg lg:text-xl lg:text-2xl font-semibold min-h-[64px] flex items-center justify-center">
                       {feature.name}
                     </h3>
                   )}
                   {feature.description && (
-                    <div className="py-2 text-base md:text-lg lg:text-xl text-gray-400">
+                    <div className="py-2 text-base lg:text-lg lg:text-xl text-gray-400">
                       {feature.description}
                     </div>
                   )}

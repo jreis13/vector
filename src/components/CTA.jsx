@@ -86,7 +86,7 @@ export default function CTA() {
       </div>
       <div className="container mx-auto grid justify-center items-center lg:grid-cols-2 gap-12">
         <div className="row-start-2 mt-12 flex flex-col items-center lg:row-auto lg:mt-0 lg:pr-12">
-          <h2 className="text-3xl md:text-5xl px-8 lg:px-0 font-bold leading-snug">
+          <h2 className="text-3xl lg:text-5xl px-8 lg:px-0 font-bold leading-snug">
             <span className="text-[#6600cc] caret">^</span> Help us shape the
             future of the eVTOL ecosystems.
           </h2>
@@ -136,7 +136,7 @@ export default function CTA() {
         <Image
           src={mailIcon}
           alt="Subscribe"
-          className="w-full md:-ml-4 lg:-ml-0 px-8 lg:px-0"
+          className="w-full lg:-ml-4 lg:-ml-0 px-8 lg:px-0"
         />
       </div>
 

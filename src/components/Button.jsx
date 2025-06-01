@@ -11,7 +11,7 @@ export default function Button({
   disabled = false,
 }) {
   const baseStyles =
-    "inline-flex w-full max-w-xs justify-center rounded-full border uppercase transition-colors duration-300 font-medium px-6 py-3 bg-[#403f4c] md:px-8 md:py-4 text-sm md:text-base"
+    "inline-flex w-full max-w-xs justify-center rounded-full border uppercase transition-colors duration-300 font-medium px-6 py-3 bg-[#403f4c] lg:px-8 lg:py-4 text-sm lg:text-base"
 
   const enabledHoverStyles = "hover:bg-[#6600cc] hover:text-[#e8e8e8]"
   const disabledStyles = "opacity-50 cursor-not-allowed"

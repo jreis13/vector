@@ -38,7 +38,7 @@ export default function SectionWithImage({
               <span className="text-[#6600cc] caret font-bold text-outline">
                 ^
               </span>
-              <h2 className="text-center text-3xl md:text-4xl font-bold text-outline">
+              <h2 className="text-center text-3xl lg:text-4xl font-bold text-outline">
                 {title}
               </h2>
               <span className="ml-2 text-[#6600cc] font-bold text-outline">
@@ -68,7 +68,7 @@ export default function SectionWithImage({
         <Image
           src={sectionImage}
           alt={`${title} section image`}
-          className="w-full md:-ml-4 lg:-ml-0 rounded-xl object-cover"
+          className="w-full lg:-ml-4 lg:-ml-0 rounded-xl object-cover"
         />
       </div>
     </section>

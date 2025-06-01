@@ -72,7 +72,7 @@ export default function Breadcrumb({ sections }) {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
       >
-        <ol className="mt-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-6 md:px-8">
+        <ol className="mt-6 flex list-none flex-row justify-center space-x-8 rounded-full bg-[#34333d] p-4 px-6 lg:px-8">
           {sections &&
             sections.map((section) => (
               <li key={section.title} className="flex items-center">
