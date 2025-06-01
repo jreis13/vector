@@ -8,7 +8,7 @@ import arrowUp from "/public/icons/arrowUpIcon.svg"
 
 export default function Breadcrumb({ sections }) {
   const [currentSection, setCurrentSection] = useState("")
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   const [isAtBottom, setIsAtBottom] = useState(false)
 
   useEffect(() => {
