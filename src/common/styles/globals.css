@@ -124,3 +124,8 @@ p {
     -1px 1px 0 #403f4c,
     1px 1px 0 #403f4c;
 }
+
+.iub__us-widget {
+  display: none !important;
+  visibility: hidden !important;
+}
