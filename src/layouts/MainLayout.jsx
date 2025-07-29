@@ -11,9 +11,9 @@ import ScrollReveal from "src/animations/ScrollReveal"
 import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import MainHero from "src/components/MainHero"
-import Breadcrumb from "src/components/Structure/Breadcrumb"
-import Footer from "src/components/Structure/Footer"
-import Header from "src/components/Structure/Header"
+import Breadcrumb from "src/components/structure/Breadcrumb"
+import Footer from "src/components/structure/Footer"
+import Header from "src/components/structure/Header"
 
 export default function MainLayout() {
   return (
