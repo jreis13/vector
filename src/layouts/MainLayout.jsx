@@ -8,7 +8,6 @@ import {
 
 import Image from "next/image"
 import ScrollReveal from "src/animations/ScrollReveal"
-import CTA from "src/components/CTA"
 import CardList from "src/components/CardList"
 import MainHero from "src/components/MainHero"
 import Breadcrumb from "src/components/structure/Breadcrumb"
@@ -52,11 +51,6 @@ export default function MainLayout() {
             features={customersFeatures && customersFeatures}
             backgroundImage="/haikei/blob-scatter-haikei.svg"
           />
-        </ScrollReveal>
-        <ScrollReveal>
-          <div id="portal" className="py-8">
-            <CTA />
-          </div>
         </ScrollReveal>
       </div>
       <Footer />
