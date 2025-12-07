@@ -3,8 +3,8 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-import arrowDown from "/public/icons/arrowDownIcon.svg"
-import arrowUp from "/public/icons/arrowUpIcon.svg"
+import arrowDown from "public/icons/arrowDownIcon.svg"
+import arrowUp from "public/icons/arrowUpIcon.svg"
 
 export default function Breadcrumb({ sections }) {
   const [isVisible, setIsVisible] = useState(false)

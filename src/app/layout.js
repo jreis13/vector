@@ -1,4 +1,3 @@
-import { UserProvider } from "@auth0/nextjs-auth0/client"
 import Script from "next/script"
 import "src/common/styles/globals.css"
 
@@ -43,7 +42,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <UserProvider>{children}</UserProvider>
+        {children}
 
         <Script
           async
